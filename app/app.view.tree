@@ -14,3 +14,4 @@ $hyoo_dungeon_app $mol_book2_catalog
 		skills <= Skills $hyoo_dungeon_skill_config
 			char <= char
 			tools / <= Spread_close
+	placeholders /

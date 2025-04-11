@@ -4,15 +4,15 @@ namespace $.$$ {
 		
 		flex: {
 			basis: '60rem',
+			grow: 1,
 		},
 		
 		Image: {
-			// margin: $mol_gap.block,
 			width: 'auto',
 		},
 		
-		Main: {
-			// margin: $mol_gap.block,
+		Stat: {
+			padding: 0,
 		},
 		
 		Name: {

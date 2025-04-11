@@ -18,7 +18,7 @@ $hyoo_dungeon_char_card $mol_page
 		skill_list => skill_list
 		Skill_addon null
 	body /
-		<= Stat $mol_row sub /
+		<= Columns $mol_row sub /
 			<= Info $mol_list rows /
 				<= Image $mol_image uri <= image \
 				<= Main $mol_list rows /
@@ -31,5 +31,6 @@ $hyoo_dungeon_char_card $mol_page
 					<= Alignment $mol_bar sub /
 						<= Goodness $mol_chip title <= goodness
 						<= Principality $mol_chip title <= principality
-			<= Param_list $mol_list rows <= param_list
-			<= Skill_list $mol_list rows <= skill_list
+			<= Stat $mol_row sub /
+				<= Param_list $mol_list rows <= param_list
+				<= Skill_list $mol_list rows <= skill_list
