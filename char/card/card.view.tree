@@ -1,0 +1,35 @@
+$hyoo_dungeon_char_card $mol_page
+	title \Карточка
+	char $hyoo_dungeon_char
+		name => name
+		story => story
+		race => race
+		classes => classes
+		goodness => goodness
+		principality => principality
+		param*? => param_total*?
+		param_addon*? => param_addon*?
+	Param_cofig $hyoo_dungeon_param_config
+		char <= char
+		param_list => param_list
+		Param_addon null
+	Skill_cofig $hyoo_dungeon_skill_config
+		char <= char
+		skill_list => skill_list
+		Skill_addon null
+	body /
+		<= Stat $mol_row sub /
+			<= Info $mol_list rows /
+				<= Image $mol_image uri <= image \
+				<= Main $mol_list rows /
+					<= Base $mol_bar sub /
+						<= Name $mol_chip title <= name
+						<= Race $mol_chip title <= race_title \
+					<= Life $mol_bar sub /
+						<= Classes $mol_chip title <= classes_title \
+						<= Story $mol_chip title <= story
+					<= Alignment $mol_bar sub /
+						<= Goodness $mol_chip title <= goodness
+						<= Principality $mol_chip title <= principality
+			<= Param_list $mol_list rows <= param_list
+			<= Skill_list $mol_list rows <= skill_list

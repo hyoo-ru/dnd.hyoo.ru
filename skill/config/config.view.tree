@@ -1,0 +1,13 @@
+$hyoo_dungeon_skill_config $mol_page
+	title \Навыки
+	char $hyoo_dungeon_char
+		skill*? => skill_total*?
+		skill_addon*? => skill_addon*?
+	body <= skill_list /
+		<= Skill_row*some $mol_bar sub /
+			<= Skill_title* $mol_chip
+				title <= skill_title* \
+			<= Skill_total* $mol_chip
+				title <= skill_total*
+			<= Skill_addon* $mol_paginator
+				value? <=> skill_addon*?

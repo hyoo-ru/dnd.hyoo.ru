@@ -1,0 +1,16 @@
+$hyoo_dungeon_app $mol_book2_catalog
+	menu_title \Dungeons & Dragons
+	char $hyoo_dungeon_char / *
+	spreads *
+		card <= Card $hyoo_dungeon_char_card
+			char <= char
+			tools / <= Spread_close
+		main <= Main $hyoo_dungeon_char_main
+			char <= char
+			tools / <= Spread_close
+		Params <= Params $hyoo_dungeon_param_config
+			char <= char
+			tools / <= Spread_close
+		skills <= Skills $hyoo_dungeon_skill_config
+			char <= char
+			tools / <= Spread_close
