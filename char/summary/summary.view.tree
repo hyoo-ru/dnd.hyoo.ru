@@ -3,6 +3,9 @@ $hyoo_dungeon_char_summary $mol_page
 	char $hyoo_dungeon_char
 		name => name
 		story => story
+		age => age
+		level => level
+		experience => experience
 		race => race
 		classes => classes
 		moral => moral
@@ -18,17 +21,46 @@ $hyoo_dungeon_char_summary $mol_page
 	body /
 		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
-				<= Base $mol_bar sub /
-					<= Race $mol_chip title <= race_title \
-					<= Name $mol_chip title <= name
+				<= Top $mol_view sub /
+					<= Base $mol_view sub /
+						<= Race $mol_chip
+							hint \Раса
+							title <= race_title \
+						<= Name $mol_chip
+							hint \Имя
+							title <= name
+					<= Grade $mol_view sub /
+						<= Age $mol_chip
+							hint \Возраст
+							sub /
+								\📅
+								<= age
+						<= Level $mol_chip
+							hint \Уровень
+							sub /
+								\🏅
+								<= level
+						<= Experience $mol_chip
+							hint \Опыт
+							sub /
+								\✨
+								<= experience
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
-					<= Life $mol_bar sub /
-						<= Classes $mol_chip title <= classes_title \
-						<= Story $mol_chip title <= story
-					<= Alignment $mol_bar sub /
-						<= Goodness $mol_chip title <= moral_title \
-						<= Principality $mol_chip title <= ethics_title \
+					<= Life $mol_view sub /
+						<= Classes $mol_chip
+							hint \Классы
+							title <= classes_title \
+						<= Story $mol_chip
+							hint \Предыстория
+							title <= story
+					<= Alignment $mol_view sub /
+						<= Goodness $mol_chip
+							hint \Мораль
+							title <= moral_title \
+						<= Principality $mol_chip
+							hint \Этика
+							title <= ethics_title \
 			<= Stat $mol_view sub /
 				<= Ability_list $mol_view sub <= ability_list
 				<= Skill_list $mol_view sub <= skill_list

@@ -3,6 +3,9 @@ $hyoo_dungeon_char_main $mol_page
 	char $hyoo_dungeon_char
 		name? => name?
 		story? => story?
+		age? => age?
+		level? => level?
+		experience? => experience?
 		race? => race?
 		classes? => classes?
 		moral? => moral?
@@ -40,3 +43,16 @@ $hyoo_dungeon_char_main $mol_page
 				value? <=> ethics?
 				keys <= ethics_options /string
 				option_title* <= ethics_title* \
+		<= Grade $mol_view sub /
+			<= Level_block $mol_form_field
+				name \Уровень
+				Content <= Level $mol_paginator
+					value? <=> level?
+			<= Experience_block $mol_form_field
+				name \Опыт
+				Content <= Experience $mol_number
+					value? <=> experience?
+			<= Age_block $mol_form_field
+				name \Возраст
+				Content <= Age $mol_number
+					value? <=> age?

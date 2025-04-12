@@ -1,5 +1,5 @@
 $hyoo_dungeon_ability_config $mol_page
-	title \Характеристики
+	title \Способности
 	char $hyoo_dungeon_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?

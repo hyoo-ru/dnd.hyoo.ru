@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '50rem',
+			basis: '55rem',
 		},
 		
 		Columns: {
@@ -20,9 +20,6 @@ namespace $.$$ {
 		},
 		
 		Info: {
-			background: {
-				color: $mol_theme.card,
-			},
 			flex: {
 				grow: 1,
 			},
@@ -36,9 +33,13 @@ namespace $.$$ {
 			aspectRatio: 1,
 		},
 		
-		Base: {
+		Top: {
+			flex: {
+				wrap: 'wrap',
+			},
 			justify: {
 				self: 'stretch',
+				content: 'space-between',
 			},
 		},
 		
@@ -70,6 +71,7 @@ namespace $.$$ {
 		
 		Ability_list: {
 			flex: {
+				basis: `11rem`,
 				direction: 'column',
 			},
 		},

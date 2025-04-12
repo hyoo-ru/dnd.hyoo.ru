@@ -3,7 +3,13 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_main, {
 		
 		flex: {
-			basis: '25rem',
+			basis: '30rem',
+		},
+		
+		Grade: {
+			flex: {
+				wrap: 'wrap',
+			},
 		},
 		
 	} )

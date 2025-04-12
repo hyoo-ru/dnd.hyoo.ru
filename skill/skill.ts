@@ -25,7 +25,7 @@ namespace $ {
 			ability_main: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
 		
-		analysis: {
+		investigation: {
 			title: 'Анализ',
 			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
@@ -33,7 +33,7 @@ namespace $ {
 			title: 'История',
 			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
-		magicity: {
+		arcana: {
 			title: 'Магия',
 			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
@@ -67,7 +67,7 @@ namespace $ {
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
 		
-		performing: {
+		performance: {
 			title: 'Выступление',
 			ability_main: 'charisma',
 		} as $hyoo_dungeon_skill_info,

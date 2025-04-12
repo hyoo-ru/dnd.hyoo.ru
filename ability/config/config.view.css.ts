@@ -18,9 +18,9 @@ namespace $.$$ {
 		
 		Param_title: {
 			flex: {
-				basis: '6rem',
+				basis: '8rem',
 				grow: 1,
-				shrink: 1,
+				shrink: 0,
 			},
 		},
 		

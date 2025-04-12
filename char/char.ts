@@ -7,6 +7,7 @@ namespace $ {
 		moral: 'good' | 'neutral' | 'evil',
 		ethics: 'lawful' | 'neutral' | 'chaotic',
 		story: string,
+		age: number,
 		level: number,
 		experience: number,
 		abilities: Record< $hyoo_dungeon_ability, number >,
@@ -19,6 +20,18 @@ namespace $ {
 		
 		story( next?: string ) {
 			return this.value( 'story', next ) ?? ''
+		}
+		
+		age( next?: number ) {
+			return this.value( 'age', next ) ?? 20
+		}
+		
+		level( next?: number ) {
+			return this.value( 'level', next ) ?? 0
+		}
+		
+		experience( next?: number ) {
+			return this.value( 'experience', next ) ?? 0
 		}
 		
 		race( next?: $hyoo_dungeon_race ) {
@@ -34,7 +47,7 @@ namespace $ {
 		}
 		
 		ability( id: $hyoo_dungeon_ability ) {
-			return 8 + this.ability_addon( id )
+			return 8 + this.ability_addon( id ) + this.$.$hyoo_dungeon_race_all[ this.race() ].abilities[ id ]
 		}
 		
 		skill_addon( id: $hyoo_dungeon_skill, next?: number ) {
