@@ -7364,6 +7364,9 @@ var $;
         story(next) {
             return this.value('story', next) ?? '';
         }
+        biography(next) {
+            return this.value('biography', next) ?? '';
+        }
         age(next) {
             return this.value('age', next) ?? 20;
         }
@@ -7425,6 +7428,9 @@ var $;
         hits(next) {
             return this.value('hits', next && Math.max(0, Math.min(next, this.hits_max()))) || this.hits_max();
         }
+        hits_addon(next) {
+            return this.value('hits_addon', next && Math.max(0, next)) ?? 0;
+        }
         hits_heal() {
             const mod = Math.max(1, this.ability_modifier('constitution'));
             const dice = this.$.$hyoo_dungeon_class_all[this.classes()[0]].dice;
@@ -7437,6 +7443,9 @@ var $;
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "hits_addon", null);
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_heal", null);
@@ -10620,6 +10629,9 @@ var $;
 		story(){
 			return (this.char().story());
 		}
+		biography(){
+			return (this.char().biography());
+		}
 		age(){
 			return (this.char().age());
 		}
@@ -10658,6 +10670,9 @@ var $;
 		}
 		hits(next){
 			return (this.char().hits(next));
+		}
+		hits_addon(next){
+			return (this.char().hits_addon(next));
 		}
 		hits_max(next){
 			return (this.char().hits_max(next));
@@ -10799,13 +10814,19 @@ var $;
 			(obj.text) = () => ((this.weakness()));
 			return obj;
 		}
+		Biography(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.biography()));
+			return obj;
+		}
 		Personality(){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ([
 				(this.Traits()), 
 				(this.Ideals()), 
 				(this.Affection()), 
-				(this.Weakness())
+				(this.Weakness()), 
+				(this.Biography())
 			]);
 			return obj;
 		}
@@ -10857,17 +10878,6 @@ var $;
 			]);
 			return obj;
 		}
-		Hits_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.hits(next)));
-			return obj;
-		}
-		Hits(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("💖Здоровье");
-			(obj.Value) = () => ((this.Hits_value()));
-			return obj;
-		}
 		Hits_max_value(){
 			const obj = new this.$.$mol_paginator();
 			(obj.value) = (next) => ((this.hits_max(next)));
@@ -10879,6 +10889,28 @@ var $;
 			(obj.Value) = () => ((this.Hits_max_value()));
 			return obj;
 		}
+		Hits_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits(next)));
+			return obj;
+		}
+		Hits(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💗Здоровье");
+			(obj.Value) = () => ((this.Hits_value()));
+			return obj;
+		}
+		Hits_addon_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits_addon(next)));
+			return obj;
+		}
+		Hits_addon(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💖Бафы");
+			(obj.Value) = () => ((this.Hits_addon_value()));
+			return obj;
+		}
 		Hits_heal(){
 			const obj = new this.$.$hyoo_dungeon_parameter();
 			(obj.title) = () => ("💊Лечение");
@@ -10888,8 +10920,9 @@ var $;
 		Hits_block(){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ([
-				(this.Hits()), 
 				(this.Hits_max()), 
+				(this.Hits()), 
+				(this.Hits_addon()), 
 				(this.Hits_heal())
 			]);
 			return obj;
@@ -10974,6 +11007,7 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ideals"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Affection"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Weakness"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Biography"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level_value"));
@@ -10982,10 +11016,12 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_heal"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_list"));
@@ -11755,250 +11791,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_char_main) = class $hyoo_dungeon_char_main extends ($.$mol_page) {
-		name(next){
-			return (this.char().name(next));
-		}
-		story(next){
-			return (this.char().story(next));
-		}
-		age(next){
-			return (this.char().age(next));
-		}
-		level(next){
-			return (this.char().level(next));
-		}
-		experience(next){
-			return (this.char().experience(next));
-		}
-		race(next){
-			return (this.char().race(next));
-		}
-		classes(next){
-			return (this.char().classes(next));
-		}
-		Level(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.level(next)));
-			return obj;
-		}
-		Level_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("🏅Уровень");
-			(obj.Content) = () => ((this.Level()));
-			return obj;
-		}
-		Experience(){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.experience(next)));
-			(obj.precision_change) = () => (100);
-			return obj;
-		}
-		Experience_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("✨Опыт");
-			(obj.Content) = () => ((this.Experience()));
-			return obj;
-		}
-		Age(){
-			const obj = new this.$.$mol_number();
-			(obj.value) = (next) => ((this.age(next)));
-			return obj;
-		}
-		Age_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("📅Возраст");
-			(obj.Content) = () => ((this.Age()));
-			return obj;
-		}
-		Grade(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Level_block()), 
-				(this.Experience_block()), 
-				(this.Age_block())
-			]);
-			return obj;
-		}
-		Name(){
-			const obj = new this.$.$mol_string();
-			(obj.value) = (next) => ((this.name(next)));
-			return obj;
-		}
-		Name_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Имя");
-			(obj.Content) = () => ((this.Name()));
-			return obj;
-		}
-		Story(){
-			const obj = new this.$.$mol_string();
-			(obj.value) = (next) => ((this.story(next)));
-			return obj;
-		}
-		Story_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Предыстория");
-			(obj.Content) = () => ((this.Story()));
-			return obj;
-		}
-		Base_block(){
-			const obj = new this.$.$mol_form_group();
-			(obj.sub) = () => ([(this.Name_block()), (this.Story_block())]);
-			return obj;
-		}
-		race_options(){
-			return [];
-		}
-		race_title(id){
-			return "";
-		}
-		Race(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.race(next)));
-			(obj.keys) = () => ((this.race_options()));
-			(obj.option_title) = (id) => ((this.race_title(id)));
-			return obj;
-		}
-		Race_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Раса");
-			(obj.Content) = () => ((this.Race()));
-			return obj;
-		}
-		class_selected(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		class_options(){
-			return [];
-		}
-		class_title(id){
-			return "";
-		}
-		Classes(){
-			const obj = new this.$.$mol_check_list();
-			(obj.option_checked) = (id, next) => ((this.class_selected(id, next)));
-			(obj.keys) = () => ((this.class_options()));
-			(obj.option_title) = (id) => ((this.class_title(id)));
-			return obj;
-		}
-		Classes_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Классы");
-			(obj.Content) = () => ((this.Classes()));
-			return obj;
-		}
-		title(){
-			return "Основное";
-		}
-		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
-			return obj;
-		}
-		body(){
-			return [
-				(this.Grade()), 
-				(this.Base_block()), 
-				(this.Race_block()), 
-				(this.Classes_block())
-			];
-		}
-	};
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Grade"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Base_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race_block"));
-	($mol_mem_key(($.$hyoo_dungeon_char_main.prototype), "class_selected"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "char"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $hyoo_dungeon_char_main extends $.$hyoo_dungeon_char_main {
-            race_options() {
-                return Object.keys(this.$.$hyoo_dungeon_race_all);
-            }
-            race_title(id) {
-                return this.$.$hyoo_dungeon_race_all[id].title;
-            }
-            class_options() {
-                return Object.keys(this.$.$hyoo_dungeon_class_all);
-            }
-            class_title(id) {
-                if (!id)
-                    return '';
-                return this.$.$hyoo_dungeon_class_all[id].title;
-            }
-            class_selected(id, next) {
-                let all = this.classes();
-                if (next !== undefined) {
-                    if (next)
-                        all = this.classes([...all, id]);
-                    else
-                        all = this.classes(all.filter(i => i !== id));
-                }
-                return all.includes(id);
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $hyoo_dungeon_char_main.prototype, "race_options", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "race_title", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_dungeon_char_main.prototype, "class_options", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "class_title", null);
-        __decorate([
-            $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "class_selected", null);
-        $$.$hyoo_dungeon_char_main = $hyoo_dungeon_char_main;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_dungeon_char_main, {
-            flex: {
-                basis: '40rem',
-            },
-            Grade: {
-                flex: {
-                    wrap: 'wrap',
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_textarea) = class $mol_textarea extends ($.$mol_stack) {
 		clickable(next){
 			if(next !== undefined) return next;
@@ -12263,6 +12055,267 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tuser-select: none;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n\tuser-select: auto;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n\tuser-select: none;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$hyoo_dungeon_char_main) = class $hyoo_dungeon_char_main extends ($.$mol_page) {
+		name(next){
+			return (this.char().name(next));
+		}
+		story(next){
+			return (this.char().story(next));
+		}
+		biography(next){
+			return (this.char().biography(next));
+		}
+		age(next){
+			return (this.char().age(next));
+		}
+		level(next){
+			return (this.char().level(next));
+		}
+		experience(next){
+			return (this.char().experience(next));
+		}
+		race(next){
+			return (this.char().race(next));
+		}
+		classes(next){
+			return (this.char().classes(next));
+		}
+		Level(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level(next)));
+			return obj;
+		}
+		Level_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🏅Уровень");
+			(obj.Content) = () => ((this.Level()));
+			return obj;
+		}
+		Experience(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.experience(next)));
+			(obj.precision_change) = () => (100);
+			return obj;
+		}
+		Experience_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("✨Опыт");
+			(obj.Content) = () => ((this.Experience()));
+			return obj;
+		}
+		Age(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.age(next)));
+			return obj;
+		}
+		Age_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("📅Возраст");
+			(obj.Content) = () => ((this.Age()));
+			return obj;
+		}
+		Grade(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Level_block()), 
+				(this.Experience_block()), 
+				(this.Age_block())
+			]);
+			return obj;
+		}
+		Name(){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.name(next)));
+			return obj;
+		}
+		Name_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Имя");
+			(obj.Content) = () => ((this.Name()));
+			return obj;
+		}
+		Story(){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.story(next)));
+			return obj;
+		}
+		Story_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Предыстория");
+			(obj.Content) = () => ((this.Story()));
+			return obj;
+		}
+		Base_block(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Name_block()), (this.Story_block())]);
+			return obj;
+		}
+		race_options(){
+			return [];
+		}
+		race_title(id){
+			return "";
+		}
+		Race(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.race(next)));
+			(obj.keys) = () => ((this.race_options()));
+			(obj.option_title) = (id) => ((this.race_title(id)));
+			return obj;
+		}
+		Race_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Раса");
+			(obj.Content) = () => ((this.Race()));
+			return obj;
+		}
+		class_selected(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		class_options(){
+			return [];
+		}
+		class_title(id){
+			return "";
+		}
+		Classes(){
+			const obj = new this.$.$mol_check_list();
+			(obj.option_checked) = (id, next) => ((this.class_selected(id, next)));
+			(obj.keys) = () => ((this.class_options()));
+			(obj.option_title) = (id) => ((this.class_title(id)));
+			return obj;
+		}
+		Classes_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Классы");
+			(obj.Content) = () => ((this.Classes()));
+			return obj;
+		}
+		Biography(){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.biography(next)));
+			return obj;
+		}
+		Biography_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Биография");
+			(obj.Content) = () => ((this.Biography()));
+			return obj;
+		}
+		title(){
+			return "Основное";
+		}
+		char(){
+			const obj = new this.$.$hyoo_dungeon_char();
+			return obj;
+		}
+		body(){
+			return [
+				(this.Grade()), 
+				(this.Base_block()), 
+				(this.Race_block()), 
+				(this.Classes_block()), 
+				(this.Biography_block())
+			];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Grade"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Base_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race_block"));
+	($mol_mem_key(($.$hyoo_dungeon_char_main.prototype), "class_selected"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Biography"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Biography_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "char"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_char_main extends $.$hyoo_dungeon_char_main {
+            race_options() {
+                return Object.keys(this.$.$hyoo_dungeon_race_all);
+            }
+            race_title(id) {
+                return this.$.$hyoo_dungeon_race_all[id].title;
+            }
+            class_options() {
+                return Object.keys(this.$.$hyoo_dungeon_class_all);
+            }
+            class_title(id) {
+                if (!id)
+                    return '';
+                return this.$.$hyoo_dungeon_class_all[id].title;
+            }
+            class_selected(id, next) {
+                let all = this.classes();
+                if (next !== undefined) {
+                    if (next)
+                        all = this.classes([...all, id]);
+                    else
+                        all = this.classes(all.filter(i => i !== id));
+                }
+                return all.includes(id);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_char_main.prototype, "race_options", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_char_main.prototype, "race_title", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_char_main.prototype, "class_options", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_char_main.prototype, "class_title", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_char_main.prototype, "class_selected", null);
+        $$.$hyoo_dungeon_char_main = $hyoo_dungeon_char_main;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_char_main, {
+            flex: {
+                basis: '40rem',
+            },
+            Grade: {
+                flex: {
+                    wrap: 'wrap',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -12825,6 +12878,7 @@ var $;
                     age: 20,
                     hits: 0,
                     hits_max: 0,
+                    hits_addon: 0,
                     abilities: {
                         dexterity: 0,
                         charisma: 0,
@@ -12854,6 +12908,7 @@ var $;
                         survival: 0,
                     },
                     story: '🏃‍♂️Чужеземец',
+                    biography: '',
                     affection: '',
                     ideals: '',
                     traits: '',

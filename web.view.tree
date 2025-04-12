@@ -788,6 +788,7 @@ $hyoo_dungeon_char_summary $mol_page
 	char $hyoo_dungeon_char
 		name => name
 		story => story
+		biography => biography
 		age => age
 		level? => level?
 		experience? => experience?
@@ -801,6 +802,7 @@ $hyoo_dungeon_char_summary $mol_page
 		weakness => weakness
 		master_bonus => master_bonus
 		hits? => hits?
+		hits_addon? => hits_addon?
 		hits_max? => hits_max?
 		hits_dice => hits_dice
 		hits_heal => hits_heal
@@ -856,6 +858,7 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Ideals $mol_text text <= ideals
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
+					<= Biography $mol_text text <= biography
 			<= Stat $mol_view sub /
 				<= Stat_main $mol_list rows /
 					<= Grade_block $mol_list rows /
@@ -874,14 +877,18 @@ $hyoo_dungeon_char_summary $mol_page
 								value? <=> experience?
 								step 100
 					<= Hits_block $mol_list rows /
-						<= Hits $hyoo_dungeon_parameter
-							title \💖Здоровье
-							Value <= Hits_value $mol_paginator
-								value? <=> hits?
 						<= Hits_max $hyoo_dungeon_parameter
 							title \💟Предел
 							Value <= Hits_max_value $mol_paginator
 								value? <=> hits_max?
+						<= Hits $hyoo_dungeon_parameter
+							title \💗Здоровье
+							Value <= Hits_value $mol_paginator
+								value? <=> hits?
+						<= Hits_addon $hyoo_dungeon_parameter
+							title \💖Бафы
+							Value <= Hits_addon_value $mol_paginator
+								value? <=> hits_addon?
 						<= Hits_heal $hyoo_dungeon_parameter
 							title \💊Лечение
 							value / <= hits_heal
@@ -971,53 +978,6 @@ $mol_check_list $mol_view
 $mol_switch $mol_check_list
 	value? \
 
-$hyoo_dungeon_char_main $mol_page
-	title \Основное
-	char $hyoo_dungeon_char
-		name? => name?
-		story? => story?
-		age? => age?
-		level? => level?
-		experience? => experience?
-		race? => race?
-		classes? => classes?
-	body /
-		<= Grade $mol_view sub /
-			<= Level_block $mol_form_field
-				name \🏅Уровень
-				Content <= Level $mol_paginator
-					value? <=> level?
-			<= Experience_block $mol_form_field
-				name \✨Опыт
-				Content <= Experience $mol_number
-					value? <=> experience?
-					precision_change 100
-			<= Age_block $mol_form_field
-				name \📅Возраст
-				Content <= Age $mol_number
-					value? <=> age?
-		<= Base_block $mol_form_group sub /
-			<= Name_block $mol_form_field
-				name \Имя
-				Content <= Name $mol_string
-					value? <=> name?
-			<= Story_block $mol_form_field
-				name \Предыстория
-				Content <= Story $mol_string
-					value? <=> story?
-		<= Race_block $mol_form_field
-			name \Раса
-			Content <= Race $mol_switch
-				value? <=> race?
-				keys <= race_options /string
-				option_title* <= race_title* \
-		<= Classes_block $mol_form_field
-			name \Классы
-			Content <= Classes $mol_check_list
-				option_checked*? <=> class_selected*? false
-				keys <= class_options /string
-				option_title* <= class_title* \
-
 $mol_textarea $mol_stack
 	attr *
 		^
@@ -1092,6 +1052,58 @@ $mol_textarea_edit $mol_string
 	field *
 		^
 		scrollTop 0
+
+$hyoo_dungeon_char_main $mol_page
+	title \Основное
+	char $hyoo_dungeon_char
+		name? => name?
+		story? => story?
+		biography? => biography?
+		age? => age?
+		level? => level?
+		experience? => experience?
+		race? => race?
+		classes? => classes?
+	body /
+		<= Grade $mol_view sub /
+			<= Level_block $mol_form_field
+				name \🏅Уровень
+				Content <= Level $mol_paginator
+					value? <=> level?
+			<= Experience_block $mol_form_field
+				name \✨Опыт
+				Content <= Experience $mol_number
+					value? <=> experience?
+					precision_change 100
+			<= Age_block $mol_form_field
+				name \📅Возраст
+				Content <= Age $mol_number
+					value? <=> age?
+		<= Base_block $mol_form_group sub /
+			<= Name_block $mol_form_field
+				name \Имя
+				Content <= Name $mol_string
+					value? <=> name?
+			<= Story_block $mol_form_field
+				name \Предыстория
+				Content <= Story $mol_string
+					value? <=> story?
+		<= Race_block $mol_form_field
+			name \Раса
+			Content <= Race $mol_switch
+				value? <=> race?
+				keys <= race_options /string
+				option_title* <= race_title* \
+		<= Classes_block $mol_form_field
+			name \Классы
+			Content <= Classes $mol_check_list
+				option_checked*? <=> class_selected*? false
+				keys <= class_options /string
+				option_title* <= class_title* \
+		<= Biography_block $mol_form_field
+			name \Биография
+			Content <= Biography $mol_textarea
+				value? <=> biography?
 
 $hyoo_dungeon_char_personality $mol_page
 	title \Характер
