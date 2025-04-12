@@ -2628,6 +2628,7 @@ declare namespace $ {
         ability_addon(id: $hyoo_dungeon_ability, next?: number): any;
         ability(id: $hyoo_dungeon_ability): any;
         ability_modifier(id: $hyoo_dungeon_ability): number;
+        ability_safe(id: $hyoo_dungeon_ability): number;
         skill_addon(id: $hyoo_dungeon_skill, next?: number): any;
         skill(id: $hyoo_dungeon_skill): any;
         moral(next?: 'good' | 'neutral' | 'evil'): "good" | "neutral" | "evil";
@@ -4279,41 +4280,56 @@ declare namespace $ {
 		Parameters< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_addon'] >[1]
 	>
 	type __hyoo_dungeon_ability_config_4 = $mol_type_enforce<
+		Parameters< $hyoo_dungeon_ability_config['ability_safe'] >[0]
+		,
+		Parameters< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_safe'] >[0]
+	>
+	type __hyoo_dungeon_ability_config_5 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_ability_config['ability_modifier'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_modifier'] >[0]
 	>
-	type $mol_chip__title_hyoo_dungeon_ability_config_5 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_ability_config_6 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_ability_config_6 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_ability_config_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_ability_config_7 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_ability_config['ability_total'] >
-		,
-		ReturnType< $mol_chip['title'] >
-	>
-	type $mol_chip__hint_hyoo_dungeon_ability_config_8 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_chip['hint'] >
-	>
-	type $mol_chip__sub_hyoo_dungeon_ability_config_9 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_chip__sub_hyoo_dungeon_ability_config_8 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_ability_config['ability_total_value'] >
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_ability_config_10 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_ability_config_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_chip['hint'] >
+	>
+	type $mol_chip__sub_hyoo_dungeon_ability_config_10 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_ability_config['ability_modifier_value'] >
+		,
+		ReturnType< $mol_chip['sub'] >
+	>
+	type $mol_chip__hint_hyoo_dungeon_ability_config_11 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_chip['hint'] >
+	>
+	type $mol_chip__sub_hyoo_dungeon_ability_config_12 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_ability_config['ability_safe_value'] >
+		,
+		ReturnType< $mol_chip['sub'] >
+	>
+	type $mol_paginator__value_hyoo_dungeon_ability_config_13 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_addon'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_ability_config_11 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_ability_config_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -4321,11 +4337,16 @@ declare namespace $ {
 	export class $hyoo_dungeon_ability_config extends $mol_page {
 		ability_total( id: any): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability'] >
 		ability_addon( id: any, next?: ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_addon'] > ): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_addon'] >
+		ability_safe( id: any): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_safe'] >
 		ability_modifier( id: any): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_modifier'] >
 		ability_title( id: any): string
 		Ability_title( id: any): $mol_chip
+		ability_total_value( id: any): readonly(any)[]
 		Ability_total( id: any): $mol_chip
+		ability_modifier_value( id: any): readonly(any)[]
 		Ability_modifier( id: any): $mol_chip
+		ability_safe_value( id: any): readonly(any)[]
+		Ability_safe( id: any): $mol_chip
 		Ability_addon( id: any): $mol_paginator
 		Ability_row( id: any): $mol_view
 		ability_list( ): readonly(any)[]
@@ -4344,6 +4365,9 @@ declare namespace $.$$ {
         pending(): number;
         ability_list(): $mol_view[];
         ability_title(id: $hyoo_dungeon_ability): string;
+        ability_total_value(id: $hyoo_dungeon_ability): readonly any[];
+        ability_modifier_value(id: $hyoo_dungeon_ability): readonly any[];
+        ability_safe_value(id: $hyoo_dungeon_ability): readonly any[];
     }
 }
 

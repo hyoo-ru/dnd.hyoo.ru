@@ -7861,7 +7861,7 @@ var $;
             image: 'https://i.imgur.com/3dO7ESp.jpeg',
             dice: 8,
             ability_main: 'charisma',
-            ability_safe: ['agility', 'charisma'],
+            ability_safe: ['dexterity', 'charisma'],
             weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
         },
     };
@@ -7904,6 +7904,11 @@ var $;
         }
         ability_modifier(id) {
             return Math.floor(this.ability(id) / 2 - 5);
+        }
+        ability_safe(id) {
+            const mod = this.ability_modifier(id);
+            const safe = this.$.$hyoo_dungeon_class_all[this.classes()[0]].ability_safe;
+            return mod + (safe.includes(id) ? this.master_bonus() : 0);
         }
         skill_addon(id, next) {
             return this.sub('skills', new $mol_store({})).value(id, next) ?? 0;
@@ -7951,6 +7956,9 @@ var $;
             return `d${dice}+${mod}`;
         }
     }
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_dungeon_char.prototype, "ability_safe", null);
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_max", null);
@@ -10852,6 +10860,9 @@ var $;
 		ability_addon(id, next){
 			return (this.char().ability_addon(id, next));
 		}
+		ability_safe(id){
+			return (this.char().ability_safe(id));
+		}
 		ability_modifier(id){
 			return (this.char().ability_modifier(id));
 		}
@@ -10863,16 +10874,31 @@ var $;
 			(obj.title) = () => ((this.ability_title(id)));
 			return obj;
 		}
+		ability_total_value(id){
+			return [(this.ability_total(id))];
+		}
 		Ability_total(id){
 			const obj = new this.$.$mol_chip();
 			(obj.hint) = () => ("Значение");
-			(obj.title) = () => ((this.ability_total(id)));
+			(obj.sub) = () => ((this.ability_total_value(id)));
 			return obj;
+		}
+		ability_modifier_value(id){
+			return [(this.ability_modifier(id))];
 		}
 		Ability_modifier(id){
 			const obj = new this.$.$mol_chip();
 			(obj.hint) = () => ("Модификатор");
-			(obj.sub) = () => ([(this.ability_modifier(id))]);
+			(obj.sub) = () => ((this.ability_modifier_value(id)));
+			return obj;
+		}
+		ability_safe_value(id){
+			return [(this.ability_safe(id))];
+		}
+		Ability_safe(id){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Спасение");
+			(obj.sub) = () => ((this.ability_safe_value(id)));
 			return obj;
 		}
 		Ability_addon(id){
@@ -10886,6 +10912,7 @@ var $;
 				(this.Ability_title(id)), 
 				(this.Ability_total(id)), 
 				(this.Ability_modifier(id)), 
+				(this.Ability_safe(id)), 
 				(this.Ability_addon(id))
 			]);
 			return obj;
@@ -10911,6 +10938,7 @@ var $;
 	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_title"));
 	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_total"));
 	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_modifier"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_safe"));
 	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_addon"));
 	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_row"));
 	($mol_mem(($.$hyoo_dungeon_ability_config.prototype), "char"));
@@ -10939,10 +10967,31 @@ var $;
                 return 24 - total;
             }
             ability_list() {
-                return Object.keys(this.$.$hyoo_dungeon_ability_all).map(ability => this.Ability_row(ability));
+                return [
+                    this.Ability_row(''),
+                    ...Object.keys(this.$.$hyoo_dungeon_ability_all)
+                        .map(ability => this.Ability_row(ability))
+                ];
             }
             ability_title(id) {
+                if (!id)
+                    return 'Способность';
                 return this.$.$hyoo_dungeon_ability_all[id].title;
+            }
+            ability_total_value(id) {
+                if (!id)
+                    return ['🔢'];
+                return super.ability_total_value(id);
+            }
+            ability_modifier_value(id) {
+                if (!id)
+                    return ['✨'];
+                return super.ability_modifier_value(id);
+            }
+            ability_safe_value(id) {
+                if (!id)
+                    return ['☔'];
+                return super.ability_safe_value(id);
             }
         }
         __decorate([
@@ -10966,12 +11015,21 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_ability_config, {
             flex: {
-                basis: '20rem',
+                basis: '25rem',
             },
             Ability_total: {
                 flex: {
                     basis: '2.5rem',
                 },
+                justify: {
+                    content: 'center',
+                },
+            },
+            Ability_safe: {
+                flex: {
+                    basis: '2.5rem',
+                },
+                color: $mol_theme.shade,
                 justify: {
                     content: 'center',
                 },
@@ -11640,7 +11698,7 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_char_summary, {
             flex: {
-                basis: '60rem',
+                basis: '65rem',
             },
             Columns: {
                 flex: {
@@ -11709,7 +11767,7 @@ var $;
             },
             Stat_main: {
                 flex: {
-                    basis: `13rem`,
+                    basis: `16rem`,
                 },
                 gap: $mol_gap.block,
             },
