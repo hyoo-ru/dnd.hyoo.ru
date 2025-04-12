@@ -2207,7 +2207,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/theme/theme.css", ":root {\n\t--mol_theme_hue: 240deg;\n\t--mol_theme_hue_spread: 90deg;\n}\n\n:where([mol_theme]) {\n\tcolor: var(--mol_theme_text);\n\tfill: var(--mol_theme_text);\n\tbackground-color: var(--mol_theme_back);\n}\n\t\n:root, [mol_theme=\"$mol_theme_dark\"], :where([mol_theme=\"$mol_theme_dark\"]) [mol_theme]  {\n\n\t--mol_theme_luma: -1;\n\t--mol_theme_image: invert(1) hue-rotate( 180deg );\n\n\t--mol_theme_back: hsl( var(--mol_theme_hue), 20%, 10% );\n\t--mol_theme_card: hsl( var(--mol_theme_hue), 50%, 20%, .25 );\n\t--mol_theme_field: hsl( var(--mol_theme_hue), 50%, 8%, .25 );\n\t--mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );\n\t\n\t--mol_theme_text: hsl( var(--mol_theme_hue), 0%, 80% );\n\t--mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 60%, 1 );\n\t--mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .25 );\n\t--mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 65% );\n\t\n\t--mol_theme_control: hsl( var(--mol_theme_hue), 60%, 65% );\n\t--mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 60%, 65% );\n\t--mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 60%, 65% );\n\n} @supports( color: oklch( 0% 0 0deg ) ) {\n:root, [mol_theme=\"$mol_theme_dark\"], :where([mol_theme=\"$mol_theme_dark\"]) [mol_theme]  {\n\t\n\t--mol_theme_back: oklch( 20% .03 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 30% .05 var(--mol_theme_hue) / .25 );\n\t--mol_theme_field: oklch( 15% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_hover: oklch( 70% 0 var(--mol_theme_hue) / .1 );\n\t\n\t--mol_theme_text: oklch( 80% 0 var(--mol_theme_hue) );\n\t--mol_theme_shade: oklch( 60% 0 var(--mol_theme_hue) );\n\t--mol_theme_line: oklch( 60% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_focus: oklch( 80% .2 calc( var(--mol_theme_hue) + 180deg ) );\n\t\n\t--mol_theme_control: oklch( 70% .1 var(--mol_theme_hue) );\n\t--mol_theme_current: oklch( 70% .2 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_special: oklch( 70% .2 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\n} }\n\n[mol_theme=\"$mol_theme_light\"], :where([mol_theme=\"$mol_theme_light\"]) [mol_theme] {\n\t\n\t--mol_theme_luma: 1;\n\t--mol_theme_image: none;\n\t\n\t--mol_theme_back: hsl( var(--mol_theme_hue), 20%, 92% );\n\t--mol_theme_card: hsl( var(--mol_theme_hue), 50%, 100%, .5 );\n\t--mol_theme_field: hsl( var(--mol_theme_hue), 50%, 100%, .75 );\n\t--mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );\n\t\n\t--mol_theme_text: hsl( var(--mol_theme_hue), 0%, 0% );\n\t--mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 40%, 1 );\n\t--mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .25 );\n\t--mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 40% );\n\t\n\t--mol_theme_control: hsl( var(--mol_theme_hue), 80%, 30% );\n\t--mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 80%, 30% );\n\t--mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 80%, 30% );\n\n} @supports( color: oklch( 0% 0 0deg ) ) {\n[mol_theme=\"$mol_theme_light\"], :where([mol_theme=\"$mol_theme_light\"]) [mol_theme] {\n\t--mol_theme_back: oklch( 92% .01 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 99% .01 var(--mol_theme_hue) / .5 );\n\t--mol_theme_field: oklch( 100% 0 var(--mol_theme_hue) / .5 );\n\t--mol_theme_hover: oklch( 70% 0 var(--mol_theme_hue) / .1 );\n\t\n\t--mol_theme_text: oklch( 20% 0 var(--mol_theme_hue) );\n\t--mol_theme_shade: oklch( 60% 0 var(--mol_theme_hue) );\n\t--mol_theme_line: oklch( 50% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_focus: oklch( 60% .2 calc( var(--mol_theme_hue) + 180deg ) );\n\t\n\t--mol_theme_control: oklch( 40% .15 var(--mol_theme_hue) );\n\t--mol_theme_current: oklch( 50% .2 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_special: oklch( 50% .2 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\n} }\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_base\"] {\n\t--mol_theme_back: oklch( 25% .05 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 35% .1 var(--mol_theme_hue) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_base\"] {\n\t--mol_theme_back: oklch( 85% .05 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 98% .03 var(--mol_theme_hue) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_current\"] {\n\t--mol_theme_back: oklch( 25% .05 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 35% .1 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_current\"] {\n\t--mol_theme_back: oklch( 85% .05 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_special\"] {\n\t--mol_theme_back: oklch( 25% .05 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 35% .1 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_special\"] {\n\t--mol_theme_back: oklch( 85% .05 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_accent\"] {\n\t--mol_theme_back: oklch( 35% .1 calc( var(--mol_theme_hue) + 180deg ) );\n\t--mol_theme_card: oklch( 45% .15 calc( var(--mol_theme_hue) + 180deg ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_accent\"] {\n\t--mol_theme_back: oklch( 83% .1 calc( var(--mol_theme_hue) + 180deg ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) + 180deg ) / .25 );\n}\n\n");
+    $mol_style_attach("mol/theme/theme.css", ":root {\n\t--mol_theme_hue: 240deg;\n\t--mol_theme_hue_spread: 90deg;\n}\n\n:where([mol_theme]) {\n\tcolor: var(--mol_theme_text);\n\tfill: var(--mol_theme_text);\n\tbackground-color: var(--mol_theme_back);\n}\n\t\n:root, [mol_theme=\"$mol_theme_dark\"], :where([mol_theme=\"$mol_theme_dark\"]) [mol_theme]  {\n\n\t--mol_theme_luma: -1;\n\t--mol_theme_image: invert(1) hue-rotate( 180deg );\n\n\t--mol_theme_back: hsl( var(--mol_theme_hue), 20%, 10% );\n\t--mol_theme_card: hsl( var(--mol_theme_hue), 50%, 20%, .25 );\n\t--mol_theme_field: hsl( var(--mol_theme_hue), 50%, 8%, .25 );\n\t--mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );\n\t\n\t--mol_theme_text: hsl( var(--mol_theme_hue), 0%, 80% );\n\t--mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 60%, 1 );\n\t--mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .25 );\n\t--mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 65% );\n\t\n\t--mol_theme_control: hsl( var(--mol_theme_hue), 60%, 65% );\n\t--mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 60%, 65% );\n\t--mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 60%, 65% );\n\n} @supports( color: oklch( 0% 0 0deg ) ) {\n:root, [mol_theme=\"$mol_theme_dark\"], :where([mol_theme=\"$mol_theme_dark\"]) [mol_theme]  {\n\t\n\t--mol_theme_back: oklch( 20% .03 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 30% .05 var(--mol_theme_hue) / .25 );\n\t--mol_theme_field: oklch( 15% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_hover: oklch( 70% 0 var(--mol_theme_hue) / .1 );\n\t\n\t--mol_theme_text: oklch( 80% 0 var(--mol_theme_hue) );\n\t--mol_theme_shade: oklch( 60% 0 var(--mol_theme_hue) );\n\t--mol_theme_line: oklch( 60% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_focus: oklch( 80% .2 calc( var(--mol_theme_hue) + 180deg ) );\n\t\n\t--mol_theme_control: oklch( 70% .1 var(--mol_theme_hue) );\n\t--mol_theme_current: oklch( 70% .2 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_special: oklch( 70% .2 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\n} }\n\n[mol_theme=\"$mol_theme_light\"], :where([mol_theme=\"$mol_theme_light\"]) [mol_theme] {\n\t\n\t--mol_theme_luma: 1;\n\t--mol_theme_image: none;\n\t\n\t--mol_theme_back: hsl( var(--mol_theme_hue), 20%, 92% );\n\t--mol_theme_card: hsl( var(--mol_theme_hue), 50%, 100%, .5 );\n\t--mol_theme_field: hsl( var(--mol_theme_hue), 50%, 100%, .75 );\n\t--mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );\n\t\n\t--mol_theme_text: hsl( var(--mol_theme_hue), 0%, 0% );\n\t--mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 40%, 1 );\n\t--mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .25 );\n\t--mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 40% );\n\t\n\t--mol_theme_control: hsl( var(--mol_theme_hue), 80%, 30% );\n\t--mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 80%, 30% );\n\t--mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 80%, 30% );\n\n} @supports( color: oklch( 0% 0 0deg ) ) {\n[mol_theme=\"$mol_theme_light\"], :where([mol_theme=\"$mol_theme_light\"]) [mol_theme] {\n\t--mol_theme_back: oklch( 92% .01 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 99% .01 var(--mol_theme_hue) / .5 );\n\t--mol_theme_field: oklch( 100% 0 var(--mol_theme_hue) / .5 );\n\t--mol_theme_hover: oklch( 70% 0 var(--mol_theme_hue) / .1 );\n\t\n\t--mol_theme_text: oklch( 20% 0 var(--mol_theme_hue) );\n\t--mol_theme_shade: oklch( 60% 0 var(--mol_theme_hue) );\n\t--mol_theme_line: oklch( 50% 0 var(--mol_theme_hue) / .25 );\n\t--mol_theme_focus: oklch( 60% .2 calc( var(--mol_theme_hue) + 180deg ) );\n\t\n\t--mol_theme_control: oklch( 40% .15 var(--mol_theme_hue) );\n\t--mol_theme_current: oklch( 50% .2 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_special: oklch( 50% .2 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\n} }\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_base\"] {\n\t--mol_theme_back: oklch( 25% .075 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 35% .1 var(--mol_theme_hue) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_base\"] {\n\t--mol_theme_back: oklch( 85% .075 var(--mol_theme_hue) );\n\t--mol_theme_card: oklch( 98% .03 var(--mol_theme_hue) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_current\"] {\n\t--mol_theme_back: oklch( 25% .05 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 35% .1 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_current\"] {\n\t--mol_theme_back: oklch( 85% .05 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_special\"] {\n\t--mol_theme_back: oklch( 25% .05 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 35% .1 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_special\"] {\n\t--mol_theme_back: oklch( 85% .05 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ) / .25 );\n}\n\n:where( :root, [mol_theme=\"$mol_theme_dark\"] ) [mol_theme=\"$mol_theme_accent\"] {\n\t--mol_theme_back: oklch( 35% .1 calc( var(--mol_theme_hue) + 180deg ) );\n\t--mol_theme_card: oklch( 45% .15 calc( var(--mol_theme_hue) + 180deg ) / .25 );\n}\n:where( [mol_theme=\"$mol_theme_light\"] ) [mol_theme=\"$mol_theme_accent\"] {\n\t--mol_theme_back: oklch( 83% .1 calc( var(--mol_theme_hue) + 180deg ) );\n\t--mol_theme_card: oklch( 98% .03 calc( var(--mol_theme_hue) + 180deg ) / .25 );\n}\n\n");
 })($ || ($ = {}));
 
 ;
@@ -7176,13 +7176,13 @@ var $;
 (function ($) {
     $.$hyoo_dungeon_ability_all = {
         strength: {
-            title: '💪Сила',
+            title: '💪Мощность',
         },
         dexterity: {
             title: '🥏Ловкость',
         },
         constitution: {
-            title: '🐘Стойкость',
+            title: '🐘Живучесть',
         },
         intelligence: {
             title: '🧠Интеллект',
@@ -7281,6 +7281,27 @@ var $;
 var $;
 (function ($) {
     $.$hyoo_dungeon_race_all = {
+        human: {
+            title: '👩‍🦲Человек',
+            link: 'https://dnd.su/race/81-human/',
+            description: 'В большинстве миров люди — это самая молодая из распространённых рас. Они поздно вышли на мировую сцену и живут намного меньше, чем дварфы, эльфы и драконы. Возможно, именно краткость их жизней заставляет их стремиться достигнуть как можно большего в отведённый им срок. А быть может, они хотят что-то доказать старшим расам, и поэтому создают могучие империи, основанные на завоеваниях и торговле. Что бы ни двигало ими, люди всегда были инноваторами и пионерами во всех мирах.',
+            image: 'https://i.imgur.com/48pZ1oG.jpeg',
+            abilities: {
+                dexterity: 1,
+                charisma: 1,
+                constitution: 1,
+                intelligence: 1,
+                strength: 1,
+                wisdom: 1,
+            },
+            age_max: 100,
+            alignment: 'Люди не имеют склонности к определённому мировоззрению. Среди них встречаются как лучшие, так и худшие представители.',
+            size: 'medium',
+            speed: 30,
+            perks: [],
+            weapons: [],
+            skills: [],
+        },
         tabaxi: {
             title: '🐈Табакси',
             link: 'https://dnd.su/race/183-tabaxi/',
@@ -7294,7 +7315,7 @@ var $;
                 strength: 0,
                 wisdom: 0,
             },
-            age_max: 150,
+            age_max: 100,
             alignment: 'Табакси склонны к хаотическому мировоззрению, поскольку они позволяют своим порывам и увлечениям направлять их решения. Они редко являются злыми, большинство из них ведомы любопытством, а не жадностью или другими темными побуждениям.',
             size: 'medium',
             speed: 30,
@@ -7324,7 +7345,7 @@ var $;
             link: 'https://dnd.su/class/88-bard/',
             description: 'Вдохновляющий заклинатель, черпающий мощь в музыке созидания',
             image: 'https://i.imgur.com/3dO7ESp.jpeg',
-            dice: 'k8',
+            dice: 8,
             ability_main: 'charisma',
             ability_safe: ['agility', 'charisma'],
             weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
@@ -7364,6 +7385,9 @@ var $;
         ability(id) {
             return 8 + this.ability_addon(id) + this.$.$hyoo_dungeon_race_all[this.race()].abilities[id];
         }
+        ability_modifier(id) {
+            return Math.floor(this.ability(id) / 2 - 5);
+        }
         skill_addon(id, next) {
             return this.sub('skills', new $mol_store({})).value(id, next) ?? 0;
         }
@@ -7388,7 +7412,34 @@ var $;
         weakness(next) {
             return this.value('weakness', next) ?? '';
         }
+        master_bonus() {
+            return 2 + Math.floor(this.level() / 4 - 1 / 4);
+        }
+        hits_dice() {
+            return this.$.$hyoo_dungeon_class_all[this.classes()[0]].dice;
+        }
+        hits_max(next) {
+            const def = this.hits_dice() + this.ability_modifier('constitution');
+            return this.value('hits_max', next) || def;
+        }
+        hits(next) {
+            return this.value('hits', next && Math.max(0, Math.min(next, this.hits_max()))) || this.hits_max();
+        }
+        hits_heal() {
+            const mod = Math.max(1, this.ability_modifier('constitution'));
+            const dice = this.$.$hyoo_dungeon_class_all[this.classes()[0]].dice;
+            return `d${dice}+${mod}`;
+        }
     }
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "hits_max", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "hits", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "hits_heal", null);
     $.$hyoo_dungeon_char = $hyoo_dungeon_char;
 })($ || ($ = {}));
 
@@ -10151,6 +10202,9 @@ var $;
 			(obj.sub) = () => ([(this.Forward_icon())]);
 			return obj;
 		}
+		step(){
+			return 1;
+		}
 		sub(){
 			return [
 				(this.Backward()), 
@@ -10183,13 +10237,13 @@ var $;
                 if (event.defaultPrevented)
                     return;
                 event.preventDefault();
-                this.value(this.value() - 1);
+                this.value(this.value() - this.step());
             }
             forward(event) {
                 if (event.defaultPrevented)
                     return;
                 event.preventDefault();
-                this.value(this.value() + 1);
+                this.value(this.value() + this.step());
             }
         }
         $$.$mol_paginator = $mol_paginator;
@@ -10204,6 +10258,60 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$hyoo_dungeon_parameter) = class $hyoo_dungeon_parameter extends ($.$mol_view) {
+		Title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		value(){
+			return [];
+		}
+		Value(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_width) = () => (40);
+			(obj.sub) = () => ((this.value()));
+			return obj;
+		}
+		sub(){
+			return [(this.Title()), (this.Value())];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_parameter.prototype), "Title"));
+	($mol_mem(($.$hyoo_dungeon_parameter.prototype), "Value"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_parameter, {
+            background: {
+                color: $mol_theme.card,
+            },
+            Title: {
+                padding: $mol_gap.text,
+                flex: {
+                    grow: 1,
+                },
+            },
+            Value: {
+                padding: $mol_gap.text,
+                color: $mol_theme.special,
+                justify: {
+                    content: 'center',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$hyoo_dungeon_ability_config) = class $hyoo_dungeon_ability_config extends ($.$mol_page) {
 		ability_total(id){
 			return (this.char().ability(id));
@@ -10211,35 +10319,46 @@ var $;
 		ability_addon(id, next){
 			return (this.char().ability_addon(id, next));
 		}
+		ability_modifier(id){
+			return (this.char().ability_modifier(id));
+		}
 		ability_title(id){
 			return "";
 		}
-		Param_title(id){
+		Ability_title(id){
 			const obj = new this.$.$mol_chip();
 			(obj.title) = () => ((this.ability_title(id)));
 			return obj;
 		}
-		Param_total(id){
+		Ability_total(id){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Значение");
 			(obj.title) = () => ((this.ability_total(id)));
 			return obj;
 		}
-		Param_addon(id){
+		Ability_modifier(id){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Модификатор");
+			(obj.sub) = () => ([(this.ability_modifier(id))]);
+			return obj;
+		}
+		Ability_addon(id){
 			const obj = new this.$.$mol_paginator();
 			(obj.value) = (next) => ((this.ability_addon(id, next)));
 			return obj;
 		}
-		Param_row(id){
+		Ability_row(id){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([
-				(this.Param_title(id)), 
-				(this.Param_total(id)), 
-				(this.Param_addon(id))
+				(this.Ability_title(id)), 
+				(this.Ability_total(id)), 
+				(this.Ability_modifier(id)), 
+				(this.Ability_addon(id))
 			]);
 			return obj;
 		}
 		ability_list(){
-			return [(this.Param_row("some"))];
+			return [(this.Ability_row("some"))];
 		}
 		title(){
 			return "Способности";
@@ -10256,10 +10375,11 @@ var $;
 			return (this.ability_list());
 		}
 	};
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Param_title"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Param_total"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Param_addon"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Param_row"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_title"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_total"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_modifier"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_addon"));
+	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_row"));
 	($mol_mem(($.$hyoo_dungeon_ability_config.prototype), "char"));
 	($mol_mem(($.$hyoo_dungeon_ability_config.prototype), "pending"));
 
@@ -10283,10 +10403,10 @@ var $;
                 const char = this.char();
                 const total = Object.keys(this.$.$hyoo_dungeon_ability_all)
                     .reduce((sum, id) => sum + char.ability_addon(id), 0);
-                return 25 - total;
+                return 24 - total;
             }
             ability_list() {
-                return Object.keys(this.$.$hyoo_dungeon_ability_all).map(ability => this.Param_row(ability));
+                return Object.keys(this.$.$hyoo_dungeon_ability_all).map(ability => this.Ability_row(ability));
             }
             ability_title(id) {
                 return this.$.$hyoo_dungeon_ability_all[id].title;
@@ -10315,7 +10435,15 @@ var $;
             flex: {
                 basis: '20rem',
             },
-            Param_total: {
+            Ability_total: {
+                flex: {
+                    basis: '2.5rem',
+                },
+                justify: {
+                    content: 'center',
+                },
+            },
+            Ability_modifier: {
                 flex: {
                     basis: '2.5rem',
                 },
@@ -10324,7 +10452,7 @@ var $;
                     content: 'center',
                 },
             },
-            Param_title: {
+            Ability_title: {
                 flex: {
                     basis: '8rem',
                     grow: 1,
@@ -10495,11 +10623,11 @@ var $;
 		age(){
 			return (this.char().age());
 		}
-		level(){
-			return (this.char().level());
+		level(next){
+			return (this.char().level(next));
 		}
-		experience(){
-			return (this.char().experience());
+		experience(next){
+			return (this.char().experience(next));
 		}
 		race(){
 			return (this.char().race());
@@ -10525,8 +10653,23 @@ var $;
 		weakness(){
 			return (this.char().weakness());
 		}
+		master_bonus(){
+			return (this.char().master_bonus());
+		}
+		hits(next){
+			return (this.char().hits(next));
+		}
+		hits_max(next){
+			return (this.char().hits_max(next));
+		}
+		hits_dice(){
+			return (this.char().hits_dice());
+		}
+		hits_heal(){
+			return (this.char().hits_heal());
+		}
 		ability_list(){
-			return (this.Param_cofig().ability_list());
+			return (this.Ability_cofig().ability_list());
 		}
 		skill_list(){
 			return (this.Skill_cofig().skill_list());
@@ -10561,18 +10704,6 @@ var $;
 			(obj.sub) = () => (["📅", (this.age())]);
 			return obj;
 		}
-		Level(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Уровень");
-			(obj.sub) = () => (["🏅", (this.level())]);
-			return obj;
-		}
-		Experience(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Опыт");
-			(obj.sub) = () => (["✨", (this.experience())]);
-			return obj;
-		}
 		speed(){
 			return 1;
 		}
@@ -10584,12 +10715,7 @@ var $;
 		}
 		Grade(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Age()), 
-				(this.Level()), 
-				(this.Experience()), 
-				(this.Speed())
-			]);
+			(obj.sub) = () => ([(this.Age()), (this.Speed())]);
 			return obj;
 		}
 		Top(){
@@ -10693,6 +10819,81 @@ var $;
 			]);
 			return obj;
 		}
+		Level_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level(next)));
+			return obj;
+		}
+		Level(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🏅Уровень");
+			(obj.Value) = () => ((this.Level_value()));
+			return obj;
+		}
+		Master_bonus(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🥇Мастерство");
+			(obj.value) = () => (["+", (this.master_bonus())]);
+			return obj;
+		}
+		Experience_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.experience(next)));
+			(obj.step) = () => (100);
+			return obj;
+		}
+		Experience(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("✨Опыт");
+			(obj.Value) = () => ((this.Experience_value()));
+			return obj;
+		}
+		Grade_block(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Level()), 
+				(this.Master_bonus()), 
+				(this.Experience())
+			]);
+			return obj;
+		}
+		Hits_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits(next)));
+			return obj;
+		}
+		Hits(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💖Здоровье");
+			(obj.Value) = () => ((this.Hits_value()));
+			return obj;
+		}
+		Hits_max_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits_max(next)));
+			return obj;
+		}
+		Hits_max(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💟Предел");
+			(obj.Value) = () => ((this.Hits_max_value()));
+			return obj;
+		}
+		Hits_heal(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💊Лечение");
+			(obj.value) = () => ([(this.hits_heal())]);
+			return obj;
+		}
+		Hits_block(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Hits()), 
+				(this.Hits_max()), 
+				(this.Hits_heal())
+			]);
+			return obj;
+		}
 		Ability_list(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ((this.ability_list()));
@@ -10708,7 +10909,12 @@ var $;
 		}
 		Stat_main(){
 			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([(this.Ability_list()), (this.Perks())]);
+			(obj.rows) = () => ([
+				(this.Grade_block()), 
+				(this.Hits_block()), 
+				(this.Ability_list()), 
+				(this.Perks())
+			]);
 			return obj;
 		}
 		Skill_list(){
@@ -10733,10 +10939,10 @@ var $;
 			const obj = new this.$.$hyoo_dungeon_char();
 			return obj;
 		}
-		Param_cofig(){
+		Ability_cofig(){
 			const obj = new this.$.$hyoo_dungeon_ability_config();
 			(obj.char) = () => ((this.char()));
-			(obj.Param_addon) = () => (null);
+			(obj.Ability_addon) = () => (null);
 			return obj;
 		}
 		Skill_cofig(){
@@ -10753,8 +10959,6 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
@@ -10772,6 +10976,18 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Weakness"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Master_bonus"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_heal"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_list"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat_main"));
@@ -10779,7 +10995,7 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Param_cofig"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_cofig"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_cofig"));
 
 
@@ -12600,13 +12816,15 @@ var $;
             char() {
                 return this.$.$mol_store_local.sub('char', new $hyoo_dungeon_char({
                     name: '',
-                    race: 'tabaxi',
+                    race: 'human',
                     classes: [],
                     moral: 'neutral',
                     ethics: 'neutral',
                     experience: 0,
                     level: 1,
                     age: 20,
+                    hits: 0,
+                    hits_max: 0,
                     abilities: {
                         dexterity: 0,
                         charisma: 0,

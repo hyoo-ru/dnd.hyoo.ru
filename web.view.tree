@@ -715,6 +715,7 @@ $mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,1
 $mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
 
 $mol_paginator $mol_bar
+	step 1
 	sub /
 		<= Backward $mol_button_minor
 			hint <= backward_hint @ \Backward
@@ -726,19 +727,32 @@ $mol_paginator $mol_bar
 			click?event <=> forward?event null
 			sub / <= Forward_icon $mol_icon_chevron_right
 
+$hyoo_dungeon_parameter $mol_view
+	sub /
+		<= Title $mol_view
+			sub / <= title
+		<= Value $mol_view
+			minimal_width 40
+			sub <= value /
+
 $hyoo_dungeon_ability_config $mol_page
 	title \Способности
 	char $hyoo_dungeon_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
+		ability_modifier* => ability_modifier*
 	pending? 25
 	body <= ability_list /
-		<= Param_row*some $mol_view sub /
-			<= Param_title* $mol_chip
+		<= Ability_row*some $mol_view sub /
+			<= Ability_title* $mol_chip
 				title <= ability_title* \
-			<= Param_total* $mol_chip
+			<= Ability_total* $mol_chip
+				hint \Значение
 				title <= ability_total*
-			<= Param_addon* $mol_paginator
+			<= Ability_modifier* $mol_chip
+				hint \Модификатор
+				sub / <= ability_modifier*
+			<= Ability_addon* $mol_paginator
 				value? <=> ability_addon*?
 
 $hyoo_dungeon_skill_config $mol_page
@@ -775,8 +789,8 @@ $hyoo_dungeon_char_summary $mol_page
 		name => name
 		story => story
 		age => age
-		level => level
-		experience => experience
+		level? => level?
+		experience? => experience?
 		race => race
 		classes => classes
 		moral => moral
@@ -785,10 +799,15 @@ $hyoo_dungeon_char_summary $mol_page
 		ideals => ideals
 		affection => affection
 		weakness => weakness
-	Param_cofig $hyoo_dungeon_ability_config
+		master_bonus => master_bonus
+		hits? => hits?
+		hits_max? => hits_max?
+		hits_dice => hits_dice
+		hits_heal => hits_heal
+	Ability_cofig $hyoo_dungeon_ability_config
 		char <= char
 		ability_list => ability_list
-		Param_addon null
+		Ability_addon null
 	Skill_cofig $hyoo_dungeon_skill_config
 		char <= char
 		skill_list => skill_list
@@ -811,16 +830,6 @@ $hyoo_dungeon_char_summary $mol_page
 							sub /
 								\📅
 								<= age
-						<= Level $mol_chip
-							hint \Уровень
-							sub /
-								\🏅
-								<= level
-						<= Experience $mol_chip
-							hint \Опыт
-							sub /
-								\✨
-								<= experience
 						<= Speed $mol_chip
 							hint \Скорость
 							sub /
@@ -849,8 +858,37 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Weakness $mol_text text <= weakness
 			<= Stat $mol_view sub /
 				<= Stat_main $mol_list rows /
-					<= Ability_list $mol_view sub <= ability_list
-					<= Perks $mol_text text <= perks \
+					<= Grade_block $mol_list rows /
+						<= Level $hyoo_dungeon_parameter
+							title \🏅Уровень
+							Value <= Level_value $mol_paginator
+								value? <=> level?
+						<= Master_bonus $hyoo_dungeon_parameter
+							title \🥇Мастерство
+							value /
+								\+
+								<= master_bonus
+						<= Experience $hyoo_dungeon_parameter
+							title \✨Опыт
+							Value <= Experience_value $mol_paginator
+								value? <=> experience?
+								step 100
+					<= Hits_block $mol_list rows /
+						<= Hits $hyoo_dungeon_parameter
+							title \💖Здоровье
+							Value <= Hits_value $mol_paginator
+								value? <=> hits?
+						<= Hits_max $hyoo_dungeon_parameter
+							title \💟Предел
+							Value <= Hits_max_value $mol_paginator
+								value? <=> hits_max?
+						<= Hits_heal $hyoo_dungeon_parameter
+							title \💊Лечение
+							value / <= hits_heal
+					<= Ability_list $mol_view
+						sub <= ability_list
+					<= Perks $mol_text
+						text <= perks \
 				<= Skill_list $mol_view sub <= skill_list
 
 $mol_labeler $mol_list
