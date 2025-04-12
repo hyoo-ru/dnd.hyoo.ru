@@ -80,10 +80,22 @@ namespace $.$$ {
 			color: $mol_theme.special,
 		},
 		
+		Stat_main: {
+			flex: {
+				basis: `13rem`,
+			},
+			gap: $mol_gap.block,
+		},
+		
 		Ability_list: {
 			flex: {
-				basis: `11rem`,
 				direction: 'column',
+			},
+		},
+		
+		Perks: {
+			background: {
+				color: $mol_theme.card,
 			},
 		},
 		

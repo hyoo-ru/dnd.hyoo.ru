@@ -25,5 +25,13 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_race_all[ this.race() ].speed
 		}
 		
+		override perks() {
+			return this.$.$hyoo_dungeon_race_all[ this.race() ].perks.join( '\n' )
+		}
+		
+		override race_link() {
+			return this.$.$hyoo_dungeon_race_all[ this.race() ].link
+		}
+		
 	}
 }
