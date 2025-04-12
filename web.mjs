@@ -7321,6 +7321,7 @@ var $;
     $.$hyoo_dungeon_class_all = {
         bard: {
             title: '🎻Бард',
+            link: 'https://dnd.su/class/88-bard/',
             description: 'Вдохновляющий заклинатель, черпающий мощь в музыке созидания',
             image: 'https://i.imgur.com/3dO7ESp.jpeg',
             dice: 'k8',
@@ -10276,7 +10277,7 @@ var $;
             title() {
                 if (!this.pending())
                     return super.title();
-                return super.title() + ' +' + this.pending();
+                return super.title() + ' ' + this.pending();
             }
             pending() {
                 const char = this.char();

@@ -2690,6 +2690,7 @@ declare namespace $ {
 declare namespace $ {
     type $hyoo_dungeon_class_info = {
         title: string;
+        link: string;
         description: string;
         image: string;
         dice: 'k8' | 'k10';
