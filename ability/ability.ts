@@ -12,7 +12,7 @@ namespace $ {
 			title: 'Ловкость',
 		} as $hyoo_dungeon_ability_info,
 		constitution: {
-			title: 'Телосложение',
+			title: 'Стойкость',
 		} as $hyoo_dungeon_ability_info,
 		intelligence: {
 			title: 'Интеллект',

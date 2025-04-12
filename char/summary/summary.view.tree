@@ -16,7 +16,7 @@ $hyoo_dungeon_char_summary $mol_page
 		skill_list => skill_list
 		Skill_addon null
 	body /
-		<= Columns $mol_row sub /
+		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
 				<= Base $mol_bar sub /
 					<= Race $mol_chip title <= race_title \
@@ -29,6 +29,6 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Alignment $mol_bar sub /
 						<= Goodness $mol_chip title <= moral_title \
 						<= Principality $mol_chip title <= ethics_title \
-			<= Stat $mol_row sub /
-				<= Param_list $mol_list rows <= ability_list
-				<= Skill_list $mol_list rows <= skill_list
+			<= Stat $mol_view sub /
+				<= Ability_list $mol_view sub <= ability_list
+				<= Skill_list $mol_view sub <= skill_list

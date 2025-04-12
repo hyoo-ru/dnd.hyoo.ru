@@ -4,7 +4,7 @@ $hyoo_dungeon_skill_config $mol_page
 		skill* => skill_total*
 		skill_addon*? => skill_addon*?
 	body <= skill_list /
-		<= Skill_row*some $mol_bar sub /
+		<= Skill_row*some $mol_view sub /
 			<= Skill_title* $mol_chip
 				title <= skill_title* \
 			<= Skill_total* $mol_chip

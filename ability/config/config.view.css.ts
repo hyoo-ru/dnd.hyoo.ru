@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_ability_config, {
 		
 		flex: {
-			basis: '30rem',
+			basis: '20rem',
 		},
 		
 		Param_total: {
@@ -12,13 +12,15 @@ namespace $.$$ {
 			},
 			color: $mol_theme.special,
 			justify: {
-				content: 'flex-end',
+				content: 'center',
 			},
 		},
 		
 		Param_title: {
 			flex: {
-				basis: '8rem',
+				basis: '6rem',
+				grow: 1,
+				shrink: 1,
 			},
 		},
 		

@@ -63,7 +63,7 @@ namespace $ {
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
 		animals: {
-			title: 'Животноводство',
+			title: 'Звероводство',
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
 		

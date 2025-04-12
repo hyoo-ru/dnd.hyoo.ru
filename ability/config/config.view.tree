@@ -4,7 +4,7 @@ $hyoo_dungeon_ability_config $mol_page
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
 	body <= ability_list /
-		<= Param_row*some $mol_bar sub /
+		<= Param_row*some $mol_view sub /
 			<= Param_title* $mol_chip
 				title <= ability_title* \
 			<= Param_total* $mol_chip
