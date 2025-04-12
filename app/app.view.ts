@@ -12,6 +12,8 @@ namespace $.$$ {
 				experience: 0,
 				level: 1,
 				age: 20,
+				hits: 0,
+				hits_max: 0,
 				abilities: {
 					dexterity: 0,
 					charisma: 0,

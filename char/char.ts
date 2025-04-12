@@ -103,12 +103,12 @@ namespace $ {
 		@ $mol_mem
 		hits_max( next?: number ) {
 			const def = this.hits_dice() + this.ability_modifier( 'constitution' )
-			return this.value( 'hits_max', next ) ?? def
+			return this.value( 'hits_max', next ) || def
 		}
 		
 		@ $mol_mem
 		hits( next?: number ) {
-			return this.value( 'hits', next && Math.max( 0, Math.min( next, this.hits_max() ) ) ) ?? this.hits_max()
+			return this.value( 'hits', next && Math.max( 0, Math.min( next, this.hits_max() ) ) ) || this.hits_max()
 		}
 		
 		@ $mol_mem
