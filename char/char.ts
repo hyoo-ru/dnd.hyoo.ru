@@ -51,7 +51,7 @@ namespace $ {
 		}
 		
 		race( next?: $hyoo_dungeon_race ) {
-			return this.value( 'race', next ) ?? 'human' as $hyoo_dungeon_race
+			return this.value( 'race', next ) || 'human' as $hyoo_dungeon_race
 		}
 		
 		@ $mol_mem
