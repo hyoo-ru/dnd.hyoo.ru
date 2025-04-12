@@ -14,40 +14,40 @@ namespace $ {
 		
 		acrobatics: {
 			title: 'Акробатика',
-			ability_main: 'agility',
+			ability_main: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
-		dexterity: {
+		sleight: {
 			title: 'Ловкость рук',
-			ability_main: 'agility',
+			ability_main: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
 		stealth: {
 			title: 'Скрытность',
-			ability_main: 'agility',
+			ability_main: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
 		
 		analysis: {
 			title: 'Анализ',
-			ability_main: 'intellect',
+			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
 		history: {
 			title: 'История',
-			ability_main: 'intellect',
+			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
 		magicity: {
 			title: 'Магия',
-			ability_main: 'intellect',
+			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
 		nature: {
 			title: 'Природа',
-			ability_main: 'intellect',
+			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
 		religion: {
 			title: 'Религия',
-			ability_main: 'intellect',
+			ability_main: 'intelligence',
 		} as $hyoo_dungeon_skill_info,
 		
-		attention: {
-			title: 'Внимательность',
+		perception: {
+			title: 'Восприятие',
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
 		survival: {
@@ -58,8 +58,8 @@ namespace $ {
 			title: 'Медицина',
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
-		discernment: {
-			title: 'Проницательность',
+		insight: {
+			title: 'Интуиция',
 			ability_main: 'wisdom',
 		} as $hyoo_dungeon_skill_info,
 		animals: {
