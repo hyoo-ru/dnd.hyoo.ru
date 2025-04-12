@@ -4,7 +4,7 @@ namespace $.$$ {
 		@ $mol_mem
 		override title() {
 			if( !this.pending() ) return super.title()
-			return super.title() + ' +' + this.pending()
+			return super.title() + ' ' + this.pending()
 		}
 		
 		@ $mol_mem
