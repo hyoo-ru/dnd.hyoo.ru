@@ -7681,22 +7681,22 @@ var $;
 (function ($) {
     $.$hyoo_dungeon_ability_all = {
         strength: {
-            title: 'Сила',
+            title: '💪Сила',
         },
         dexterity: {
-            title: 'Ловкость',
+            title: '🥏Ловкость',
         },
         constitution: {
-            title: 'Стойкость',
+            title: '🐘Стойкость',
         },
         intelligence: {
-            title: 'Интеллект',
+            title: '🧠Интеллект',
         },
         wisdom: {
-            title: 'Мудрость',
+            title: '🦉Мудрость',
         },
         charisma: {
-            title: 'Харизма',
+            title: '🌟Харизма',
         },
     };
 })($ || ($ = {}));
@@ -7722,7 +7722,7 @@ var $;
             title: 'Скрытность',
             ability_main: 'dexterity',
         },
-        analysis: {
+        investigation: {
             title: 'Анализ',
             ability_main: 'intelligence',
         },
@@ -7730,7 +7730,7 @@ var $;
             title: 'История',
             ability_main: 'intelligence',
         },
-        magicity: {
+        arcana: {
             title: 'Магия',
             ability_main: 'intelligence',
         },
@@ -7762,7 +7762,7 @@ var $;
             title: 'Звероводство',
             ability_main: 'wisdom',
         },
-        performing: {
+        performance: {
             title: 'Выступление',
             ability_main: 'charisma',
         },
@@ -7790,7 +7790,7 @@ var $;
             title: '🐈Табакси',
             description: 'Родом из странных и далёких земель, странствующие табакси – кошкоподобные гуманоиды, которых любопытство заставляет собирать интересные артефакты, записывать рассказы и истории, и осматривать все чудеса в мире. Отъявленные путешественники, любознательные табакси редко на долго оседают на одном месте. Их врожденный характер толкает их раскрывать тайны и находить потерянные сокровища и легенды.',
             image: 'https://i.imgur.com/3QaQLIa.jpeg',
-            ability: {
+            abilities: {
                 dexterity: 2,
                 charisma: 1,
                 constitution: 0,
@@ -7802,7 +7802,7 @@ var $;
             alignment: 'Табакси склонны к хаотическому мировоззрению, поскольку они позволяют своим порывам и увлечениям направлять их решения. Они редко являются злыми, большинство из них ведомы любопытством, а не жадностью или другими темными побуждениям.',
             size: 'medium',
             speed: 30,
-            abilities: [
+            perks: [
                 'Тёмное зрение',
                 'Кошачье проворство',
                 'Кошачьи когти',
@@ -7846,6 +7846,15 @@ var $;
         story(next) {
             return this.value('story', next) ?? '';
         }
+        age(next) {
+            return this.value('age', next) ?? 20;
+        }
+        level(next) {
+            return this.value('level', next) ?? 0;
+        }
+        experience(next) {
+            return this.value('experience', next) ?? 0;
+        }
         race(next) {
             return this.value('race', next) ?? 'tabaxi';
         }
@@ -7856,7 +7865,7 @@ var $;
             return this.sub('abilities', new $mol_store({})).value(id, next) ?? 0;
         }
         ability(id) {
-            return 8 + this.ability_addon(id);
+            return 8 + this.ability_addon(id) + this.$.$hyoo_dungeon_race_all[this.race()].abilities[id];
         }
         skill_addon(id, next) {
             return this.sub('skills', new $mol_store({})).value(id, next) ?? 0;
@@ -7876,6 +7885,12 @@ var $;
 
 ;
 	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
+		hint(){
+			return "";
+		}
+		attr(){
+			return {...(super.attr()), "title": (this.hint())};
+		}
 		sub(){
 			return [(this.title())];
 		}
@@ -7899,23 +7914,10 @@ var $;
             background: {
                 color: $mol_theme.card,
             },
+            gap: $mol_gap.block,
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_bar) = class $mol_bar extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/bar/bar.view.css", "[mol_bar] {\n\tdisplay: flex;\n\t/* box-shadow: inset 0 0 0 1px var(--mol_theme_line); */\n\tborder-radius: var(--mol_gap_round);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 	($.$mol_image) = class $mol_image extends ($.$mol_view) {
@@ -8019,6 +8021,20 @@ var $;
 (function ($) {
     $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
 })($ || ($ = {}));
+
+;
+	($.$mol_bar) = class $mol_bar extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/bar/bar.view.css", "[mol_bar] {\n\tdisplay: flex;\n\t/* box-shadow: inset 0 0 0 1px var(--mol_theme_line); */\n\tborder-radius: var(--mol_gap_round);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 	($.$mol_icon_chevron) = class $mol_icon_chevron extends ($.$mol_icon) {
@@ -8191,7 +8207,7 @@ var $;
 			return [(this.Param_row("some"))];
 		}
 		title(){
-			return "Характеристики";
+			return "Способности";
 		}
 		char(){
 			const obj = new this.$.$hyoo_dungeon_char();
@@ -8253,9 +8269,9 @@ var $;
             },
             Param_title: {
                 flex: {
-                    basis: '6rem',
+                    basis: '8rem',
                     grow: 1,
-                    shrink: 1,
+                    shrink: 0,
                 },
             },
         });
@@ -8380,6 +8396,15 @@ var $;
 		story(){
 			return (this.char().story());
 		}
+		age(){
+			return (this.char().age());
+		}
+		level(){
+			return (this.char().level());
+		}
+		experience(){
+			return (this.char().experience());
+		}
 		race(){
 			return (this.char().race());
 		}
@@ -8403,17 +8428,61 @@ var $;
 		}
 		Race(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Раса");
 			(obj.title) = () => ((this.race_title()));
 			return obj;
 		}
 		Name(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Имя");
 			(obj.title) = () => ((this.name()));
 			return obj;
 		}
 		Base(){
-			const obj = new this.$.$mol_bar();
+			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.Race()), (this.Name())]);
+			return obj;
+		}
+		Age(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Возраст");
+			(obj.sub) = () => (["📅", (this.age())]);
+			return obj;
+		}
+		Level(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Уровень");
+			(obj.sub) = () => (["🏅", (this.level())]);
+			return obj;
+		}
+		Experience(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Опыт");
+			(obj.sub) = () => (["✨", (this.experience())]);
+			return obj;
+		}
+		speed(){
+			return 1;
+		}
+		Speed(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Скорость");
+			(obj.sub) = () => (["🦶", (this.speed())]);
+			return obj;
+		}
+		Grade(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Age()), 
+				(this.Level()), 
+				(this.Experience()), 
+				(this.Speed())
+			]);
+			return obj;
+		}
+		Top(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Base()), (this.Grade())]);
 			return obj;
 		}
 		image(){
@@ -8429,16 +8498,18 @@ var $;
 		}
 		Classes(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Классы");
 			(obj.title) = () => ((this.classes_title()));
 			return obj;
 		}
 		Story(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Предыстория");
 			(obj.title) = () => ((this.story()));
 			return obj;
 		}
 		Life(){
-			const obj = new this.$.$mol_bar();
+			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.Classes()), (this.Story())]);
 			return obj;
 		}
@@ -8447,6 +8518,7 @@ var $;
 		}
 		Goodness(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Мораль");
 			(obj.title) = () => ((this.moral_title()));
 			return obj;
 		}
@@ -8455,11 +8527,12 @@ var $;
 		}
 		Principality(){
 			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Этика");
 			(obj.title) = () => ((this.ethics_title()));
 			return obj;
 		}
 		Alignment(){
-			const obj = new this.$.$mol_bar();
+			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.Goodness()), (this.Principality())]);
 			return obj;
 		}
@@ -8471,7 +8544,7 @@ var $;
 		Info(){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ([
-				(this.Base()), 
+				(this.Top()), 
 				(this.Image()), 
 				(this.Main())
 			]);
@@ -8523,6 +8596,12 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Image"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Classes"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Story"));
@@ -8600,6 +8679,9 @@ var $;
             classes_title() {
                 return this.classes().map(cl => this.$.$hyoo_dungeon_class_all[cl].title).join(', ');
             }
+            speed() {
+                return this.$.$hyoo_dungeon_race_all[this.race()].speed;
+            }
         }
         $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
     })($$ = $.$$ || ($.$$ = {}));
@@ -8613,7 +8695,7 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_char_summary, {
             flex: {
-                basis: '50rem',
+                basis: '55rem',
             },
             Columns: {
                 flex: {
@@ -8628,9 +8710,6 @@ var $;
                 gap: $mol_gap.block,
             },
             Info: {
-                background: {
-                    color: $mol_theme.card,
-                },
                 flex: {
                     grow: 1,
                 },
@@ -8642,9 +8721,13 @@ var $;
                 },
                 aspectRatio: 1,
             },
-            Base: {
+            Top: {
+                flex: {
+                    wrap: 'wrap',
+                },
                 justify: {
                     self: 'stretch',
+                    content: 'space-between',
                 },
             },
             Main: {
@@ -8672,6 +8755,7 @@ var $;
             },
             Ability_list: {
                 flex: {
+                    basis: `11rem`,
                     direction: 'column',
                 },
             },
@@ -9062,6 +9146,235 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_minus) = class $mol_icon_minus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H5V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_number) = class $mol_number extends ($.$mol_view) {
+		precision(){
+			return 1;
+		}
+		type(){
+			return "tel";
+		}
+		value_string(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		string_enabled(){
+			return (this.enabled());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		String(){
+			const obj = new this.$.$mol_string();
+			(obj.type) = () => ((this.type()));
+			(obj.value) = (next) => ((this.value_string(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.string_enabled()));
+			(obj.submit) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		event_dec(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dec_enabled(){
+			return (this.enabled());
+		}
+		dec_icon(){
+			const obj = new this.$.$mol_icon_minus();
+			return obj;
+		}
+		Dec(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_dec(next)));
+			(obj.enabled) = () => ((this.dec_enabled()));
+			(obj.sub) = () => ([(this.dec_icon())]);
+			return obj;
+		}
+		event_inc(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		inc_enabled(){
+			return (this.enabled());
+		}
+		inc_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Inc(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_inc(next)));
+			(obj.enabled) = () => ((this.inc_enabled()));
+			(obj.sub) = () => ([(this.inc_icon())]);
+			return obj;
+		}
+		precision_view(){
+			return (this.precision());
+		}
+		precision_change(){
+			return (this.precision());
+		}
+		value_min(){
+			return -Infinity;
+		}
+		value_max(){
+			return +Infinity;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return +NaN;
+		}
+		enabled(){
+			return true;
+		}
+		sub(){
+			return [
+				(this.String()), 
+				(this.Dec()), 
+				(this.Inc())
+			];
+		}
+	};
+	($mol_mem(($.$mol_number.prototype), "value_string"));
+	($mol_mem(($.$mol_number.prototype), "submit"));
+	($mol_mem(($.$mol_number.prototype), "String"));
+	($mol_mem(($.$mol_number.prototype), "event_dec"));
+	($mol_mem(($.$mol_number.prototype), "dec_icon"));
+	($mol_mem(($.$mol_number.prototype), "Dec"));
+	($mol_mem(($.$mol_number.prototype), "event_inc"));
+	($mol_mem(($.$mol_number.prototype), "inc_icon"));
+	($mol_mem(($.$mol_number.prototype), "Inc"));
+	($mol_mem(($.$mol_number.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/number/number.css", "[mol_number] {\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tposition: relative;\n\talign-items: stretch;\n\tmax-width: 100%;\n}\n\n[mol_number_string] {\n\tappearance: textfield;\n\tflex: 1 1 7rem;\n\twidth: 7rem;\n}\n\n[mol_number_string]::-webkit-inner-spin-button {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_number extends $.$mol_number {
+            value_limited(val) {
+                if (Number.isNaN(val))
+                    return this.value(val);
+                if (val === undefined)
+                    return this.value();
+                const min = this.value_min();
+                const max = this.value_max();
+                if (val < min)
+                    return this.value(min);
+                if (val > max)
+                    return this.value(max);
+                return this.value(val);
+            }
+            event_dec(next) {
+                this.value_limited((this.value_limited() || 0) - this.precision_change());
+            }
+            event_inc(next) {
+                this.value_limited((this.value_limited() || 0) + this.precision_change());
+            }
+            round(val) {
+                if (Number.isNaN(val))
+                    return '';
+                if (val === 0)
+                    return '0';
+                if (!val)
+                    return '';
+                const precision_view = this.precision_view();
+                if (!precision_view)
+                    return val.toFixed();
+                if (precision_view >= 1) {
+                    return (val / precision_view).toFixed();
+                }
+                else {
+                    const fixed_number = Math.log10(1 / precision_view);
+                    return val.toFixed(Math.ceil(fixed_number));
+                }
+            }
+            value_string(next) {
+                const current = this.round(this.value_limited());
+                if (next === undefined)
+                    return current;
+                const precision = this.precision_view();
+                if (precision - Math.floor(precision) === 0)
+                    next = next.replace(/[.,]/g, '');
+                next = (this.value_min() < 0 && next.startsWith('-') ? '-' : '')
+                    + next.replace(/,/g, '.').replace(/[^\d\.]/g, '').replace(/^0{2,}/, '0');
+                let dot_pos = next.indexOf('.');
+                if (dot_pos !== -1) {
+                    const prev = $mol_wire_probe(() => this.value_string()) ?? '';
+                    const dot_pos_prev = prev.indexOf('.');
+                    if (dot_pos_prev === dot_pos)
+                        dot_pos = next.lastIndexOf('.');
+                    const frac = next.slice(dot_pos + 1).replace(/\./g, '');
+                    next = (next.slice(0, dot_pos) || '0').replace(/\./g, '') + '.' + frac;
+                }
+                if (Number.isNaN(Number(next)))
+                    return next;
+                if (next.endsWith('.'))
+                    return next;
+                if (next.endsWith('-'))
+                    return next;
+                this.value_limited(Number(next || Number.NaN));
+                return next;
+            }
+            dec_enabled() {
+                return this.enabled() && (!((this.value() || 0) <= this.value_min()));
+            }
+            inc_enabled() {
+                return this.enabled() && (!((this.value() || 0) >= this.value_max()));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "value_string", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "dec_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "inc_enabled", null);
+        $$.$mol_number = $mol_number;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -9175,6 +9488,15 @@ var $;
 		}
 		story(next){
 			return (this.char().story(next));
+		}
+		age(next){
+			return (this.char().age(next));
+		}
+		level(next){
+			return (this.char().level(next));
+		}
+		experience(next){
+			return (this.char().experience(next));
 		}
 		race(next){
 			return (this.char().race(next));
@@ -9290,6 +9612,48 @@ var $;
 			(obj.Content) = () => ((this.Ethics()));
 			return obj;
 		}
+		Level(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level(next)));
+			return obj;
+		}
+		Level_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Уровень");
+			(obj.Content) = () => ((this.Level()));
+			return obj;
+		}
+		Experience(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.experience(next)));
+			return obj;
+		}
+		Experience_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Опыт");
+			(obj.Content) = () => ((this.Experience()));
+			return obj;
+		}
+		Age(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.age(next)));
+			return obj;
+		}
+		Age_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Возраст");
+			(obj.Content) = () => ((this.Age()));
+			return obj;
+		}
+		Grade(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Level_block()), 
+				(this.Experience_block()), 
+				(this.Age_block())
+			]);
+			return obj;
+		}
 		title(){
 			return "Основное";
 		}
@@ -9304,7 +9668,8 @@ var $;
 				(this.Race_block()), 
 				(this.Classes_block()), 
 				(this.Moral_block()), 
-				(this.Ethics_block())
+				(this.Ethics_block()), 
+				(this.Grade())
 			];
 		}
 	};
@@ -9321,6 +9686,13 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Moral_block"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Ethics"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Ethics_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Experience_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Grade"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "char"));
 
 
@@ -9410,7 +9782,12 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_char_main, {
             flex: {
-                basis: '25rem',
+                basis: '30rem',
+            },
+            Grade: {
+                flex: {
+                    wrap: 'wrap',
+                },
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -9765,6 +10142,7 @@ var $;
                     ethics: 'neutral',
                     experience: 0,
                     level: 0,
+                    age: 20,
                     abilities: {
                         dexterity: 0,
                         charisma: 0,
@@ -9775,7 +10153,7 @@ var $;
                     },
                     skills: {
                         acrobatics: 0,
-                        analysis: 0,
+                        investigation: 0,
                         athletics: 0,
                         insight: 0,
                         stealth: 0,
@@ -9785,10 +10163,10 @@ var $;
                         perception: 0,
                         history: 0,
                         intimidation: 0,
-                        magicity: 0,
+                        arcana: 0,
                         medicine: 0,
                         nature: 0,
-                        performing: 0,
+                        performance: 0,
                         persuasion: 0,
                         religion: 0,
                         survival: 0,
