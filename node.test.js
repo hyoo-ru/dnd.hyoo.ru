@@ -11200,7 +11200,7 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_skill_config, {
             flex: {
-                basis: '20rem',
+                basis: '15rem',
             },
             Skill_total: {
                 flex: {
