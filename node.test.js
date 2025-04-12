@@ -8751,6 +8751,9 @@ var $;
                 gap: $mol_gap.block,
             },
             Name: {
+                textShadow: '0 0',
+            },
+            Grade: {
                 color: $mol_theme.special,
             },
             Ability_list: {
