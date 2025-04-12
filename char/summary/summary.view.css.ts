@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '70rem',
+			basis: '60rem',
 		},
 		
 		Columns: {
@@ -12,22 +12,33 @@ namespace $.$$ {
 			},
 		},
 		
+		Info: {
+			background: {
+				color: $mol_theme.card,
+			},
+		},
+		
 		Image: {
 			width: 'auto',
+			justify: {
+				self: 'stretch',
+			},
+			aspectRatio: 1,
+		},
+		
+		Base: {
 			justify: {
 				self: 'stretch',
 			},
 		},
 		
 		Main: {
-			background: {
-				color: $mol_style_func.hsla( 0, 0, 0, .75 ),
-			},
 			flex: {
 				wrap: 'wrap',
 			},
-			align: {
-				self: 'flex-end',
+			justify: {
+				self: 'stretch',
+				content: 'space-between',
 			},
 		},
 		

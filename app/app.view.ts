@@ -12,10 +12,10 @@ namespace $.$$ {
 				experience: 0,
 				level: 0,
 				abilities: {
-					agility: 0,
+					dexterity: 0,
 					charisma: 0,
 					constitution: 0,
-					intellect: 0,
+					intelligence: 0,
 					strength: 0,
 					wisdom: 0,
 				},

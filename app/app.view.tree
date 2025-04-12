@@ -14,4 +14,10 @@ $hyoo_dungeon_app $mol_book2_catalog
 		skills <= Skills $hyoo_dungeon_skill_config
 			char <= char
 			tools / <= Spread_close
+	menu_foot /
+		<= Source $mol_link_source
+			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
+		<= Lights $mol_lights_toggle
 	placeholders /
+	plugins /
+		<= Theme $mol_theme_auto

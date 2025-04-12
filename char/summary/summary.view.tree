@@ -17,12 +17,12 @@ $hyoo_dungeon_char_summary $mol_page
 		Skill_addon null
 	body /
 		<= Columns $mol_row sub /
-			<= Info $mol_stack sub /
+			<= Info $mol_list rows /
+				<= Base $mol_bar sub /
+					<= Race $mol_chip title <= race_title \
+					<= Name $mol_chip title <= name
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
-					<= Base $mol_bar sub /
-						<= Race $mol_chip title <= race_title \
-						<= Name $mol_chip title <= name
 					<= Life $mol_bar sub /
 						<= Classes $mol_chip title <= classes_title \
 						<= Story $mol_chip title <= story
