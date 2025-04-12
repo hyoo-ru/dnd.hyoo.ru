@@ -10,6 +10,10 @@ $hyoo_dungeon_char_summary $mol_page
 		classes => classes
 		moral => moral
 		ethics => ethics
+		traits => traits
+		ideals => ideals
+		affection => affection
+		weakness => weakness
 	Param_cofig $hyoo_dungeon_ability_config
 		char <= char
 		ability_list => ability_list
@@ -66,6 +70,11 @@ $hyoo_dungeon_char_summary $mol_page
 						<= Principality $mol_chip
 							hint \Этика
 							title <= ethics_title \
+				<= Personality $mol_list rows /
+					<= Traits $mol_text text <= traits
+					<= Ideals $mol_text text <= ideals
+					<= Affection $mol_text text <= affection
+					<= Weakness $mol_text text <= weakness
 			<= Stat $mol_view sub /
 				<= Ability_list $mol_view sub <= ability_list
 				<= Skill_list $mol_view sub <= skill_list

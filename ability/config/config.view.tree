@@ -3,6 +3,7 @@ $hyoo_dungeon_ability_config $mol_page
 	char $hyoo_dungeon_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
+	pending? 25
 	body <= ability_list /
 		<= Param_row*some $mol_view sub /
 			<= Param_title* $mol_chip

@@ -8,6 +8,9 @@ $hyoo_dungeon_app $mol_book2_catalog
 		main <= Main $hyoo_dungeon_char_main
 			char <= char
 			tools / <= Spread_close
+		personality <= Personality $hyoo_dungeon_char_personality
+			char <= char
+			tools / <= Spread_close
 		Params <= Params $hyoo_dungeon_ability_config
 			char <= char
 			tools / <= Spread_close

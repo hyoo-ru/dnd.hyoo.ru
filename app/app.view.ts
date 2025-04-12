@@ -10,7 +10,7 @@ namespace $.$$ {
 				moral: 'neutral',
 				ethics: 'neutral',
 				experience: 0,
-				level: 0,
+				level: 1,
 				age: 20,
 				abilities: {
 					dexterity: 0,
@@ -41,6 +41,10 @@ namespace $.$$ {
 					survival: 0,
 				},
 				story: '🏃‍♂️Чужеземец',
+				affection: '',
+				ideals: '',
+				traits: '',
+				weakness: '',
 			}) )
 		}
 		

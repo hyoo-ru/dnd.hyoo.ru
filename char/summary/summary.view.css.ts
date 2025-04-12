@@ -22,6 +22,7 @@ namespace $.$$ {
 		Info: {
 			flex: {
 				grow: 1,
+				basis: '30rem',
 			},
 		},
 		
@@ -50,6 +51,12 @@ namespace $.$$ {
 			justify: {
 				self: 'stretch',
 				content: 'space-between',
+			},
+		},
+		
+		Personality: {
+			background: {
+				color: $mol_theme.card,
 			},
 		},
 		

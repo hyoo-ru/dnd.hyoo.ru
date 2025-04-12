@@ -8,17 +8,30 @@ $hyoo_dungeon_char_main $mol_page
 		experience? => experience?
 		race? => race?
 		classes? => classes?
-		moral? => moral?
-		ethics? => ethics?
 	body /
-		<= Name_block $mol_form_field
-			name \Имя
-			Content <= Name $mol_string
-				value? <=> name?
-		<= Story_block $mol_form_field
-			name \Предыстория
-			Content <= Story $mol_string
-				value? <=> story?
+		<= Grade $mol_view sub /
+			<= Level_block $mol_form_field
+				name \🏅Уровень
+				Content <= Level $mol_paginator
+					value? <=> level?
+			<= Experience_block $mol_form_field
+				name \✨Опыт
+				Content <= Experience $mol_number
+					value? <=> experience?
+					precision_change 100
+			<= Age_block $mol_form_field
+				name \📅Возраст
+				Content <= Age $mol_number
+					value? <=> age?
+		<= Base_block $mol_form_group sub /
+			<= Name_block $mol_form_field
+				name \Имя
+				Content <= Name $mol_string
+					value? <=> name?
+			<= Story_block $mol_form_field
+				name \Предыстория
+				Content <= Story $mol_string
+					value? <=> story?
 		<= Race_block $mol_form_field
 			name \Раса
 			Content <= Race $mol_switch
@@ -31,28 +44,3 @@ $hyoo_dungeon_char_main $mol_page
 				option_checked*? <=> class_selected*? false
 				keys <= class_options /string
 				option_title* <= class_title* \
-		<= Moral_block $mol_form_field
-			name \Мораль
-			Content <= Moral $mol_switch
-				value? <=> moral?
-				keys <= moral_options /string
-				option_title* <= moral_title* \
-		<= Ethics_block $mol_form_field
-			name \Этика
-			Content <= Ethics $mol_switch
-				value? <=> ethics?
-				keys <= ethics_options /string
-				option_title* <= ethics_title* \
-		<= Grade $mol_view sub /
-			<= Level_block $mol_form_field
-				name \🏅Уровень
-				Content <= Level $mol_paginator
-					value? <=> level?
-			<= Experience_block $mol_form_field
-				name \✨Опыт
-				Content <= Experience $mol_number
-					value? <=> experience?
-			<= Age_block $mol_form_field
-				name \📅Возраст
-				Content <= Age $mol_number
-					value? <=> age?

@@ -10,6 +10,10 @@ namespace $ {
 		age: number,
 		level: number,
 		experience: number,
+		traits: string,
+		ideals: string,
+		affection: string,
+		weakness: string,
 		abilities: Record< $hyoo_dungeon_ability, number >,
 		skills: Record< $hyoo_dungeon_skill, number >,
 	}> {
@@ -43,7 +47,7 @@ namespace $ {
 		}
 		
 		ability_addon( id: $hyoo_dungeon_ability, next?: number ) {
-			return this.sub( 'abilities', new $mol_store( {} as any ) ).value( id, next ) ?? 0
+			return this.sub( 'abilities', new $mol_store( {} as any ) ).value( id, next && Math.max( 0, Math.min( next, 7 ) ) ) ?? 0
 		}
 		
 		ability( id: $hyoo_dungeon_ability ) {
@@ -64,6 +68,22 @@ namespace $ {
 		
 		ethics( next?: 'lawful' | 'neutral' | 'chaotic' ) {
 			return this.value( 'ethics', next ) ?? 'neutral'
+		}
+		
+		traits( next?: string ) {
+			return this.value( 'traits', next ) ?? ''
+		}
+		
+		ideals( next?: string ) {
+			return this.value( 'ideals', next ) ?? ''
+		}
+		
+		affection( next?: string ) {
+			return this.value( 'affection', next ) ?? ''
+		}
+		
+		weakness( next?: string ) {
+			return this.value( 'weakness', next ) ?? ''
 		}
 		
 	}
