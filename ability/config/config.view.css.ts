@@ -3,13 +3,23 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_ability_config, {
 		
 		flex: {
-			basis: '20rem',
+			basis: '25rem',
 		},
 		
 		Ability_total: {
 			flex: {
 				basis: '2.5rem',
 			},
+			justify: {
+				content: 'center',
+			},
+		},
+		
+		Ability_safe: {
+			flex: {
+				basis: '2.5rem',
+			},
+			color: $mol_theme.shade,
 			justify: {
 				content: 'center',
 			},

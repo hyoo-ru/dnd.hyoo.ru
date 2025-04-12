@@ -66,6 +66,13 @@ namespace $ {
 			return Math.floor( this.ability( id ) / 2 - 5 )
 		}
 		
+		@ $mol_mem_key
+		ability_safe( id: $hyoo_dungeon_ability ) {
+			const mod = this.ability_modifier( id )
+			const safe = this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].ability_safe
+			return mod + ( safe.includes( id ) ? this.master_bonus() : 0 )
+		}
+		
 		skill_addon( id: $hyoo_dungeon_skill, next?: number ) {
 			return this.sub( 'skills', new $mol_store( {} as any ) ).value( id, next ) ?? 0
 		}

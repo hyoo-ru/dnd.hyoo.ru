@@ -17,11 +17,31 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		override ability_list() {
-			return Object.keys( this.$.$hyoo_dungeon_ability_all ).map( ability => this.Ability_row( ability ) )
+			return [
+				this.Ability_row( '' ),
+				... Object.keys( this.$.$hyoo_dungeon_ability_all )
+					.map( ability => this.Ability_row( ability ) )
+			]
 		}
 		
 		override ability_title( id: $hyoo_dungeon_ability ) {
+			if( !id ) return 'Способность'
 			return this.$.$hyoo_dungeon_ability_all[ id ].title
+		}
+		
+		ability_total_value( id: $hyoo_dungeon_ability ) {
+			if( !id ) return [ '🔢' ]
+			return super.ability_total_value( id )
+		}
+		
+		ability_modifier_value( id: $hyoo_dungeon_ability ) {
+			if( !id ) return [ '✨' ]
+			return super.ability_modifier_value( id )
+		}
+		
+		ability_safe_value( id: $hyoo_dungeon_ability ) {
+			if( !id ) return [ '☔' ]
+			return super.ability_safe_value( id )
 		}
 		
 	}

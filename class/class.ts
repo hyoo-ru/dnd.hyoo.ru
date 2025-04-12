@@ -20,7 +20,7 @@ namespace $ {
 			image: 'https://i.imgur.com/3dO7ESp.jpeg',
 			dice: 8,
 			ability_main: 'charisma',
-			ability_safe: [ 'agility', 'charisma' ],
+			ability_safe: [ 'dexterity', 'charisma' ],
 			weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
 		} as $hyoo_dungeon_class_info,
 		

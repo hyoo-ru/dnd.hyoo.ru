@@ -3,6 +3,7 @@ $hyoo_dungeon_ability_config $mol_page
 	char $hyoo_dungeon_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
+		ability_safe* => ability_safe*
 		ability_modifier* => ability_modifier*
 	pending? 25
 	body <= ability_list /
@@ -11,9 +12,12 @@ $hyoo_dungeon_ability_config $mol_page
 				title <= ability_title* \
 			<= Ability_total* $mol_chip
 				hint \Значение
-				title <= ability_total*
+				sub <= ability_total_value* / <= ability_total*
 			<= Ability_modifier* $mol_chip
 				hint \Модификатор
-				sub / <= ability_modifier*
+				sub <= ability_modifier_value* / <= ability_modifier*
+			<= Ability_safe* $mol_chip
+				hint \Спасение
+				sub <= ability_safe_value* / <= ability_safe*
 			<= Ability_addon* $mol_paginator
 				value? <=> ability_addon*?
