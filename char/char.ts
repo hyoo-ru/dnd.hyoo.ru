@@ -7,6 +7,7 @@ namespace $ {
 		moral: 'good' | 'neutral' | 'evil',
 		ethics: 'lawful' | 'neutral' | 'chaotic',
 		story: string,
+		biography: string,
 		age: number,
 		level: number,
 		experience: number,
@@ -26,6 +27,10 @@ namespace $ {
 		
 		story( next?: string ) {
 			return this.value( 'story', next ) ?? ''
+		}
+		
+		biography( next?: string ) {
+			return this.value( 'biography', next ) ?? ''
 		}
 		
 		age( next?: number ) {

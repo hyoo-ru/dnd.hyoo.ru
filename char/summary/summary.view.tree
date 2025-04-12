@@ -3,6 +3,7 @@ $hyoo_dungeon_char_summary $mol_page
 	char $hyoo_dungeon_char
 		name => name
 		story => story
+		biography => biography
 		age => age
 		level? => level?
 		experience? => experience?
@@ -71,6 +72,7 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Ideals $mol_text text <= ideals
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
+					<= Biography $mol_text text <= biography
 			<= Stat $mol_view sub /
 				<= Stat_main $mol_list rows /
 					<= Grade_block $mol_list rows /
