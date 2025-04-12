@@ -14,6 +14,7 @@ namespace $.$$ {
 				age: 20,
 				hits: 0,
 				hits_max: 0,
+				hits_addon: 0,
 				abilities: {
 					dexterity: 0,
 					charisma: 0,
@@ -43,6 +44,7 @@ namespace $.$$ {
 					survival: 0,
 				},
 				story: '🏃‍♂️Чужеземец',
+				biography: '',
 				affection: '',
 				ideals: '',
 				traits: '',

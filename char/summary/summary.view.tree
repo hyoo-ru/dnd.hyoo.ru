@@ -17,6 +17,7 @@ $hyoo_dungeon_char_summary $mol_page
 		weakness => weakness
 		master_bonus => master_bonus
 		hits? => hits?
+		hits_addon? => hits_addon?
 		hits_max? => hits_max?
 		hits_dice => hits_dice
 		hits_heal => hits_heal
@@ -91,14 +92,18 @@ $hyoo_dungeon_char_summary $mol_page
 								value? <=> experience?
 								step 100
 					<= Hits_block $mol_list rows /
-						<= Hits $hyoo_dungeon_parameter
-							title \💖Здоровье
-							Value <= Hits_value $mol_paginator
-								value? <=> hits?
 						<= Hits_max $hyoo_dungeon_parameter
 							title \💟Предел
 							Value <= Hits_max_value $mol_paginator
 								value? <=> hits_max?
+						<= Hits $hyoo_dungeon_parameter
+							title \💗Здоровье
+							Value <= Hits_value $mol_paginator
+								value? <=> hits?
+						<= Hits_addon $hyoo_dungeon_parameter
+							title \💖Бафы
+							Value <= Hits_addon_value $mol_paginator
+								value? <=> hits_addon?
 						<= Hits_heal $hyoo_dungeon_parameter
 							title \💊Лечение
 							value / <= hits_heal

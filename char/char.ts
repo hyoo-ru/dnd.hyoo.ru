@@ -12,6 +12,7 @@ namespace $ {
 		level: number,
 		experience: number,
 		hits_max: number,
+		hits_addon: number,
 		hits: number,
 		traits: string,
 		ideals: string,
@@ -114,6 +115,11 @@ namespace $ {
 		@ $mol_mem
 		hits( next?: number ) {
 			return this.value( 'hits', next && Math.max( 0, Math.min( next, this.hits_max() ) ) ) || this.hits_max()
+		}
+		
+		@ $mol_mem
+		hits_addon( next?: number ) {
+			return this.value( 'hits_addon', next && Math.max( 0, next ) ) ?? 0
 		}
 		
 		@ $mol_mem
