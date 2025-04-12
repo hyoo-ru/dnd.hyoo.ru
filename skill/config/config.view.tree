@@ -10,4 +10,4 @@ $hyoo_dungeon_skill_config $mol_page
 			<= Skill_title* $mol_chip
 				title <= skill_title* \
 			<= Skill_total* $mol_chip
-				title <= skill*
+				sub / <= skill*
