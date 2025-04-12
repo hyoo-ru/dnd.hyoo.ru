@@ -8704,7 +8704,7 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_char_summary, {
             flex: {
-                basis: '55rem',
+                basis: '60rem',
             },
             Columns: {
                 flex: {
@@ -9628,7 +9628,7 @@ var $;
 		}
 		Level_block(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Уровень");
+			(obj.name) = () => ("🏅Уровень");
 			(obj.Content) = () => ((this.Level()));
 			return obj;
 		}
@@ -9639,7 +9639,7 @@ var $;
 		}
 		Experience_block(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Опыт");
+			(obj.name) = () => ("✨Опыт");
 			(obj.Content) = () => ((this.Experience()));
 			return obj;
 		}
@@ -9650,7 +9650,7 @@ var $;
 		}
 		Age_block(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Возраст");
+			(obj.name) = () => ("📅Возраст");
 			(obj.Content) = () => ((this.Age()));
 			return obj;
 		}
