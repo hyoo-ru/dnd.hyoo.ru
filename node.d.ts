@@ -2728,6 +2728,7 @@ declare namespace $ {
         abilities: Record<$hyoo_dungeon_ability, number>;
         skills: $hyoo_dungeon_skill[];
     }> {
+        image(): string;
         name(next?: string): string;
         story(next?: string): string;
         biography(next?: string): string;
@@ -6170,6 +6171,8 @@ declare namespace $ {
 		ReturnType< $mol_link_source['uri'] >
 	>
 	export class $hyoo_dungeon_app extends $mol_book2_catalog {
+		char_image( ): ReturnType< ReturnType< $hyoo_dungeon_app['char'] >['image'] >
+		background( ): string
 		Summary( ): $hyoo_dungeon_char_summary
 		Main( ): $hyoo_dungeon_char_main
 		Personality( ): $hyoo_dungeon_char_personality
@@ -6180,6 +6183,9 @@ declare namespace $ {
 		Theme( ): $mol_theme_auto
 		menu_title( ): string
 		char( ): $hyoo_dungeon_char
+		style( ): ({ 
+			'background-image': ReturnType< $hyoo_dungeon_app['background'] >,
+		}) 
 		spreads( ): ({ 
 			'summary': ReturnType< $hyoo_dungeon_app['Summary'] >,
 			'main': ReturnType< $hyoo_dungeon_app['Main'] >,
@@ -6198,7 +6204,11 @@ declare namespace $ {
 declare namespace $.$$ {
     class $hyoo_dungeon_app extends $.$hyoo_dungeon_app {
         char(): $hyoo_dungeon_char;
+        background(): string;
     }
+}
+
+declare namespace $.$$ {
 }
 
 export = $;

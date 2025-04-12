@@ -1177,6 +1177,9 @@ $mol_theme_auto $mol_plugin
 $hyoo_dungeon_app $mol_book2_catalog
 	menu_title \Dungeons & Dragons
 	char $hyoo_dungeon_char
+		image => char_image
+	style *
+		background-image <= background \
 	spreads *
 		summary <= Summary $hyoo_dungeon_char_summary
 			char <= char

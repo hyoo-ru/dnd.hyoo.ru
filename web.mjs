@@ -7359,6 +7359,9 @@ var $;
 var $;
 (function ($) {
     class $hyoo_dungeon_char extends $mol_store {
+        image() {
+            return this.race_info().image;
+        }
         name(next) {
             return this.value('name', next) ?? '';
         }
@@ -12819,6 +12822,12 @@ var $;
 
 ;
 	($.$hyoo_dungeon_app) = class $hyoo_dungeon_app extends ($.$mol_book2_catalog) {
+		char_image(){
+			return (this.char().image());
+		}
+		background(){
+			return "";
+		}
 		Summary(){
 			const obj = new this.$.$hyoo_dungeon_char_summary();
 			(obj.char) = () => ((this.char()));
@@ -12868,6 +12877,9 @@ var $;
 		char(){
 			const obj = new this.$.$hyoo_dungeon_char();
 			return obj;
+		}
+		style(){
+			return {"background-image": (this.background())};
 		}
 		spreads(){
 			return {
@@ -13021,11 +13033,34 @@ var $;
                     weakness: '',
                 }));
             }
+            background() {
+                const color = this.$.$mol_lights() ? `rgba(255,255,255,.75)` : `rgba(0,0,0,.75)`;
+                return `linear-gradient( to bottom, ${color}, ${color} ), url(${JSON.stringify(this.char_image())})`;
+            }
         }
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_app.prototype, "char", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_app.prototype, "background", null);
         $$.$hyoo_dungeon_app = $hyoo_dungeon_app;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_app, {
+            background: {
+                size: ['cover'],
+                position: 'center',
+            },
+            '--mol_theme_hue': '10deg',
+        });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
