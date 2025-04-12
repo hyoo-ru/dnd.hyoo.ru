@@ -7,7 +7,7 @@ namespace $ {
 	export const $hyoo_dungeon_ethics_all = {
 			
 		lawful: {
-			title: '🤩Принципиал',
+			title: '🧐Стоик',
 		} as $hyoo_dungeon_moral_info,
 		
 		neutral: {
