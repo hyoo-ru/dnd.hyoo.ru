@@ -45,6 +45,11 @@ $hyoo_dungeon_char_summary $mol_page
 							sub /
 								\✨
 								<= experience
+						<= Speed $mol_chip
+							hint \Скорость
+							sub /
+								\🦶
+								<= speed 1
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
 					<= Life $mol_view sub /

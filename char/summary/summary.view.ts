@@ -21,5 +21,9 @@ namespace $.$$ {
 			return this.classes().map( cl => this.$.$hyoo_dungeon_class_all[ cl ].title ).join( ', ' )
 		}
 		
+		override speed() {
+			return this.$.$hyoo_dungeon_race_all[ this.race() ].speed
+		}
+		
 	}
 }
