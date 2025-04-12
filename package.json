@@ -222,6 +222,8 @@
     "$hyoo_dungeon_parameter",
     "$hyoo_dungeon_ability_config",
     "$hyoo_dungeon_skill_config",
+    "$mol_check_box",
+    "$mol_icon_tick",
     "$hyoo_dungeon_moral",
     "$hyoo_dungeon_ethics",
     "$hyoo_dungeon_char_main",

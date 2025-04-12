@@ -759,19 +759,24 @@ $hyoo_dungeon_ability_config $mol_page
 			<= Ability_addon* $mol_paginator
 				value? <=> ability_addon*?
 
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
 $hyoo_dungeon_skill_config $mol_page
 	title \Навыки
 	char $hyoo_dungeon_char
-		skill* => skill_total*
-		skill_addon*? => skill_addon*?
+		skill* => skill*
+		skill_has*? => skill_has*?
 	body <= skill_list /
 		<= Skill_row*some $mol_view sub /
+			<= Skill_addon* $mol_check_box
+				checked? <=> skill_has*?
 			<= Skill_title* $mol_chip
 				title <= skill_title* \
 			<= Skill_total* $mol_chip
-				title <= skill_total*
-			<= Skill_addon* $mol_paginator
-				value? <=> skill_addon*?
+				sub / <= skill*
 
 $mol_text_list $mol_text
 	auto_scroll null

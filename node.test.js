@@ -7708,75 +7708,75 @@ var $;
     $.$hyoo_dungeon_skill_all = {
         athletics: {
             title: 'Атлетика',
-            ability_main: 'strength',
+            ability: 'strength',
         },
         acrobatics: {
             title: 'Акробатика',
-            ability_main: 'dexterity',
+            ability: 'dexterity',
         },
         sleight: {
             title: 'Ловкость рук',
-            ability_main: 'dexterity',
+            ability: 'dexterity',
         },
         stealth: {
             title: 'Скрытность',
-            ability_main: 'dexterity',
+            ability: 'dexterity',
         },
         investigation: {
             title: 'Анализ',
-            ability_main: 'intelligence',
+            ability: 'intelligence',
         },
         history: {
             title: 'История',
-            ability_main: 'intelligence',
+            ability: 'intelligence',
         },
         arcana: {
             title: 'Магия',
-            ability_main: 'intelligence',
+            ability: 'intelligence',
         },
         nature: {
             title: 'Природа',
-            ability_main: 'intelligence',
+            ability: 'intelligence',
         },
         religion: {
             title: 'Религия',
-            ability_main: 'intelligence',
+            ability: 'intelligence',
         },
         perception: {
             title: 'Восприятие',
-            ability_main: 'wisdom',
+            ability: 'wisdom',
         },
         survival: {
             title: 'Выживание',
-            ability_main: 'wisdom',
+            ability: 'wisdom',
         },
         medicine: {
             title: 'Медицина',
-            ability_main: 'wisdom',
+            ability: 'wisdom',
         },
         insight: {
             title: 'Интуиция',
-            ability_main: 'wisdom',
+            ability: 'wisdom',
         },
         animals: {
             title: 'Звероводство',
-            ability_main: 'wisdom',
+            ability: 'wisdom',
         },
         performance: {
             title: 'Выступление',
-            ability_main: 'charisma',
+            ability: 'charisma',
         },
         intimidation: {
             title: 'Запугивание',
-            ability_main: 'charisma',
+            ability: 'charisma',
         },
         deception: {
             title: 'Обман',
-            ability_main: 'charisma',
+            ability: 'charisma',
         },
         persuasion: {
             title: 'Убеждение',
-            ability_main: 'charisma',
+            ability: 'charisma',
         },
     };
 })($ || ($ = {}));
@@ -7833,7 +7833,7 @@ var $;
                 'Кошачьи когти',
             ],
             skills: [
-                'attention',
+                'perception',
                 'stealth',
             ],
         },
@@ -7853,6 +7853,7 @@ var $;
             dice: 8,
             ability_main: 'charisma',
             ability_safe: ['dexterity', 'charisma'],
+            skills: [],
             weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
         },
     };
@@ -7882,30 +7883,56 @@ var $;
             return this.value('experience', next) ?? 0;
         }
         race(next) {
-            return this.value('race', next) ?? 'tabaxi';
+            return this.value('race', next) ?? 'human';
+        }
+        race_info() {
+            return this.$.$hyoo_dungeon_race_all[this.race()];
         }
         classes(next) {
             return this.value('classes', next) ?? [];
+        }
+        classes_info() {
+            return this.classes().map(id => this.$.$hyoo_dungeon_class_all[id]);
         }
         ability_addon(id, next) {
             return this.sub('abilities', new $mol_store({})).value(id, next && Math.max(0, Math.min(next, 7))) ?? 0;
         }
         ability(id) {
-            return 8 + this.ability_addon(id) + this.$.$hyoo_dungeon_race_all[this.race()].abilities[id];
+            return 8 + this.ability_addon(id) + this.race_info().abilities[id];
         }
         ability_modifier(id) {
             return Math.floor(this.ability(id) / 2 - 5);
         }
         ability_safe(id) {
             const mod = this.ability_modifier(id);
-            const safe = this.$.$hyoo_dungeon_class_all[this.classes()[0]].ability_safe;
+            const safe = this.classes_info()[0].ability_safe;
             return mod + (safe.includes(id) ? this.master_bonus() : 0);
         }
-        skill_addon(id, next) {
-            return this.sub('skills', new $mol_store({})).value(id, next) ?? 0;
+        skills_choosen(next) {
+            return this.value('skills', next) ?? [];
+        }
+        skills() {
+            return [...new Set([
+                    ...this.classes_info().flatMap(cl => cl.skills),
+                    ...this.race_info().skills,
+                    ...this.skills_choosen(),
+                ])];
         }
         skill(id) {
-            return this.skill_addon(id);
+            const skill = this.$.$hyoo_dungeon_skill_all[id];
+            const mod = this.ability_modifier(skill.ability);
+            const skills = this.skills();
+            return mod + (skills.includes(id) ? this.master_bonus() : 0);
+        }
+        skill_has(id, next) {
+            if (next !== undefined) {
+                if (next)
+                    this.skills_choosen([...this.skills_choosen(), id]);
+                else
+                    this.skills_choosen(this.skills_choosen().filter(i => i !== id));
+            }
+            const skills = this.skills();
+            return skills.includes(id);
         }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
@@ -7929,7 +7956,7 @@ var $;
             return 2 + Math.floor(this.level() / 4 - 1 / 4);
         }
         hits_dice() {
-            return this.$.$hyoo_dungeon_class_all[this.classes()[0]].dice;
+            return this.classes_info()[0].dice;
         }
         hits_max(next) {
             const def = this.hits_dice() + this.ability_modifier('constitution');
@@ -7943,13 +7970,22 @@ var $;
         }
         hits_heal() {
             const mod = Math.max(1, this.ability_modifier('constitution'));
-            const dice = this.$.$hyoo_dungeon_class_all[this.classes()[0]].dice;
+            const dice = this.hits_dice();
             return `d${dice}+${mod}`;
         }
     }
     __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "race_info", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "classes_info", null);
+    __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "ability_safe", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_dungeon_char.prototype, "skill", null);
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_max", null);
@@ -11046,12 +11082,48 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
 	($.$hyoo_dungeon_skill_config) = class $hyoo_dungeon_skill_config extends ($.$mol_page) {
-		skill_total(id){
+		skill(id){
 			return (this.char().skill(id));
 		}
-		skill_addon(id, next){
-			return (this.char().skill_addon(id, next));
+		skill_has(id, next){
+			return (this.char().skill_has(id, next));
+		}
+		Skill_addon(id){
+			const obj = new this.$.$mol_check_box();
+			(obj.checked) = (next) => ((this.skill_has(id, next)));
+			return obj;
 		}
 		skill_title(id){
 			return "";
@@ -11063,20 +11135,15 @@ var $;
 		}
 		Skill_total(id){
 			const obj = new this.$.$mol_chip();
-			(obj.title) = () => ((this.skill_total(id)));
-			return obj;
-		}
-		Skill_addon(id){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.skill_addon(id, next)));
+			(obj.sub) = () => ([(this.skill(id))]);
 			return obj;
 		}
 		Skill_row(id){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([
+				(this.Skill_addon(id)), 
 				(this.Skill_title(id)), 
-				(this.Skill_total(id)), 
-				(this.Skill_addon(id))
+				(this.Skill_total(id))
 			]);
 			return obj;
 		}
@@ -11094,9 +11161,9 @@ var $;
 			return (this.skill_list());
 		}
 	};
+	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_addon"));
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_title"));
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_total"));
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_addon"));
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_row"));
 	($mol_mem(($.$hyoo_dungeon_skill_config.prototype), "char"));
 
@@ -13431,7 +13498,7 @@ var $;
                 return this.$.$mol_store_local.sub('char', new $hyoo_dungeon_char({
                     name: '',
                     race: 'human',
-                    classes: [],
+                    classes: ['bard'],
                     moral: 'neutral',
                     ethics: 'neutral',
                     experience: 0,
@@ -13448,26 +13515,7 @@ var $;
                         strength: 0,
                         wisdom: 0,
                     },
-                    skills: {
-                        acrobatics: 0,
-                        investigation: 0,
-                        athletics: 0,
-                        insight: 0,
-                        stealth: 0,
-                        animals: 0,
-                        deception: 0,
-                        sleight: 0,
-                        perception: 0,
-                        history: 0,
-                        intimidation: 0,
-                        arcana: 0,
-                        medicine: 0,
-                        nature: 0,
-                        performance: 0,
-                        persuasion: 0,
-                        religion: 0,
-                        survival: 0,
-                    },
+                    skills: [],
                     story: '🏃‍♂️Чужеземец',
                     biography: '',
                     affection: '',

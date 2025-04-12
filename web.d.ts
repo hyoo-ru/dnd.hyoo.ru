@@ -2531,7 +2531,7 @@ declare namespace $ {
 declare namespace $ {
     type $hyoo_dungeon_skill_info = {
         title: string;
-        ability_main: $hyoo_dungeon_ability;
+        ability: $hyoo_dungeon_ability;
     };
     const $hyoo_dungeon_skill_all: {
         athletics: $hyoo_dungeon_skill_info;
@@ -2587,6 +2587,7 @@ declare namespace $ {
         dice: 6 | 8;
         ability_main: $hyoo_dungeon_ability;
         ability_safe: $hyoo_dungeon_ability[];
+        skills: $hyoo_dungeon_skill[];
         weapon: string;
     };
     const $hyoo_dungeon_class_all: {
@@ -2615,7 +2616,7 @@ declare namespace $ {
         affection: string;
         weakness: string;
         abilities: Record<$hyoo_dungeon_ability, number>;
-        skills: Record<$hyoo_dungeon_skill, number>;
+        skills: $hyoo_dungeon_skill[];
     }> {
         name(next?: string): string;
         story(next?: string): string;
@@ -2624,13 +2625,17 @@ declare namespace $ {
         level(next?: number): number;
         experience(next?: number): number;
         race(next?: $hyoo_dungeon_race): "human" | "tabaxi";
+        race_info(): $hyoo_dungeon_race_info;
         classes(next?: $hyoo_dungeon_class[]): "bard"[];
+        classes_info(): $hyoo_dungeon_class_info[];
         ability_addon(id: $hyoo_dungeon_ability, next?: number): any;
         ability(id: $hyoo_dungeon_ability): any;
         ability_modifier(id: $hyoo_dungeon_ability): number;
         ability_safe(id: $hyoo_dungeon_ability): number;
-        skill_addon(id: $hyoo_dungeon_skill, next?: number): any;
-        skill(id: $hyoo_dungeon_skill): any;
+        skills_choosen(next?: $hyoo_dungeon_skill[]): ("athletics" | "acrobatics" | "sleight" | "stealth" | "investigation" | "history" | "arcana" | "nature" | "religion" | "perception" | "survival" | "medicine" | "insight" | "animals" | "performance" | "intimidation" | "deception" | "persuasion")[];
+        skills(): ("athletics" | "acrobatics" | "sleight" | "stealth" | "investigation" | "history" | "arcana" | "nature" | "religion" | "perception" | "survival" | "medicine" | "insight" | "animals" | "performance" | "intimidation" | "deception" | "persuasion")[];
+        skill(id: $hyoo_dungeon_skill): number;
+        skill_has(id: $hyoo_dungeon_skill, next?: boolean): boolean;
         moral(next?: 'good' | 'neutral' | 'evil'): "good" | "neutral" | "evil";
         ethics(next?: 'lawful' | 'neutral' | 'chaotic'): "neutral" | "lawful" | "chaotic";
         traits(next?: string): string;
@@ -4376,35 +4381,56 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+
 	type __hyoo_dungeon_skill_config_1 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_skill_config['skill_total'] >[0]
+		Parameters< $hyoo_dungeon_skill_config['skill'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill'] >[0]
 	>
 	type __hyoo_dungeon_skill_config_2 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_skill_config['skill_addon'] >[0]
+		Parameters< $hyoo_dungeon_skill_config['skill_has'] >[0]
 		,
-		Parameters< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_addon'] >[0]
+		Parameters< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_has'] >[0]
 	>
 	type __hyoo_dungeon_skill_config_3 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_skill_config['skill_addon'] >[1]
+		Parameters< $hyoo_dungeon_skill_config['skill_has'] >[1]
 		,
-		Parameters< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_addon'] >[1]
+		Parameters< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_has'] >[1]
 	>
-	type $mol_chip__title_hyoo_dungeon_skill_config_4 = $mol_type_enforce<
+	type $mol_check_box__checked_hyoo_dungeon_skill_config_4 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_skill_config['skill_has'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_chip__title_hyoo_dungeon_skill_config_5 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_skill_config['skill_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_skill_config_5 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_skill_config['skill_total'] >
+	type $mol_chip__sub_hyoo_dungeon_skill_config_6 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $mol_chip['title'] >
-	>
-	type $mol_paginator__value_hyoo_dungeon_skill_config_6 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_skill_config['skill_addon'] >
-		,
-		ReturnType< $mol_paginator['value'] >
+		ReturnType< $mol_chip['sub'] >
 	>
 	type $mol_view__sub_hyoo_dungeon_skill_config_7 = $mol_type_enforce<
 		readonly(any)[]
@@ -4412,12 +4438,12 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	export class $hyoo_dungeon_skill_config extends $mol_page {
-		skill_total( id: any): ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill'] >
-		skill_addon( id: any, next?: ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_addon'] > ): ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_addon'] >
+		skill( id: any): ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill'] >
+		skill_has( id: any, next?: ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_has'] > ): ReturnType< ReturnType< $hyoo_dungeon_skill_config['char'] >['skill_has'] >
+		Skill_addon( id: any): $mol_check_box
 		skill_title( id: any): string
 		Skill_title( id: any): $mol_chip
 		Skill_total( id: any): $mol_chip
-		Skill_addon( id: any): $mol_paginator
 		Skill_row( id: any): $mol_view
 		skill_list( ): readonly(any)[]
 		title( ): string
