@@ -7,8 +7,6 @@ $hyoo_dungeon_char_card $mol_page
 		classes => classes
 		goodness => goodness
 		principality => principality
-		param*? => param_total*?
-		param_addon*? => param_addon*?
 	Param_cofig $hyoo_dungeon_param_config
 		char <= char
 		param_list => param_list

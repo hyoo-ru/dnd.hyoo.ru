@@ -1,7 +1,7 @@
 $hyoo_dungeon_param_config $mol_page
 	title \Характеристики
 	char $hyoo_dungeon_char
-		param*? => param_total*?
+		param* => param_total*
 		param_addon*? => param_addon*?
 	body <= param_list /
 		<= Param_row*some $mol_bar sub /
