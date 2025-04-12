@@ -798,9 +798,10 @@ $hyoo_dungeon_char_summary $mol_page
 			<= Info $mol_list rows /
 				<= Top $mol_view sub /
 					<= Base $mol_view sub /
-						<= Race $mol_chip
+						<= Race $mol_link
 							hint \Раса
 							title <= race_title \
+							uri <= race_link \
 						<= Name $mol_chip
 							hint \Имя
 							title <= name
@@ -847,7 +848,9 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
 			<= Stat $mol_view sub /
-				<= Ability_list $mol_view sub <= ability_list
+				<= Stat_main $mol_list rows /
+					<= Ability_list $mol_view sub <= ability_list
+					<= Perks $mol_text text <= perks \
 				<= Skill_list $mol_view sub <= skill_list
 
 $mol_labeler $mol_list
@@ -1135,6 +1138,6 @@ $hyoo_dungeon_app $mol_book2_catalog
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
 		<= Lights $mol_lights_toggle
-	placeholders /
+	Placeholder null
 	plugins /
 		<= Theme $mol_theme_auto

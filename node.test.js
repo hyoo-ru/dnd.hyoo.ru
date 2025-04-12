@@ -7788,6 +7788,7 @@ var $;
     $.$hyoo_dungeon_race_all = {
         tabaxi: {
             title: '🐈Табакси',
+            link: 'https://dnd.su/race/183-tabaxi/',
             description: 'Родом из странных и далёких земель, странствующие табакси – кошкоподобные гуманоиды, которых любопытство заставляет собирать интересные артефакты, записывать рассказы и истории, и осматривать все чудеса в мире. Отъявленные путешественники, любознательные табакси редко на долго оседают на одном месте. Их врожденный характер толкает их раскрывать тайны и находить потерянные сокровища и легенды.',
             image: 'https://i.imgur.com/3QaQLIa.jpeg',
             abilities: {
@@ -7803,9 +7804,9 @@ var $;
             size: 'medium',
             speed: 30,
             perks: [
-                'Тёмное зрение',
-                'Кошачье проворство',
-                'Кошачьи когти',
+                '👀Тёмное зрение',
+                '🐱‍👤Кошачье проворство',
+                '🐾Кошачьи когти',
             ],
             weapons: [
                 'Кошачьи когти',
@@ -11047,10 +11048,14 @@ var $;
 		race_title(){
 			return "";
 		}
+		race_link(){
+			return "";
+		}
 		Race(){
-			const obj = new this.$.$mol_chip();
+			const obj = new this.$.$mol_link();
 			(obj.hint) = () => ("Раса");
 			(obj.title) = () => ((this.race_title()));
+			(obj.uri) = () => ((this.race_link()));
 			return obj;
 		}
 		Name(){
@@ -11207,6 +11212,19 @@ var $;
 			(obj.sub) = () => ((this.ability_list()));
 			return obj;
 		}
+		perks(){
+			return "";
+		}
+		Perks(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.perks()));
+			return obj;
+		}
+		Stat_main(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Ability_list()), (this.Perks())]);
+			return obj;
+		}
 		Skill_list(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ((this.skill_list()));
@@ -11214,7 +11232,7 @@ var $;
 		}
 		Stat(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Ability_list()), (this.Skill_list())]);
+			(obj.sub) = () => ([(this.Stat_main()), (this.Skill_list())]);
 			return obj;
 		}
 		Columns(){
@@ -11269,6 +11287,8 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_list"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat_main"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_list"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
@@ -11338,6 +11358,12 @@ var $;
             }
             speed() {
                 return this.$.$hyoo_dungeon_race_all[this.race()].speed;
+            }
+            perks() {
+                return this.$.$hyoo_dungeon_race_all[this.race()].perks.join('\n');
+            }
+            race_link() {
+                return this.$.$hyoo_dungeon_race_all[this.race()].link;
             }
         }
         $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
@@ -11419,10 +11445,20 @@ var $;
             Grade: {
                 color: $mol_theme.special,
             },
+            Stat_main: {
+                flex: {
+                    basis: `13rem`,
+                },
+                gap: $mol_gap.block,
+            },
             Ability_list: {
                 flex: {
-                    basis: `11rem`,
                     direction: 'column',
+                },
+            },
+            Perks: {
+                background: {
+                    color: $mol_theme.card,
                 },
             },
             Skill_list: {
@@ -12965,8 +13001,8 @@ var $;
 		menu_foot(){
 			return [(this.Source()), (this.Lights())];
 		}
-		placeholders(){
-			return [];
+		Placeholder(){
+			return null;
 		}
 		plugins(){
 			return [(this.Theme())];
