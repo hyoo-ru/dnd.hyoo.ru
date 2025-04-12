@@ -7895,7 +7895,7 @@ var $;
             return this.value('experience', next) ?? 0;
         }
         race(next) {
-            return this.value('race', next) ?? 'human';
+            return this.value('race', next) || 'human';
         }
         race_info() {
             return this.$.$hyoo_dungeon_race_all[this.race()];
