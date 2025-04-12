@@ -5,7 +5,7 @@ namespace $.$$ {
 		char() {
 			return this.$.$mol_store_local.sub( 'char', new $hyoo_dungeon_char({
 				name: '',
-				race: 'tabaxi',
+				race: 'human',
 				classes: [],
 				moral: 'neutral',
 				ethics: 'neutral',

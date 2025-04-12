@@ -6,7 +6,16 @@ namespace $.$$ {
 			basis: '20rem',
 		},
 		
-		Param_total: {
+		Ability_total: {
+			flex: {
+				basis: '2.5rem',
+			},
+			justify: {
+				content: 'center',
+			},
+		},
+		
+		Ability_modifier: {
 			flex: {
 				basis: '2.5rem',
 			},
@@ -16,7 +25,7 @@ namespace $.$$ {
 			},
 		},
 		
-		Param_title: {
+		Ability_title: {
 			flex: {
 				basis: '8rem',
 				grow: 1,

@@ -10,6 +10,8 @@ namespace $ {
 		age: number,
 		level: number,
 		experience: number,
+		hits_max: number,
+		hits: number,
 		traits: string,
 		ideals: string,
 		affection: string,
@@ -54,6 +56,10 @@ namespace $ {
 			return 8 + this.ability_addon( id ) + this.$.$hyoo_dungeon_race_all[ this.race() ].abilities[ id ]
 		}
 		
+		ability_modifier( id: $hyoo_dungeon_ability ) {
+			return Math.floor( this.ability( id ) / 2 - 5 )
+		}
+		
 		skill_addon( id: $hyoo_dungeon_skill, next?: number ) {
 			return this.sub( 'skills', new $mol_store( {} as any ) ).value( id, next ) ?? 0
 		}
@@ -84,6 +90,32 @@ namespace $ {
 		
 		weakness( next?: string ) {
 			return this.value( 'weakness', next ) ?? ''
+		}
+		
+		master_bonus() {
+			return 2 + Math.floor( this.level() / 4 - 1/4 )
+		}
+		
+		hits_dice() {
+			return this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].dice
+		}
+		
+		@ $mol_mem
+		hits_max( next?: number ) {
+			const def = this.hits_dice() + this.ability_modifier( 'constitution' )
+			return this.value( 'hits_max', next ) ?? def
+		}
+		
+		@ $mol_mem
+		hits( next?: number ) {
+			return this.value( 'hits', next && Math.max( 0, Math.min( next, this.hits_max() ) ) ) ?? this.hits_max()
+		}
+		
+		@ $mol_mem
+		hits_heal() {
+			const mod = Math.max( 1, this.ability_modifier( 'constitution' ) )
+			const dice = this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].dice
+			return `d${dice}+${mod}`
 		}
 		
 	}

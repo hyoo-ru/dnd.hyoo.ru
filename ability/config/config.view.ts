@@ -12,12 +12,12 @@ namespace $.$$ {
 			const char = this.char()
 			const total = Object.keys( this.$.$hyoo_dungeon_ability_all )
 				.reduce( ( sum, id )=> sum + char.ability_addon( id as $hyoo_dungeon_ability ), 0 )
-			return 25 - total
+			return 24 - total
 		}
 		
 		@ $mol_mem
 		override ability_list() {
-			return Object.keys( this.$.$hyoo_dungeon_ability_all ).map( ability => this.Param_row( ability ) )
+			return Object.keys( this.$.$hyoo_dungeon_ability_all ).map( ability => this.Ability_row( ability ) )
 		}
 		
 		override ability_title( id: $hyoo_dungeon_ability ) {

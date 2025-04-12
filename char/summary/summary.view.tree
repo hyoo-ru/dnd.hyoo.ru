@@ -4,8 +4,8 @@ $hyoo_dungeon_char_summary $mol_page
 		name => name
 		story => story
 		age => age
-		level => level
-		experience => experience
+		level? => level?
+		experience? => experience?
 		race => race
 		classes => classes
 		moral => moral
@@ -14,10 +14,15 @@ $hyoo_dungeon_char_summary $mol_page
 		ideals => ideals
 		affection => affection
 		weakness => weakness
-	Param_cofig $hyoo_dungeon_ability_config
+		master_bonus => master_bonus
+		hits? => hits?
+		hits_max? => hits_max?
+		hits_dice => hits_dice
+		hits_heal => hits_heal
+	Ability_cofig $hyoo_dungeon_ability_config
 		char <= char
 		ability_list => ability_list
-		Param_addon null
+		Ability_addon null
 	Skill_cofig $hyoo_dungeon_skill_config
 		char <= char
 		skill_list => skill_list
@@ -40,16 +45,6 @@ $hyoo_dungeon_char_summary $mol_page
 							sub /
 								\📅
 								<= age
-						<= Level $mol_chip
-							hint \Уровень
-							sub /
-								\🏅
-								<= level
-						<= Experience $mol_chip
-							hint \Опыт
-							sub /
-								\✨
-								<= experience
 						<= Speed $mol_chip
 							hint \Скорость
 							sub /
@@ -78,6 +73,35 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Weakness $mol_text text <= weakness
 			<= Stat $mol_view sub /
 				<= Stat_main $mol_list rows /
-					<= Ability_list $mol_view sub <= ability_list
-					<= Perks $mol_text text <= perks \
+					<= Grade_block $mol_list rows /
+						<= Level $hyoo_dungeon_parameter
+							title \🏅Уровень
+							Value <= Level_value $mol_paginator
+								value? <=> level?
+						<= Master_bonus $hyoo_dungeon_parameter
+							title \🥇Мастерство
+							value /
+								\+
+								<= master_bonus
+						<= Experience $hyoo_dungeon_parameter
+							title \✨Опыт
+							Value <= Experience_value $mol_paginator
+								value? <=> experience?
+								step 100
+					<= Hits_block $mol_list rows /
+						<= Hits $hyoo_dungeon_parameter
+							title \💖Здоровье
+							Value <= Hits_value $mol_paginator
+								value? <=> hits?
+						<= Hits_max $hyoo_dungeon_parameter
+							title \💟Предел
+							Value <= Hits_max_value $mol_paginator
+								value? <=> hits_max?
+						<= Hits_heal $hyoo_dungeon_parameter
+							title \💊Лечение
+							value / <= hits_heal
+					<= Ability_list $mol_view
+						sub <= ability_list
+					<= Perks $mol_text
+						text <= perks \
 				<= Skill_list $mol_view sub <= skill_list
