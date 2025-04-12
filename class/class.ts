@@ -8,6 +8,7 @@ namespace $ {
 		dice: 6 | 8
 		ability_main: $hyoo_dungeon_ability
 		ability_safe: $hyoo_dungeon_ability[]
+		skills: $hyoo_dungeon_skill[]
 		weapon: string
 	}
 	
@@ -21,6 +22,7 @@ namespace $ {
 			dice: 8,
 			ability_main: 'charisma',
 			ability_safe: [ 'dexterity', 'charisma' ],
+			skills: [],
 			weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
 		} as $hyoo_dungeon_class_info,
 		

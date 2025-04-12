@@ -65,7 +65,7 @@ namespace $ {
 				'Кошачьи когти',
 			],
 			skills: [
-				'attention',
+				'perception',
 				'stealth',
 			],
 		} as $hyoo_dungeon_race_info,

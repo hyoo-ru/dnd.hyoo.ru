@@ -19,7 +19,7 @@ namespace $ {
 		affection: string,
 		weakness: string,
 		abilities: Record< $hyoo_dungeon_ability, number >,
-		skills: Record< $hyoo_dungeon_skill, number >,
+		skills: $hyoo_dungeon_skill[],
 	}> {
 		
 		name( next?: string ) {
@@ -47,11 +47,21 @@ namespace $ {
 		}
 		
 		race( next?: $hyoo_dungeon_race ) {
-			return this.value( 'race', next ) ?? 'tabaxi' as $hyoo_dungeon_race
+			return this.value( 'race', next ) ?? 'human' as $hyoo_dungeon_race
+		}
+		
+		@ $mol_mem
+		race_info() {
+			return this.$.$hyoo_dungeon_race_all[ this.race() ]
 		}
 		
 		classes( next?: $hyoo_dungeon_class[] ) {
 			return this.value( 'classes', next ) ?? [] as $hyoo_dungeon_class[]
+		}
+		
+		@ $mol_mem
+		classes_info() {
+			return this.classes().map( id => this.$.$hyoo_dungeon_class_all[ id ] )
 		}
 		
 		ability_addon( id: $hyoo_dungeon_ability, next?: number ) {
@@ -59,7 +69,7 @@ namespace $ {
 		}
 		
 		ability( id: $hyoo_dungeon_ability ) {
-			return 8 + this.ability_addon( id ) + this.$.$hyoo_dungeon_race_all[ this.race() ].abilities[ id ]
+			return 8 + this.ability_addon( id ) + this.race_info().abilities[ id ]
 		}
 		
 		ability_modifier( id: $hyoo_dungeon_ability ) {
@@ -69,16 +79,37 @@ namespace $ {
 		@ $mol_mem_key
 		ability_safe( id: $hyoo_dungeon_ability ) {
 			const mod = this.ability_modifier( id )
-			const safe = this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].ability_safe
+			const safe = this.classes_info()[0].ability_safe
 			return mod + ( safe.includes( id ) ? this.master_bonus() : 0 )
 		}
-		
-		skill_addon( id: $hyoo_dungeon_skill, next?: number ) {
-			return this.sub( 'skills', new $mol_store( {} as any ) ).value( id, next ) ?? 0
+
+		skills_choosen( next?: $hyoo_dungeon_skill[] ) {
+			return this.value( 'skills', next ) ?? [] as $hyoo_dungeon_skill[]
 		}
 		
+		skills() {
+			return [ ... new Set([
+				... this.classes_info().flatMap( cl => cl.skills ),
+				... this.race_info().skills,
+				... this.skills_choosen(),
+			]) ]
+		}
+		
+		@ $mol_mem_key
 		skill( id: $hyoo_dungeon_skill ) {
-			return this.skill_addon( id )
+			const skill = this.$.$hyoo_dungeon_skill_all[ id ]
+			const mod = this.ability_modifier( skill.ability )
+			const skills = this.skills()
+			return mod + ( skills.includes( id ) ? this.master_bonus() : 0 )
+		}
+		
+		skill_has( id: $hyoo_dungeon_skill, next?: boolean ) {
+			if( next !== undefined ) {
+				if( next ) this.skills_choosen([ ... this.skills_choosen(), id ])
+				else this.skills_choosen( this.skills_choosen().filter( i => i !== id ) )
+			}
+			const skills = this.skills()
+			return skills.includes( id )
 		}
 		
 		moral( next?: 'good' | 'neutral' | 'evil' ) {
@@ -110,7 +141,7 @@ namespace $ {
 		}
 		
 		hits_dice() {
-			return this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].dice
+			return this.classes_info()[0].dice
 		}
 		
 		@ $mol_mem
@@ -132,7 +163,7 @@ namespace $ {
 		@ $mol_mem
 		hits_heal() {
 			const mod = Math.max( 1, this.ability_modifier( 'constitution' ) )
-			const dice = this.$.$hyoo_dungeon_class_all[ this.classes()[0] ].dice
+			const dice = this.hits_dice()
 			return `d${dice}+${mod}`
 		}
 		
