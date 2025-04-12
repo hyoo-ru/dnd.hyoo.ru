@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '55rem',
+			basis: '60rem',
 		},
 		
 		Columns: {

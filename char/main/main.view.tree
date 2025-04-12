@@ -45,14 +45,14 @@ $hyoo_dungeon_char_main $mol_page
 				option_title* <= ethics_title* \
 		<= Grade $mol_view sub /
 			<= Level_block $mol_form_field
-				name \Уровень
+				name \🏅Уровень
 				Content <= Level $mol_paginator
 					value? <=> level?
 			<= Experience_block $mol_form_field
-				name \Опыт
+				name \✨Опыт
 				Content <= Experience $mol_number
 					value? <=> experience?
 			<= Age_block $mol_form_field
-				name \Возраст
+				name \📅Возраст
 				Content <= Age $mol_number
 					value? <=> age?
