@@ -33,5 +33,11 @@ namespace $.$$ {
 			}) )
 		}
 		
+		@ $mol_mem
+		background() {
+			const color = this.$.$mol_lights() ? `rgba(255,255,255,.75)` : `rgba(0,0,0,.75)`
+			return `linear-gradient( to bottom, ${color}, ${color} ), url(${ JSON.stringify( this.char_image() ) })`
+		}
+		
 	}
 }

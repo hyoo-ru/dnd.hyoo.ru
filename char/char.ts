@@ -22,6 +22,10 @@ namespace $ {
 		skills: $hyoo_dungeon_skill[],
 	}> {
 		
+		image() {
+			return this.race_info().image
+		}
+		
 		name( next?: string ) {
 			return this.value( 'name', next ) ?? ''
 		}
