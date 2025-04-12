@@ -66,6 +66,10 @@ namespace $.$$ {
 		},
 		
 		Name: {
+			textShadow: '0 0',
+		},
+		
+		Grade: {
 			color: $mol_theme.special,
 		},
 		
