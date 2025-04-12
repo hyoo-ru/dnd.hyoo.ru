@@ -7,11 +7,11 @@ namespace $.$$ {
 				name: '',
 				race: 'tabaxi',
 				classes: [],
-				goodness: 'neutral',
-				principality: 'neutral',
+				moral: 'neutral',
+				ethics: 'neutral',
 				experience: 0,
 				level: 0,
-				params: {
+				abilities: {
 					agility: 0,
 					charisma: 0,
 					constitution: 0,

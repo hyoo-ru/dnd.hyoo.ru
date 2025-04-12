@@ -1,6 +1,6 @@
 namespace $.$$ {
 	
-	$mol_style_define( $hyoo_dungeon_param_config, {
+	$mol_style_define( $hyoo_dungeon_ability_config, {
 		
 		flex: {
 			basis: '30rem',

@@ -4,12 +4,12 @@ namespace $ {
 		name: string,
 		race: $hyoo_dungeon_race,
 		classes: $hyoo_dungeon_class[],
-		goodness: 'good' | 'neutral' | 'evil',
-		principality: 'lawful' | 'neutral' | 'chaotic',
+		moral: 'good' | 'neutral' | 'evil',
+		ethics: 'lawful' | 'neutral' | 'chaotic',
 		story: string,
 		level: number,
 		experience: number,
-		params: Record< $hyoo_dungeon_param, number >,
+		abilities: Record< $hyoo_dungeon_ability, number >,
 		skills: Record< $hyoo_dungeon_skill, number >,
 	}> {
 		
@@ -29,12 +29,12 @@ namespace $ {
 			return this.value( 'classes', next ) ?? [] as $hyoo_dungeon_class[]
 		}
 		
-		param_addon( id: $hyoo_dungeon_param, next?: number ) {
-			return this.sub( 'params', new $mol_store( {} as any ) ).value( id, next ) ?? 0
+		ability_addon( id: $hyoo_dungeon_ability, next?: number ) {
+			return this.sub( 'abilities', new $mol_store( {} as any ) ).value( id, next ) ?? 0
 		}
 		
-		param( id: $hyoo_dungeon_param ) {
-			return 8 + this.param_addon( id )
+		ability( id: $hyoo_dungeon_ability ) {
+			return 8 + this.ability_addon( id )
 		}
 		
 		skill_addon( id: $hyoo_dungeon_skill, next?: number ) {
@@ -45,12 +45,12 @@ namespace $ {
 			return this.skill_addon( id )
 		}
 		
-		goodness( next?: 'good' | 'neutral' | 'evil' ) {
-			return this.value( 'goodness', next ) ?? 'neutral'
+		moral( next?: 'good' | 'neutral' | 'evil' ) {
+			return this.value( 'moral', next ) ?? 'neutral'
 		}
 		
-		principality( next?: 'lawful' | 'neutral' | 'chaotic' ) {
-			return this.value( 'principality', next ) ?? 'neutral'
+		ethics( next?: 'lawful' | 'neutral' | 'chaotic' ) {
+			return this.value( 'ethics', next ) ?? 'neutral'
 		}
 		
 	}

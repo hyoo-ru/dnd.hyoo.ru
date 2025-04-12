@@ -1,0 +1,13 @@
+$hyoo_dungeon_ability_config $mol_page
+	title \Характеристики
+	char $hyoo_dungeon_char
+		ability* => ability_total*
+		ability_addon*? => ability_addon*?
+	body <= ability_list /
+		<= Param_row*some $mol_bar sub /
+			<= Param_title* $mol_chip
+				title <= ability_title* \
+			<= Param_total* $mol_chip
+				title <= ability_total*
+			<= Param_addon* $mol_paginator
+				value? <=> ability_addon*?
