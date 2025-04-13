@@ -2750,12 +2750,12 @@ declare namespace $ {
         age(next?: number): number;
         level(next?: number): number;
         experience(next?: number): number;
-        race(next?: $hyoo_dungeon_race): "human" | "tabaxi";
-        race_info(): $hyoo_dungeon_race_info;
-        story(next?: $hyoo_dungeon_story): "pirate";
-        story_info(): $hyoo_dungeon_story_info;
-        class(next?: $hyoo_dungeon_class): "bard";
-        class_info(): $hyoo_dungeon_class_info;
+        race_id(next?: $hyoo_dungeon_race): "human" | "tabaxi";
+        race(): $hyoo_dungeon_race_info;
+        story_id(next?: $hyoo_dungeon_story): "pirate";
+        story(): $hyoo_dungeon_story_info;
+        class_id(next?: $hyoo_dungeon_class): "bard";
+        class(): $hyoo_dungeon_class_info;
         ability_addon(id: $hyoo_dungeon_ability, next?: number): any;
         ability(id: $hyoo_dungeon_ability): any;
         ability_modifier(id: $hyoo_dungeon_ability): number;
@@ -5007,9 +5007,6 @@ declare namespace $ {
 		age( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['age'] >
 		level( next?: ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['level'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['level'] >
 		experience( next?: ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['experience'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['experience'] >
-		race( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['race'] >
-		story( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['story'] >
-		class( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['class'] >
 		moral( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['moral'] >
 		ethics( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['ethics'] >
 		traits( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['traits'] >
@@ -5588,39 +5585,39 @@ declare namespace $ {
 		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['name'] >[0]
 	>
 	type __hyoo_dungeon_char_main_2 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_char_main['story'] >[0]
-		,
-		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['story'] >[0]
-	>
-	type __hyoo_dungeon_char_main_3 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_char_main['biography'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['biography'] >[0]
 	>
-	type __hyoo_dungeon_char_main_4 = $mol_type_enforce<
+	type __hyoo_dungeon_char_main_3 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_char_main['age'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['age'] >[0]
 	>
-	type __hyoo_dungeon_char_main_5 = $mol_type_enforce<
+	type __hyoo_dungeon_char_main_4 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_char_main['level'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['level'] >[0]
 	>
-	type __hyoo_dungeon_char_main_6 = $mol_type_enforce<
+	type __hyoo_dungeon_char_main_5 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_char_main['experience'] >[0]
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['experience'] >[0]
 	>
-	type __hyoo_dungeon_char_main_7 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_char_main['race'] >[0]
+	type __hyoo_dungeon_char_main_6 = $mol_type_enforce<
+		Parameters< $hyoo_dungeon_char_main['race_id'] >[0]
 		,
-		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['race'] >[0]
+		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['race_id'] >[0]
+	>
+	type __hyoo_dungeon_char_main_7 = $mol_type_enforce<
+		Parameters< $hyoo_dungeon_char_main['story_id'] >[0]
+		,
+		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['story_id'] >[0]
 	>
 	type __hyoo_dungeon_char_main_8 = $mol_type_enforce<
-		Parameters< $hyoo_dungeon_char_main['class'] >[0]
+		Parameters< $hyoo_dungeon_char_main['class_id'] >[0]
 		,
-		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['class'] >[0]
+		Parameters< ReturnType< $hyoo_dungeon_char_main['char'] >['class_id'] >[0]
 	>
 	type $mol_paginator__value_hyoo_dungeon_char_main_9 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_main['level'] >
@@ -5698,7 +5695,7 @@ declare namespace $ {
 		ReturnType< $mol_form_group['sub'] >
 	>
 	type $mol_switch__value_hyoo_dungeon_char_main_24 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_main['race'] >
+		ReturnType< $hyoo_dungeon_char_main['race_id'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
@@ -5723,7 +5720,7 @@ declare namespace $ {
 		ReturnType< $mol_form_field['Content'] >
 	>
 	type $mol_switch__value_hyoo_dungeon_char_main_29 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_main['story'] >
+		ReturnType< $hyoo_dungeon_char_main['story_id'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
@@ -5748,7 +5745,7 @@ declare namespace $ {
 		ReturnType< $mol_form_field['Content'] >
 	>
 	type $mol_switch__value_hyoo_dungeon_char_main_34 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_main['class'] >
+		ReturnType< $hyoo_dungeon_char_main['class_id'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
@@ -5789,13 +5786,13 @@ declare namespace $ {
 	>
 	export class $hyoo_dungeon_char_main extends $mol_page {
 		name( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['name'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['name'] >
-		story( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['story'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['story'] >
 		biography( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['biography'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['biography'] >
 		age( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['age'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['age'] >
 		level( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['level'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['level'] >
 		experience( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['experience'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['experience'] >
-		race( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['race'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['race'] >
-		class( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['class'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['class'] >
+		race_id( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['race_id'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['race_id'] >
+		story_id( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['story_id'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['story_id'] >
+		class_id( next?: ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['class_id'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_main['char'] >['class_id'] >
 		Level( ): $mol_paginator
 		Level_block( ): $mol_form_field
 		Experience( ): $mol_number

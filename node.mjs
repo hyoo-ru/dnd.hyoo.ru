@@ -7902,7 +7902,7 @@ var $;
 (function ($) {
     class $hyoo_dungeon_char extends $mol_store {
         image() {
-            return this.race_info().image;
+            return this.race().image;
         }
         name(next) {
             return this.value('name', next) ?? '';
@@ -7919,36 +7919,36 @@ var $;
         experience(next) {
             return this.value('experience', next) ?? 0;
         }
-        race(next) {
+        race_id(next) {
             return this.value('race', next) || Object.keys($hyoo_dungeon_race_all)[0];
         }
-        race_info() {
-            return this.$.$hyoo_dungeon_race_all[this.race()];
+        race() {
+            return this.$.$hyoo_dungeon_race_all[this.race_id()];
         }
-        story(next) {
+        story_id(next) {
             return this.value('story', next) || Object.keys($hyoo_dungeon_story_all)[0];
         }
-        story_info() {
-            return this.$.$hyoo_dungeon_story_all[this.story()];
+        story() {
+            return this.$.$hyoo_dungeon_story_all[this.story_id()];
         }
-        class(next) {
+        class_id(next) {
             return this.value('class', next) || Object.keys($hyoo_dungeon_class_all)[0];
         }
-        class_info() {
-            return this.$.$hyoo_dungeon_class_all[this.class()];
+        class() {
+            return this.$.$hyoo_dungeon_class_all[this.class_id()];
         }
         ability_addon(id, next) {
             return this.sub('abilities', new $mol_store({})).value(id, next && Math.max(0, Math.min(next, 7))) ?? 0;
         }
         ability(id) {
-            return 8 + this.ability_addon(id) + this.race_info().abilities[id];
+            return 8 + this.ability_addon(id) + this.race().abilities[id];
         }
         ability_modifier(id) {
             return Math.floor(this.ability(id) / 2 - 5);
         }
         ability_safe(id) {
             const mod = this.ability_modifier(id);
-            const safe = this.class_info().ability_safe;
+            const safe = this.class().ability_safe;
             return mod + (safe.includes(id) ? this.master_bonus() : 0);
         }
         skills_choosen(next) {
@@ -7956,9 +7956,9 @@ var $;
         }
         skills() {
             return [...new Set([
-                    ...this.class_info().skills,
-                    ...this.race_info().skills,
-                    ...this.story_info().skills,
+                    ...this.class().skills,
+                    ...this.race().skills,
+                    ...this.story().skills,
                     ...this.skills_choosen(),
                 ])];
         }
@@ -8000,7 +8000,7 @@ var $;
             return 2 + Math.floor(this.level() / 4 - 1 / 4);
         }
         hits_dice() {
-            return this.class_info().dice;
+            return this.class().dice;
         }
         hits_max(next) {
             const def = this.hits_dice() + this.ability_modifier('constitution');
@@ -8020,13 +8020,13 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "race_info", null);
+    ], $hyoo_dungeon_char.prototype, "race", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "story_info", null);
+    ], $hyoo_dungeon_char.prototype, "story", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "class_info", null);
+    ], $hyoo_dungeon_char.prototype, "class", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "ability_safe", null);
@@ -11328,15 +11328,6 @@ var $;
 		experience(next){
 			return (this.char().experience(next));
 		}
-		race(){
-			return (this.char().race());
-		}
-		story(){
-			return (this.char().story());
-		}
-		class(){
-			return (this.char().class());
-		}
 		moral(){
 			return (this.char().moral());
 		}
@@ -11783,25 +11774,25 @@ var $;
     (function ($$) {
         class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
             image() {
-                return this.$.$hyoo_dungeon_race_all[this.race()].image;
+                return this.char().race().image;
             }
             race_title() {
-                return this.char().race_info().title;
+                return this.char().race().title;
             }
             race_link() {
-                return this.char().race_info().link;
+                return this.char().race().link;
             }
             story_title() {
-                return this.char().story_info().title;
+                return this.char().story().title;
             }
             story_link() {
-                return this.char().story_info().link;
+                return this.char().story().link;
             }
             class_title() {
-                return this.char().class_info().title;
+                return this.char().class().title;
             }
             class_link() {
-                return this.char().class_info().link;
+                return this.char().class().link;
             }
             moral_title() {
                 return this.$.$hyoo_dungeon_moral_all[this.moral()].title;
@@ -11810,10 +11801,10 @@ var $;
                 return this.$.$hyoo_dungeon_ethics_all[this.ethics()].title;
             }
             speed() {
-                return this.$.$hyoo_dungeon_race_all[this.race()].speed;
+                return this.char().race().speed;
             }
             perks() {
-                return this.$.$hyoo_dungeon_race_all[this.race()].perks.join('\n');
+                return this.char().race().perks.join('\n');
             }
         }
         $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
@@ -12768,9 +12759,6 @@ var $;
 		name(next){
 			return (this.char().name(next));
 		}
-		story(next){
-			return (this.char().story(next));
-		}
 		biography(next){
 			return (this.char().biography(next));
 		}
@@ -12783,11 +12771,14 @@ var $;
 		experience(next){
 			return (this.char().experience(next));
 		}
-		race(next){
-			return (this.char().race(next));
+		race_id(next){
+			return (this.char().race_id(next));
 		}
-		class(next){
-			return (this.char().class(next));
+		story_id(next){
+			return (this.char().story_id(next));
+		}
+		class_id(next){
+			return (this.char().class_id(next));
 		}
 		Level(){
 			const obj = new this.$.$mol_paginator();
@@ -12856,7 +12847,7 @@ var $;
 		}
 		Race(){
 			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.race(next)));
+			(obj.value) = (next) => ((this.race_id(next)));
 			(obj.keys) = () => ((this.race_options()));
 			(obj.option_title) = (id) => ((this.race_title(id)));
 			return obj;
@@ -12875,7 +12866,7 @@ var $;
 		}
 		Story(){
 			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.story(next)));
+			(obj.value) = (next) => ((this.story_id(next)));
 			(obj.keys) = () => ((this.story_options()));
 			(obj.option_title) = (id) => ((this.story_title(id)));
 			return obj;
@@ -12894,7 +12885,7 @@ var $;
 		}
 		Class(){
 			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.class(next)));
+			(obj.value) = (next) => ((this.class_id(next)));
 			(obj.keys) = () => ((this.class_options()));
 			(obj.option_title) = (id) => ((this.class_title(id)));
 			return obj;
