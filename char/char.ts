@@ -123,6 +123,15 @@ namespace $ {
 			return skills.includes( id )
 		}
 		
+		@ $mol_mem
+		perks() {
+			return [ ... new Set([
+				... this.class().perks,
+				... this.race().perks,
+				... this.story().perks,
+			]) ]
+		}
+		
 		moral( next?: 'good' | 'neutral' | 'evil' ) {
 			return this.value( 'moral', next ) ?? 'neutral'
 		}

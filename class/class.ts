@@ -9,6 +9,7 @@ namespace $ {
 		ability_main: $hyoo_dungeon_ability
 		ability_safe: $hyoo_dungeon_ability[]
 		skills: $hyoo_dungeon_skill[]
+		perks: string[]
 		weapon: string
 	}
 	
@@ -23,6 +24,7 @@ namespace $ {
 			ability_main: 'charisma',
 			ability_safe: [ 'dexterity', 'charisma' ],
 			skills: [],
+			perks: [],
 			weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
 		} as $hyoo_dungeon_class_info,
 		

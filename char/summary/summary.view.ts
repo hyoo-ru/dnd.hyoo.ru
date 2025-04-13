@@ -42,7 +42,7 @@ namespace $.$$ {
 		}
 		
 		override perks() {
-			return this.char().race().perks.join( '\n' )
+			return this.char().perks().join( '\n' )
 		}
 		
 	}
