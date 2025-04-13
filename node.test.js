@@ -11370,28 +11370,10 @@ var $;
 		skill_list(){
 			return (this.Skill_cofig().skill_list());
 		}
-		race_title(){
-			return "";
-		}
-		race_link(){
-			return "";
-		}
-		Race(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Раса");
-			(obj.title) = () => ((this.race_title()));
-			(obj.uri) = () => ((this.race_link()));
-			return obj;
-		}
 		Name(){
 			const obj = new this.$.$mol_chip();
 			(obj.hint) = () => ("Имя");
 			(obj.title) = () => ((this.name()));
-			return obj;
-		}
-		Base(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Race()), (this.Name())]);
 			return obj;
 		}
 		Age(){
@@ -11409,14 +11391,18 @@ var $;
 			(obj.sub) = () => (["🦶", (this.speed())]);
 			return obj;
 		}
-		Grade(){
+		Base(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Age()), (this.Speed())]);
+			(obj.sub) = () => ([
+				(this.Name()), 
+				(this.Age()), 
+				(this.Speed())
+			]);
 			return obj;
 		}
 		Top(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Base()), (this.Grade())]);
+			(obj.sub) = () => ([(this.Base())]);
 			return obj;
 		}
 		image(){
@@ -11425,6 +11411,19 @@ var $;
 		Image(){
 			const obj = new this.$.$mol_image();
 			(obj.uri) = () => ((this.image()));
+			return obj;
+		}
+		race_title(){
+			return "";
+		}
+		race_link(){
+			return "";
+		}
+		Race(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Раса");
+			(obj.title) = () => ((this.race_title()));
+			(obj.uri) = () => ((this.race_link()));
 			return obj;
 		}
 		class_title(){
@@ -11455,7 +11454,11 @@ var $;
 		}
 		Life(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Class()), (this.Story())]);
+			(obj.sub) = () => ([
+				(this.Race()), 
+				(this.Class()), 
+				(this.Story())
+			]);
 			return obj;
 		}
 		moral_title(){
@@ -11680,14 +11683,13 @@ var $;
 			return [(this.Columns())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Image"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Class"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Story"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Life"));
@@ -11877,12 +11879,6 @@ var $;
                     content: 'space-between',
                 },
                 gap: $mol_gap.block,
-            },
-            Name: {
-                textShadow: '0 0',
-            },
-            Grade: {
-                color: $mol_theme.special,
             },
             Stat_main: {
                 flex: {

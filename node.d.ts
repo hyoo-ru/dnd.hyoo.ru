@@ -4681,298 +4681,298 @@ declare namespace $ {
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_max'] >[0]
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_6 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_link['hint'] >
-	>
-	type $mol_link__title_hyoo_dungeon_char_summary_7 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['race_title'] >
-		,
-		ReturnType< $mol_link['title'] >
-	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_8 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['race_link'] >
-		,
-		ReturnType< $mol_link['uri'] >
-	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_9 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_10 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_7 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['name'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_11 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_12 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_char_summary_13 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_char_summary_9 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_14 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_char_summary_15 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_char_summary_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_16 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_12 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_17 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_image__uri_hyoo_dungeon_char_summary_18 = $mol_type_enforce<
+	type $mol_image__uri_hyoo_dungeon_char_summary_14 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['image'] >
 		,
 		ReturnType< $mol_image['uri'] >
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_19 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_dungeon_char_summary_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__title_hyoo_dungeon_char_summary_20 = $mol_type_enforce<
+	type $mol_link__title_hyoo_dungeon_char_summary_16 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['race_title'] >
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__uri_hyoo_dungeon_char_summary_17 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['race_link'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__hint_hyoo_dungeon_char_summary_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__title_hyoo_dungeon_char_summary_19 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['class_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_21 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_dungeon_char_summary_20 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['class_link'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_22 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_dungeon_char_summary_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__title_hyoo_dungeon_char_summary_23 = $mol_type_enforce<
+	type $mol_link__title_hyoo_dungeon_char_summary_22 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['story_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_24 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_dungeon_char_summary_23 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['story_link'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_25 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_24 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_26 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_25 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_27 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_26 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['moral_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_28 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_27 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_29 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_28 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ethics_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
+	>
+	type $mol_view__sub_hyoo_dungeon_char_summary_29 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_hyoo_dungeon_char_summary_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_31 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_text__text_hyoo_dungeon_char_summary_32 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_31 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['traits'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_33 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_32 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ideals'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_34 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_33 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['affection'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_35 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_34 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['weakness'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_36 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_35 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['biography'] >
 		,
 		ReturnType< $mol_text['text'] >
+	>
+	type $mol_list__rows_hyoo_dungeon_char_summary_36 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['rows'] >
 	>
 	type $mol_list__rows_hyoo_dungeon_char_summary_37 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_38 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_39 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_38 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['level'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_40 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_39 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_41 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_40 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Level_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_42 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_41 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_43 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_42 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $hyoo_dungeon_parameter['value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_44 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_43 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['experience'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $mol_paginator__step_hyoo_dungeon_char_summary_45 = $mol_type_enforce<
+	type $mol_paginator__step_hyoo_dungeon_char_summary_44 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_paginator['step'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_46 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_45 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_47 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_46 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Experience_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_48 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_47 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_49 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_48 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits_max'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_50 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_49 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_51 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_50 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Hits_max_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_52 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_51 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_53 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_52 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_54 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_53 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Hits_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_55 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_54 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits_addon'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_56 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_55 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_57 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_56 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Hits_addon_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_58 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_57 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_59 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_58 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $hyoo_dungeon_parameter['value'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_60 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_59 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_61 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_60 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ability_list'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_62 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_61 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['perks'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_63 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_62 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_64 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_63 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['skill_list'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_hyoo_dungeon_char_summary_64 = $mol_type_enforce<
+		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
@@ -4981,27 +4981,22 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_66 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_67 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_66 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_ability_config['char'] >
 	>
-	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_68 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_67 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_ability_config['Ability_addon'] >
 	>
-	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_69 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_68 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_skill_config['char'] >
 	>
-	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_70 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_69 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_skill_config['Skill_addon'] >
@@ -5029,18 +5024,17 @@ declare namespace $ {
 		hits_heal( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_heal'] >
 		ability_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Ability_cofig'] >['ability_list'] >
 		skill_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Skill_cofig'] >['skill_list'] >
-		race_title( ): string
-		race_link( ): string
-		Race( ): $mol_link
 		Name( ): $mol_chip
-		Base( ): $mol_view
 		Age( ): $mol_chip
 		speed( ): number
 		Speed( ): $mol_chip
-		Grade( ): $mol_view
+		Base( ): $mol_view
 		Top( ): $mol_view
 		image( ): string
 		Image( ): $mol_image
+		race_title( ): string
+		race_link( ): string
+		Race( ): $mol_link
 		class_title( ): string
 		class_link( ): string
 		Class( ): $mol_link
