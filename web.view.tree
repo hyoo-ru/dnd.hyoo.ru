@@ -802,7 +802,7 @@ $hyoo_dungeon_char_summary $mol_page
 		experience? => experience?
 		race => race
 		story => story
-		classes => classes
+		class => class
 		moral => moral
 		ethics => ethics
 		traits => traits
@@ -849,9 +849,10 @@ $hyoo_dungeon_char_summary $mol_page
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
 					<= Life $mol_view sub /
-						<= Classes $mol_chip
-							hint \Классы
-							title <= classes_title \
+						<= Class $mol_link
+							hint \Класс
+							title <= class_title \
+							uri <= class_link \
 						<= Story $mol_link
 							hint \Предыстория
 							title <= story_title \
@@ -1073,7 +1074,7 @@ $hyoo_dungeon_char_main $mol_page
 		level? => level?
 		experience? => experience?
 		race? => race?
-		classes? => classes?
+		class? => class?
 	body /
 		<= Grade $mol_view sub /
 			<= Level_block $mol_form_field
@@ -1106,10 +1107,10 @@ $hyoo_dungeon_char_main $mol_page
 				value? <=> story?
 				keys <= story_options /string
 				option_title* <= story_title* \
-		<= Classes_block $mol_form_field
-			name \Классы
-			Content <= Classes $mol_check_list
-				option_checked*? <=> class_selected*? false
+		<= Class_block $mol_form_field
+			name \Класс
+			Content <= Class $mol_switch
+				value? <=> class?
 				keys <= class_options /string
 				option_title* <= class_title* \
 		<= Biography_block $mol_form_field
