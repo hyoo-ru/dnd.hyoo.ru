@@ -2605,6 +2605,7 @@ declare namespace $ {
         ability_safe: $hyoo_dungeon_ability[];
         skills: $hyoo_dungeon_skill[];
         perks: string[];
+        inventory: string[];
         weapon: string;
     };
     const $hyoo_dungeon_class_all: {
@@ -2634,6 +2635,7 @@ declare namespace $ {
         weakness: string;
         abilities: Record<$hyoo_dungeon_ability, number>;
         skills: $hyoo_dungeon_skill[];
+        inventory: string;
     }> {
         image(): string;
         name(next?: string): string;
@@ -2656,6 +2658,7 @@ declare namespace $ {
         skill(id: $hyoo_dungeon_skill): number;
         skill_has(id: $hyoo_dungeon_skill, next?: boolean): boolean;
         perks(): string[];
+        inventory(next?: string): string;
         moral(next?: 'good' | 'neutral' | 'evil'): "good" | "neutral" | "evil";
         ethics(next?: 'lawful' | 'neutral' | 'chaotic'): "neutral" | "lawful" | "chaotic";
         traits(next?: string): string;
@@ -4288,6 +4291,220 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__minimal_height_mol_labeler_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_2 = $mol_type_enforce<
+		ReturnType< $mol_labeler['label'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_labeler_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_4 = $mol_type_enforce<
+		ReturnType< $mol_labeler['content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_labeler extends $mol_list {
+		label( ): readonly($mol_view_content)[]
+		Label( ): $mol_view
+		content( ): readonly(any)[]
+		Content( ): $mol_view
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=labeler.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_form_field extends $mol_labeler {
+		name( ): string
+		bid( ): string
+		Bid( ): $mol_view
+		control( ): any
+		bids( ): readonly(string)[]
+		label( ): readonly(any)[]
+		content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=field.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form_field extends $.$mol_form_field {
+        bid(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_textarea_edit__value_mol_textarea_1 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_textarea_edit['value'] >
+	>
+	type $mol_textarea_edit__hint_mol_textarea_2 = $mol_type_enforce<
+		ReturnType< $mol_textarea['hint'] >
+		,
+		ReturnType< $mol_textarea_edit['hint'] >
+	>
+	type $mol_textarea_edit__enabled_mol_textarea_3 = $mol_type_enforce<
+		ReturnType< $mol_textarea['enabled'] >
+		,
+		ReturnType< $mol_textarea_edit['enabled'] >
+	>
+	type $mol_textarea_edit__spellcheck_mol_textarea_4 = $mol_type_enforce<
+		ReturnType< $mol_textarea['spellcheck'] >
+		,
+		ReturnType< $mol_textarea_edit['spellcheck'] >
+	>
+	type $mol_textarea_edit__length_max_mol_textarea_5 = $mol_type_enforce<
+		ReturnType< $mol_textarea['length_max'] >
+		,
+		ReturnType< $mol_textarea_edit['length_max'] >
+	>
+	type $mol_textarea_edit__selection_mol_textarea_6 = $mol_type_enforce<
+		ReturnType< $mol_textarea['selection'] >
+		,
+		ReturnType< $mol_textarea_edit['selection'] >
+	>
+	type $mol_textarea_edit__submit_mol_textarea_7 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit'] >
+		,
+		ReturnType< $mol_textarea_edit['submit'] >
+	>
+	type $mol_textarea_edit__submit_with_ctrl_mol_textarea_8 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit_with_ctrl'] >
+		,
+		ReturnType< $mol_textarea_edit['submit_with_ctrl'] >
+	>
+	type $mol_text_code__text_mol_textarea_9 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_text_code['text'] >
+	>
+	type $mol_text_code__render_visible_only_mol_textarea_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_text_code['render_visible_only'] >
+	>
+	type $mol_text_code__row_numb_mol_textarea_11 = $mol_type_enforce<
+		ReturnType< $mol_textarea['row_numb'] >
+		,
+		ReturnType< $mol_text_code['row_numb'] >
+	>
+	type $mol_text_code__sidebar_showed_mol_textarea_12 = $mol_type_enforce<
+		ReturnType< $mol_textarea['sidebar_showed'] >
+		,
+		ReturnType< $mol_text_code['sidebar_showed'] >
+	>
+	type $mol_text_code__highlight_mol_textarea_13 = $mol_type_enforce<
+		ReturnType< $mol_textarea['highlight'] >
+		,
+		ReturnType< $mol_text_code['highlight'] >
+	>
+	type $mol_text_code__syntax_mol_textarea_14 = $mol_type_enforce<
+		ReturnType< $mol_textarea['syntax'] >
+		,
+		ReturnType< $mol_text_code['syntax'] >
+	>
+	export class $mol_textarea extends $mol_stack {
+		clickable( next?: boolean ): boolean
+		sidebar_showed( ): boolean
+		press( next?: any ): any
+		hover( next?: any ): any
+		value( next?: string ): string
+		hint( ): string
+		enabled( ): boolean
+		spellcheck( ): boolean
+		length_max( ): number
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		bring( ): ReturnType< ReturnType< $mol_textarea['Edit'] >['bring'] >
+		submit( next?: any ): any
+		submit_with_ctrl( ): boolean
+		Edit( ): $mol_textarea_edit
+		row_numb( id: any): number
+		highlight( ): string
+		syntax( ): $mol_syntax2
+		View( ): $mol_text_code
+		attr( ): ({ 
+			'mol_textarea_clickable': ReturnType< $mol_textarea['clickable'] >,
+			'mol_textarea_sidebar_showed': ReturnType< $mol_textarea['sidebar_showed'] >,
+		})  & ReturnType< $mol_stack['attr'] >
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_textarea['press'] > ): ReturnType< $mol_textarea['press'] >,
+			pointermove( next?: ReturnType< $mol_textarea['hover'] > ): ReturnType< $mol_textarea['hover'] >,
+		}) 
+		sub( ): readonly(any)[]
+		symbols_alt( ): Record<string, string>
+		symbols_alt_ctrl( ): Record<string, string>
+		symbols_alt_shift( ): Record<string, string>
+	}
+	
+	export class $mol_textarea_edit extends $mol_string {
+		dom_name( ): string
+		enter( ): string
+		field( ): ({ 
+			'scrollTop': number,
+		})  & ReturnType< $mol_string['field'] >
+	}
+	
+}
+
+//# sourceMappingURL=textarea.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_textarea extends $.$mol_textarea {
+        indent_inc(): void;
+        indent_dec(): void;
+        symbol_insert(event: KeyboardEvent): void;
+        clickable(next?: boolean): boolean;
+        hover(event: PointerEvent): void;
+        press(event: KeyboardEvent): void;
+        row_numb(index: number): number;
+        syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	type __hyoo_dungeon_ability_config_1 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_ability_config['ability_total'] >[0]
@@ -4519,6 +4736,61 @@ declare namespace $ {
 
 //# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_row extends $mol_view {
+	}
+	
+}
+
+//# sourceMappingURL=row.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
+		ReturnType< $mol_form['body'] >
+		,
+		ReturnType< $mol_list['sub'] >
+	>
+	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
+		ReturnType< $mol_form['foot'] >
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	export class $mol_form extends $mol_list {
+		keydown( next?: any ): any
+		form_fields( ): readonly($mol_form_field)[]
+		body( ): ReturnType< $mol_form['form_fields'] >
+		Body( ): $mol_list
+		buttons( ): readonly($mol_view)[]
+		foot( ): ReturnType< $mol_form['buttons'] >
+		Foot( ): $mol_row
+		submit_allowed( ): boolean
+		submit_blocked( ): boolean
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
+		})  & ReturnType< $mol_list['event'] >
+		submit( next?: any ): any
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=form.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form extends $.$mol_form {
+        form_fields(): readonly $mol_form_field[];
+        submit_allowed(): boolean;
+        submit_blocked(): boolean;
+        keydown(next: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     type $hyoo_dungeon_moral_info = {
         title: string;
     };
@@ -4569,322 +4841,352 @@ declare namespace $ {
 		,
 		Parameters< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_max'] >[0]
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_6 = $mol_type_enforce<
+	type __hyoo_dungeon_char_summary_6 = $mol_type_enforce<
+		Parameters< $hyoo_dungeon_char_summary['inventory'] >[0]
+		,
+		Parameters< ReturnType< $hyoo_dungeon_char_summary['char'] >['inventory'] >[0]
+	>
+	type $mol_chip__hint_hyoo_dungeon_char_summary_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_7 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_8 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['name'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_8 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_char_summary_9 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_char_summary_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_10 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_char_summary_11 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_char_summary_12 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_chip['sub'] >
-	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_12 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_hyoo_dungeon_char_summary_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_image__uri_hyoo_dungeon_char_summary_14 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_image__uri_hyoo_dungeon_char_summary_15 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['image'] >
 		,
 		ReturnType< $mol_image['uri'] >
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_15 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_dungeon_char_summary_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__title_hyoo_dungeon_char_summary_16 = $mol_type_enforce<
+	type $mol_link__title_hyoo_dungeon_char_summary_17 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['race_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_17 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_dungeon_char_summary_18 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['race_link'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_18 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_dungeon_char_summary_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__title_hyoo_dungeon_char_summary_19 = $mol_type_enforce<
+	type $mol_link__title_hyoo_dungeon_char_summary_20 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['class_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_20 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_dungeon_char_summary_21 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['class_link'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__hint_hyoo_dungeon_char_summary_21 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_dungeon_char_summary_22 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__title_hyoo_dungeon_char_summary_22 = $mol_type_enforce<
+	type $mol_link__title_hyoo_dungeon_char_summary_23 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['story_title'] >
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_hyoo_dungeon_char_summary_23 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_dungeon_char_summary_24 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['story_link'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_24 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_25 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_25 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_26 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_26 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_27 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['moral_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_char_summary_27 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_char_summary_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_char_summary_28 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_char_summary_29 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ethics_title'] >
 		,
 		ReturnType< $mol_chip['title'] >
-	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_29 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_hyoo_dungeon_char_summary_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_31 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_31 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_text__text_hyoo_dungeon_char_summary_32 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['traits'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_32 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_33 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ideals'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_33 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_34 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['affection'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_34 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_35 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['weakness'] >
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_35 = $mol_type_enforce<
+	type $mol_text__text_hyoo_dungeon_char_summary_36 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['biography'] >
 		,
 		ReturnType< $mol_text['text'] >
-	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_36 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_list['rows'] >
 	>
 	type $mol_list__rows_hyoo_dungeon_char_summary_37 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_38 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_38 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__sub_hyoo_dungeon_char_summary_39 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['skill_list'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_paginator__value_hyoo_dungeon_char_summary_40 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['level'] >
 		,
 		ReturnType< $mol_paginator['value'] >
-	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_39 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $hyoo_dungeon_parameter['title'] >
-	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_40 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['Level_value'] >
-		,
-		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
 	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_41 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_42 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_42 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['Level_value'] >
+		,
+		ReturnType< $hyoo_dungeon_parameter['Value'] >
+	>
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_43 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $hyoo_dungeon_parameter['title'] >
+	>
+	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_44 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $hyoo_dungeon_parameter['value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_43 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_45 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['experience'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $mol_paginator__step_hyoo_dungeon_char_summary_44 = $mol_type_enforce<
+	type $mol_paginator__step_hyoo_dungeon_char_summary_46 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_paginator['step'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_45 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_47 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_46 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_48 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Experience_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_47 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_49 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_48 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_50 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits_max'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_49 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_51 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_50 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_52 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Hits_max_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_51 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_53 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_52 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_54 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_53 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_55 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['Hits_value'] >
 		,
 		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_char_summary_54 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_char_summary_56 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['hits_addon'] >
 		,
 		ReturnType< $mol_paginator['value'] >
-	>
-	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_55 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $hyoo_dungeon_parameter['title'] >
-	>
-	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_56 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['Hits_addon_value'] >
-		,
-		ReturnType< $hyoo_dungeon_parameter['Value'] >
 	>
 	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_57 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_parameter['title'] >
 	>
-	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_58 = $mol_type_enforce<
+	type $hyoo_dungeon_parameter__Value_hyoo_dungeon_char_summary_58 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['Hits_addon_value'] >
+		,
+		ReturnType< $hyoo_dungeon_parameter['Value'] >
+	>
+	type $hyoo_dungeon_parameter__title_hyoo_dungeon_char_summary_59 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $hyoo_dungeon_parameter['title'] >
+	>
+	type $hyoo_dungeon_parameter__value_hyoo_dungeon_char_summary_60 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $hyoo_dungeon_parameter['value'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_59 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_61 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_60 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_62 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['ability_list'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_text__text_hyoo_dungeon_char_summary_61 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['perks'] >
-		,
-		ReturnType< $mol_text['text'] >
-	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_62 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_dungeon_char_summary_63 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_63 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['skill_list'] >
+	type $mol_text__text_hyoo_dungeon_char_summary_64 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['perks'] >
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_text['text'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_64 = $mol_type_enforce<
+	type $mol_form_field__name_hyoo_dungeon_char_summary_65 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__Content_hyoo_dungeon_char_summary_66 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['Perks'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_textarea__value_hyoo_dungeon_char_summary_67 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['inventory'] >
+		,
+		ReturnType< $mol_textarea['value'] >
+	>
+	type $mol_form_field__name_hyoo_dungeon_char_summary_68 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__Content_hyoo_dungeon_char_summary_69 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_char_summary['Inventory'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_view__sub_hyoo_dungeon_char_summary_70 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_65 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_71 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_66 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_72 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_ability_config['char'] >
 	>
-	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_67 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_73 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_ability_config['Ability_addon'] >
 	>
-	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_68 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_74 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_skill_config['char'] >
 	>
-	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_69 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_75 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_skill_config['Skill_addon'] >
@@ -4907,6 +5209,7 @@ declare namespace $ {
 		hits_max( next?: ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_max'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_max'] >
 		hits_dice( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_dice'] >
 		hits_heal( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['hits_heal'] >
+		inventory( next?: ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['inventory'] > ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['char'] >['inventory'] >
 		ability_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Ability_cofig'] >['ability_list'] >
 		skill_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Skill_cofig'] >['skill_list'] >
 		Name( ): $mol_chip
@@ -4940,6 +5243,7 @@ declare namespace $ {
 		Biography( ): $mol_text
 		Personality( ): $mol_list
 		Info( ): $mol_list
+		Skill_list( ): $mol_view
 		Level_value( ): $mol_paginator
 		Level( ): $hyoo_dungeon_parameter
 		Master_bonus( ): $hyoo_dungeon_parameter
@@ -4955,11 +5259,13 @@ declare namespace $ {
 		Hits_heal( ): $hyoo_dungeon_parameter
 		Hits_block( ): $mol_list
 		Ability_list( ): $mol_view
+		Stat_main( ): $mol_list
 		perks( ): string
 		Perks( ): $mol_text
-		Stat_main( ): $mol_list
-		Skill_list( ): $mol_view
-		Stat( ): $mol_view
+		Perks_block( ): $mol_form_field
+		Inventory( ): $mol_textarea
+		Inventory_block( ): $mol_form_field
+		Spec( ): $mol_view
 		Columns( ): $mol_view
 		title( ): string
 		char( ): $hyoo_dungeon_char
@@ -4988,71 +5294,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__minimal_height_mol_labeler_1 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_labeler_2 = $mol_type_enforce<
-		ReturnType< $mol_labeler['label'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__minimal_height_mol_labeler_3 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_labeler_4 = $mol_type_enforce<
-		ReturnType< $mol_labeler['content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_labeler extends $mol_list {
-		label( ): readonly($mol_view_content)[]
-		Label( ): $mol_view
-		content( ): readonly(any)[]
-		Content( ): $mol_view
-		rows( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=labeler.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_form_field extends $mol_labeler {
-		name( ): string
-		bid( ): string
-		Bid( ): $mol_view
-		control( ): any
-		bids( ): readonly(string)[]
-		label( ): readonly(any)[]
-		content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=field.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form_field extends $.$mol_form_field {
-        bid(): string;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -5178,61 +5419,6 @@ declare namespace $ {
 
 declare namespace $ {
 
-	export class $mol_row extends $mol_view {
-	}
-	
-}
-
-//# sourceMappingURL=row.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
-		ReturnType< $mol_form['body'] >
-		,
-		ReturnType< $mol_list['sub'] >
-	>
-	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
-		ReturnType< $mol_form['foot'] >
-		,
-		ReturnType< $mol_row['sub'] >
-	>
-	export class $mol_form extends $mol_list {
-		keydown( next?: any ): any
-		form_fields( ): readonly($mol_form_field)[]
-		body( ): ReturnType< $mol_form['form_fields'] >
-		Body( ): $mol_list
-		buttons( ): readonly($mol_view)[]
-		foot( ): ReturnType< $mol_form['buttons'] >
-		Foot( ): $mol_row
-		submit_allowed( ): boolean
-		submit_blocked( ): boolean
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
-		})  & ReturnType< $mol_list['event'] >
-		submit( next?: any ): any
-		rows( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=form.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form extends $.$mol_form {
-        form_fields(): readonly $mol_form_field[];
-        submit_allowed(): boolean;
-        submit_blocked(): boolean;
-        keydown(next: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
 	export class $mol_form_group extends $mol_view {
 	}
 	
@@ -5314,155 +5500,6 @@ declare namespace $.$$ {
         value(next?: string): string;
         option_checked(key: string, next?: boolean): boolean;
     }
-}
-
-declare namespace $ {
-
-	type $mol_textarea_edit__value_mol_textarea_1 = $mol_type_enforce<
-		ReturnType< $mol_textarea['value'] >
-		,
-		ReturnType< $mol_textarea_edit['value'] >
-	>
-	type $mol_textarea_edit__hint_mol_textarea_2 = $mol_type_enforce<
-		ReturnType< $mol_textarea['hint'] >
-		,
-		ReturnType< $mol_textarea_edit['hint'] >
-	>
-	type $mol_textarea_edit__enabled_mol_textarea_3 = $mol_type_enforce<
-		ReturnType< $mol_textarea['enabled'] >
-		,
-		ReturnType< $mol_textarea_edit['enabled'] >
-	>
-	type $mol_textarea_edit__spellcheck_mol_textarea_4 = $mol_type_enforce<
-		ReturnType< $mol_textarea['spellcheck'] >
-		,
-		ReturnType< $mol_textarea_edit['spellcheck'] >
-	>
-	type $mol_textarea_edit__length_max_mol_textarea_5 = $mol_type_enforce<
-		ReturnType< $mol_textarea['length_max'] >
-		,
-		ReturnType< $mol_textarea_edit['length_max'] >
-	>
-	type $mol_textarea_edit__selection_mol_textarea_6 = $mol_type_enforce<
-		ReturnType< $mol_textarea['selection'] >
-		,
-		ReturnType< $mol_textarea_edit['selection'] >
-	>
-	type $mol_textarea_edit__submit_mol_textarea_7 = $mol_type_enforce<
-		ReturnType< $mol_textarea['submit'] >
-		,
-		ReturnType< $mol_textarea_edit['submit'] >
-	>
-	type $mol_textarea_edit__submit_with_ctrl_mol_textarea_8 = $mol_type_enforce<
-		ReturnType< $mol_textarea['submit_with_ctrl'] >
-		,
-		ReturnType< $mol_textarea_edit['submit_with_ctrl'] >
-	>
-	type $mol_text_code__text_mol_textarea_9 = $mol_type_enforce<
-		ReturnType< $mol_textarea['value'] >
-		,
-		ReturnType< $mol_text_code['text'] >
-	>
-	type $mol_text_code__render_visible_only_mol_textarea_10 = $mol_type_enforce<
-		boolean
-		,
-		ReturnType< $mol_text_code['render_visible_only'] >
-	>
-	type $mol_text_code__row_numb_mol_textarea_11 = $mol_type_enforce<
-		ReturnType< $mol_textarea['row_numb'] >
-		,
-		ReturnType< $mol_text_code['row_numb'] >
-	>
-	type $mol_text_code__sidebar_showed_mol_textarea_12 = $mol_type_enforce<
-		ReturnType< $mol_textarea['sidebar_showed'] >
-		,
-		ReturnType< $mol_text_code['sidebar_showed'] >
-	>
-	type $mol_text_code__highlight_mol_textarea_13 = $mol_type_enforce<
-		ReturnType< $mol_textarea['highlight'] >
-		,
-		ReturnType< $mol_text_code['highlight'] >
-	>
-	type $mol_text_code__syntax_mol_textarea_14 = $mol_type_enforce<
-		ReturnType< $mol_textarea['syntax'] >
-		,
-		ReturnType< $mol_text_code['syntax'] >
-	>
-	export class $mol_textarea extends $mol_stack {
-		clickable( next?: boolean ): boolean
-		sidebar_showed( ): boolean
-		press( next?: any ): any
-		hover( next?: any ): any
-		value( next?: string ): string
-		hint( ): string
-		enabled( ): boolean
-		spellcheck( ): boolean
-		length_max( ): number
-		selection( next?: readonly(number)[] ): readonly(number)[]
-		bring( ): ReturnType< ReturnType< $mol_textarea['Edit'] >['bring'] >
-		submit( next?: any ): any
-		submit_with_ctrl( ): boolean
-		Edit( ): $mol_textarea_edit
-		row_numb( id: any): number
-		highlight( ): string
-		syntax( ): $mol_syntax2
-		View( ): $mol_text_code
-		attr( ): ({ 
-			'mol_textarea_clickable': ReturnType< $mol_textarea['clickable'] >,
-			'mol_textarea_sidebar_showed': ReturnType< $mol_textarea['sidebar_showed'] >,
-		})  & ReturnType< $mol_stack['attr'] >
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_textarea['press'] > ): ReturnType< $mol_textarea['press'] >,
-			pointermove( next?: ReturnType< $mol_textarea['hover'] > ): ReturnType< $mol_textarea['hover'] >,
-		}) 
-		sub( ): readonly(any)[]
-		symbols_alt( ): Record<string, string>
-		symbols_alt_ctrl( ): Record<string, string>
-		symbols_alt_shift( ): Record<string, string>
-	}
-	
-	export class $mol_textarea_edit extends $mol_string {
-		dom_name( ): string
-		enter( ): string
-		field( ): ({ 
-			'scrollTop': number,
-		})  & ReturnType< $mol_string['field'] >
-	}
-	
-}
-
-//# sourceMappingURL=textarea.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_textarea extends $.$mol_textarea {
-        indent_inc(): void;
-        indent_dec(): void;
-        symbol_insert(event: KeyboardEvent): void;
-        clickable(next?: boolean): boolean;
-        hover(event: PointerEvent): void;
-        press(event: KeyboardEvent): void;
-        row_numb(index: number): number;
-        syntax(): $mol_syntax2<{
-            'code-indent': RegExp;
-            'code-docs': RegExp;
-            'code-comment-block': RegExp;
-            'code-link': RegExp;
-            'code-comment-inline': RegExp;
-            'code-string': RegExp;
-            'code-number': RegExp;
-            'code-call': RegExp;
-            'code-sexpr': RegExp;
-            'code-field': RegExp;
-            'code-keyword': RegExp;
-            'code-global': RegExp;
-            'code-word': RegExp;
-            'code-decorator': RegExp;
-            'code-tag': RegExp;
-            'code-punctuation': RegExp;
-        }>;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
