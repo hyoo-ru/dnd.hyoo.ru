@@ -2714,6 +2714,7 @@ declare namespace $ {
         ability_main: $hyoo_dungeon_ability;
         ability_safe: $hyoo_dungeon_ability[];
         skills: $hyoo_dungeon_skill[];
+        perks: string[];
         weapon: string;
     };
     const $hyoo_dungeon_class_all: {
@@ -2764,6 +2765,7 @@ declare namespace $ {
         skills(): ("athletics" | "acrobatics" | "sleight" | "stealth" | "investigation" | "history" | "arcana" | "nature" | "religion" | "perception" | "survival" | "medicine" | "insight" | "animals" | "performance" | "intimidation" | "deception" | "persuasion")[];
         skill(id: $hyoo_dungeon_skill): number;
         skill_has(id: $hyoo_dungeon_skill, next?: boolean): boolean;
+        perks(): string[];
         moral(next?: 'good' | 'neutral' | 'evil'): "good" | "neutral" | "evil";
         ethics(next?: 'lawful' | 'neutral' | 'chaotic'): "neutral" | "lawful" | "chaotic";
         traits(next?: string): string;

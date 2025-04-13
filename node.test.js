@@ -7882,6 +7882,7 @@ var $;
             ability_main: 'charisma',
             ability_safe: ['dexterity', 'charisma'],
             skills: [],
+            perks: [],
             weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
         },
     };
@@ -7969,6 +7970,13 @@ var $;
             const skills = this.skills();
             return skills.includes(id);
         }
+        perks() {
+            return [...new Set([
+                    ...this.class().perks,
+                    ...this.race().perks,
+                    ...this.story().perks,
+                ])];
+        }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
         }
@@ -8027,6 +8035,9 @@ var $;
     __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "skill", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "perks", null);
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_max", null);
@@ -11795,7 +11806,7 @@ var $;
                 return this.char().race().speed;
             }
             perks() {
-                return this.char().race().perks.join('\n');
+                return this.char().perks().join('\n');
             }
         }
         $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
