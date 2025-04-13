@@ -20,6 +20,7 @@ namespace $ {
 		weakness: string,
 		abilities: Record< $hyoo_dungeon_ability, number >,
 		skills: $hyoo_dungeon_skill[],
+		inventory: string,
 	}> {
 		
 		image() {
@@ -130,6 +131,15 @@ namespace $ {
 				... this.race().perks,
 				... this.story().perks,
 			]) ]
+		}
+		
+		@ $mol_mem
+		inventory( next?: string ) {
+			return this.value( 'inventory', next ) ?? [ ... new Set([
+				... this.class().inventory,
+				... this.race().inventory,
+				... this.story().inventory,
+			]) ].join( '\n' )
 		}
 		
 		moral( next?: 'good' | 'neutral' | 'evil' ) {

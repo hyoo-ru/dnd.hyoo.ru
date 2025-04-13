@@ -17,7 +17,7 @@ namespace $ {
 			ability: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
 		sleight: {
-			title: 'Ловкость рук',
+			title: 'Моторика',
 			ability: 'dexterity',
 		} as $hyoo_dungeon_skill_info,
 		stealth: {

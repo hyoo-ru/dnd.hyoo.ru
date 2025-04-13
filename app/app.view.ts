@@ -30,6 +30,7 @@ namespace $.$$ {
 				ideals: '',
 				traits: '',
 				weakness: '',
+				inventory: '',
 			}) )
 		}
 		

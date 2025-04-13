@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '65rem',
+			basis: '80rem',
 		},
 		
 		Columns: {
@@ -60,18 +60,6 @@ namespace $.$$ {
 			},
 		},
 		
-		Stat: {
-			padding: 0,
-			flex: {
-				grow: 1,
-				wrap: 'wrap',
-			},
-			justify: {
-				content: 'space-between',
-			},
-			gap: $mol_gap.block,
-		},
-		
 		Stat_main: {
 			flex: {
 				basis: `16rem`,
@@ -83,6 +71,13 @@ namespace $.$$ {
 			flex: {
 				direction: 'column',
 			},
+		},
+		
+		Spec: {
+			flex: {
+				direction: 'column',
+			},
+			gap: $mol_gap.block,
 		},
 		
 		Perks: {
