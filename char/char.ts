@@ -23,7 +23,7 @@ namespace $ {
 	}> {
 		
 		image() {
-			return this.race_info().image
+			return this.race().image
 		}
 		
 		name( next?: string ) {
@@ -46,31 +46,31 @@ namespace $ {
 			return this.value( 'experience', next ) ?? 0
 		}
 		
-		race( next?: $hyoo_dungeon_race ) {
+		race_id( next?: $hyoo_dungeon_race ) {
 			return this.value( 'race', next ) || Object.keys( $hyoo_dungeon_race_all )[0] as $hyoo_dungeon_race
 		}
 		
 		@ $mol_mem
-		race_info() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ]
+		race() {
+			return this.$.$hyoo_dungeon_race_all[ this.race_id() ]
 		}
 		
-		story( next?: $hyoo_dungeon_story ) {
+		story_id( next?: $hyoo_dungeon_story ) {
 			return this.value( 'story', next ) || Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story
 		}
 		
 		@ $mol_mem
-		story_info() {
-			return this.$.$hyoo_dungeon_story_all[ this.story() ]
+		story() {
+			return this.$.$hyoo_dungeon_story_all[ this.story_id() ]
 		}
 		
-		class( next?: $hyoo_dungeon_class ) {
+		class_id( next?: $hyoo_dungeon_class ) {
 			return this.value( 'class', next ) || Object.keys( $hyoo_dungeon_class_all )[0] as $hyoo_dungeon_class
 		}
 		
 		@ $mol_mem
-		class_info() {
-			return this.$.$hyoo_dungeon_class_all[ this.class() ]
+		class() {
+			return this.$.$hyoo_dungeon_class_all[ this.class_id() ]
 		}
 		
 		ability_addon( id: $hyoo_dungeon_ability, next?: number ) {
@@ -78,7 +78,7 @@ namespace $ {
 		}
 		
 		ability( id: $hyoo_dungeon_ability ) {
-			return 8 + this.ability_addon( id ) + this.race_info().abilities[ id ]
+			return 8 + this.ability_addon( id ) + this.race().abilities[ id ]
 		}
 		
 		ability_modifier( id: $hyoo_dungeon_ability ) {
@@ -88,7 +88,7 @@ namespace $ {
 		@ $mol_mem_key
 		ability_safe( id: $hyoo_dungeon_ability ) {
 			const mod = this.ability_modifier( id )
-			const safe = this.class_info().ability_safe
+			const safe = this.class().ability_safe
 			return mod + ( safe.includes( id ) ? this.master_bonus() : 0 )
 		}
 
@@ -99,9 +99,9 @@ namespace $ {
 		@ $mol_mem
 		skills() {
 			return [ ... new Set([
-				... this.class_info().skills,
-				... this.race_info().skills,
-				... this.story_info().skills,
+				... this.class().skills,
+				... this.race().skills,
+				... this.story().skills,
 				... this.skills_choosen(),
 			]) ]
 		}
@@ -152,7 +152,7 @@ namespace $ {
 		}
 		
 		hits_dice() {
-			return this.class_info().dice
+			return this.class().dice
 		}
 		
 		@ $mol_mem

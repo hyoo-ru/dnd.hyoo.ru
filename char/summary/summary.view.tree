@@ -6,9 +6,6 @@ $hyoo_dungeon_char_summary $mol_page
 		age => age
 		level? => level?
 		experience? => experience?
-		race => race
-		story => story
-		class => class
 		moral => moral
 		ethics => ethics
 		traits => traits

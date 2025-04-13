@@ -2,31 +2,31 @@ namespace $.$$ {
 	export class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
 		
 		override image() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ].image
+			return this.char().race().image
 		}
 		
 		override race_title() {
-			return this.char().race_info().title
+			return this.char().race().title
 		}
 		
 		override race_link() {
-			return this.char().race_info().link
+			return this.char().race().link
 		}
 		
 		override story_title() {
-			return this.char().story_info().title
+			return this.char().story().title
 		}
 		
 		override story_link() {
-			return this.char().story_info().link
+			return this.char().story().link
 		}
 		
 		override class_title() {
-			return this.char().class_info().title
+			return this.char().class().title
 		}
 		
 		override class_link() {
-			return this.char().class_info().link
+			return this.char().class().link
 		}
 		
 		override moral_title() {
@@ -38,11 +38,11 @@ namespace $.$$ {
 		}
 		
 		override speed() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ].speed
+			return this.char().race().speed
 		}
 		
 		override perks() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ].perks.join( '\n' )
+			return this.char().race().perks.join( '\n' )
 		}
 		
 	}
