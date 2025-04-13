@@ -7813,7 +7813,7 @@ var $;
             size: 'medium',
             speed: 30,
             perks: [],
-            weapons: [],
+            inventory: [],
             skills: [],
         },
         tabaxi: {
@@ -7838,12 +7838,40 @@ var $;
                 '🐱‍👤Кошачье проворство',
                 '🐾Кошачьи когти',
             ],
-            weapons: [
-                'Кошачьи когти',
+            inventory: [
+                '🐾Кошачьи когти',
             ],
             skills: [
                 'perception',
                 'stealth',
+            ],
+        },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$hyoo_dungeon_story_all = {
+        pirate: {
+            title: '🏴‍☠️Пират',
+            link: 'https://dnd.su/backgrounds/770-pirate/',
+            description: 'Провел молодость среди жутких пиратов, безжалостных головорезов, научивших выживать среди акул и дикарей. Занимались грабежом в морях, и не одну душу отправил в солёную пучину. Хорошо знаком со страхом и кровью, и заслужил сомнительную репутацию во многих портовых городах.',
+            skills: ['athletics', 'perception'],
+            perks: [
+                '😨Дурная репутация',
+            ],
+            mastery: [
+                '🧭Инструменты навигатора',
+                '⛵Водный транспорт'
+            ],
+            inventory: [
+                '🏏дубинка Кофель-нагель',
+                '🧵50 футов шёлковой верёвки',
+                '📿талисман',
+                '👘обычная одежда',
+                '💰поясной кошель с 10 зм',
             ],
         },
     };
@@ -7879,9 +7907,6 @@ var $;
         name(next) {
             return this.value('name', next) ?? '';
         }
-        story(next) {
-            return this.value('story', next) ?? '';
-        }
         biography(next) {
             return this.value('biography', next) ?? '';
         }
@@ -7899,6 +7924,12 @@ var $;
         }
         race_info() {
             return this.$.$hyoo_dungeon_race_all[this.race()];
+        }
+        story(next) {
+            return this.value('story', next) || 'pirate';
+        }
+        story_info() {
+            return this.$.$hyoo_dungeon_story_all[this.story()];
         }
         classes(next) {
             return this.value('classes', next) ?? [];
@@ -7927,6 +7958,7 @@ var $;
             return [...new Set([
                     ...this.classes_info().flatMap(cl => cl.skills),
                     ...this.race_info().skills,
+                    ...this.story_info().skills,
                     ...this.skills_choosen(),
                 ])];
         }
@@ -7991,10 +8023,16 @@ var $;
     ], $hyoo_dungeon_char.prototype, "race_info", null);
     __decorate([
         $mol_mem
+    ], $hyoo_dungeon_char.prototype, "story_info", null);
+    __decorate([
+        $mol_mem
     ], $hyoo_dungeon_char.prototype, "classes_info", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "ability_safe", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "skills", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "skill", null);
@@ -11278,9 +11316,6 @@ var $;
 		name(){
 			return (this.char().name());
 		}
-		story(){
-			return (this.char().story());
-		}
 		biography(){
 			return (this.char().biography());
 		}
@@ -11295,6 +11330,9 @@ var $;
 		}
 		race(){
 			return (this.char().race());
+		}
+		story(){
+			return (this.char().story());
 		}
 		classes(){
 			return (this.char().classes());
@@ -11407,10 +11445,17 @@ var $;
 			(obj.title) = () => ((this.classes_title()));
 			return obj;
 		}
+		story_title(){
+			return "";
+		}
+		story_link(){
+			return "";
+		}
 		Story(){
-			const obj = new this.$.$mol_chip();
+			const obj = new this.$.$mol_link();
 			(obj.hint) = () => ("Предыстория");
-			(obj.title) = () => ((this.story()));
+			(obj.title) = () => ((this.story_title()));
+			(obj.uri) = () => ((this.story_link()));
 			return obj;
 		}
 		Life(){
@@ -11735,7 +11780,16 @@ var $;
                 return this.$.$hyoo_dungeon_race_all[this.race()].image;
             }
             race_title() {
-                return this.$.$hyoo_dungeon_race_all[this.race()].title;
+                return this.char().race_info().title;
+            }
+            race_link() {
+                return this.char().race_info().link;
+            }
+            story_title() {
+                return this.char().story_info().title;
+            }
+            story_link() {
+                return this.char().story_info().link;
             }
             moral_title() {
                 return this.$.$hyoo_dungeon_moral_all[this.moral()].title;
@@ -11751,9 +11805,6 @@ var $;
             }
             perks() {
                 return this.$.$hyoo_dungeon_race_all[this.race()].perks.join('\n');
-            }
-            race_link() {
-                return this.$.$hyoo_dungeon_race_all[this.race()].link;
             }
         }
         $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
@@ -12789,20 +12840,9 @@ var $;
 			(obj.Content) = () => ((this.Name()));
 			return obj;
 		}
-		Story(){
-			const obj = new this.$.$mol_string();
-			(obj.value) = (next) => ((this.story(next)));
-			return obj;
-		}
-		Story_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Предыстория");
-			(obj.Content) = () => ((this.Story()));
-			return obj;
-		}
 		Base_block(){
 			const obj = new this.$.$mol_form_group();
-			(obj.sub) = () => ([(this.Name_block()), (this.Story_block())]);
+			(obj.sub) = () => ([(this.Name_block())]);
 			return obj;
 		}
 		race_options(){
@@ -12822,6 +12862,25 @@ var $;
 			const obj = new this.$.$mol_form_field();
 			(obj.name) = () => ("Раса");
 			(obj.Content) = () => ((this.Race()));
+			return obj;
+		}
+		story_options(){
+			return [];
+		}
+		story_title(id){
+			return "";
+		}
+		Story(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.story(next)));
+			(obj.keys) = () => ((this.story_options()));
+			(obj.option_title) = (id) => ((this.story_title(id)));
+			return obj;
+		}
+		Story_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Предыстроия");
+			(obj.Content) = () => ((this.Story()));
 			return obj;
 		}
 		class_selected(id, next){
@@ -12870,6 +12929,7 @@ var $;
 				(this.Grade()), 
 				(this.Base_block()), 
 				(this.Race_block()), 
+				(this.Story_block()), 
 				(this.Classes_block()), 
 				(this.Biography_block())
 			];
@@ -12884,11 +12944,11 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Grade"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_block"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Base_block"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race_block"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story"));
+	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_block"));
 	($mol_mem_key(($.$hyoo_dungeon_char_main.prototype), "class_selected"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes"));
 	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Classes_block"));
@@ -12912,6 +12972,12 @@ var $;
             }
             race_title(id) {
                 return this.$.$hyoo_dungeon_race_all[id].title;
+            }
+            story_options() {
+                return Object.keys(this.$.$hyoo_dungeon_story_all);
+            }
+            story_title(id) {
+                return this.$.$hyoo_dungeon_story_all[id].title;
             }
             class_options() {
                 return Object.keys(this.$.$hyoo_dungeon_class_all);
@@ -12938,6 +13004,12 @@ var $;
         __decorate([
             $mol_mem_key
         ], $hyoo_dungeon_char_main.prototype, "race_title", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_char_main.prototype, "story_options", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_char_main.prototype, "story_title", null);
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_char_main.prototype, "class_options", null);
@@ -13537,7 +13609,7 @@ var $;
                         wisdom: 0,
                     },
                     skills: [],
-                    story: '🏃‍♂️Чужеземец',
+                    story: Object.keys($hyoo_dungeon_story_all)[0],
                     biography: '',
                     affection: '',
                     ideals: '',

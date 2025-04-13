@@ -796,12 +796,12 @@ $hyoo_dungeon_char_summary $mol_page
 	title \Сводка
 	char $hyoo_dungeon_char
 		name => name
-		story => story
 		biography => biography
 		age => age
 		level? => level?
 		experience? => experience?
 		race => race
+		story => story
 		classes => classes
 		moral => moral
 		ethics => ethics
@@ -852,9 +852,10 @@ $hyoo_dungeon_char_summary $mol_page
 						<= Classes $mol_chip
 							hint \Классы
 							title <= classes_title \
-						<= Story $mol_chip
+						<= Story $mol_link
 							hint \Предыстория
-							title <= story
+							title <= story_title \
+							uri <= story_link \
 					<= Alignment $mol_view sub /
 						<= Goodness $mol_chip
 							hint \Мораль
@@ -1093,16 +1094,18 @@ $hyoo_dungeon_char_main $mol_page
 				name \Имя
 				Content <= Name $mol_string
 					value? <=> name?
-			<= Story_block $mol_form_field
-				name \Предыстория
-				Content <= Story $mol_string
-					value? <=> story?
 		<= Race_block $mol_form_field
 			name \Раса
 			Content <= Race $mol_switch
 				value? <=> race?
 				keys <= race_options /string
 				option_title* <= race_title* \
+		<= Story_block $mol_form_field
+			name \Предыстроия
+			Content <= Story $mol_switch
+				value? <=> story?
+				keys <= story_options /string
+				option_title* <= story_title* \
 		<= Classes_block $mol_form_field
 			name \Классы
 			Content <= Classes $mol_check_list
