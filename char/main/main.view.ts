@@ -12,6 +12,16 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
+		override story_options() {
+			return Object.keys( this.$.$hyoo_dungeon_story_all )
+		}
+		
+		@ $mol_mem_key
+		override story_title( id: $hyoo_dungeon_story ) {
+			return this.$.$hyoo_dungeon_story_all[ id ].title
+		}
+		
+		@ $mol_mem
 		override class_options() {
 			return Object.keys( this.$.$hyoo_dungeon_class_all )
 		}

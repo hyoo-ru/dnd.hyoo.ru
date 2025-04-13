@@ -3,10 +3,10 @@ namespace $ {
 	export class $hyoo_dungeon_char extends $mol_store<{
 		name: string,
 		race: $hyoo_dungeon_race,
+		story: $hyoo_dungeon_story,
 		classes: $hyoo_dungeon_class[],
 		moral: 'good' | 'neutral' | 'evil',
 		ethics: 'lawful' | 'neutral' | 'chaotic',
-		story: string,
 		biography: string,
 		age: number,
 		level: number,
@@ -28,10 +28,6 @@ namespace $ {
 		
 		name( next?: string ) {
 			return this.value( 'name', next ) ?? ''
-		}
-		
-		story( next?: string ) {
-			return this.value( 'story', next ) ?? ''
 		}
 		
 		biography( next?: string ) {
@@ -57,6 +53,15 @@ namespace $ {
 		@ $mol_mem
 		race_info() {
 			return this.$.$hyoo_dungeon_race_all[ this.race() ]
+		}
+		
+		story( next?: $hyoo_dungeon_story ) {
+			return this.value( 'story', next ) || 'pirate' as $hyoo_dungeon_story
+		}
+		
+		@ $mol_mem
+		story_info() {
+			return this.$.$hyoo_dungeon_story_all[ this.story() ]
 		}
 		
 		classes( next?: $hyoo_dungeon_class[] ) {
@@ -91,10 +96,12 @@ namespace $ {
 			return this.value( 'skills', next ) ?? [] as $hyoo_dungeon_skill[]
 		}
 		
+		@ $mol_mem
 		skills() {
 			return [ ... new Set([
 				... this.classes_info().flatMap( cl => cl.skills ),
 				... this.race_info().skills,
+				... this.story_info().skills,
 				... this.skills_choosen(),
 			]) ]
 		}

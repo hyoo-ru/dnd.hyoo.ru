@@ -6,7 +6,19 @@ namespace $.$$ {
 		}
 		
 		override race_title() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ].title
+			return this.char().race_info().title
+		}
+		
+		override race_link() {
+			return this.char().race_info().link
+		}
+		
+		override story_title() {
+			return this.char().story_info().title
+		}
+		
+		override story_link() {
+			return this.char().story_info().link
 		}
 		
 		override moral_title() {
@@ -27,10 +39,6 @@ namespace $.$$ {
 		
 		override perks() {
 			return this.$.$hyoo_dungeon_race_all[ this.race() ].perks.join( '\n' )
-		}
-		
-		override race_link() {
-			return this.$.$hyoo_dungeon_race_all[ this.race() ].link
 		}
 		
 	}

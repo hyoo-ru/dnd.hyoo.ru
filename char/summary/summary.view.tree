@@ -2,12 +2,12 @@ $hyoo_dungeon_char_summary $mol_page
 	title \Сводка
 	char $hyoo_dungeon_char
 		name => name
-		story => story
 		biography => biography
 		age => age
 		level? => level?
 		experience? => experience?
 		race => race
+		story => story
 		classes => classes
 		moral => moral
 		ethics => ethics
@@ -58,9 +58,10 @@ $hyoo_dungeon_char_summary $mol_page
 						<= Classes $mol_chip
 							hint \Классы
 							title <= classes_title \
-						<= Story $mol_chip
+						<= Story $mol_link
 							hint \Предыстория
-							title <= story
+							title <= story_title \
+							uri <= story_link \
 					<= Alignment $mol_view sub /
 						<= Goodness $mol_chip
 							hint \Мораль

@@ -24,7 +24,7 @@ namespace $.$$ {
 					wisdom: 0,
 				},
 				skills: [],
-				story: '🏃‍♂️Чужеземец',
+				story: Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story,
 				biography: '',
 				affection: '',
 				ideals: '',

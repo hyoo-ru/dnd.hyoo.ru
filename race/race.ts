@@ -11,7 +11,7 @@ namespace $ {
 		size: 'small' | 'medium' | 'big'
 		speed: number
 		perks: string[]
-		weapons: string[]
+		inventory: string[]
 		skills: $hyoo_dungeon_skill[]
 	}
 	
@@ -35,7 +35,7 @@ namespace $ {
 			size: 'medium',
 			speed: 30,
 			perks: [],
-			weapons: [],
+			inventory: [],
 			skills: [],
 		} as $hyoo_dungeon_race_info,
 	
@@ -61,8 +61,8 @@ namespace $ {
 				'🐱‍👤Кошачье проворство',
 				'🐾Кошачьи когти',
 			],
-			weapons: [
-				'Кошачьи когти',
+			inventory: [
+				'🐾Кошачьи когти',
 			],
 			skills: [
 				'perception',
