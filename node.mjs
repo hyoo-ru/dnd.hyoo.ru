@@ -7986,11 +7986,12 @@ var $;
                 ])];
         }
         inventory(next) {
-            return this.value('inventory', next) ?? [...new Set([
+            const def = [...new Set([
                     ...this.class().inventory,
                     ...this.race().inventory,
                     ...this.story().inventory,
                 ])].join('\n');
+            return this.value('inventory', next) ?? def;
         }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
