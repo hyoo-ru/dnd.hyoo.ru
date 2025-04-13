@@ -8,7 +8,7 @@ $hyoo_dungeon_char_summary $mol_page
 		experience? => experience?
 		race => race
 		story => story
-		classes => classes
+		class => class
 		moral => moral
 		ethics => ethics
 		traits => traits
@@ -55,9 +55,10 @@ $hyoo_dungeon_char_summary $mol_page
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
 					<= Life $mol_view sub /
-						<= Classes $mol_chip
-							hint \Классы
-							title <= classes_title \
+						<= Class $mol_link
+							hint \Класс
+							title <= class_title \
+							uri <= class_link \
 						<= Story $mol_link
 							hint \Предыстория
 							title <= story_title \

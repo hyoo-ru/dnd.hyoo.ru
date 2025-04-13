@@ -8,7 +8,7 @@ $hyoo_dungeon_char_main $mol_page
 		level? => level?
 		experience? => experience?
 		race? => race?
-		classes? => classes?
+		class? => class?
 	body /
 		<= Grade $mol_view sub /
 			<= Level_block $mol_form_field
@@ -41,10 +41,10 @@ $hyoo_dungeon_char_main $mol_page
 				value? <=> story?
 				keys <= story_options /string
 				option_title* <= story_title* \
-		<= Classes_block $mol_form_field
-			name \Классы
-			Content <= Classes $mol_check_list
-				option_checked*? <=> class_selected*? false
+		<= Class_block $mol_form_field
+			name \Класс
+			Content <= Class $mol_switch
+				value? <=> class?
 				keys <= class_options /string
 				option_title* <= class_title* \
 		<= Biography_block $mol_form_field

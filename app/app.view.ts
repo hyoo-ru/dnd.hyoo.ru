@@ -5,8 +5,9 @@ namespace $.$$ {
 		char() {
 			return this.$.$mol_store_local.sub( 'char', new $hyoo_dungeon_char({
 				name: '',
-				race: 'human',
-				classes: [ 'bard' ],
+				race: Object.keys( $hyoo_dungeon_race_all )[0] as $hyoo_dungeon_race,
+				class: Object.keys( $hyoo_dungeon_class_all )[0] as $hyoo_dungeon_class,
+				story: Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story,
 				moral: 'neutral',
 				ethics: 'neutral',
 				experience: 0,
@@ -24,7 +25,6 @@ namespace $.$$ {
 					wisdom: 0,
 				},
 				skills: [],
-				story: Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story,
 				biography: '',
 				affection: '',
 				ideals: '',

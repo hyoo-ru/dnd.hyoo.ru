@@ -32,15 +32,5 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_class_all[ id ].title
 		}
 		
-		@ $mol_mem_key
-		class_selected( id: $hyoo_dungeon_class, next?: boolean ) {
-			let all = this.classes()
-			if( next !== undefined ) {
-				if( next ) all = this.classes([ ... all, id ])
-				else all = this.classes( all.filter( i => i !== id ) )
-			}
-			return all.includes( id )
-		}
-		
 	}
 }
