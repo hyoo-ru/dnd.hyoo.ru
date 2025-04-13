@@ -34,14 +34,9 @@ $hyoo_dungeon_char_summary $mol_page
 			<= Info $mol_list rows /
 				<= Top $mol_view sub /
 					<= Base $mol_view sub /
-						<= Race $mol_link
-							hint \Раса
-							title <= race_title \
-							uri <= race_link \
 						<= Name $mol_chip
 							hint \Имя
 							title <= name
-					<= Grade $mol_view sub /
 						<= Age $mol_chip
 							hint \Возраст
 							sub /
@@ -55,6 +50,10 @@ $hyoo_dungeon_char_summary $mol_page
 				<= Image $mol_image uri <= image \
 				<= Main $mol_view sub /
 					<= Life $mol_view sub /
+						<= Race $mol_link
+							hint \Раса
+							title <= race_title \
+							uri <= race_link \
 						<= Class $mol_link
 							hint \Класс
 							title <= class_title \

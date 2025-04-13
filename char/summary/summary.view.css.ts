@@ -72,14 +72,6 @@ namespace $.$$ {
 			gap: $mol_gap.block,
 		},
 		
-		Name: {
-			textShadow: '0 0',
-		},
-		
-		Grade: {
-			color: $mol_theme.special,
-		},
-		
 		Stat_main: {
 			flex: {
 				basis: `16rem`,
