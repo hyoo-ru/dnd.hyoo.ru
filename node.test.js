@@ -11331,7 +11331,7 @@ var $;
             }
             ability_title(id) {
                 if (!id)
-                    return 'Способность';
+                    return 'Способности';
                 return this.$.$hyoo_dungeon_ability_all[id].title;
             }
             ability_total_value(id) {
