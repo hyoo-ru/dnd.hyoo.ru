@@ -36,11 +36,11 @@ namespace $ {
 		}
 		
 		age( next?: number ) {
-			return this.value( 'age', next ) ?? 20
+			return Math.max( 1, this.value( 'age', next ) ?? 20 )
 		}
 		
 		level( next?: number ) {
-			return this.value( 'level', next ) ?? 0
+			return Math.max( 1, this.value( 'level', next ) ?? 1 )
 		}
 		
 		experience( next?: number ) {

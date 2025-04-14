@@ -11,6 +11,10 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_race_all[ id ].title
 		}
 		
+		override race_descr( id: $hyoo_dungeon_race ) {
+			return this.char().race().description
+		}
+		
 		@ $mol_mem
 		override story_options() {
 			return Object.keys( this.$.$hyoo_dungeon_story_all )
@@ -19,6 +23,10 @@ namespace $.$$ {
 		@ $mol_mem_key
 		override story_title( id: $hyoo_dungeon_story ) {
 			return this.$.$hyoo_dungeon_story_all[ id ].title
+		}
+		
+		override story_descr( id: $hyoo_dungeon_race ) {
+			return this.char().story().description
 		}
 		
 		@ $mol_mem
@@ -30,6 +38,10 @@ namespace $.$$ {
 		override class_title( id: $hyoo_dungeon_class ) {
 			if( !id ) return ''
 			return this.$.$hyoo_dungeon_class_all[ id ].title
+		}
+		
+		override class_descr( id: $hyoo_dungeon_race ) {
+			return this.char().class().description
 		}
 		
 	}

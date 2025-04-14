@@ -6,22 +6,22 @@ namespace $ {
 	
 	export const $hyoo_dungeon_ability_all = {
 		strength: {
-			title: '💪Мощность',
+			title: '💪 Мощность',
 		} as $hyoo_dungeon_ability_info,
 		dexterity: {
-			title: '🥏Ловкость',
+			title: '🥏 Ловкость',
 		} as $hyoo_dungeon_ability_info,
 		constitution: {
-			title: '🐘Живучесть',
+			title: '🐘 Живучесть',
 		} as $hyoo_dungeon_ability_info,
 		intelligence: {
-			title: '🧠Интеллект',
+			title: '🧠 Интеллект',
 		} as $hyoo_dungeon_ability_info,
 		wisdom: {
-			title: '🦉Мудрость',
+			title: '🦉 Мудрость',
 		} as $hyoo_dungeon_ability_info,
 		charisma: {
-			title: '🌟Харизма',
+			title: '🌟 Харизма',
 		} as $hyoo_dungeon_ability_info,
 	}
 	

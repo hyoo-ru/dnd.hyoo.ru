@@ -6,6 +6,18 @@ namespace $.$$ {
 			basis: '25rem',
 		},
 		
+		Ability_row: {
+			':first-of-type': {
+				textShadow: '0 0',
+				$mol_chip: {
+					background: 'none',
+				},
+				$mol_paginator: {
+					visibility: 'hidden',
+				},
+			},
+		},
+		
 		Ability_total: {
 			flex: {
 				basis: '2.5rem',

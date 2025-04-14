@@ -7,15 +7,15 @@ namespace $ {
 	export const $hyoo_dungeon_moral_all = {
 			
 		good: {
-			title: '👼Добрый',
+			title: '👼 Добрый',
 		} as $hyoo_dungeon_moral_info,
 		
 		neutral: {
-			title: '🤔Нейтральный',
+			title: '🤔 Нейтральный',
 		} as $hyoo_dungeon_moral_info,
 		
 		evil: {
-			title: '👿Злой',
+			title: '👿 Злой',
 		} as $hyoo_dungeon_moral_info,
 		
 	}

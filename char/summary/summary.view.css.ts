@@ -42,11 +42,20 @@ namespace $.$$ {
 				self: 'stretch',
 				content: 'space-between',
 			},
+			background: {
+				color: $mol_theme.spirit,
+			},
 		},
 		
 		Main: {
+			background: {
+				color: $mol_theme.spirit,
+			},
 			flex: {
 				wrap: 'wrap',
+			},
+			align: {
+				self: 'flex-end',
 			},
 			justify: {
 				self: 'stretch',
@@ -67,12 +76,6 @@ namespace $.$$ {
 			gap: $mol_gap.block,
 		},
 		
-		Ability_list: {
-			flex: {
-				direction: 'column',
-			},
-		},
-		
 		Spec: {
 			flex: {
 				direction: 'column',
@@ -83,13 +86,6 @@ namespace $.$$ {
 		Perks: {
 			background: {
 				color: $mol_theme.card,
-			},
-		},
-		
-		Skill_list: {
-			flex: {
-				basis: '11rem',
-				direction: 'column',
 			},
 		},
 		

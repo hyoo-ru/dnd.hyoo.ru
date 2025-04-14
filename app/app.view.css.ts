@@ -9,6 +9,24 @@ namespace $.$$ {
 		
 		'--mol_theme_hue': '10deg',
 		
+		Menu: {
+			'@media': {
+				'print': {
+					display: 'none',
+				}
+			},
+		},
+		
+		Summary: {
+			Head: {
+				'@media': {
+					'print': {
+						display: 'none',
+					}
+				},
+			}
+		},
+		
 	} )
 	
 }
