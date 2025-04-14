@@ -7,7 +7,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		override race_title( id: $hyoo_dungeon_race ) {
+		override race_title( id: $hyoo_dungeon_race_id ) {
 			return this.$.$hyoo_dungeon_race_all[ id ].title
 		}
 		
@@ -21,7 +21,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		override story_title( id: $hyoo_dungeon_story ) {
+		override story_title( id: $hyoo_dungeon_story_id ) {
 			return this.$.$hyoo_dungeon_story_all[ id ].title
 		}
 		
@@ -35,7 +35,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		override class_title( id: $hyoo_dungeon_class ) {
+		override class_title( id: $hyoo_dungeon_class_id ) {
 			if( !id ) return ''
 			return this.$.$hyoo_dungeon_class_all[ id ].title
 		}

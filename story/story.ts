@@ -1,13 +1,13 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_story_info = {
+	export type $hyoo_dungeon_story = {
 		title: string
 		link: string
 		description: string
-		skills: $hyoo_dungeon_skill[]
+		skills: $hyoo_dungeon_skill_id[]
 		perks: string[]
 		mastery: string[]
-		inventory: string[]
+		inventory: $hyoo_dungeon_item_data[]
 	}
 	
 	export const $hyoo_dungeon_story_all = {
@@ -25,16 +25,104 @@ namespace $ {
 			mastery: [
 			],
 			inventory: [
-				'🏏 Дубинка Кофель-нагель',
-				'🧵 50 футов шёлковой верёвки',
-				'📿 Талисман',
-				'👘 Обычная одежда',
-				'💰 Поясной кошель с 10 зм',
+				{
+					title: '🏏 Дубинка',
+					price: 10,
+					weight: 2,
+					defence: 0,
+					weapon_size: 'small',
+					ability: 'strength',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 4,
+						hand2: 0,
+						near: 0,
+						distant: 4,
+					},
+					damage_type: 'crush',
+					attack_distance_norm: 20,
+					attack_distance_max: 60,
+				},
+				{
+					title: '🧵 50ф верёвки',
+					price: 100,
+					weight: 10,
+					defence: 0,
+					weapon_size: 'medium',
+					ability: 'dexterity',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 0,
+						hand2: 4,
+						near: 0,
+						distant: 4,
+					},
+					damage_type: 'crush',
+					attack_distance_norm: 10,
+					attack_distance_max: 20,
+				},
+				{
+					title: '🧸 Талисман',
+					price: 10,
+					weight: 1,
+					defence: 0,
+					weapon_size: '',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 0,
+						hand2: 0,
+						near: 0,
+						distant: 0,
+					},
+					damage_type: '',
+					attack_distance_norm: 0,
+					attack_distance_max: 0,
+				},
+				{
+					title: '👘 Обычная одежда',
+					price: 10,
+					weight: 1,
+					defence: 0,
+					weapon_size: '',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 0,
+						hand2: 0,
+						near: 0,
+						distant: 0,
+					},
+					damage_type: '',
+					attack_distance_norm: 0,
+					attack_distance_max: 0,
+				},
+				{
+					title: '💰 Поясной кошель',
+					price: 1000,
+					weight: 1,
+					defence: 0,
+					weapon_size: 'small',
+					ability: 'strength',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 4,
+						hand2: 0,
+						near: 0,
+						distant: 4,
+					},
+					damage_type: 'crush',
+					attack_distance_norm: 20,
+					attack_distance_max: 60,
+				},
 			],
-		} as $hyoo_dungeon_story_info,
+		} as $hyoo_dungeon_story,
 		
 	}
 
-	export type $hyoo_dungeon_story = keyof typeof $hyoo_dungeon_story_all
+	export type $hyoo_dungeon_story_id = keyof typeof $hyoo_dungeon_story_all
 
 }

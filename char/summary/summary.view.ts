@@ -1,10 +1,6 @@
 namespace $.$$ {
 	export class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
 		
-		override image() {
-			return this.char().race().image
-		}
-		
 		override race_title() {
 			return this.char().race().title
 		}

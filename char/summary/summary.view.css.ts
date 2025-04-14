@@ -3,7 +3,8 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '85rem',
+			basis: '105rem',
+			grow: 1,
 		},
 		
 		Columns: {
@@ -22,16 +23,14 @@ namespace $.$$ {
 		Info: {
 			flex: {
 				grow: 1,
-				basis: '30rem',
+				basis: '20rem',
 			},
 		},
 		
-		Image: {
-			width: 'auto',
-			justify: {
-				self: 'stretch',
+		Inventory_block: {
+			flex: {
+				basis: '30rem',
 			},
-			aspectRatio: 1,
 		},
 		
 		Top: {
@@ -42,20 +41,11 @@ namespace $.$$ {
 				self: 'stretch',
 				content: 'space-between',
 			},
-			background: {
-				color: $mol_theme.spirit,
-			},
 		},
 		
 		Main: {
-			background: {
-				color: $mol_theme.spirit,
-			},
 			flex: {
 				wrap: 'wrap',
-			},
-			align: {
-				self: 'flex-end',
 			},
 			justify: {
 				self: 'stretch',
@@ -76,14 +66,25 @@ namespace $.$$ {
 			gap: $mol_gap.block,
 		},
 		
-		Spec: {
+		Skills: {
 			flex: {
-				direction: 'column',
+				basis: '10rem',
 			},
-			gap: $mol_gap.block,
+		},
+		
+		Perks_block: {
+			flex: {
+				basis: '20rem',
+			},
 		},
 		
 		Perks: {
+			background: {
+				color: $mol_theme.card,
+			},
+		},
+		
+		Inventory: {
 			background: {
 				color: $mol_theme.card,
 			},

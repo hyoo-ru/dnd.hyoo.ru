@@ -18,7 +18,6 @@ $hyoo_dungeon_char_summary $mol_page
 		hits_max? => hits_max?
 		hits_dice => hits_dice
 		hits_heal => hits_heal
-		inventory? => inventory?
 	Ability_cofig $hyoo_dungeon_ability_config
 		char <= char
 		ability_list => ability_list
@@ -27,56 +26,55 @@ $hyoo_dungeon_char_summary $mol_page
 		char <= char
 		skill_list => skill_list
 		Skill_addon null
+	Item_list $hyoo_dungeon_item_manage
+		char <= char
+		menu_links => item_list
+		Item_delete* null
 	body /
 		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
-				<= Image_block $mol_stack sub /
-					<= Image $mol_image uri <= image \
-					<= Top $mol_view sub /
-						<= Base $mol_view sub /
-							<= Name $mol_chip
-								hint \Имя
-								title <= name
-							<= Age $mol_chip
-								hint \Возраст
-								sub /
-									\📅
-									<= age
-							<= Speed $mol_chip
-								hint \Скорость
-								sub /
-									\🦶
-									<= speed 1
-					<= Main $mol_view sub /
-						<= Life $mol_view sub /
-							<= Race $mol_link
-								hint \Раса
-								title <= race_title \
-								uri <= race_link \
-							<= Class $mol_link
-								hint \Класс
-								title <= class_title \
-								uri <= class_link \
-							<= Story $mol_link
-								hint \Предыстория
-								title <= story_title \
-								uri <= story_link \
-						<= Alignment $mol_view sub /
-							<= Goodness $mol_chip
-								hint \Мораль
-								title <= moral_title \
-							<= Principality $mol_chip
-								hint \Этика
-								title <= ethics_title \
+				<= Top $mol_view sub /
+					<= Base $mol_view sub /
+						<= Name $mol_chip
+							hint \Имя
+							title <= name
+						<= Age $mol_chip
+							hint \Возраст
+							sub /
+								\📅
+								<= age
+						<= Speed $mol_chip
+							hint \Скорость
+							sub /
+								\🦶
+								<= speed 1
+				<= Main $mol_view sub /
+					<= Life $mol_view sub /
+						<= Race $mol_link
+							hint \Раса
+							title <= race_title \
+							uri <= race_link \
+						<= Class $mol_link
+							hint \Класс
+							title <= class_title \
+							uri <= class_link \
+						<= Story $mol_link
+							hint \Предыстория
+							title <= story_title \
+							uri <= story_link \
+					<= Alignment $mol_view sub /
+						<= Goodness $mol_chip
+							hint \Мораль
+							title <= moral_title \
+						<= Principality $mol_chip
+							hint \Этика
+							title <= ethics_title \
 				<= Personality $mol_list rows /
 					<= Biography $mol_text text <= biography
 					<= Traits $mol_text text <= traits
 					<= Ideals $mol_text text <= ideals
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
-			<= Skills $hyoo_dungeon_char_summary_block
-				title \Навыки
-				content <= skill_list
 			<= Stat_main $mol_list rows /
 				<= Grade_block $hyoo_dungeon_char_summary_block
 					title \Прогресс
@@ -114,16 +112,16 @@ $hyoo_dungeon_char_summary $mol_page
 							title \💊 Лечение
 							value / <= hits_heal
 				<= Abilities $mol_list rows <= ability_list
-			<= Spec $mol_view sub /
-				<= Perks_block $hyoo_dungeon_char_summary_block
-					title \Умения
-					Content <= Perks $mol_text
-						text <= perks \
-				<= Inventory_block $hyoo_dungeon_char_summary_block
-					level 5
-					title \Инвентарь
-					content / <= Inventory $mol_textarea
-						value? <=> inventory?
+			<= Skills $hyoo_dungeon_char_summary_block
+				title \Навыки
+				content <= skill_list
+			<= Perks_block $hyoo_dungeon_char_summary_block
+				title \Умения
+				Content <= Perks $mol_text
+					text <= perks \
+			<= Inventory_block $hyoo_dungeon_char_summary_block
+				title \Инвентарь
+				content / <= Inventory $mol_list rows <= item_list
 
 $hyoo_dungeon_char_summary_block $mol_section
 	level 5

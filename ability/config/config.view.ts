@@ -11,7 +11,7 @@ namespace $.$$ {
 		pending() {
 			const char = this.char()
 			const total = Object.keys( this.$.$hyoo_dungeon_ability_all )
-				.reduce( ( sum, id )=> sum + char.ability_addon( id as $hyoo_dungeon_ability ), 0 )
+				.reduce( ( sum, id )=> sum + char.ability_addon( id as $hyoo_dungeon_ability_id ), 0 )
 			return 24 - total
 		}
 		
@@ -24,22 +24,22 @@ namespace $.$$ {
 			]
 		}
 		
-		override ability_title( id: $hyoo_dungeon_ability ) {
+		override ability_title( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return 'Способности'
 			return this.$.$hyoo_dungeon_ability_all[ id ].title
 		}
 		
-		ability_total_value( id: $hyoo_dungeon_ability ) {
+		ability_total_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '🔢' ]
 			return super.ability_total_value( id )
 		}
 		
-		ability_modifier_value( id: $hyoo_dungeon_ability ) {
+		ability_modifier_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '✨' ]
 			return super.ability_modifier_value( id )
 		}
 		
-		ability_safe_value( id: $hyoo_dungeon_ability ) {
+		ability_safe_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '☔' ]
 			return super.ability_safe_value( id )
 		}

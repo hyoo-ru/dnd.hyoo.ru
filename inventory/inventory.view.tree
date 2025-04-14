@@ -1,0 +1,8 @@
+$hyoo_dungeon_inventory $mol_page
+	title \Инвентарь
+	char $hyoo_dungeon_char
+	body /
+		<= Item_row*0 $mol_view sub /
+			<= Title $mol_string
+				hint \Название
+				value? <=> item_title? \

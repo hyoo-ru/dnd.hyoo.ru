@@ -1,17 +1,16 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_class_info = {
+	export type $hyoo_dungeon_class = {
 		title: string
 		link: string
 		description: string
 		image: string
 		dice: 6 | 8
-		ability_main: $hyoo_dungeon_ability
-		ability_safe: $hyoo_dungeon_ability[]
-		skills: $hyoo_dungeon_skill[]
-		perks: string[]
-		inventory: string[]
-		weapon: string
+		ability_main: $hyoo_dungeon_ability_id
+		ability_safe: $hyoo_dungeon_ability_id[]
+		skills: $hyoo_dungeon_skill_id[]
+		perks: string[][]
+		inventory: $hyoo_dungeon_item_data[]
 	}
 	
 	export const $hyoo_dungeon_class_all = {
@@ -24,14 +23,60 @@ namespace $ {
 			dice: 8,
 			ability_main: 'charisma',
 			ability_safe: [ 'dexterity', 'charisma' ],
-			skills: [],
-			perks: [],
-			inventory: [],
-			weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
-		} as $hyoo_dungeon_class_info,
+			skills: [
+			],
+			perks: [
+				[ '🦺 Лёгкие доспехи', '🏏 Простое оружие', '🔪 Длинные мечи', '🔪 Короткие мечи', '🔪 Рапиры', '🏹 Ручные арбалеты' ],
+				[ '✨ Использование заклинаний', '🎼 Вдохновение барда d6' ],
+				[ '🔧 Мастер на все руки', '🎶 Песнь отдыха d6' ],
+				[ '🏫 Коллегия бардов', '🎓 Компетентность' ],
+				[ '📈 Увеличение характеристик' ],
+				// @todo 5+
+			],
+			inventory: [
+				{
+					title: '🦺 Кожанка',
+					price: 1000,
+					weight: 10,
+					defence: 11,
+					weapon_size: '',
+					ability: 'dexterity',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 0,
+						hand2: 0,
+						near: 0,
+						distant: 0,
+					},
+					damage_type: '',
+					attack_distance_norm: 0,
+					attack_distance_max: 0,
+				},
+				{
+					title: '🔪 Кинжал',
+					price: 200,
+					weight: 1,
+					defence: 0,
+					weapon_size: 'small',
+					ability: 'dexterity',
+					attack_cooldown: false,
+					attack_ammo: false,
+					damage_max: {
+						hand1: 4,
+						hand2: 0,
+						near: 0,
+						distant: 4,
+					},
+					damage_type: 'stab',
+					attack_distance_norm: 20,
+					attack_distance_max: 60,
+				},
+			],
+		} as $hyoo_dungeon_class,
 		
 	}
 
-	export type $hyoo_dungeon_class = keyof typeof $hyoo_dungeon_class_all
+	export type $hyoo_dungeon_class_id = keyof typeof $hyoo_dungeon_class_all
 	
 }
