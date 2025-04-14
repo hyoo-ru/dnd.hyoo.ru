@@ -11,7 +11,7 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_race_all[ id ].title
 		}
 		
-		override race_descr( id: $hyoo_dungeon_race ) {
+		override race_descr() {
 			return this.char().race().description
 		}
 		
@@ -25,7 +25,7 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_story_all[ id ].title
 		}
 		
-		override story_descr( id: $hyoo_dungeon_race ) {
+		override story_descr() {
 			return this.char().story().description
 		}
 		
@@ -40,7 +40,7 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_class_all[ id ].title
 		}
 		
-		override class_descr( id: $hyoo_dungeon_race ) {
+		override class_descr() {
 			return this.char().class().description
 		}
 		
