@@ -334,13 +334,6 @@ $mol_book2_catalog $mol_book2
 		sub /
 			<= Spread_close_icon $mol_icon_close
 
-$mol_chip $mol_view
-	attr *
-		^
-		title <= hint \
-	sub /
-		<= title
-
 $mol_image $mol_view
 	dom_name \img
 	field *any
@@ -358,6 +351,13 @@ $mol_image $mol_view
 		load? <=> load? null
 	minimal_width 16
 	minimal_height 16
+
+$mol_chip $mol_view
+	attr *
+		^
+		title <= hint \
+	sub /
+		<= title
 
 $mol_stack $mol_view
 
@@ -735,24 +735,6 @@ $hyoo_dungeon_parameter $mol_view
 			minimal_width 40
 			sub <= value /
 
-$mol_labeler $mol_list
-	rows /
-		<= Label $mol_view
-			minimal_height 32
-			sub <= label /$mol_view_content
-				<= title
-		<= Content $mol_view
-			minimal_height 24
-			sub <= content /
-
-$mol_form_field $mol_labeler
-	bids /string
-	label /
-		<= name \
-		<= Bid $mol_view
-			sub / <= bid \
-	content / <= control null
-
 $mol_textarea $mol_stack
 	attr *
 		^
@@ -871,6 +853,18 @@ $hyoo_dungeon_skill_config $mol_page
 			<= Skill_total* $mol_chip
 				sub / <= skill*
 
+$mol_section $mol_list
+	level 1
+	rows /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_paragraph
+					dom_name <= title_dom_name \h1
+					title <= title
+				<= Tools $mol_view sub <= tools /
+		<= Content $mol_list
+			rows <= content /
+
 $mol_text_list $mol_text
 	auto_scroll null
 	attr *
@@ -884,21 +878,6 @@ $mol_text_list_item $mol_paragraph
 	attr *
 		^
 		mol_text_list_item_index <= index 0
-
-$mol_row $mol_view
-
-$mol_form $mol_list
-	submit_allowed true
-	submit_blocked false
-	event *
-		^
-		keydown?event <=> keydown?event null
-	submit?event null
-	rows /
-		<= Body $mol_list
-			sub <= body <= form_fields /$mol_form_field
-		<= Foot $mol_row
-			sub <= foot <= buttons /$mol_view
 
 $hyoo_dungeon_char_summary $mol_page
 	title \Сводка
@@ -932,97 +911,138 @@ $hyoo_dungeon_char_summary $mol_page
 	body /
 		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
-				<= Top $mol_view sub /
-					<= Base $mol_view sub /
-						<= Name $mol_chip
-							hint \Имя
-							title <= name
-						<= Age $mol_chip
-							hint \Возраст
-							sub /
-								\📅
-								<= age
-						<= Speed $mol_chip
-							hint \Скорость
-							sub /
-								\🦶
-								<= speed 1
-				<= Image $mol_image uri <= image \
-				<= Main $mol_view sub /
-					<= Life $mol_view sub /
-						<= Race $mol_link
-							hint \Раса
-							title <= race_title \
-							uri <= race_link \
-						<= Class $mol_link
-							hint \Класс
-							title <= class_title \
-							uri <= class_link \
-						<= Story $mol_link
-							hint \Предыстория
-							title <= story_title \
-							uri <= story_link \
-					<= Alignment $mol_view sub /
-						<= Goodness $mol_chip
-							hint \Мораль
-							title <= moral_title \
-						<= Principality $mol_chip
-							hint \Этика
-							title <= ethics_title \
+				<= Image_block $mol_stack sub /
+					<= Image $mol_image uri <= image \
+					<= Top $mol_view sub /
+						<= Base $mol_view sub /
+							<= Name $mol_chip
+								hint \Имя
+								title <= name
+							<= Age $mol_chip
+								hint \Возраст
+								sub /
+									\📅
+									<= age
+							<= Speed $mol_chip
+								hint \Скорость
+								sub /
+									\🦶
+									<= speed 1
+					<= Main $mol_view sub /
+						<= Life $mol_view sub /
+							<= Race $mol_link
+								hint \Раса
+								title <= race_title \
+								uri <= race_link \
+							<= Class $mol_link
+								hint \Класс
+								title <= class_title \
+								uri <= class_link \
+							<= Story $mol_link
+								hint \Предыстория
+								title <= story_title \
+								uri <= story_link \
+						<= Alignment $mol_view sub /
+							<= Goodness $mol_chip
+								hint \Мораль
+								title <= moral_title \
+							<= Principality $mol_chip
+								hint \Этика
+								title <= ethics_title \
 				<= Personality $mol_list rows /
+					<= Biography $mol_text text <= biography
 					<= Traits $mol_text text <= traits
 					<= Ideals $mol_text text <= ideals
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
-					<= Biography $mol_text text <= biography
-			<= Skill_list $mol_view sub <= skill_list
+			<= Skills $hyoo_dungeon_char_summary_block
+				title \Навыки
+				content <= skill_list
 			<= Stat_main $mol_list rows /
-				<= Grade_block $mol_list rows /
-					<= Level $hyoo_dungeon_parameter
-						title \🏅Уровень
-						Value <= Level_value $mol_paginator
-							value? <=> level?
-					<= Master_bonus $hyoo_dungeon_parameter
-						title \🥇Мастерство
-						value /
-							\+
-							<= master_bonus
-					<= Experience $hyoo_dungeon_parameter
-						title \✨Опыт
-						Value <= Experience_value $mol_paginator
-							value? <=> experience?
-							step 100
-				<= Hits_block $mol_list rows /
-					<= Hits_max $hyoo_dungeon_parameter
-						title \💟Предел
-						Value <= Hits_max_value $mol_paginator
-							value? <=> hits_max?
-					<= Hits $hyoo_dungeon_parameter
-						title \💗Здоровье
-						Value <= Hits_value $mol_paginator
-							value? <=> hits?
-					<= Hits_addon $hyoo_dungeon_parameter
-						title \💖Бафы
-						Value <= Hits_addon_value $mol_paginator
-							value? <=> hits_addon?
-					<= Hits_heal $hyoo_dungeon_parameter
-						title \💊Лечение
-						value / <= hits_heal
-				<= Ability_list $mol_view
-					sub <= ability_list
+				<= Grade_block $hyoo_dungeon_char_summary_block
+					title \Прогресс
+					content /
+						<= Level $hyoo_dungeon_parameter
+							title \🏅 Уровень
+							Value <= Level_value $mol_paginator
+								value? <=> level?
+						<= Master_bonus $hyoo_dungeon_parameter
+							title \🥇 Мастерство
+							value /
+								\+
+								<= master_bonus
+						<= Experience $hyoo_dungeon_parameter
+							title \✨ Опыт
+							Value <= Experience_value $mol_paginator
+								value? <=> experience?
+								step 100
+				<= Hits_block $hyoo_dungeon_char_summary_block
+					title \Хиты
+					content /
+						<= Hits_max $hyoo_dungeon_parameter
+							title \💟 Предел
+							Value <= Hits_max_value $mol_paginator
+								value? <=> hits_max?
+						<= Hits $hyoo_dungeon_parameter
+							title \💗 Здоровье
+							Value <= Hits_value $mol_paginator
+								value? <=> hits?
+						<= Hits_addon $hyoo_dungeon_parameter
+							title \💖 Бафы
+							Value <= Hits_addon_value $mol_paginator
+								value? <=> hits_addon?
+						<= Hits_heal $hyoo_dungeon_parameter
+							title \💊 Лечение
+							value / <= hits_heal
+				<= Abilities $mol_list rows <= ability_list
 			<= Spec $mol_view sub /
-				<= Perks_block $mol_form_field
-					name \Умения
+				<= Perks_block $hyoo_dungeon_char_summary_block
+					title \Умения
 					Content <= Perks $mol_text
 						text <= perks \
-				<= Inventory_block $mol_form_field
-					name \Инвентарь
-					Content <= Inventory $mol_textarea
+				<= Inventory_block $hyoo_dungeon_char_summary_block
+					level 5
+					title \Инвентарь
+					content / <= Inventory $mol_textarea
 						value? <=> inventory?
 
-$mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
+$hyoo_dungeon_char_summary_block $mol_section
+	level 5
 
-$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+$mol_labeler $mol_list
+	rows /
+		<= Label $mol_view
+			minimal_height 32
+			sub <= label /$mol_view_content
+				<= title
+		<= Content $mol_view
+			minimal_height 24
+			sub <= content /
+
+$mol_form_field $mol_labeler
+	bids /string
+	label /
+		<= name \
+		<= Bid $mol_view
+			sub / <= bid \
+	content / <= control null
+
+$mol_row $mol_view
+
+$mol_form $mol_list
+	submit_allowed true
+	submit_blocked false
+	event *
+		^
+		keydown?event <=> keydown?event null
+	submit?event null
+	rows /
+		<= Body $mol_list
+			sub <= body <= form_fields /$mol_form_field
+		<= Foot $mol_row
+			sub <= foot <= buttons /$mol_view
+
+$mol_form_group $mol_view
 
 $mol_number $mol_view
 	precision_view <= precision 1
@@ -1032,6 +1052,10 @@ $mol_number $mol_view
 	value? +NaN
 	enabled true
 	sub /
+		<= Dec $mol_button_minor
+			event_click? <=> event_dec? null
+			enabled <= dec_enabled <= enabled
+			sub / <= dec_icon $mol_icon_chevron_left
 		<= String $mol_string
 			- \ we don't want native number controls in mobile devices
 			- \ https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
@@ -1040,16 +1064,10 @@ $mol_number $mol_view
 			hint <= hint \ 
 			enabled <= string_enabled <= enabled
 			submit? <=> submit? null
-		<= Dec $mol_button_minor
-			event_click? <=> event_dec? null
-			enabled <= dec_enabled <= enabled
-			sub / <= dec_icon $mol_icon_minus
 		<= Inc $mol_button_minor
 			event_click? <=> event_inc? null
 			enabled <= inc_enabled <= enabled
-			sub / <= inc_icon $mol_icon_plus
-
-$mol_form_group $mol_view
+			sub / <= inc_icon $mol_icon_chevron_right
 
 $mol_check_list $mol_view
 	dictionary *
@@ -1074,48 +1092,45 @@ $hyoo_dungeon_char_main $mol_page
 		biography? => biography?
 		age? => age?
 		level? => level?
-		experience? => experience?
 		race_id? => race_id?
 		story_id? => story_id?
 		class_id? => class_id?
 	body /
-		<= Grade $mol_view sub /
-			<= Level_block $mol_form_field
-				name \🏅Уровень
-				Content <= Level $mol_paginator
-					value? <=> level?
-			<= Experience_block $mol_form_field
-				name \✨Опыт
-				Content <= Experience $mol_number
-					value? <=> experience?
-					precision_change 100
-			<= Age_block $mol_form_field
-				name \📅Возраст
-				Content <= Age $mol_number
-					value? <=> age?
 		<= Base_block $mol_form_group sub /
 			<= Name_block $mol_form_field
 				name \Имя
 				Content <= Name $mol_string
 					value? <=> name?
+		<= Grade $mol_form_group sub /
+			<= Level_block $mol_form_field
+				name \🏅 Уровень
+				Content <= Level $mol_paginator
+					value? <=> level?
+			<= Age_block $mol_form_field
+				name \📅 Возраст
+				Content <= Age $mol_number
+					value? <=> age?
 		<= Race_block $mol_form_field
 			name \Раса
 			Content <= Race $mol_switch
 				value? <=> race_id?
 				keys <= race_options /string
 				option_title* <= race_title* \
-		<= Story_block $mol_form_field
-			name \Предыстроия
-			Content <= Story $mol_switch
-				value? <=> story_id?
-				keys <= story_options /string
-				option_title* <= story_title* \
+		<= Race_descr $mol_text text <= race_descr \
 		<= Class_block $mol_form_field
 			name \Класс
 			Content <= Class $mol_switch
 				value? <=> class_id?
 				keys <= class_options /string
 				option_title* <= class_title* \
+		<= Class_descr $mol_text text <= class_descr \
+		<= Story_block $mol_form_field
+			name \Предыстроия
+			Content <= Story $mol_switch
+				value? <=> story_id?
+				keys <= story_options /string
+				option_title* <= story_title* \
+		<= Story_descr $mol_text text <= story_descr \
 		<= Biography_block $mol_form_field
 			name \Биография
 			Content <= Biography $mol_textarea
