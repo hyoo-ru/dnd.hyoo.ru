@@ -25,7 +25,7 @@ namespace $.$$ {
 		}
 		
 		override ability_title( id: $hyoo_dungeon_ability ) {
-			if( !id ) return 'Способность'
+			if( !id ) return 'Способности'
 			return this.$.$hyoo_dungeon_ability_all[ id ].title
 		}
 		
