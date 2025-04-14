@@ -7541,7 +7541,7 @@ var $;
             }
             menu_links() {
                 return this.spread_ids_filtered()
-                    .map(spread => this.Menu_link(spread));
+                    .map(spread => this.Menu_item(spread));
             }
             spread_ids_filtered() {
                 return this.spread_ids()
@@ -7616,6 +7616,18 @@ var $;
                     grow: 0,
                 },
                 alignSelf: 'stretch',
+            },
+            Menu_item: {
+                align: {
+                    items: 'flex-start',
+                },
+            },
+            Menu_link: {
+                flex: {
+                    grow: 1,
+                    shrink: 1,
+                    wrap: 'wrap',
+                },
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -7843,6 +7855,191 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_unit extends $mol_object {
+        'valueOf()';
+        constructor(value) {
+            super();
+            if (value !== undefined)
+                this['valueOf()'] = value;
+        }
+        prefix() {
+            return '';
+        }
+        postfix() {
+            return '';
+        }
+        [Symbol.toPrimitive](hint) {
+            switch (hint) {
+                case 'number': return this.valueOf();
+                case 'string': return this.toString();
+                default: return this.toString();
+            }
+        }
+        valueOf() {
+            return this['valueOf()'];
+        }
+        delimiter() {
+            return ' ';
+        }
+        value_view() {
+            return this.valueOf().toLocaleString();
+        }
+        toString() {
+            return this.prefix() + this.value_view() + this.postfix();
+        }
+        static summ(a, b) {
+            var Class = a.constructor;
+            if (Class !== b.constructor)
+                throw new Error(`Not same measure: ${Class} , ${b.constructor}`);
+            return new Class(a.valueOf() + b.valueOf());
+        }
+        mult(m) {
+            var Class = this.constructor;
+            return new Class(this.valueOf() * m);
+        }
+    }
+    $.$mol_unit = $mol_unit;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $hyoo_dungeon_coin extends $mol_unit {
+        toString() {
+            let val = this.valueOf();
+            let str = '';
+            if (val % 10) {
+                str = `🟠${val % 10}` + str;
+                val -= val % 10;
+            }
+            val /= 10;
+            if (val % 10) {
+                str = `⚪${val % 10}` + str;
+                val -= val % 10;
+            }
+            val /= 10;
+            if (val)
+                str = `🟡${val}` + str;
+            return str;
+        }
+    }
+    $.$hyoo_dungeon_coin = $hyoo_dungeon_coin;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $hyoo_dungeon_item extends $mol_store {
+        title(next) {
+            return this.value('title', next) ?? '';
+        }
+        price(next) {
+            return this.value('price', next) ?? 0;
+        }
+        weight(next) {
+            return this.value('weight', next) ?? 0;
+        }
+        defence(next) {
+            return this.value('defence', next) ?? 0;
+        }
+        price_coin() {
+            return new $hyoo_dungeon_coin(this.price());
+        }
+        damage() {
+            return this.sub('damage_max', new $mol_store({ hand1: 0, hand2: 0, near: 0, distant: 0 }));
+        }
+        damage_hand1(next) {
+            return this.damage().value('hand1', next) ?? 4;
+        }
+        damage_hand2(next) {
+            return this.damage().value('hand2', next) ?? 4;
+        }
+        damage_near(next) {
+            return this.damage().value('near', next) ?? 0;
+        }
+        damage_distant(next) {
+            return this.damage().value('distant', next) ?? 4;
+        }
+        damage_type(next) {
+            return this.value('damage_type', next) ?? '';
+        }
+        attack_distance_norm(next) {
+            return this.value('attack_distance_norm', next) ?? 20;
+        }
+        attack_distance_max(next) {
+            return this.value('attack_distance_max', next) ?? 60;
+        }
+        ability(next) {
+            return this.value('ability', next) ?? 'strength';
+        }
+        brief() {
+            let brief = '';
+            brief += ` ${this.price_coin()}`;
+            if (this.weight())
+                brief += ` 🧱${this.weight()}`;
+            if (this.defence())
+                brief += ` 🦺${this.defence()}`;
+            const damage = this.damage();
+            if (damage.value('hand1'))
+                brief += ` 🙋d${damage.value('hand1')}`;
+            if (damage.value('hand2'))
+                brief += ` 🙆d${damage.value('hand2')}`;
+            if (damage.value('distant')) {
+                brief += ` 💨d${damage.value('distant')}`;
+                brief += `:${this.attack_distance_norm()}..${this.attack_distance_max()}`;
+            }
+            if (this.damage_type())
+                brief += ' ' + {
+                    '': '',
+                    stab: '🤺',
+                    slash: '🔪',
+                    crush: '🏏',
+                    poison: '🧪',
+                    fire: '🔥',
+                }[this.damage_type()];
+            brief += ' ' + { strength: ' 💪', dexterity: '🥏' }[this.ability()];
+            return brief;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "price_coin", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "damage", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "damage_hand1", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "damage_hand2", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "damage_near", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "damage_distant", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "attack_distance_norm", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "attack_distance_max", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "ability", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_item.prototype, "brief", null);
+    $.$hyoo_dungeon_item = $hyoo_dungeon_item;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     $.$hyoo_dungeon_story_all = {
         pirate: {
             title: '🏴‍☠️ Пират',
@@ -7856,11 +8053,99 @@ var $;
             ],
             mastery: [],
             inventory: [
-                '🏏 Дубинка Кофель-нагель',
-                '🧵 50 футов шёлковой верёвки',
-                '📿 Талисман',
-                '👘 Обычная одежда',
-                '💰 Поясной кошель с 10 зм',
+                {
+                    title: '🏏 Дубинка',
+                    price: 10,
+                    weight: 2,
+                    defence: 0,
+                    weapon_size: 'small',
+                    ability: 'strength',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 4,
+                        hand2: 0,
+                        near: 0,
+                        distant: 4,
+                    },
+                    damage_type: 'crush',
+                    attack_distance_norm: 20,
+                    attack_distance_max: 60,
+                },
+                {
+                    title: '🧵 50ф верёвки',
+                    price: 100,
+                    weight: 10,
+                    defence: 0,
+                    weapon_size: 'medium',
+                    ability: 'dexterity',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 0,
+                        hand2: 4,
+                        near: 0,
+                        distant: 4,
+                    },
+                    damage_type: 'crush',
+                    attack_distance_norm: 10,
+                    attack_distance_max: 20,
+                },
+                {
+                    title: '🧸 Талисман',
+                    price: 10,
+                    weight: 1,
+                    defence: 0,
+                    weapon_size: '',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 0,
+                        hand2: 0,
+                        near: 0,
+                        distant: 0,
+                    },
+                    damage_type: '',
+                    attack_distance_norm: 0,
+                    attack_distance_max: 0,
+                },
+                {
+                    title: '👘 Обычная одежда',
+                    price: 10,
+                    weight: 1,
+                    defence: 0,
+                    weapon_size: '',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 0,
+                        hand2: 0,
+                        near: 0,
+                        distant: 0,
+                    },
+                    damage_type: '',
+                    attack_distance_norm: 0,
+                    attack_distance_max: 0,
+                },
+                {
+                    title: '💰 Поясной кошель',
+                    price: 1000,
+                    weight: 1,
+                    defence: 0,
+                    weapon_size: 'small',
+                    ability: 'strength',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 4,
+                        hand2: 0,
+                        near: 0,
+                        distant: 4,
+                    },
+                    damage_type: 'crush',
+                    attack_distance_norm: 20,
+                    attack_distance_max: 60,
+                },
             ],
         },
     };
@@ -7880,9 +8165,53 @@ var $;
             ability_main: 'charisma',
             ability_safe: ['dexterity', 'charisma'],
             skills: [],
-            perks: [],
-            inventory: [],
-            weapon: 'Лёгкие доспехи, простое оружие, длинные мечи, короткие мечи, рапиры, ручные арбалеты',
+            perks: [
+                ['🦺 Лёгкие доспехи', '🏏 Простое оружие', '🔪 Длинные мечи', '🔪 Короткие мечи', '🔪 Рапиры', '🏹 Ручные арбалеты'],
+                ['✨ Использование заклинаний', '🎼 Вдохновение барда d6'],
+                ['🔧 Мастер на все руки', '🎶 Песнь отдыха d6'],
+                ['🏫 Коллегия бардов', '🎓 Компетентность'],
+                ['📈 Увеличение характеристик'],
+            ],
+            inventory: [
+                {
+                    title: '🦺 Кожанка',
+                    price: 1000,
+                    weight: 10,
+                    defence: 11,
+                    weapon_size: '',
+                    ability: 'dexterity',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 0,
+                        hand2: 0,
+                        near: 0,
+                        distant: 0,
+                    },
+                    damage_type: '',
+                    attack_distance_norm: 0,
+                    attack_distance_max: 0,
+                },
+                {
+                    title: '🔪 Кинжал',
+                    price: 200,
+                    weight: 1,
+                    defence: 0,
+                    weapon_size: 'small',
+                    ability: 'dexterity',
+                    attack_cooldown: false,
+                    attack_ammo: false,
+                    damage_max: {
+                        hand1: 4,
+                        hand2: 0,
+                        near: 0,
+                        distant: 4,
+                    },
+                    damage_type: 'stab',
+                    attack_distance_norm: 20,
+                    attack_distance_max: 60,
+                },
+            ],
         },
     };
 })($ || ($ = {}));
@@ -7971,17 +8300,24 @@ var $;
         }
         perks() {
             return [...new Set([
-                    ...this.class().perks,
                     ...this.race().perks,
                     ...this.story().perks,
+                    ...this.class().perks.slice(0, this.level() + 1).flatMap(p => p),
                 ])];
         }
         inventory(next) {
-            return this.value('inventory', next) || [...new Set([
+            return this.sub('inventory', new $mol_store([...new Set([
                     ...this.class().inventory,
                     ...this.race().inventory,
                     ...this.story().inventory,
-                ])].join('\n');
+                ])]));
+        }
+        inventory_item(index) {
+            return this.inventory().sub(index, new $hyoo_dungeon_item({}));
+        }
+        inventory_delete(index) {
+            const all = this.inventory().data();
+            this.inventory().data([...all.slice(0, index), ...all.slice(index + 1)]);
         }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
@@ -8048,6 +8384,9 @@ var $;
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "inventory", null);
     __decorate([
+        $mol_mem_key
+    ], $hyoo_dungeon_char.prototype, "inventory_item", null);
+    __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_max", null);
     __decorate([
@@ -8060,109 +8399,6 @@ var $;
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_heal", null);
     $.$hyoo_dungeon_char = $hyoo_dungeon_char;
-})($ || ($ = {}));
-
-;
-	($.$mol_image) = class $mol_image extends ($.$mol_view) {
-		uri(){
-			return "";
-		}
-		loading(){
-			return "eager";
-		}
-		decoding(){
-			return "async";
-		}
-		cors(){
-			return null;
-		}
-		natural_width(){
-			return 0;
-		}
-		natural_height(){
-			return 0;
-		}
-		load(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dom_name(){
-			return "img";
-		}
-		field(){
-			return {
-				...(super.field()), 
-				"src": (this.uri()), 
-				"alt": (this.title()), 
-				"loading": (this.loading()), 
-				"decoding": (this.decoding()), 
-				"crossOrigin": (this.cors())
-			};
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"width": (this.natural_width()), 
-				"height": (this.natural_height())
-			};
-		}
-		event(){
-			return {"load": (next) => (this.load(next))};
-		}
-		minimal_width(){
-			return 16;
-		}
-		minimal_height(){
-			return 16;
-		}
-	};
-	($mol_mem(($.$mol_image.prototype), "load"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_image extends $.$mol_image {
-            natural_width(next) {
-                const dom = this.dom_node();
-                if (dom.naturalWidth)
-                    return dom.naturalWidth;
-                const found = this.uri().match(/\bwidth=(\d+)/);
-                return found ? Number(found[1]) : null;
-            }
-            natural_height(next) {
-                const dom = this.dom_node();
-                if (dom.naturalHeight)
-                    return dom.naturalHeight;
-                const found = this.uri().match(/\bheight=(\d+)/);
-                return found ? Number(found[1]) : null;
-            }
-            load() {
-                this.natural_width(null);
-                this.natural_height(null);
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_image.prototype, "natural_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_image.prototype, "natural_height", null);
-        $$.$mol_image = $mol_image;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -9461,6 +9697,109 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/grid/grid.view.css", "[mol_grid] {\n\tdisplay: block;\n\tflex: 0 1 auto;\n\tposition: relative;\n\toverflow-x: auto;\n}\n\n[mol_grid_gap] {\n\tposition: absolute;\n\tpadding: .1px;\n\ttop: 0;\n\ttransform: translateZ(0);\n}\n\n[mol_grid_table] {\n\tborder-spacing: 0;\n\tdisplay: table-row-group;\n\tposition: relative;\n}\n\n[mol_grid_table] > * {\n\tdisplay: table-row;\n\ttransition: none;\n}\n\n[mol_grid_head] > *,\n[mol_grid_table] > * > * {\n\tdisplay: table-cell;\n\tpadding: var(--mol_gap_text);\n\twhite-space: nowrap;\n\tvertical-align: middle;\n\tbox-shadow: inset 2px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_row]:where(:first-child) > * {\n\tbox-shadow: inset 2px 0 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > * > *:where(:first-child) {\n\tbox-shadow: inset 0px 2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > * {\n\tbox-shadow: inset 2px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_head] > *:where(:first-child) {\n\tbox-shadow: inset 0px -2px 0 -1px var(--mol_theme_line);\n}\n\n[mol_grid_table] > [mol_grid_row]:where(:first-child) > *:where(:first-child) {\n\tbox-shadow: none;\n}\t\n\n[mol_grid_head] {\n\tdisplay: table-row;\n\ttransform: none !important;\n}\n\n/* [mol_grid_cell_number] {\n\ttext-align: right;\n} */\n\n[mol_grid_col_head] {\n\tfont-weight: inherit;\n\ttext-align: inherit;\n\tdisplay: table-cell;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_grid_cell_dimmer] {\n\tdisplay: inline-block;\n\tvertical-align: inherit;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_image) = class $mol_image extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		loading(){
+			return "eager";
+		}
+		decoding(){
+			return "async";
+		}
+		cors(){
+			return null;
+		}
+		natural_width(){
+			return 0;
+		}
+		natural_height(){
+			return 0;
+		}
+		load(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "img";
+		}
+		field(){
+			return {
+				...(super.field()), 
+				"src": (this.uri()), 
+				"alt": (this.title()), 
+				"loading": (this.loading()), 
+				"decoding": (this.decoding()), 
+				"crossOrigin": (this.cors())
+			};
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"width": (this.natural_width()), 
+				"height": (this.natural_height())
+			};
+		}
+		event(){
+			return {"load": (next) => (this.load(next))};
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+	};
+	($mol_mem(($.$mol_image.prototype), "load"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_image extends $.$mol_image {
+            natural_width(next) {
+                const dom = this.dom_node();
+                if (dom.naturalWidth)
+                    return dom.naturalWidth;
+                const found = this.uri().match(/\bwidth=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            natural_height(next) {
+                const dom = this.dom_node();
+                if (dom.naturalHeight)
+                    return dom.naturalHeight;
+                const found = this.uri().match(/\bheight=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            load() {
+                this.natural_width(null);
+                this.natural_height(null);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_height", null);
+        $$.$mol_image = $mol_image;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -10941,273 +11280,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_textarea) = class $mol_textarea extends ($.$mol_stack) {
-		clickable(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		sidebar_showed(){
-			return false;
-		}
-		press(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		hover(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		value(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		hint(){
-			return " ";
-		}
-		enabled(){
-			return true;
-		}
-		spellcheck(){
-			return true;
-		}
-		length_max(){
-			return +Infinity;
-		}
-		selection(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		bring(){
-			return (this.Edit().bring());
-		}
-		submit(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		submit_with_ctrl(){
-			return true;
-		}
-		Edit(){
-			const obj = new this.$.$mol_textarea_edit();
-			(obj.value) = (next) => ((this.value(next)));
-			(obj.hint) = () => ((this.hint()));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.spellcheck) = () => ((this.spellcheck()));
-			(obj.length_max) = () => ((this.length_max()));
-			(obj.selection) = (next) => ((this.selection(next)));
-			(obj.submit) = (next) => ((this.submit(next)));
-			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
-			return obj;
-		}
-		row_numb(id){
-			return 0;
-		}
-		highlight(){
-			return "";
-		}
-		syntax(){
-			const obj = new this.$.$mol_syntax2();
-			return obj;
-		}
-		View(){
-			const obj = new this.$.$mol_text_code();
-			(obj.text) = () => ((this.value()));
-			(obj.render_visible_only) = () => (false);
-			(obj.row_numb) = (id) => ((this.row_numb(id)));
-			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
-			(obj.highlight) = () => ((this.highlight()));
-			(obj.syntax) = () => ((this.syntax()));
-			return obj;
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"mol_textarea_clickable": (this.clickable()), 
-				"mol_textarea_sidebar_showed": (this.sidebar_showed())
-			};
-		}
-		event(){
-			return {"keydown": (next) => (this.press(next)), "pointermove": (next) => (this.hover(next))};
-		}
-		sub(){
-			return [(this.Edit()), (this.View())];
-		}
-		symbols_alt(){
-			return {
-				"comma": "<", 
-				"period": ">", 
-				"dash": "−", 
-				"equals": "≈", 
-				"graveAccent": "́", 
-				"forwardSlash": "÷", 
-				"E": "€", 
-				"V": "✔", 
-				"X": "×", 
-				"C": "©", 
-				"P": "§", 
-				"H": "₽", 
-				"key0": "°", 
-				"key8": "•", 
-				"key2": "@", 
-				"key3": "#", 
-				"key4": "$", 
-				"key6": "^", 
-				"key7": "&", 
-				"bracketOpen": "[", 
-				"bracketClose": "]", 
-				"slashBack": "|"
-			};
-		}
-		symbols_alt_ctrl(){
-			return {"space": " "};
-		}
-		symbols_alt_shift(){
-			return {
-				"V": "✅", 
-				"X": "❌", 
-				"O": "⭕", 
-				"key1": "❗", 
-				"key4": "💲", 
-				"key7": "❓", 
-				"comma": "«", 
-				"period": "»", 
-				"semicolon": "“", 
-				"quoteSingle": "”", 
-				"dash": "—", 
-				"equals": "≠", 
-				"graveAccent": "̱", 
-				"bracketOpen": "{", 
-				"bracketClose": "}"
-			};
-		}
-	};
-	($mol_mem(($.$mol_textarea.prototype), "clickable"));
-	($mol_mem(($.$mol_textarea.prototype), "press"));
-	($mol_mem(($.$mol_textarea.prototype), "hover"));
-	($mol_mem(($.$mol_textarea.prototype), "value"));
-	($mol_mem(($.$mol_textarea.prototype), "selection"));
-	($mol_mem(($.$mol_textarea.prototype), "submit"));
-	($mol_mem(($.$mol_textarea.prototype), "Edit"));
-	($mol_mem(($.$mol_textarea.prototype), "syntax"));
-	($mol_mem(($.$mol_textarea.prototype), "View"));
-	($.$mol_textarea_edit) = class $mol_textarea_edit extends ($.$mol_string) {
-		dom_name(){
-			return "textarea";
-		}
-		enter(){
-			return "enter";
-		}
-		field(){
-			return {...(super.field()), "scrollTop": 0};
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_textarea extends $.$mol_textarea {
-            indent_inc() {
-                let text = this.value();
-                let [from, to] = this.selection();
-                const rows = text.split('\n');
-                let start = 0;
-                for (let i = 0; i < rows.length; ++i) {
-                    let end = start + rows[i].length;
-                    if (end >= from && start <= to) {
-                        if (to === from || start !== to) {
-                            rows[i] = '\t' + rows[i];
-                            to += 1;
-                            end += 1;
-                        }
-                    }
-                    start = end + 1;
-                }
-                this.value(rows.join('\n'));
-                this.selection([from + 1, to]);
-            }
-            indent_dec() {
-                let text = this.value();
-                let [from, to] = this.selection();
-                const rows = text.split('\n');
-                let start = 0;
-                for (let i = 0; i < rows.length; ++i) {
-                    const end = start + rows[i].length;
-                    if (end >= from && start <= to && rows[i].startsWith('\t')) {
-                        rows[i] = rows[i].slice(1);
-                        to -= 1;
-                        if (start < from)
-                            from -= 1;
-                    }
-                    start = end + 1;
-                }
-                this.value(rows.join('\n'));
-                this.selection([from, to]);
-            }
-            symbol_insert(event) {
-                const symbol = event.shiftKey
-                    ? this.symbols_alt_shift()[$mol_keyboard_code[event.keyCode]]
-                    : event.ctrlKey
-                        ? this.symbols_alt_ctrl()[$mol_keyboard_code[event.keyCode]]
-                        : this.symbols_alt()[$mol_keyboard_code[event.keyCode]];
-                if (!symbol)
-                    return;
-                event.preventDefault();
-                document.execCommand('insertText', false, symbol);
-            }
-            clickable(next) {
-                if (!this.enabled())
-                    return true;
-                return next ?? false;
-            }
-            hover(event) {
-                this.clickable(event.ctrlKey);
-            }
-            press(event) {
-                if (event.altKey) {
-                    this.symbol_insert(event);
-                }
-                else {
-                    switch (event.keyCode) {
-                        case !event.shiftKey && $mol_keyboard_code.tab:
-                            this.indent_inc();
-                            break;
-                        case event.shiftKey && $mol_keyboard_code.tab:
-                            this.indent_dec();
-                            break;
-                        default: return;
-                    }
-                    event.preventDefault();
-                }
-            }
-            row_numb(index) {
-                return index;
-            }
-            syntax() {
-                return this.$.$mol_syntax2_md_code;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_textarea.prototype, "clickable", null);
-        $$.$mol_textarea = $mol_textarea;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tuser-select: none;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n\tuser-select: auto;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n\tuser-select: none;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
-})($ || ($ = {}));
-
-;
 	($.$hyoo_dungeon_ability_config) = class $hyoo_dungeon_ability_config extends ($.$mol_page) {
 		ability_total(id){
 			return (this.char().ability(id));
@@ -11562,608 +11634,149 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_section) = class $mol_section extends ($.$mol_list) {
-		title_dom_name(){
-			return "h1";
-		}
-		Title(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.dom_name) = () => ((this.title_dom_name()));
-			(obj.title) = () => ((this.title()));
-			return obj;
-		}
-		tools(){
-			return [];
-		}
-		Tools(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.tools()));
-			return obj;
-		}
-		head(){
-			return [(this.Title()), (this.Tools())];
-		}
-		Head(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.head()));
-			return obj;
-		}
-		content(){
-			return [];
-		}
-		Content(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.content()));
-			return obj;
-		}
-		level(){
-			return 1;
-		}
-		rows(){
-			return [(this.Head()), (this.Content())];
+	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
 		}
 	};
-	($mol_mem(($.$mol_section.prototype), "Title"));
-	($mol_mem(($.$mol_section.prototype), "Tools"));
-	($mol_mem(($.$mol_section.prototype), "Head"));
-	($mol_mem(($.$mol_section.prototype), "Content"));
 
 
 ;
 "use strict";
 
 ;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_section extends $.$mol_section {
-            title_dom_name() {
-                return 'h' + this.level();
-            }
-        }
-        $$.$mol_section = $mol_section;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/section/section.view.css", "[mol_section_head] {\n\tjustify-content: space-between;\n\talign-items: flex-end;\n\tflex-wrap: wrap;\n}\n\n[mol_section_title] {\n\tpadding: var(--mol_gap_text);\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[mol_section_title]:where(h1) {\n\tfont-size: 1.5rem;\n}\n\n[mol_section_title]:where(h2) {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h3) {\n\tfont-size: 1.25rem;\n}\n\n[mol_section_title]:where(h4) {\n\tfont-size: 1.25rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h5) {\n\tfont-size: 1rem;\n}\n\n[mol_section_title]:where(h6) {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
-		type(){
-			return "";
+	($.$mol_icon_trash_can) = class $mol_icon_trash_can extends ($.$mol_icon) {
+		path(){
+			return "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z";
 		}
-		auto_scroll(){
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_trash_can_outline) = class $mol_icon_trash_can_outline extends ($.$mol_icon) {
+		path(){
+			return "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_number) = class $mol_number extends ($.$mol_view) {
+		precision(){
+			return 1;
+		}
+		event_dec(next){
+			if(next !== undefined) return next;
 			return null;
 		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_type": (this.type())};
+		dec_enabled(){
+			return (this.enabled());
 		}
-		Paragraph(id){
-			const obj = new this.$.$mol_text_list_item();
-			(obj.index) = () => ((this.item_index(id)));
-			(obj.sub) = () => ((this.block_content(id)));
+		dec_icon(){
+			const obj = new this.$.$mol_icon_chevron_left();
 			return obj;
 		}
-	};
-	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
-	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
-		index(){
-			return 0;
+		Dec(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_dec(next)));
+			(obj.enabled) = () => ((this.dec_enabled()));
+			(obj.sub) = () => ([(this.dec_icon())]);
+			return obj;
 		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
+		type(){
+			return "tel";
+		}
+		value_string(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		string_enabled(){
+			return (this.enabled());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		String(){
+			const obj = new this.$.$mol_string();
+			(obj.type) = () => ((this.type()));
+			(obj.value) = (next) => ((this.value_string(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.string_enabled()));
+			(obj.submit) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		event_inc(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		inc_enabled(){
+			return (this.enabled());
+		}
+		inc_icon(){
+			const obj = new this.$.$mol_icon_chevron_right();
+			return obj;
+		}
+		Inc(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_inc(next)));
+			(obj.enabled) = () => ((this.inc_enabled()));
+			(obj.sub) = () => ([(this.inc_icon())]);
+			return obj;
+		}
+		precision_view(){
+			return (this.precision());
+		}
+		precision_change(){
+			return (this.precision());
+		}
+		value_min(){
+			return -Infinity;
+		}
+		value_max(){
+			return +Infinity;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return +NaN;
+		}
+		enabled(){
+			return true;
+		}
+		sub(){
+			return [
+				(this.Dec()), 
+				(this.String()), 
+				(this.Inc())
+			];
 		}
 	};
+	($mol_mem(($.$mol_number.prototype), "event_dec"));
+	($mol_mem(($.$mol_number.prototype), "dec_icon"));
+	($mol_mem(($.$mol_number.prototype), "Dec"));
+	($mol_mem(($.$mol_number.prototype), "value_string"));
+	($mol_mem(($.$mol_number.prototype), "submit"));
+	($mol_mem(($.$mol_number.prototype), "String"));
+	($mol_mem(($.$mol_number.prototype), "event_inc"));
+	($mol_mem(($.$mol_number.prototype), "inc_icon"));
+	($mol_mem(($.$mol_number.prototype), "Inc"));
+	($mol_mem(($.$mol_number.prototype), "value"));
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\r\n\tpadding-left: 1.75rem;\r\n}\r\n\r\n[mol_text_list_item] {\r\n\tcontain: none;\r\n\tdisplay: list-item;\r\n}\r\n\r\n[mol_text_list_item]::before {\r\n\tcontent: attr( mol_text_list_item_index ) \".\";\r\n\twidth: 1.25rem;\r\n\tdisplay: inline-block;\r\n\tposition: absolute;\r\n\tmargin-left: -1.75rem;\r\n\ttext-align: end;\r\n}\r\n\r\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\r\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\r\n\tcontent: \"•\";\r\n}\r\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-	($.$hyoo_dungeon_char_summary) = class $hyoo_dungeon_char_summary extends ($.$mol_page) {
-		name(){
-			return (this.char().name());
-		}
-		biography(){
-			return (this.char().biography());
-		}
-		age(){
-			return (this.char().age());
-		}
-		level(next){
-			return (this.char().level(next));
-		}
-		experience(next){
-			return (this.char().experience(next));
-		}
-		moral(){
-			return (this.char().moral());
-		}
-		ethics(){
-			return (this.char().ethics());
-		}
-		traits(){
-			return (this.char().traits());
-		}
-		ideals(){
-			return (this.char().ideals());
-		}
-		affection(){
-			return (this.char().affection());
-		}
-		weakness(){
-			return (this.char().weakness());
-		}
-		master_bonus(){
-			return (this.char().master_bonus());
-		}
-		hits(next){
-			return (this.char().hits(next));
-		}
-		hits_addon(next){
-			return (this.char().hits_addon(next));
-		}
-		hits_max(next){
-			return (this.char().hits_max(next));
-		}
-		hits_dice(){
-			return (this.char().hits_dice());
-		}
-		hits_heal(){
-			return (this.char().hits_heal());
-		}
-		inventory(next){
-			return (this.char().inventory(next));
-		}
-		ability_list(){
-			return (this.Ability_cofig().ability_list());
-		}
-		skill_list(){
-			return (this.Skill_cofig().skill_list());
-		}
-		image(){
-			return "";
-		}
-		Image(){
-			const obj = new this.$.$mol_image();
-			(obj.uri) = () => ((this.image()));
-			return obj;
-		}
-		Name(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Имя");
-			(obj.title) = () => ((this.name()));
-			return obj;
-		}
-		Age(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Возраст");
-			(obj.sub) = () => (["📅", (this.age())]);
-			return obj;
-		}
-		speed(){
-			return 1;
-		}
-		Speed(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Скорость");
-			(obj.sub) = () => (["🦶", (this.speed())]);
-			return obj;
-		}
-		Base(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Name()), 
-				(this.Age()), 
-				(this.Speed())
-			]);
-			return obj;
-		}
-		Top(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Base())]);
-			return obj;
-		}
-		race_title(){
-			return "";
-		}
-		race_link(){
-			return "";
-		}
-		Race(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Раса");
-			(obj.title) = () => ((this.race_title()));
-			(obj.uri) = () => ((this.race_link()));
-			return obj;
-		}
-		class_title(){
-			return "";
-		}
-		class_link(){
-			return "";
-		}
-		Class(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Класс");
-			(obj.title) = () => ((this.class_title()));
-			(obj.uri) = () => ((this.class_link()));
-			return obj;
-		}
-		story_title(){
-			return "";
-		}
-		story_link(){
-			return "";
-		}
-		Story(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Предыстория");
-			(obj.title) = () => ((this.story_title()));
-			(obj.uri) = () => ((this.story_link()));
-			return obj;
-		}
-		Life(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Race()), 
-				(this.Class()), 
-				(this.Story())
-			]);
-			return obj;
-		}
-		moral_title(){
-			return "";
-		}
-		Goodness(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Мораль");
-			(obj.title) = () => ((this.moral_title()));
-			return obj;
-		}
-		ethics_title(){
-			return "";
-		}
-		Principality(){
-			const obj = new this.$.$mol_chip();
-			(obj.hint) = () => ("Этика");
-			(obj.title) = () => ((this.ethics_title()));
-			return obj;
-		}
-		Alignment(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Goodness()), (this.Principality())]);
-			return obj;
-		}
-		Main(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Life()), (this.Alignment())]);
-			return obj;
-		}
-		Image_block(){
-			const obj = new this.$.$mol_stack();
-			(obj.sub) = () => ([
-				(this.Image()), 
-				(this.Top()), 
-				(this.Main())
-			]);
-			return obj;
-		}
-		Biography(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.biography()));
-			return obj;
-		}
-		Traits(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.traits()));
-			return obj;
-		}
-		Ideals(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.ideals()));
-			return obj;
-		}
-		Affection(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.affection()));
-			return obj;
-		}
-		Weakness(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.weakness()));
-			return obj;
-		}
-		Personality(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([
-				(this.Biography()), 
-				(this.Traits()), 
-				(this.Ideals()), 
-				(this.Affection()), 
-				(this.Weakness())
-			]);
-			return obj;
-		}
-		Info(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([(this.Image_block()), (this.Personality())]);
-			return obj;
-		}
-		Skills(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
-			(obj.title) = () => ("Навыки");
-			(obj.content) = () => ((this.skill_list()));
-			return obj;
-		}
-		Level_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.level(next)));
-			return obj;
-		}
-		Level(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("🏅 Уровень");
-			(obj.Value) = () => ((this.Level_value()));
-			return obj;
-		}
-		Master_bonus(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("🥇 Мастерство");
-			(obj.value) = () => (["+", (this.master_bonus())]);
-			return obj;
-		}
-		Experience_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.experience(next)));
-			(obj.step) = () => (100);
-			return obj;
-		}
-		Experience(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("✨ Опыт");
-			(obj.Value) = () => ((this.Experience_value()));
-			return obj;
-		}
-		Grade_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
-			(obj.title) = () => ("Прогресс");
-			(obj.content) = () => ([
-				(this.Level()), 
-				(this.Master_bonus()), 
-				(this.Experience())
-			]);
-			return obj;
-		}
-		Hits_max_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.hits_max(next)));
-			return obj;
-		}
-		Hits_max(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("💟 Предел");
-			(obj.Value) = () => ((this.Hits_max_value()));
-			return obj;
-		}
-		Hits_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.hits(next)));
-			return obj;
-		}
-		Hits(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("💗 Здоровье");
-			(obj.Value) = () => ((this.Hits_value()));
-			return obj;
-		}
-		Hits_addon_value(){
-			const obj = new this.$.$mol_paginator();
-			(obj.value) = (next) => ((this.hits_addon(next)));
-			return obj;
-		}
-		Hits_addon(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("💖 Бафы");
-			(obj.Value) = () => ((this.Hits_addon_value()));
-			return obj;
-		}
-		Hits_heal(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
-			(obj.title) = () => ("💊 Лечение");
-			(obj.value) = () => ([(this.hits_heal())]);
-			return obj;
-		}
-		Hits_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
-			(obj.title) = () => ("Хиты");
-			(obj.content) = () => ([
-				(this.Hits_max()), 
-				(this.Hits()), 
-				(this.Hits_addon()), 
-				(this.Hits_heal())
-			]);
-			return obj;
-		}
-		Abilities(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.ability_list()));
-			return obj;
-		}
-		Stat_main(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ([
-				(this.Grade_block()), 
-				(this.Hits_block()), 
-				(this.Abilities())
-			]);
-			return obj;
-		}
-		perks(){
-			return "";
-		}
-		Perks(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.perks()));
-			return obj;
-		}
-		Perks_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
-			(obj.title) = () => ("Умения");
-			(obj.Content) = () => ((this.Perks()));
-			return obj;
-		}
-		Inventory(){
-			const obj = new this.$.$mol_textarea();
-			(obj.value) = (next) => ((this.inventory(next)));
-			return obj;
-		}
-		Inventory_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
-			(obj.level) = () => (5);
-			(obj.title) = () => ("Инвентарь");
-			(obj.content) = () => ([(this.Inventory())]);
-			return obj;
-		}
-		Spec(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Perks_block()), (this.Inventory_block())]);
-			return obj;
-		}
-		Columns(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Info()), 
-				(this.Skills()), 
-				(this.Stat_main()), 
-				(this.Spec())
-			]);
-			return obj;
-		}
-		title(){
-			return "Сводка";
-		}
-		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
-			return obj;
-		}
-		Ability_cofig(){
-			const obj = new this.$.$hyoo_dungeon_ability_config();
-			(obj.char) = () => ((this.char()));
-			(obj.Ability_addon) = () => (null);
-			return obj;
-		}
-		Skill_cofig(){
-			const obj = new this.$.$hyoo_dungeon_skill_config();
-			(obj.char) = () => ((this.char()));
-			(obj.Skill_addon) = () => (null);
-			return obj;
-		}
-		body(){
-			return [(this.Columns())];
-		}
-	};
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Image"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Class"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Story"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Life"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Goodness"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Principality"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Alignment"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Main"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Image_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Biography"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Traits"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ideals"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Affection"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Weakness"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skills"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Master_bonus"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_heal"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Abilities"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat_main"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spec"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_cofig"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_cofig"));
-	($.$hyoo_dungeon_char_summary_block) = class $hyoo_dungeon_char_summary_block extends ($.$mol_section) {
-		level(){
-			return 5;
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$hyoo_dungeon_moral_all = {
-        good: {
-            title: '👼 Добрый',
-        },
-        neutral: {
-            title: '🤔 Нейтральный',
-        },
-        evil: {
-            title: '👿 Злой',
-        },
-    };
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$hyoo_dungeon_ethics_all = {
-        lawful: {
-            title: '🧐 Стоик',
-        },
-        neutral: {
-            title: '🤔 Нейтрал',
-        },
-        chaotic: {
-            title: '🥴 Хаотик',
-        },
-    };
+    $mol_style_attach("mol/number/number.css", "[mol_number] {\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tposition: relative;\n\talign-items: stretch;\n\tmax-width: 100%;\n}\n\n[mol_number_string] {\n\tappearance: textfield;\n\tflex: 1 1 7rem;\n\twidth: 7rem;\n}\n\n[mol_number_string]::-webkit-inner-spin-button {\n\tdisplay: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -12175,130 +11788,88 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
-            image() {
-                return this.char().race().image;
+        class $mol_number extends $.$mol_number {
+            value_limited(val) {
+                if (Number.isNaN(val))
+                    return this.value(val);
+                if (val === undefined)
+                    return this.value();
+                const min = this.value_min();
+                const max = this.value_max();
+                if (val < min)
+                    return this.value(min);
+                if (val > max)
+                    return this.value(max);
+                return this.value(val);
             }
-            race_title() {
-                return this.char().race().title;
+            event_dec(next) {
+                this.value_limited((this.value_limited() || 0) - this.precision_change());
             }
-            race_link() {
-                return this.char().race().link;
+            event_inc(next) {
+                this.value_limited((this.value_limited() || 0) + this.precision_change());
             }
-            story_title() {
-                return this.char().story().title;
+            round(val) {
+                if (Number.isNaN(val))
+                    return '';
+                if (val === 0)
+                    return '0';
+                if (!val)
+                    return '';
+                const precision_view = this.precision_view();
+                if (!precision_view)
+                    return val.toFixed();
+                if (precision_view >= 1) {
+                    return (val / precision_view).toFixed();
+                }
+                else {
+                    const fixed_number = Math.log10(1 / precision_view);
+                    return val.toFixed(Math.ceil(fixed_number));
+                }
             }
-            story_link() {
-                return this.char().story().link;
+            value_string(next) {
+                const current = this.round(this.value_limited());
+                if (next === undefined)
+                    return current;
+                const precision = this.precision_view();
+                if (precision - Math.floor(precision) === 0)
+                    next = next.replace(/[.,]/g, '');
+                next = (this.value_min() < 0 && next.startsWith('-') ? '-' : '')
+                    + next.replace(/,/g, '.').replace(/[^\d\.]/g, '').replace(/^0{2,}/, '0');
+                let dot_pos = next.indexOf('.');
+                if (dot_pos !== -1) {
+                    const prev = $mol_wire_probe(() => this.value_string()) ?? '';
+                    const dot_pos_prev = prev.indexOf('.');
+                    if (dot_pos_prev === dot_pos)
+                        dot_pos = next.lastIndexOf('.');
+                    const frac = next.slice(dot_pos + 1).replace(/\./g, '');
+                    next = (next.slice(0, dot_pos) || '0').replace(/\./g, '') + '.' + frac;
+                }
+                if (Number.isNaN(Number(next)))
+                    return next;
+                if (next.endsWith('.'))
+                    return next;
+                if (next.endsWith('-'))
+                    return next;
+                this.value_limited(Number(next || Number.NaN));
+                return next;
             }
-            class_title() {
-                return this.char().class().title;
+            dec_enabled() {
+                return this.enabled() && (!((this.value() || 0) <= this.value_min()));
             }
-            class_link() {
-                return this.char().class().link;
-            }
-            moral_title() {
-                return this.$.$hyoo_dungeon_moral_all[this.moral()].title;
-            }
-            ethics_title() {
-                return this.$.$hyoo_dungeon_ethics_all[this.ethics()].title;
-            }
-            speed() {
-                return this.char().race().speed;
-            }
-            perks() {
-                return this.char().perks().join('\n');
+            inc_enabled() {
+                return this.enabled() && (!((this.value() || 0) >= this.value_max()));
             }
         }
-        $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_dungeon_char_summary, {
-            flex: {
-                basis: '85rem',
-            },
-            Columns: {
-                flex: {
-                    wrap: 'wrap',
-                },
-                align: {
-                    items: 'flex-start',
-                },
-                justify: {
-                    content: 'space-between',
-                },
-                gap: $mol_gap.block,
-            },
-            Info: {
-                flex: {
-                    grow: 1,
-                    basis: '30rem',
-                },
-            },
-            Image: {
-                width: 'auto',
-                justify: {
-                    self: 'stretch',
-                },
-                aspectRatio: 1,
-            },
-            Top: {
-                flex: {
-                    wrap: 'wrap',
-                },
-                justify: {
-                    self: 'stretch',
-                    content: 'space-between',
-                },
-                background: {
-                    color: $mol_theme.spirit,
-                },
-            },
-            Main: {
-                background: {
-                    color: $mol_theme.spirit,
-                },
-                flex: {
-                    wrap: 'wrap',
-                },
-                align: {
-                    self: 'flex-end',
-                },
-                justify: {
-                    self: 'stretch',
-                    content: 'space-between',
-                },
-            },
-            Personality: {
-                background: {
-                    color: $mol_theme.card,
-                },
-            },
-            Stat_main: {
-                flex: {
-                    basis: `16rem`,
-                },
-                gap: $mol_gap.block,
-            },
-            Spec: {
-                flex: {
-                    direction: 'column',
-                },
-                gap: $mol_gap.block,
-            },
-            Perks: {
-                background: {
-                    color: $mol_theme.card,
-                },
-            },
-        });
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "value_string", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "dec_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "inc_enabled", null);
+        $$.$mol_number = $mol_number;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -12519,213 +12090,6 @@ var $;
 "use strict";
 
 ;
-	($.$mol_number) = class $mol_number extends ($.$mol_view) {
-		precision(){
-			return 1;
-		}
-		event_dec(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dec_enabled(){
-			return (this.enabled());
-		}
-		dec_icon(){
-			const obj = new this.$.$mol_icon_chevron_left();
-			return obj;
-		}
-		Dec(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.event_click) = (next) => ((this.event_dec(next)));
-			(obj.enabled) = () => ((this.dec_enabled()));
-			(obj.sub) = () => ([(this.dec_icon())]);
-			return obj;
-		}
-		type(){
-			return "tel";
-		}
-		value_string(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		hint(){
-			return " ";
-		}
-		string_enabled(){
-			return (this.enabled());
-		}
-		submit(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		String(){
-			const obj = new this.$.$mol_string();
-			(obj.type) = () => ((this.type()));
-			(obj.value) = (next) => ((this.value_string(next)));
-			(obj.hint) = () => ((this.hint()));
-			(obj.enabled) = () => ((this.string_enabled()));
-			(obj.submit) = (next) => ((this.submit(next)));
-			return obj;
-		}
-		event_inc(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		inc_enabled(){
-			return (this.enabled());
-		}
-		inc_icon(){
-			const obj = new this.$.$mol_icon_chevron_right();
-			return obj;
-		}
-		Inc(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.event_click) = (next) => ((this.event_inc(next)));
-			(obj.enabled) = () => ((this.inc_enabled()));
-			(obj.sub) = () => ([(this.inc_icon())]);
-			return obj;
-		}
-		precision_view(){
-			return (this.precision());
-		}
-		precision_change(){
-			return (this.precision());
-		}
-		value_min(){
-			return -Infinity;
-		}
-		value_max(){
-			return +Infinity;
-		}
-		value(next){
-			if(next !== undefined) return next;
-			return +NaN;
-		}
-		enabled(){
-			return true;
-		}
-		sub(){
-			return [
-				(this.Dec()), 
-				(this.String()), 
-				(this.Inc())
-			];
-		}
-	};
-	($mol_mem(($.$mol_number.prototype), "event_dec"));
-	($mol_mem(($.$mol_number.prototype), "dec_icon"));
-	($mol_mem(($.$mol_number.prototype), "Dec"));
-	($mol_mem(($.$mol_number.prototype), "value_string"));
-	($mol_mem(($.$mol_number.prototype), "submit"));
-	($mol_mem(($.$mol_number.prototype), "String"));
-	($mol_mem(($.$mol_number.prototype), "event_inc"));
-	($mol_mem(($.$mol_number.prototype), "inc_icon"));
-	($mol_mem(($.$mol_number.prototype), "Inc"));
-	($mol_mem(($.$mol_number.prototype), "value"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/number/number.css", "[mol_number] {\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tposition: relative;\n\talign-items: stretch;\n\tmax-width: 100%;\n}\n\n[mol_number_string] {\n\tappearance: textfield;\n\tflex: 1 1 7rem;\n\twidth: 7rem;\n}\n\n[mol_number_string]::-webkit-inner-spin-button {\n\tdisplay: none;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_number extends $.$mol_number {
-            value_limited(val) {
-                if (Number.isNaN(val))
-                    return this.value(val);
-                if (val === undefined)
-                    return this.value();
-                const min = this.value_min();
-                const max = this.value_max();
-                if (val < min)
-                    return this.value(min);
-                if (val > max)
-                    return this.value(max);
-                return this.value(val);
-            }
-            event_dec(next) {
-                this.value_limited((this.value_limited() || 0) - this.precision_change());
-            }
-            event_inc(next) {
-                this.value_limited((this.value_limited() || 0) + this.precision_change());
-            }
-            round(val) {
-                if (Number.isNaN(val))
-                    return '';
-                if (val === 0)
-                    return '0';
-                if (!val)
-                    return '';
-                const precision_view = this.precision_view();
-                if (!precision_view)
-                    return val.toFixed();
-                if (precision_view >= 1) {
-                    return (val / precision_view).toFixed();
-                }
-                else {
-                    const fixed_number = Math.log10(1 / precision_view);
-                    return val.toFixed(Math.ceil(fixed_number));
-                }
-            }
-            value_string(next) {
-                const current = this.round(this.value_limited());
-                if (next === undefined)
-                    return current;
-                const precision = this.precision_view();
-                if (precision - Math.floor(precision) === 0)
-                    next = next.replace(/[.,]/g, '');
-                next = (this.value_min() < 0 && next.startsWith('-') ? '-' : '')
-                    + next.replace(/,/g, '.').replace(/[^\d\.]/g, '').replace(/^0{2,}/, '0');
-                let dot_pos = next.indexOf('.');
-                if (dot_pos !== -1) {
-                    const prev = $mol_wire_probe(() => this.value_string()) ?? '';
-                    const dot_pos_prev = prev.indexOf('.');
-                    if (dot_pos_prev === dot_pos)
-                        dot_pos = next.lastIndexOf('.');
-                    const frac = next.slice(dot_pos + 1).replace(/\./g, '');
-                    next = (next.slice(0, dot_pos) || '0').replace(/\./g, '') + '.' + frac;
-                }
-                if (Number.isNaN(Number(next)))
-                    return next;
-                if (next.endsWith('.'))
-                    return next;
-                if (next.endsWith('-'))
-                    return next;
-                this.value_limited(Number(next || Number.NaN));
-                return next;
-            }
-            dec_enabled() {
-                return this.enabled() && (!((this.value() || 0) <= this.value_min()));
-            }
-            inc_enabled() {
-                return this.enabled() && (!((this.value() || 0) >= this.value_max()));
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_number.prototype, "value_string", null);
-        __decorate([
-            $mol_mem
-        ], $mol_number.prototype, "dec_enabled", null);
-        __decorate([
-            $mol_mem
-        ], $mol_number.prototype, "inc_enabled", null);
-        $$.$mol_number = $mol_number;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
 		option_checked(id, next){
 			if(next !== undefined) return next;
@@ -12859,6 +12223,1380 @@ var $;
         }
         $$.$mol_switch = $mol_switch;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_dungeon_item_config) = class $hyoo_dungeon_item_config extends ($.$mol_page) {
+		name(next){
+			return (this.item().title(next));
+		}
+		price(next){
+			return (this.item().price(next));
+		}
+		weight(next){
+			return (this.item().weight(next));
+		}
+		ability(next){
+			return (this.item().ability(next));
+		}
+		hand1(next){
+			return (this.item().damage_hand1(next));
+		}
+		hand2(next){
+			return (this.item().damage_hand2(next));
+		}
+		near(next){
+			return (this.item().damage_near(next));
+		}
+		distant(next){
+			return (this.item().damage_distant(next));
+		}
+		damage_type(next){
+			return (this.item().damage_type(next));
+		}
+		distance_norm(next){
+			return (this.item().attack_distance_norm(next));
+		}
+		distance_max(next){
+			return (this.item().attack_distance_max(next));
+		}
+		Price(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.price(next)));
+			return obj;
+		}
+		Price_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🟠 Цена");
+			(obj.Content) = () => ((this.Price()));
+			return obj;
+		}
+		Weight(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.weight(next)));
+			return obj;
+		}
+		Weight_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🧱 Вес");
+			(obj.Content) = () => ((this.Weight()));
+			return obj;
+		}
+		Common(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Price_block()), (this.Weight_block())]);
+			return obj;
+		}
+		Hand1(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hand1(next)));
+			return obj;
+		}
+		Hand1_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🙋 Одноручный урон");
+			(obj.Content) = () => ((this.Hand1()));
+			return obj;
+		}
+		Hand2(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hand2(next)));
+			return obj;
+		}
+		Hand2_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🙆 Двуручный урон");
+			(obj.Content) = () => ((this.Hand2()));
+			return obj;
+		}
+		Touch_range(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Hand1_block()), (this.Hand2_block())]);
+			return obj;
+		}
+		Near(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.near(next)));
+			return obj;
+		}
+		Near_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💫 Ближний урон");
+			(obj.Content) = () => ((this.Near()));
+			return obj;
+		}
+		Distant(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.distant(next)));
+			return obj;
+		}
+		Distant_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💨 Дальний урон");
+			(obj.Content) = () => ((this.Distant()));
+			return obj;
+		}
+		Long_range(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Near_block()), (this.Distant_block())]);
+			return obj;
+		}
+		Distance_norm(){
+			const obj = new this.$.$mol_paginator();
+			(obj.step) = () => (5);
+			(obj.value) = (next) => ((this.distance_norm(next)));
+			return obj;
+		}
+		Distance_norm_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🛑 Дальность без помех");
+			(obj.Content) = () => ((this.Distance_norm()));
+			return obj;
+		}
+		Distance_max(){
+			const obj = new this.$.$mol_paginator();
+			(obj.step) = () => (5);
+			(obj.value) = (next) => ((this.distance_max(next)));
+			return obj;
+		}
+		Distance_max_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("⛔ Дальность с помехой");
+			(obj.Content) = () => ((this.Distance_max()));
+			return obj;
+		}
+		Distance_limit(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Distance_norm_block()), (this.Distance_max_block())]);
+			return obj;
+		}
+		Damage_type(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.damage_type(next)));
+			(obj.options) = () => ({
+				"stab": "🤺 Колящий", 
+				"slash": "🔪 Режущий", 
+				"crush": "🏏 Дробящий", 
+				"poison": "🧪 Ядовитый", 
+				"fire": "🔥 Огненный"
+			});
+			return obj;
+		}
+		Damage_type_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💢 Вид урона");
+			(obj.Content) = () => ((this.Damage_type()));
+			return obj;
+		}
+		Ability(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.ability(next)));
+			(obj.options) = () => ({"strength": "💪 Мощность", "dexterity": "🥏 Ловкость"});
+			return obj;
+		}
+		Ability_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🔰 Основная способность");
+			(obj.Content) = () => ((this.Ability()));
+			return obj;
+		}
+		item(){
+			const obj = new this.$.$hyoo_dungeon_item();
+			return obj;
+		}
+		Title(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ("Название");
+			(obj.value) = (next) => ((this.name(next)));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Common()), 
+				(this.Touch_range()), 
+				(this.Long_range()), 
+				(this.Distance_limit()), 
+				(this.Damage_type_block()), 
+				(this.Ability_block())
+			];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Price"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Price_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Weight"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Weight_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Common"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand1"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand1_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand2"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand2_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Touch_range"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Near"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Near_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distant"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distant_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Long_range"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_norm"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_norm_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_max"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_max_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_limit"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Damage_type"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Damage_type_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "item"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Title"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_item_config extends $.$hyoo_dungeon_item_config {
+            title() {
+                return this.item().title();
+            }
+        }
+        $$.$hyoo_dungeon_item_config = $hyoo_dungeon_item_config;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_item_config, {
+            flex: {
+                basis: '40rem',
+            },
+            Body_content: {
+                gap: $mol_gap.block,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_dungeon_item_manage) = class $hyoo_dungeon_item_manage extends ($.$mol_book2_catalog) {
+		item_id_next(){
+			return "";
+		}
+		Item_add_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Item_add(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ({"item": (this.item_id_next())});
+			(obj.sub) = () => ([(this.Item_add_icon())]);
+			return obj;
+		}
+		item(id){
+			const obj = new this.$.$hyoo_dungeon_item();
+			return obj;
+		}
+		item_delete(id){
+			return null;
+		}
+		Item_delete_icon(id){
+			const obj = new this.$.$mol_icon_trash_can_outline();
+			return obj;
+		}
+		Item_delete(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.item_delete(id)));
+			(obj.sub) = () => ([(this.Item_delete_icon(id))]);
+			return obj;
+		}
+		item_brief(id){
+			return "";
+		}
+		Item_brief(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.item_brief(id))]);
+			return obj;
+		}
+		char(){
+			const obj = new this.$.$hyoo_dungeon_char();
+			return obj;
+		}
+		menu_title(){
+			return "Инвентарь";
+		}
+		menu_tools(){
+			return [(this.Item_add())];
+		}
+		param(){
+			return "item";
+		}
+		Spread(id){
+			const obj = new this.$.$hyoo_dungeon_item_config();
+			(obj.item) = () => ((this.item(id)));
+			(obj.tools) = () => ([(this.Spread_close())]);
+			return obj;
+		}
+		menu_item_content(id){
+			return [(this.Menu_link(id)), (this.Item_delete(id))];
+		}
+		menu_link_content(id){
+			return [(this.Menu_link_title(id)), (this.Item_brief(id))];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "Item_add_icon"));
+	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "Item_add"));
+	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "item"));
+	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_delete_icon"));
+	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_delete"));
+	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_brief"));
+	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "char"));
+	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Spread"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_item_manage extends $.$hyoo_dungeon_item_manage {
+            spread_ids() {
+                return Object.keys(this.char().inventory().data());
+            }
+            item_id_next() {
+                return this.char().inventory().data().length.toString();
+            }
+            item(index) {
+                return this.char().inventory_item(index);
+            }
+            item_brief(index) {
+                return this.item(index).brief();
+            }
+            item_delete(index) {
+                this.char().inventory_delete(index);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_item_manage.prototype, "spread_ids", null);
+        $$.$hyoo_dungeon_item_manage = $hyoo_dungeon_item_manage;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_item_manage, {
+            Menu: {
+                flex: {
+                    basis: '35rem',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_section) = class $mol_section extends ($.$mol_list) {
+		title_dom_name(){
+			return "h1";
+		}
+		Title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.dom_name) = () => ((this.title_dom_name()));
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		tools(){
+			return [];
+		}
+		Tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tools()));
+			return obj;
+		}
+		head(){
+			return [(this.Title()), (this.Tools())];
+		}
+		Head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.head()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.content()));
+			return obj;
+		}
+		level(){
+			return 1;
+		}
+		rows(){
+			return [(this.Head()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_section.prototype), "Title"));
+	($mol_mem(($.$mol_section.prototype), "Tools"));
+	($mol_mem(($.$mol_section.prototype), "Head"));
+	($mol_mem(($.$mol_section.prototype), "Content"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_section extends $.$mol_section {
+            title_dom_name() {
+                return 'h' + this.level();
+            }
+        }
+        $$.$mol_section = $mol_section;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/section/section.view.css", "[mol_section_head] {\n\tjustify-content: space-between;\n\talign-items: flex-end;\n\tflex-wrap: wrap;\n}\n\n[mol_section_title] {\n\tpadding: var(--mol_gap_text);\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[mol_section_title]:where(h1) {\n\tfont-size: 1.5rem;\n}\n\n[mol_section_title]:where(h2) {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h3) {\n\tfont-size: 1.25rem;\n}\n\n[mol_section_title]:where(h4) {\n\tfont-size: 1.25rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h5) {\n\tfont-size: 1rem;\n}\n\n[mol_section_title]:where(h6) {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
+		type(){
+			return "";
+		}
+		auto_scroll(){
+			return null;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_type": (this.type())};
+		}
+		Paragraph(id){
+			const obj = new this.$.$mol_text_list_item();
+			(obj.index) = () => ((this.item_index(id)));
+			(obj.sub) = () => ((this.block_content(id)));
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
+	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
+		index(){
+			return 0;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\r\n\tpadding-left: 1.75rem;\r\n}\r\n\r\n[mol_text_list_item] {\r\n\tcontain: none;\r\n\tdisplay: list-item;\r\n}\r\n\r\n[mol_text_list_item]::before {\r\n\tcontent: attr( mol_text_list_item_index ) \".\";\r\n\twidth: 1.25rem;\r\n\tdisplay: inline-block;\r\n\tposition: absolute;\r\n\tmargin-left: -1.75rem;\r\n\ttext-align: end;\r\n}\r\n\r\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\r\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\r\n\tcontent: \"•\";\r\n}\r\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$hyoo_dungeon_char_summary) = class $hyoo_dungeon_char_summary extends ($.$mol_page) {
+		name(){
+			return (this.char().name());
+		}
+		biography(){
+			return (this.char().biography());
+		}
+		age(){
+			return (this.char().age());
+		}
+		level(next){
+			return (this.char().level(next));
+		}
+		experience(next){
+			return (this.char().experience(next));
+		}
+		moral(){
+			return (this.char().moral());
+		}
+		ethics(){
+			return (this.char().ethics());
+		}
+		traits(){
+			return (this.char().traits());
+		}
+		ideals(){
+			return (this.char().ideals());
+		}
+		affection(){
+			return (this.char().affection());
+		}
+		weakness(){
+			return (this.char().weakness());
+		}
+		master_bonus(){
+			return (this.char().master_bonus());
+		}
+		hits(next){
+			return (this.char().hits(next));
+		}
+		hits_addon(next){
+			return (this.char().hits_addon(next));
+		}
+		hits_max(next){
+			return (this.char().hits_max(next));
+		}
+		hits_dice(){
+			return (this.char().hits_dice());
+		}
+		hits_heal(){
+			return (this.char().hits_heal());
+		}
+		ability_list(){
+			return (this.Ability_cofig().ability_list());
+		}
+		skill_list(){
+			return (this.Skill_cofig().skill_list());
+		}
+		item_list(){
+			return (this.Item_list().menu_links());
+		}
+		Name(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Имя");
+			(obj.title) = () => ((this.name()));
+			return obj;
+		}
+		Age(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Возраст");
+			(obj.sub) = () => (["📅", (this.age())]);
+			return obj;
+		}
+		speed(){
+			return 1;
+		}
+		Speed(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Скорость");
+			(obj.sub) = () => (["🦶", (this.speed())]);
+			return obj;
+		}
+		Base(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Name()), 
+				(this.Age()), 
+				(this.Speed())
+			]);
+			return obj;
+		}
+		Top(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Base())]);
+			return obj;
+		}
+		race_title(){
+			return "";
+		}
+		race_link(){
+			return "";
+		}
+		Race(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Раса");
+			(obj.title) = () => ((this.race_title()));
+			(obj.uri) = () => ((this.race_link()));
+			return obj;
+		}
+		class_title(){
+			return "";
+		}
+		class_link(){
+			return "";
+		}
+		Class(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Класс");
+			(obj.title) = () => ((this.class_title()));
+			(obj.uri) = () => ((this.class_link()));
+			return obj;
+		}
+		story_title(){
+			return "";
+		}
+		story_link(){
+			return "";
+		}
+		Story(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Предыстория");
+			(obj.title) = () => ((this.story_title()));
+			(obj.uri) = () => ((this.story_link()));
+			return obj;
+		}
+		Life(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Race()), 
+				(this.Class()), 
+				(this.Story())
+			]);
+			return obj;
+		}
+		moral_title(){
+			return "";
+		}
+		Goodness(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Мораль");
+			(obj.title) = () => ((this.moral_title()));
+			return obj;
+		}
+		ethics_title(){
+			return "";
+		}
+		Principality(){
+			const obj = new this.$.$mol_chip();
+			(obj.hint) = () => ("Этика");
+			(obj.title) = () => ((this.ethics_title()));
+			return obj;
+		}
+		Alignment(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Goodness()), (this.Principality())]);
+			return obj;
+		}
+		Main(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Life()), (this.Alignment())]);
+			return obj;
+		}
+		Biography(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.biography()));
+			return obj;
+		}
+		Traits(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.traits()));
+			return obj;
+		}
+		Ideals(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.ideals()));
+			return obj;
+		}
+		Affection(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.affection()));
+			return obj;
+		}
+		Weakness(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.weakness()));
+			return obj;
+		}
+		Personality(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Biography()), 
+				(this.Traits()), 
+				(this.Ideals()), 
+				(this.Affection()), 
+				(this.Weakness())
+			]);
+			return obj;
+		}
+		Info(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Top()), 
+				(this.Main()), 
+				(this.Personality())
+			]);
+			return obj;
+		}
+		Level_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level(next)));
+			return obj;
+		}
+		Level(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🏅 Уровень");
+			(obj.Value) = () => ((this.Level_value()));
+			return obj;
+		}
+		Master_bonus(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🥇 Мастерство");
+			(obj.value) = () => (["+", (this.master_bonus())]);
+			return obj;
+		}
+		Experience_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.experience(next)));
+			(obj.step) = () => (100);
+			return obj;
+		}
+		Experience(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("✨ Опыт");
+			(obj.Value) = () => ((this.Experience_value()));
+			return obj;
+		}
+		Grade_block(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Прогресс");
+			(obj.content) = () => ([
+				(this.Level()), 
+				(this.Master_bonus()), 
+				(this.Experience())
+			]);
+			return obj;
+		}
+		Hits_max_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits_max(next)));
+			return obj;
+		}
+		Hits_max(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💟 Предел");
+			(obj.Value) = () => ((this.Hits_max_value()));
+			return obj;
+		}
+		Hits_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits(next)));
+			return obj;
+		}
+		Hits(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💗 Здоровье");
+			(obj.Value) = () => ((this.Hits_value()));
+			return obj;
+		}
+		Hits_addon_value(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.hits_addon(next)));
+			return obj;
+		}
+		Hits_addon(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💖 Бафы");
+			(obj.Value) = () => ((this.Hits_addon_value()));
+			return obj;
+		}
+		Hits_heal(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("💊 Лечение");
+			(obj.value) = () => ([(this.hits_heal())]);
+			return obj;
+		}
+		Hits_block(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Хиты");
+			(obj.content) = () => ([
+				(this.Hits_max()), 
+				(this.Hits()), 
+				(this.Hits_addon()), 
+				(this.Hits_heal())
+			]);
+			return obj;
+		}
+		Abilities(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.ability_list()));
+			return obj;
+		}
+		Stat_main(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Grade_block()), 
+				(this.Hits_block()), 
+				(this.Abilities())
+			]);
+			return obj;
+		}
+		Skills(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Навыки");
+			(obj.content) = () => ((this.skill_list()));
+			return obj;
+		}
+		perks(){
+			return "";
+		}
+		Perks(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.perks()));
+			return obj;
+		}
+		Perks_block(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Умения");
+			(obj.Content) = () => ((this.Perks()));
+			return obj;
+		}
+		Inventory(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.item_list()));
+			return obj;
+		}
+		Inventory_block(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Инвентарь");
+			(obj.content) = () => ([(this.Inventory())]);
+			return obj;
+		}
+		Columns(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Info()), 
+				(this.Stat_main()), 
+				(this.Skills()), 
+				(this.Perks_block()), 
+				(this.Inventory_block())
+			]);
+			return obj;
+		}
+		title(){
+			return "Сводка";
+		}
+		char(){
+			const obj = new this.$.$hyoo_dungeon_char();
+			return obj;
+		}
+		Ability_cofig(){
+			const obj = new this.$.$hyoo_dungeon_ability_config();
+			(obj.char) = () => ((this.char()));
+			(obj.Ability_addon) = () => (null);
+			return obj;
+		}
+		Skill_cofig(){
+			const obj = new this.$.$hyoo_dungeon_skill_config();
+			(obj.char) = () => ((this.char()));
+			(obj.Skill_addon) = () => (null);
+			return obj;
+		}
+		Item_list(){
+			const obj = new this.$.$hyoo_dungeon_item_manage();
+			(obj.char) = () => ((this.char()));
+			(obj.Item_delete) = (id) => (null);
+			return obj;
+		}
+		body(){
+			return [(this.Columns())];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Class"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Story"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Life"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Goodness"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Principality"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Alignment"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Main"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Biography"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Traits"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ideals"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Affection"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Weakness"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Master_bonus"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon_value"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_heal"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Abilities"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat_main"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skills"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_cofig"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_cofig"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Item_list"));
+	($.$hyoo_dungeon_char_summary_block) = class $hyoo_dungeon_char_summary_block extends ($.$mol_section) {
+		level(){
+			return 5;
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$hyoo_dungeon_moral_all = {
+        good: {
+            title: '👼 Добрый',
+        },
+        neutral: {
+            title: '🤔 Нейтральный',
+        },
+        evil: {
+            title: '👿 Злой',
+        },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$hyoo_dungeon_ethics_all = {
+        lawful: {
+            title: '🧐 Стоик',
+        },
+        neutral: {
+            title: '🤔 Нейтрал',
+        },
+        chaotic: {
+            title: '🥴 Хаотик',
+        },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
+            race_title() {
+                return this.char().race().title;
+            }
+            race_link() {
+                return this.char().race().link;
+            }
+            story_title() {
+                return this.char().story().title;
+            }
+            story_link() {
+                return this.char().story().link;
+            }
+            class_title() {
+                return this.char().class().title;
+            }
+            class_link() {
+                return this.char().class().link;
+            }
+            moral_title() {
+                return this.$.$hyoo_dungeon_moral_all[this.moral()].title;
+            }
+            ethics_title() {
+                return this.$.$hyoo_dungeon_ethics_all[this.ethics()].title;
+            }
+            speed() {
+                return this.char().race().speed;
+            }
+            perks() {
+                return this.char().perks().join('\n');
+            }
+        }
+        $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_char_summary, {
+            flex: {
+                basis: '105rem',
+                grow: 1,
+            },
+            Columns: {
+                flex: {
+                    wrap: 'wrap',
+                },
+                align: {
+                    items: 'flex-start',
+                },
+                justify: {
+                    content: 'space-between',
+                },
+                gap: $mol_gap.block,
+            },
+            Info: {
+                flex: {
+                    grow: 1,
+                    basis: '20rem',
+                },
+            },
+            Inventory_block: {
+                flex: {
+                    basis: '30rem',
+                },
+            },
+            Top: {
+                flex: {
+                    wrap: 'wrap',
+                },
+                justify: {
+                    self: 'stretch',
+                    content: 'space-between',
+                },
+            },
+            Main: {
+                flex: {
+                    wrap: 'wrap',
+                },
+                justify: {
+                    self: 'stretch',
+                    content: 'space-between',
+                },
+            },
+            Personality: {
+                background: {
+                    color: $mol_theme.card,
+                },
+            },
+            Stat_main: {
+                flex: {
+                    basis: `16rem`,
+                },
+                gap: $mol_gap.block,
+            },
+            Skills: {
+                flex: {
+                    basis: '10rem',
+                },
+            },
+            Perks_block: {
+                flex: {
+                    basis: '20rem',
+                },
+            },
+            Perks: {
+                background: {
+                    color: $mol_theme.card,
+                },
+            },
+            Inventory: {
+                background: {
+                    color: $mol_theme.card,
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_textarea) = class $mol_textarea extends ($.$mol_stack) {
+		clickable(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		sidebar_showed(){
+			return false;
+		}
+		press(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		hover(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		enabled(){
+			return true;
+		}
+		spellcheck(){
+			return true;
+		}
+		length_max(){
+			return +Infinity;
+		}
+		selection(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		bring(){
+			return (this.Edit().bring());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		submit_with_ctrl(){
+			return true;
+		}
+		Edit(){
+			const obj = new this.$.$mol_textarea_edit();
+			(obj.value) = (next) => ((this.value(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.spellcheck) = () => ((this.spellcheck()));
+			(obj.length_max) = () => ((this.length_max()));
+			(obj.selection) = (next) => ((this.selection(next)));
+			(obj.submit) = (next) => ((this.submit(next)));
+			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
+			return obj;
+		}
+		row_numb(id){
+			return 0;
+		}
+		highlight(){
+			return "";
+		}
+		syntax(){
+			const obj = new this.$.$mol_syntax2();
+			return obj;
+		}
+		View(){
+			const obj = new this.$.$mol_text_code();
+			(obj.text) = () => ((this.value()));
+			(obj.render_visible_only) = () => (false);
+			(obj.row_numb) = (id) => ((this.row_numb(id)));
+			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.syntax) = () => ((this.syntax()));
+			return obj;
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"mol_textarea_clickable": (this.clickable()), 
+				"mol_textarea_sidebar_showed": (this.sidebar_showed())
+			};
+		}
+		event(){
+			return {"keydown": (next) => (this.press(next)), "pointermove": (next) => (this.hover(next))};
+		}
+		sub(){
+			return [(this.Edit()), (this.View())];
+		}
+		symbols_alt(){
+			return {
+				"comma": "<", 
+				"period": ">", 
+				"dash": "−", 
+				"equals": "≈", 
+				"graveAccent": "́", 
+				"forwardSlash": "÷", 
+				"E": "€", 
+				"V": "✔", 
+				"X": "×", 
+				"C": "©", 
+				"P": "§", 
+				"H": "₽", 
+				"key0": "°", 
+				"key8": "•", 
+				"key2": "@", 
+				"key3": "#", 
+				"key4": "$", 
+				"key6": "^", 
+				"key7": "&", 
+				"bracketOpen": "[", 
+				"bracketClose": "]", 
+				"slashBack": "|"
+			};
+		}
+		symbols_alt_ctrl(){
+			return {"space": " "};
+		}
+		symbols_alt_shift(){
+			return {
+				"V": "✅", 
+				"X": "❌", 
+				"O": "⭕", 
+				"key1": "❗", 
+				"key4": "💲", 
+				"key7": "❓", 
+				"comma": "«", 
+				"period": "»", 
+				"semicolon": "“", 
+				"quoteSingle": "”", 
+				"dash": "—", 
+				"equals": "≠", 
+				"graveAccent": "̱", 
+				"bracketOpen": "{", 
+				"bracketClose": "}"
+			};
+		}
+	};
+	($mol_mem(($.$mol_textarea.prototype), "clickable"));
+	($mol_mem(($.$mol_textarea.prototype), "press"));
+	($mol_mem(($.$mol_textarea.prototype), "hover"));
+	($mol_mem(($.$mol_textarea.prototype), "value"));
+	($mol_mem(($.$mol_textarea.prototype), "selection"));
+	($mol_mem(($.$mol_textarea.prototype), "submit"));
+	($mol_mem(($.$mol_textarea.prototype), "Edit"));
+	($mol_mem(($.$mol_textarea.prototype), "syntax"));
+	($mol_mem(($.$mol_textarea.prototype), "View"));
+	($.$mol_textarea_edit) = class $mol_textarea_edit extends ($.$mol_string) {
+		dom_name(){
+			return "textarea";
+		}
+		enter(){
+			return "enter";
+		}
+		field(){
+			return {...(super.field()), "scrollTop": 0};
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_textarea extends $.$mol_textarea {
+            indent_inc() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    let end = start + rows[i].length;
+                    if (end >= from && start <= to) {
+                        if (to === from || start !== to) {
+                            rows[i] = '\t' + rows[i];
+                            to += 1;
+                            end += 1;
+                        }
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from + 1, to]);
+            }
+            indent_dec() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    const end = start + rows[i].length;
+                    if (end >= from && start <= to && rows[i].startsWith('\t')) {
+                        rows[i] = rows[i].slice(1);
+                        to -= 1;
+                        if (start < from)
+                            from -= 1;
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from, to]);
+            }
+            symbol_insert(event) {
+                const symbol = event.shiftKey
+                    ? this.symbols_alt_shift()[$mol_keyboard_code[event.keyCode]]
+                    : event.ctrlKey
+                        ? this.symbols_alt_ctrl()[$mol_keyboard_code[event.keyCode]]
+                        : this.symbols_alt()[$mol_keyboard_code[event.keyCode]];
+                if (!symbol)
+                    return;
+                event.preventDefault();
+                document.execCommand('insertText', false, symbol);
+            }
+            clickable(next) {
+                if (!this.enabled())
+                    return true;
+                return next ?? false;
+            }
+            hover(event) {
+                this.clickable(event.ctrlKey);
+            }
+            press(event) {
+                if (event.altKey) {
+                    this.symbol_insert(event);
+                }
+                else {
+                    switch (event.keyCode) {
+                        case !event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_inc();
+                            break;
+                        case event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_dec();
+                            break;
+                        default: return;
+                    }
+                    event.preventDefault();
+                }
+            }
+            row_numb(index) {
+                return index;
+            }
+            syntax() {
+                return this.$.$mol_syntax2_md_code;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_textarea.prototype, "clickable", null);
+        $$.$mol_textarea = $mol_textarea;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tuser-select: none;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n\tuser-select: auto;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n\tuser-select: none;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -13555,6 +14293,12 @@ var $;
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
+		Inventory(){
+			const obj = new this.$.$hyoo_dungeon_item_manage();
+			(obj.char) = () => ((this.char()));
+			(obj.addon_tools) = () => ([(this.Spread_close())]);
+			return obj;
+		}
 		Source(){
 			const obj = new this.$.$mol_link_source();
 			(obj.uri) = () => ("https://github.com/hyoo-ru/dungeon.hyoo.ru");
@@ -13567,6 +14311,9 @@ var $;
 		Theme(){
 			const obj = new this.$.$mol_theme_auto();
 			return obj;
+		}
+		param(){
+			return "section";
 		}
 		menu_title(){
 			return "Dungeons & Dragons";
@@ -13584,7 +14331,8 @@ var $;
 				"main": (this.Main()), 
 				"personality": (this.Personality()), 
 				"Params": (this.Params()), 
-				"skills": (this.Skills())
+				"skills": (this.Skills()), 
+				"inventory": (this.Inventory())
 			};
 		}
 		menu_foot(){
@@ -13602,6 +14350,7 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Personality"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Params"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Skills"));
+	($mol_mem(($.$hyoo_dungeon_app.prototype), "Inventory"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Source"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Lights"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Theme"));
@@ -13689,35 +14438,7 @@ var $;
     (function ($$) {
         class $hyoo_dungeon_app extends $.$hyoo_dungeon_app {
             char() {
-                return this.$.$mol_store_local.sub('char', new $hyoo_dungeon_char({
-                    name: '',
-                    race: Object.keys($hyoo_dungeon_race_all)[0],
-                    class: Object.keys($hyoo_dungeon_class_all)[0],
-                    story: Object.keys($hyoo_dungeon_story_all)[0],
-                    moral: 'neutral',
-                    ethics: 'neutral',
-                    experience: 0,
-                    level: 1,
-                    age: 20,
-                    hits: 0,
-                    hits_max: 0,
-                    hits_addon: 0,
-                    abilities: {
-                        dexterity: 0,
-                        charisma: 0,
-                        constitution: 0,
-                        intelligence: 0,
-                        strength: 0,
-                        wisdom: 0,
-                    },
-                    skills: [],
-                    biography: '',
-                    affection: '',
-                    ideals: '',
-                    traits: '',
-                    weakness: '',
-                    inventory: '',
-                }));
+                return this.$.$mol_store_local.sub('char', new $hyoo_dungeon_char({}));
             }
             background() {
                 const color = this.$.$mol_lights() ? `rgba(255,255,255,.75)` : `rgba(0,0,0,.75)`;
@@ -17305,6 +18026,51 @@ var $;
             $mol_assert_equal(band.data().members['foo'].name.last, 'Foo');
         },
     });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'convertion to primitives'() {
+            var unit = new $mol_unit_money_usd(5);
+            $mol_assert_equal(unit.valueOf(), 5);
+            $mol_assert_equal(unit * 2, 10);
+            $mol_assert_equal(unit + '', '$5');
+            $mol_assert_equal(`${unit}`, '$5');
+            $mol_assert_equal(unit.toString(), '$5');
+            $mol_assert_equal(String(unit), '$5');
+        },
+        'arithmetic'() {
+            var usd1 = new $mol_unit_money_usd(2);
+            var usd2 = new $mol_unit_money_usd(3);
+            var rur = new $mol_unit_money_rub(2);
+            $mol_assert_equal($mol_unit.summ(usd1, usd2).toString(), '$5');
+            $mol_assert_equal(usd1.mult(2).toString(), '$4');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_unit_money extends $mol_unit {
+    }
+    $.$mol_unit_money = $mol_unit_money;
+    class $mol_unit_money_usd extends $mol_unit_money {
+        prefix() {
+            return '$';
+        }
+    }
+    $.$mol_unit_money_usd = $mol_unit_money_usd;
+    class $mol_unit_money_rub extends $mol_unit_money {
+        postfix() {
+            return ' ₽';
+        }
+    }
+    $.$mol_unit_money_rub = $mol_unit_money_rub;
 })($ || ($ = {}));
 
 ;
