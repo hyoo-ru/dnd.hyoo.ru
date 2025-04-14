@@ -122,7 +122,7 @@ $hyoo_dungeon_char_summary $mol_page
 				<= Inventory_block $hyoo_dungeon_char_summary_block
 					level 5
 					title \Инвентарь
-					Content <= Inventory $mol_textarea
+					content / <= Inventory $mol_textarea
 						value? <=> inventory?
 
 $hyoo_dungeon_char_summary_block $mol_section
