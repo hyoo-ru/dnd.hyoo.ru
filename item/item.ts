@@ -1,6 +1,6 @@
 namespace $ {
 	
-	type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire'
+	type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire' | 'cold' | 'electro' | 'acid' | 'force' | 'necro' | 'psy' | 'radiant' | 'thunder'
 	type size = 'small' | 'medium' | 'large'
 	type ability = 'strength' | 'dexterity'
 	
@@ -116,9 +116,17 @@ namespace $ {
 				stab: '🤺',
 				slash: '🔪',
 				crush: '🥊',
-				poison: '🧪',
+				poison: '🦂',
 				fire: '🔥',
-			}[ this.damage_type() ]
+				cold: '🧊',
+				electro: '⚡',
+				acid: '🧪',
+				force: '🥋',
+				necro: '💀',
+				psy: '💫',
+				radiant: '🚨',
+				thunder: '📢',
+		}[ this.damage_type() ]
 			
 			brief += ' ' + { strength: ' 💪', dexterity: '🥏' }[ this.ability() ]
 			
