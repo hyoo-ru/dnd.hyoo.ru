@@ -1327,6 +1327,6 @@ $hyoo_dungeon_app $mol_book2_catalog
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
 		<= Lights $mol_lights_toggle
-	Placeholder null
+	placeholders /
 	plugins /
 		<= Theme $mol_theme_auto

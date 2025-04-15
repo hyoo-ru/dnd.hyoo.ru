@@ -2639,56 +2639,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    type $hyoo_dungeon_skill = {
-        title: string;
-        ability: $hyoo_dungeon_ability_id;
-    };
-    const $hyoo_dungeon_skill_all: {
-        athletics: $hyoo_dungeon_skill;
-        acrobatics: $hyoo_dungeon_skill;
-        sleight: $hyoo_dungeon_skill;
-        stealth: $hyoo_dungeon_skill;
-        investigation: $hyoo_dungeon_skill;
-        history: $hyoo_dungeon_skill;
-        arcana: $hyoo_dungeon_skill;
-        nature: $hyoo_dungeon_skill;
-        religion: $hyoo_dungeon_skill;
-        perception: $hyoo_dungeon_skill;
-        survival: $hyoo_dungeon_skill;
-        medicine: $hyoo_dungeon_skill;
-        insight: $hyoo_dungeon_skill;
-        animals: $hyoo_dungeon_skill;
-        performance: $hyoo_dungeon_skill;
-        intimidation: $hyoo_dungeon_skill;
-        deception: $hyoo_dungeon_skill;
-        persuasion: $hyoo_dungeon_skill;
-    };
-    type $hyoo_dungeon_skill_id = keyof typeof $hyoo_dungeon_skill_all;
-}
-
-declare namespace $ {
-    type $hyoo_dungeon_race = {
-        title: string;
-        link: string;
-        description: string;
-        image: string;
-        abilities: Record<$hyoo_dungeon_ability_id, number>;
-        age_max: number;
-        alignment: string;
-        size: 'small' | 'medium' | 'big';
-        speed: number;
-        perks: string[];
-        inventory: string[];
-        skills: $hyoo_dungeon_skill_id[];
-    };
-    const $hyoo_dungeon_race_all: {
-        human: $hyoo_dungeon_race;
-        tabaxi: $hyoo_dungeon_race;
-    };
-    type $hyoo_dungeon_race_id = keyof typeof $hyoo_dungeon_race_all;
-}
-
-declare namespace $ {
     class $mol_unit extends $mol_object {
         'valueOf()': number;
         constructor(value?: number);
@@ -2756,6 +2706,56 @@ declare namespace $ {
         brief(): string;
     }
     export {};
+}
+
+declare namespace $ {
+    type $hyoo_dungeon_skill = {
+        title: string;
+        ability: $hyoo_dungeon_ability_id;
+    };
+    const $hyoo_dungeon_skill_all: {
+        athletics: $hyoo_dungeon_skill;
+        acrobatics: $hyoo_dungeon_skill;
+        sleight: $hyoo_dungeon_skill;
+        stealth: $hyoo_dungeon_skill;
+        investigation: $hyoo_dungeon_skill;
+        history: $hyoo_dungeon_skill;
+        arcana: $hyoo_dungeon_skill;
+        nature: $hyoo_dungeon_skill;
+        religion: $hyoo_dungeon_skill;
+        perception: $hyoo_dungeon_skill;
+        survival: $hyoo_dungeon_skill;
+        medicine: $hyoo_dungeon_skill;
+        insight: $hyoo_dungeon_skill;
+        animals: $hyoo_dungeon_skill;
+        performance: $hyoo_dungeon_skill;
+        intimidation: $hyoo_dungeon_skill;
+        deception: $hyoo_dungeon_skill;
+        persuasion: $hyoo_dungeon_skill;
+    };
+    type $hyoo_dungeon_skill_id = keyof typeof $hyoo_dungeon_skill_all;
+}
+
+declare namespace $ {
+    type $hyoo_dungeon_race = {
+        title: string;
+        link: string;
+        description: string;
+        image: string;
+        abilities: Record<$hyoo_dungeon_ability_id, number>;
+        age_max: number;
+        alignment: string;
+        size: 'small' | 'medium' | 'big';
+        speed: number;
+        perks: string[];
+        inventory: $hyoo_dungeon_item_data[];
+        skills: $hyoo_dungeon_skill_id[];
+    };
+    const $hyoo_dungeon_race_all: {
+        human: $hyoo_dungeon_race;
+        tabaxi: $hyoo_dungeon_race;
+    };
+    type $hyoo_dungeon_race_id = keyof typeof $hyoo_dungeon_race_all;
 }
 
 declare namespace $ {
@@ -6814,7 +6814,7 @@ declare namespace $ {
 			'inventory': ReturnType< $hyoo_dungeon_app['Inventory'] >,
 		}) 
 		menu_foot( ): readonly(any)[]
-		Placeholder( ): any
+		placeholders( ): readonly(any)[]
 		plugins( ): readonly(any)[]
 	}
 	
