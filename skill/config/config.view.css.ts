@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_skill_config, {
 		
 		flex: {
-			basis: '15rem',
+			basis: '18rem',
 		},
 		
 		Skill_total: {

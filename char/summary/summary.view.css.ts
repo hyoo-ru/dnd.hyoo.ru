@@ -68,7 +68,7 @@ namespace $.$$ {
 		
 		Skills: {
 			flex: {
-				basis: '10rem',
+				basis: '13rem',
 			},
 		},
 		

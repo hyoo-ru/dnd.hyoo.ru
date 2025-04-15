@@ -8,79 +8,79 @@ namespace $ {
 	export const $hyoo_dungeon_skill_all = {
 		
 		athletics: {
-			title: 'Атлетика',
+			title: '🏋️‍♂️ Атлетика',
 			ability: 'strength',
 		} as $hyoo_dungeon_skill,
 		
 		acrobatics: {
-			title: 'Акробатика',
+			title: '🤸‍♂️ Акробатика',
 			ability: 'dexterity',
 		} as $hyoo_dungeon_skill,
 		sleight: {
-			title: 'Моторика',
+			title: '🤏 Моторика',
 			ability: 'dexterity',
 		} as $hyoo_dungeon_skill,
 		stealth: {
-			title: 'Скрытность',
+			title: '🐙 Скрытность',
 			ability: 'dexterity',
 		} as $hyoo_dungeon_skill,
 		
 		investigation: {
-			title: 'Анализ',
+			title: '🧠 Анализ',
 			ability: 'intelligence',
 		} as $hyoo_dungeon_skill,
 		history: {
-			title: 'История',
+			title: '📚 История',
 			ability: 'intelligence',
 		} as $hyoo_dungeon_skill,
 		arcana: {
-			title: 'Магия',
+			title: '✨ Магия',
 			ability: 'intelligence',
 		} as $hyoo_dungeon_skill,
 		nature: {
-			title: 'Природа',
+			title: '🌿 Природа',
 			ability: 'intelligence',
 		} as $hyoo_dungeon_skill,
 		religion: {
-			title: 'Религия',
+			title: '🛐 Религия',
 			ability: 'intelligence',
 		} as $hyoo_dungeon_skill,
 		
 		perception: {
-			title: 'Восприятие',
+			title: '👀 Восприятие',
 			ability: 'wisdom',
 		} as $hyoo_dungeon_skill,
 		survival: {
-			title: 'Выживание',
+			title: '🍄 Выживание',
 			ability: 'wisdom',
 		} as $hyoo_dungeon_skill,
 		medicine: {
-			title: 'Медицина',
+			title: '💊 Медицина',
 			ability: 'wisdom',
 		} as $hyoo_dungeon_skill,
 		insight: {
-			title: 'Интуиция',
+			title: '🔮 Интуиция',
 			ability: 'wisdom',
 		} as $hyoo_dungeon_skill,
 		animals: {
-			title: 'Звероводство',
+			title: '🐕 Звероводство',
 			ability: 'wisdom',
 		} as $hyoo_dungeon_skill,
 		
 		performance: {
-			title: 'Выступление',
+			title: '🎪 Выступление',
 			ability: 'charisma',
 		} as $hyoo_dungeon_skill,
 		intimidation: {
-			title: 'Запугивание',
+			title: '🎃 Запугивание',
 			ability: 'charisma',
 		} as $hyoo_dungeon_skill,
 		deception: {
-			title: 'Обман',
+			title: '🎎 Обман',
 			ability: 'charisma',
 		} as $hyoo_dungeon_skill,
 		persuasion: {
-			title: 'Убеждение',
+			title: '💬 Убеждение',
 			ability: 'charisma',
 		} as $hyoo_dungeon_skill,
 		

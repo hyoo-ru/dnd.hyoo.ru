@@ -11,7 +11,7 @@ namespace $ {
 		size: 'small' | 'medium' | 'big'
 		speed: number
 		perks: string[]
-		inventory: string[]
+		inventory: $hyoo_dungeon_item_data[]
 		skills: $hyoo_dungeon_skill_id[]
 	}
 	
