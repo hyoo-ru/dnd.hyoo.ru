@@ -2661,7 +2661,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire';
+    type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire' | 'cold' | 'electro' | 'acid' | 'force' | 'necro' | 'psy' | 'radiant' | 'thunder';
     type size = 'small' | 'medium' | 'large';
     type ability = 'strength' | 'dexterity';
     export type $hyoo_dungeon_item_data = {
@@ -2699,7 +2699,7 @@ declare namespace $ {
         damage_hand2(next?: number): number;
         damage_near(next?: number): number;
         damage_distant(next?: number): number;
-        damage_type(next?: damage_type): "" | "crush" | "stab" | "slash" | "poison" | "fire";
+        damage_type(next?: damage_type): "" | "crush" | "stab" | "slash" | "poison" | "fire" | "cold" | "electro" | "acid" | "force" | "necro" | "psy" | "radiant" | "thunder";
         attack_distance_norm(next?: number): number;
         attack_distance_max(next?: number): number;
         ability(next?: ability): "strength" | "dexterity";
@@ -5228,6 +5228,14 @@ declare namespace $ {
 			'crush': string,
 			'poison': string,
 			'fire': string,
+			'cold': string,
+			'electro': string,
+			'acid': string,
+			'force': string,
+			'necro': string,
+			'psy': string,
+			'radiant': string,
+			'thunder': string,
 		}) 
 		,
 		ReturnType< $mol_switch['options'] >
