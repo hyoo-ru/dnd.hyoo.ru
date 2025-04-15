@@ -115,7 +115,7 @@ namespace $ {
 				'': '',
 				stab: '🤺',
 				slash: '🔪',
-				crush: '🏏',
+				crush: '🥊',
 				poison: '🧪',
 				fire: '🔥',
 			}[ this.damage_type() ]
