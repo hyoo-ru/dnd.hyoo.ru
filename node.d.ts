@@ -6816,7 +6816,7 @@ declare namespace $ {
 			'inventory': ReturnType< $hyoo_dungeon_app['Inventory'] >,
 		}) 
 		menu_foot( ): readonly(any)[]
-		placeholders( ): readonly(any)[]
+		Placeholder( ): any
 		plugins( ): readonly(any)[]
 	}
 	

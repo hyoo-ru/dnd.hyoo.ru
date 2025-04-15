@@ -14346,8 +14346,8 @@ var $;
 		menu_foot(){
 			return [(this.Source()), (this.Lights())];
 		}
-		placeholders(){
-			return [];
+		Placeholder(){
+			return null;
 		}
 		plugins(){
 			return [(this.Theme())];
