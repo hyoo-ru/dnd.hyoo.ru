@@ -6,9 +6,9 @@ namespace $.$$ {
 			basis: '18rem',
 		},
 		
-		Skill_total: {
+		Skill_value: {
 			flex: {
-				basis: '2.5rem',
+				basis: '4rem',
 			},
 			color: $mol_theme.special,
 			justify: {

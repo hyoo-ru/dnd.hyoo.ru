@@ -9,5 +9,5 @@ $hyoo_dungeon_skill_config $mol_page
 				checked? <=> skill_has*?
 			<= Skill_title* $mol_chip
 				title <= skill_title* \
-			<= Skill_total* $mol_chip
-				sub / <= skill*
+			<= Skill_value* $mol_chip
+				title <= skill_value* \

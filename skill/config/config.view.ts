@@ -10,5 +10,11 @@ namespace $.$$ {
 			return this.$.$hyoo_dungeon_skill_all[ id ].title
 		}
 		
+		override skill_value( id: $hyoo_dungeon_skill_id ) {
+			const ability = this.$.$hyoo_dungeon_skill_all[ id ].ability
+			const icon = this.$.$hyoo_dungeon_ability_all[ ability ].title.slice( 0, 2 )
+			return `${icon} ${ this.skill( id ) }`
+		}
+		
 	}
 }
