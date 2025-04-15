@@ -7353,7 +7353,7 @@ var $;
                     '': '',
                     stab: '🤺',
                     slash: '🔪',
-                    crush: '🏏',
+                    crush: '🥊',
                     poison: '🧪',
                     fire: '🔥',
                 }[this.damage_type()];
@@ -11869,7 +11869,7 @@ var $;
 			(obj.options) = () => ({
 				"stab": "🤺 Колящий", 
 				"slash": "🔪 Режущий", 
-				"crush": "🏏 Дробящий", 
+				"crush": "🥊 Дробящий", 
 				"poison": "🧪 Ядовитый", 
 				"fire": "🔥 Огненный"
 			});

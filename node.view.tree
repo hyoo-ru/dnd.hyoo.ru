@@ -922,7 +922,7 @@ $hyoo_dungeon_item_config $mol_page
 				options *
 					stab \🤺 Колящий
 					slash \🔪 Режущий
-					crush \🏏 Дробящий
+					crush \🥊 Дробящий
 					poison \🧪 Ядовитый
 					fire \🔥 Огненный
 		<= Ability_block $mol_form_field
