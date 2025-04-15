@@ -775,8 +775,8 @@ $hyoo_dungeon_skill_config $mol_page
 				checked? <=> skill_has*?
 			<= Skill_title* $mol_chip
 				title <= skill_title* \
-			<= Skill_total* $mol_chip
-				sub / <= skill*
+			<= Skill_value* $mol_chip
+				title <= skill_value* \
 
 $mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 

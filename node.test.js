@@ -11544,9 +11544,12 @@ var $;
 			(obj.title) = () => ((this.skill_title(id)));
 			return obj;
 		}
-		Skill_total(id){
+		skill_value(id){
+			return "";
+		}
+		Skill_value(id){
 			const obj = new this.$.$mol_chip();
-			(obj.sub) = () => ([(this.skill(id))]);
+			(obj.title) = () => ((this.skill_value(id)));
 			return obj;
 		}
 		Skill_row(id){
@@ -11554,7 +11557,7 @@ var $;
 			(obj.sub) = () => ([
 				(this.Skill_addon(id)), 
 				(this.Skill_title(id)), 
-				(this.Skill_total(id))
+				(this.Skill_value(id))
 			]);
 			return obj;
 		}
@@ -11574,7 +11577,7 @@ var $;
 	};
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_addon"));
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_title"));
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_total"));
+	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_value"));
 	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_row"));
 	($mol_mem(($.$hyoo_dungeon_skill_config.prototype), "char"));
 
@@ -11595,6 +11598,11 @@ var $;
             skill_title(id) {
                 return this.$.$hyoo_dungeon_skill_all[id].title;
             }
+            skill_value(id) {
+                const ability = this.$.$hyoo_dungeon_skill_all[id].ability;
+                const icon = this.$.$hyoo_dungeon_ability_all[ability].title.slice(0, 2);
+                return `${icon} ${this.skill(id)}`;
+            }
         }
         __decorate([
             $mol_mem
@@ -11613,9 +11621,9 @@ var $;
             flex: {
                 basis: '18rem',
             },
-            Skill_total: {
+            Skill_value: {
                 flex: {
-                    basis: '2.5rem',
+                    basis: '4rem',
                 },
                 color: $mol_theme.special,
                 justify: {
@@ -13310,7 +13318,7 @@ var $;
             },
             Skills: {
                 flex: {
-                    basis: '13rem',
+                    basis: '14rem',
                 },
             },
             Perks_block: {

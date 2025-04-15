@@ -2589,7 +2589,7 @@ declare namespace $ {
         damage_hand2(next?: number): number;
         damage_near(next?: number): number;
         damage_distant(next?: number): number;
-        damage_type(next?: damage_type): "" | "stab" | "slash" | "crush" | "poison" | "fire";
+        damage_type(next?: damage_type): "" | "crush" | "stab" | "slash" | "poison" | "fire";
         attack_distance_norm(next?: number): number;
         attack_distance_max(next?: number): number;
         ability(next?: ability): "strength" | "dexterity";
@@ -4521,10 +4521,10 @@ declare namespace $ {
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_skill_config_6 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_chip__title_hyoo_dungeon_skill_config_6 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_skill_config['skill_value'] >
 		,
-		ReturnType< $mol_chip['sub'] >
+		ReturnType< $mol_chip['title'] >
 	>
 	type $mol_view__sub_hyoo_dungeon_skill_config_7 = $mol_type_enforce<
 		readonly(any)[]
@@ -4537,7 +4537,8 @@ declare namespace $ {
 		Skill_addon( id: any): $mol_check_box
 		skill_title( id: any): string
 		Skill_title( id: any): $mol_chip
-		Skill_total( id: any): $mol_chip
+		skill_value( id: any): string
+		Skill_value( id: any): $mol_chip
 		Skill_row( id: any): $mol_view
 		skill_list( ): readonly(any)[]
 		title( ): string
@@ -4552,6 +4553,7 @@ declare namespace $.$$ {
     class $hyoo_dungeon_skill_config extends $.$hyoo_dungeon_skill_config {
         skill_list(): $mol_view[];
         skill_title(id: $hyoo_dungeon_skill_id): string;
+        skill_value(id: $hyoo_dungeon_skill_id): string;
     }
 }
 
