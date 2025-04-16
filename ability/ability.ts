@@ -15,7 +15,7 @@ namespace $ {
 			description: 'Гибкость, проворство',
 		} as $hyoo_dungeon_ability,
 		constitution: {
-			title: '🐘 Живучесть',
+			title: '🐘 Стойкость',
 			description: 'Телосложение, выносливость',
 		} as $hyoo_dungeon_ability,
 		intelligence: {
