@@ -7190,21 +7190,27 @@ var $;
     $.$hyoo_dungeon_ability_all = {
         strength: {
             title: '💪 Мощность',
+            description: 'Сила, физическая мощь',
         },
         dexterity: {
             title: '🥏 Ловкость',
+            description: 'Гибкость, проворство',
         },
         constitution: {
             title: '🐘 Живучесть',
+            description: 'Телосложение, выносливость',
         },
         intelligence: {
             title: '🧠 Интеллект',
+            description: 'Рассудительность, память',
         },
         wisdom: {
             title: '🦉 Мудрость',
+            description: 'Внимательность, проницательность',
         },
         charisma: {
             title: '🌟 Харизма',
+            description: 'Внушение, сила характера',
         },
     };
 })($ || ($ = {}));
@@ -10789,9 +10795,13 @@ var $;
 		ability_title(id){
 			return "";
 		}
+		ability_hint(id){
+			return "";
+		}
 		Ability_title(id){
 			const obj = new this.$.$mol_chip();
 			(obj.title) = () => ((this.ability_title(id)));
+			(obj.hint) = () => ((this.ability_hint(id)));
 			return obj;
 		}
 		ability_total_value(id){
@@ -10892,6 +10902,11 @@ var $;
                     ...Object.keys(this.$.$hyoo_dungeon_ability_all)
                         .map(ability => this.Ability_row(ability))
                 ];
+            }
+            ability_hint(id) {
+                if (!id)
+                    return 'Характеристики';
+                return this.$.$hyoo_dungeon_ability_all[id].description;
             }
             ability_title(id) {
                 if (!id)

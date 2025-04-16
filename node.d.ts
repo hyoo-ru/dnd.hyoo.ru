@@ -2626,6 +2626,7 @@ declare namespace $ {
 declare namespace $ {
     type $hyoo_dungeon_ability = {
         title: string;
+        description: string;
     };
     const $hyoo_dungeon_ability_all: {
         strength: $hyoo_dungeon_ability;
@@ -4508,41 +4509,46 @@ declare namespace $ {
 		ReturnType< $mol_chip['title'] >
 	>
 	type $mol_chip__hint_hyoo_dungeon_ability_config_7 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_ability_config['ability_hint'] >
+		,
+		ReturnType< $mol_chip['hint'] >
+	>
+	type $mol_chip__hint_hyoo_dungeon_ability_config_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_ability_config_8 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_ability_config_9 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_total_value'] >
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_ability_config_9 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_ability_config_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_ability_config_10 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_ability_config_11 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_modifier_value'] >
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_chip__hint_hyoo_dungeon_ability_config_11 = $mol_type_enforce<
+	type $mol_chip__hint_hyoo_dungeon_ability_config_12 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['hint'] >
 	>
-	type $mol_chip__sub_hyoo_dungeon_ability_config_12 = $mol_type_enforce<
+	type $mol_chip__sub_hyoo_dungeon_ability_config_13 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_safe_value'] >
 		,
 		ReturnType< $mol_chip['sub'] >
 	>
-	type $mol_paginator__value_hyoo_dungeon_ability_config_13 = $mol_type_enforce<
+	type $mol_paginator__value_hyoo_dungeon_ability_config_14 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_ability_config['ability_addon'] >
 		,
 		ReturnType< $mol_paginator['value'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_ability_config_14 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_ability_config_15 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -4553,6 +4559,7 @@ declare namespace $ {
 		ability_safe( id: any): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_safe'] >
 		ability_modifier( id: any): ReturnType< ReturnType< $hyoo_dungeon_ability_config['char'] >['ability_modifier'] >
 		ability_title( id: any): string
+		ability_hint( id: any): string
 		Ability_title( id: any): $mol_chip
 		ability_total_value( id: any): readonly(any)[]
 		Ability_total( id: any): $mol_chip
@@ -4577,6 +4584,7 @@ declare namespace $.$$ {
         title(): string;
         pending(): number;
         ability_list(): $mol_view[];
+        ability_hint(id: $hyoo_dungeon_ability_id): string;
         ability_title(id: $hyoo_dungeon_ability_id): string;
         ability_total_value(id: $hyoo_dungeon_ability_id): readonly any[];
         ability_modifier_value(id: $hyoo_dungeon_ability_id): readonly any[];
