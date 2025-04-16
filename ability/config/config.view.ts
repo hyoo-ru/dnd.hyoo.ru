@@ -36,17 +36,18 @@ namespace $.$$ {
 		
 		ability_total_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '🔢' ]
-			return super.ability_total_value( id )
+			return [ this.char().ability( id ) ]
 		}
 		
 		ability_modifier_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '✨' ]
-			return super.ability_modifier_value( id )
+			return [ new $hyoo_dungeon_modifier( this.char().ability_modifier( id ) ).toString() ]
 		}
 		
+		@ $mol_mem_key
 		ability_safe_value( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return [ '☔' ]
-			return super.ability_safe_value( id )
+			return [ new $hyoo_dungeon_modifier( this.char().ability_safe( id ) ).toString() ]
 		}
 		
 	}

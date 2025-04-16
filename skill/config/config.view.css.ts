@@ -7,13 +7,7 @@ namespace $.$$ {
 		},
 		
 		Skill_value: {
-			flex: {
-				basis: '4rem',
-			},
 			color: $mol_theme.special,
-			justify: {
-				content: 'center',
-			},
 		},
 		
 		Skill_title: {
