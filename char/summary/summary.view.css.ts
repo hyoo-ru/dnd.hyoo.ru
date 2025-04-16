@@ -66,6 +66,22 @@ namespace $.$$ {
 			gap: $mol_gap.block,
 		},
 		
+		Master_bonus: {
+			Value: {
+				flex: {
+					basis: '6.25rem',
+				},
+			},
+		},
+		
+		Hits_heal: {
+			Value: {
+				flex: {
+					basis: '4rem',
+				},
+			},
+		},
+		
 		Skills: {
 			flex: {
 				basis: '14rem',
