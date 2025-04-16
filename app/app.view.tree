@@ -24,7 +24,7 @@ $hyoo_dungeon_app $mol_book2_catalog
 		inventory <= Inventory $hyoo_dungeon_item_manage
 			char <= char
 			addon_tools / <= Spread_close
-			Spread_current => Inventory_spread
+			spread_current => Inventory_spread
 	menu_foot /
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
