@@ -225,6 +225,7 @@
     "$mol_icon_chevron_right",
     "$hyoo_dungeon_parameter",
     "$hyoo_dungeon_ability_config",
+    "$hyoo_dungeon_modifier",
     "$hyoo_dungeon_skill_config",
     "$mol_check_box",
     "$mol_icon_tick",

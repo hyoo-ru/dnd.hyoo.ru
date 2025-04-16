@@ -863,6 +863,7 @@ $mol_switch $mol_check_list
 
 $hyoo_dungeon_item_config $mol_page
 	item $hyoo_dungeon_item
+		brief => brief
 		title? => name?
 		price? => price?
 		weight? => weight?
@@ -932,7 +933,7 @@ $hyoo_dungeon_item_config $mol_page
 					force \🥋 Силовой
 					necro \💀 Некротический
 					psy \💫 Психический
-					radiant \🚨 Сияющий
+					radiant \🔆 Сияющий
 					thunder \📢 Громовой
 		<= Ability_block $mol_form_field
 			name \🔰 Основная способность
@@ -941,7 +942,8 @@ $hyoo_dungeon_item_config $mol_page
 				options *
 					strength \💪 Мощность
 					dexterity \🥏 Ловкость
-			
+	foot /
+		<= Brief $mol_chip title <= brief
 
 $hyoo_dungeon_item_manage $mol_book2_catalog
 	char $hyoo_dungeon_char
@@ -1332,6 +1334,7 @@ $hyoo_dungeon_app $mol_book2_catalog
 		inventory <= Inventory $hyoo_dungeon_item_manage
 			char <= char
 			addon_tools / <= Spread_close
+			spread_current => Inventory_spread
 	menu_foot /
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
@@ -1339,3 +1342,6 @@ $hyoo_dungeon_app $mol_book2_catalog
 	Placeholder null
 	plugins /
 		<= Theme $mol_theme_auto
+	pages /
+		^
+		<= Inventory_spread

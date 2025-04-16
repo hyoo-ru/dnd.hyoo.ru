@@ -7882,7 +7882,7 @@ var $;
                     force: '🥋',
                     necro: '💀',
                     psy: '💫',
-                    radiant: '🚨',
+                    radiant: '🔆',
                     thunder: '📢',
                 }[this.damage_type()];
             brief += ' ' + { strength: ' 💪', dexterity: '🥏' }[this.ability()];
@@ -11401,6 +11401,18 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $hyoo_dungeon_modifier extends $mol_unit {
+        toString() {
+            return this.valueOf().toLocaleString(undefined, { signDisplay: 'always' }).replace('-', '−');
+        }
+    }
+    $.$hyoo_dungeon_modifier = $hyoo_dungeon_modifier;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -11440,17 +11452,17 @@ var $;
             ability_total_value(id) {
                 if (!id)
                     return ['🔢'];
-                return super.ability_total_value(id);
+                return [this.char().ability(id)];
             }
             ability_modifier_value(id) {
                 if (!id)
                     return ['✨'];
-                return super.ability_modifier_value(id);
+                return [new $hyoo_dungeon_modifier(this.char().ability_modifier(id)).toString()];
             }
             ability_safe_value(id) {
                 if (!id)
                     return ['☔'];
-                return super.ability_safe_value(id);
+                return [new $hyoo_dungeon_modifier(this.char().ability_safe(id)).toString()];
             }
         }
         __decorate([
@@ -11462,6 +11474,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_ability_config.prototype, "ability_list", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_ability_config.prototype, "ability_safe_value", null);
         $$.$hyoo_dungeon_ability_config = $hyoo_dungeon_ability_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -11633,12 +11648,16 @@ var $;
             skill_value(id) {
                 const ability = this.$.$hyoo_dungeon_skill_all[id].ability;
                 const icon = this.$.$hyoo_dungeon_ability_all[ability].title.slice(0, 2);
-                return `${icon} ${this.skill(id)}`;
+                const skill = new $hyoo_dungeon_modifier(this.skill(id));
+                return `${skill} ${icon}`;
             }
         }
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_skill_config.prototype, "skill_list", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_skill_config.prototype, "skill_value", null);
         $$.$hyoo_dungeon_skill_config = $hyoo_dungeon_skill_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -11654,13 +11673,7 @@ var $;
                 basis: '18rem',
             },
             Skill_value: {
-                flex: {
-                    basis: '4rem',
-                },
                 color: $mol_theme.special,
-                justify: {
-                    content: 'center',
-                },
             },
             Skill_title: {
                 flex: {
@@ -12267,6 +12280,9 @@ var $;
 
 ;
 	($.$hyoo_dungeon_item_config) = class $hyoo_dungeon_item_config extends ($.$mol_page) {
+		brief(){
+			return (this.item().brief());
+		}
 		name(next){
 			return (this.item().title(next));
 		}
@@ -12425,7 +12441,7 @@ var $;
 				"force": "🥋 Силовой", 
 				"necro": "💀 Некротический", 
 				"psy": "💫 Психический", 
-				"radiant": "🚨 Сияющий", 
+				"radiant": "🔆 Сияющий", 
 				"thunder": "📢 Громовой"
 			});
 			return obj;
@@ -12448,6 +12464,11 @@ var $;
 			(obj.Content) = () => ((this.Ability()));
 			return obj;
 		}
+		Brief(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ((this.brief()));
+			return obj;
+		}
 		item(){
 			const obj = new this.$.$hyoo_dungeon_item();
 			return obj;
@@ -12467,6 +12488,9 @@ var $;
 				(this.Damage_type_block()), 
 				(this.Ability_block())
 			];
+		}
+		foot(){
+			return [(this.Brief())];
 		}
 	};
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Price"));
@@ -12493,6 +12517,7 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Damage_type_block"));
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability"));
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability_block"));
+	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Brief"));
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "item"));
 	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Title"));
 
@@ -13355,6 +13380,20 @@ var $;
                     basis: `16rem`,
                 },
                 gap: $mol_gap.block,
+            },
+            Master_bonus: {
+                Value: {
+                    flex: {
+                        basis: '6.25rem',
+                    },
+                },
+            },
+            Hits_heal: {
+                Value: {
+                    flex: {
+                        basis: '4rem',
+                    },
+                },
             },
             Skills: {
                 flex: {
@@ -14341,6 +14380,9 @@ var $;
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
+		Inventory_spread(){
+			return (this.Inventory().spread_current());
+		}
 		Inventory(){
 			const obj = new this.$.$hyoo_dungeon_item_manage();
 			(obj.char) = () => ((this.char()));
@@ -14391,6 +14433,9 @@ var $;
 		}
 		plugins(){
 			return [(this.Theme())];
+		}
+		pages(){
+			return [...(super.pages()), (this.Inventory_spread())];
 		}
 	};
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Summary"));

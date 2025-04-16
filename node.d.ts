@@ -4477,6 +4477,12 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $hyoo_dungeon_modifier extends $mol_unit {
+        toString(): string;
+    }
+}
+
+declare namespace $ {
 
 	type __hyoo_dungeon_ability_config_1 = $mol_type_enforce<
 		Parameters< $hyoo_dungeon_ability_config['ability_total'] >[0]
@@ -4586,9 +4592,9 @@ declare namespace $.$$ {
         ability_list(): $mol_view[];
         ability_hint(id: $hyoo_dungeon_ability_id): string;
         ability_title(id: $hyoo_dungeon_ability_id): string;
-        ability_total_value(id: $hyoo_dungeon_ability_id): readonly any[];
-        ability_modifier_value(id: $hyoo_dungeon_ability_id): readonly any[];
-        ability_safe_value(id: $hyoo_dungeon_ability_id): readonly any[];
+        ability_total_value(id: $hyoo_dungeon_ability_id): any[];
+        ability_modifier_value(id: $hyoo_dungeon_ability_id): string[];
+        ability_safe_value(id: $hyoo_dungeon_ability_id): string[];
     }
 }
 
@@ -5281,17 +5287,23 @@ declare namespace $ {
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_string__hint_hyoo_dungeon_item_config_50 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_item_config_50 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_item_config['brief'] >
+		,
+		ReturnType< $mol_chip['title'] >
+	>
+	type $mol_string__hint_hyoo_dungeon_item_config_51 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_hyoo_dungeon_item_config_51 = $mol_type_enforce<
+	type $mol_string__value_hyoo_dungeon_item_config_52 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['name'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
 	export class $hyoo_dungeon_item_config extends $mol_page {
+		brief( ): ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['brief'] >
 		name( next?: ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['title'] > ): ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['title'] >
 		price( next?: ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['price'] > ): ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['price'] >
 		weight( next?: ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['weight'] > ): ReturnType< ReturnType< $hyoo_dungeon_item_config['item'] >['weight'] >
@@ -5327,9 +5339,11 @@ declare namespace $ {
 		Damage_type_block( ): $mol_form_field
 		Ability( ): $mol_switch
 		Ability_block( ): $mol_form_field
+		Brief( ): $mol_chip
 		item( ): $hyoo_dungeon_item
 		Title( ): $mol_string
 		body( ): readonly(any)[]
+		foot( ): readonly(any)[]
 	}
 	
 }
@@ -6813,6 +6827,7 @@ declare namespace $ {
 		Personality( ): $hyoo_dungeon_char_personality
 		Params( ): $hyoo_dungeon_ability_config
 		Skills( ): $hyoo_dungeon_skill_config
+		Inventory_spread( ): ReturnType< ReturnType< $hyoo_dungeon_app['Inventory'] >['spread_current'] >
 		Inventory( ): $hyoo_dungeon_item_manage
 		Source( ): $mol_link_source
 		Lights( ): $mol_lights_toggle
@@ -6834,6 +6849,7 @@ declare namespace $ {
 		menu_foot( ): readonly(any)[]
 		Placeholder( ): any
 		plugins( ): readonly(any)[]
+		pages( ): readonly(any)[]
 	}
 	
 }
