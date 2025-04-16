@@ -335,6 +335,7 @@ $mol_book2_catalog $mol_book2
 			<= Spread_close_icon $mol_icon_close
 
 $mol_chip $mol_view
+	minimal_height 40
 	attr *
 		^
 		title <= hint \
