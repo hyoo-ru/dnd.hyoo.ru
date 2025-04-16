@@ -1,5 +1,6 @@
 $hyoo_dungeon_item_config $mol_page
 	item $hyoo_dungeon_item
+		brief => brief
 		title? => name?
 		price? => price?
 		weight? => weight?
@@ -78,4 +79,5 @@ $hyoo_dungeon_item_config $mol_page
 				options *
 					strength \💪 Мощность
 					dexterity \🥏 Ловкость
-			
+	foot /
+		<= Brief $mol_chip title <= brief
