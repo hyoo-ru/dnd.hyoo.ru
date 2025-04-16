@@ -24,6 +24,11 @@ namespace $.$$ {
 			]
 		}
 		
+		override ability_hint( id: $hyoo_dungeon_ability_id ) {
+			if( !id ) return 'Характеристики'
+			return this.$.$hyoo_dungeon_ability_all[ id ].description
+		}
+		
 		override ability_title( id: $hyoo_dungeon_ability_id ) {
 			if( !id ) return 'Способности'
 			return this.$.$hyoo_dungeon_ability_all[ id ].title

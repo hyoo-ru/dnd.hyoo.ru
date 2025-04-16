@@ -10,6 +10,7 @@ $hyoo_dungeon_ability_config $mol_page
 		<= Ability_row*some $mol_view sub /
 			<= Ability_title* $mol_chip
 				title <= ability_title* \
+				hint <= ability_hint* \
 			<= Ability_total* $mol_chip
 				hint \Значение
 				sub <= ability_total_value* / <= ability_total*
