@@ -124,7 +124,7 @@ namespace $ {
 				force: '🥋',
 				necro: '💀',
 				psy: '💫',
-				radiant: '🚨',
+				radiant: '🔆',
 				thunder: '📢',
 		}[ this.damage_type() ]
 			

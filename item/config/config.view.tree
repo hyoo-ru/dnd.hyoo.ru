@@ -69,7 +69,7 @@ $hyoo_dungeon_item_config $mol_page
 					force \🥋 Силовой
 					necro \💀 Некротический
 					psy \💫 Психический
-					radiant \🚨 Сияющий
+					radiant \🔆 Сияющий
 					thunder \📢 Громовой
 		<= Ability_block $mol_form_field
 			name \🔰 Основная способность
