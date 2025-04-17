@@ -18,6 +18,7 @@ namespace $ {
 		ideals: string,
 		affection: string,
 		weakness: string,
+		remarks: string,
 		abilities: Record< $hyoo_dungeon_ability_id, number >,
 		skills: $hyoo_dungeon_skill_id[],
 		inventory: $hyoo_dungeon_item_data[],
@@ -183,6 +184,10 @@ namespace $ {
 		
 		weakness( next?: string ) {
 			return this.value( 'weakness', next ) ?? ''
+		}
+		
+		remarks( next?: string ) {
+			return this.value( 'remarks', next ) ?? ''
 		}
 		
 		master_bonus() {

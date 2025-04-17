@@ -12,6 +12,7 @@ $hyoo_dungeon_char_summary $mol_page
 		ideals => ideals
 		affection => affection
 		weakness => weakness
+		remarks? => remarks?
 		master_bonus => master_bonus
 		hits? => hits?
 		hits_addon? => hits_addon?
@@ -75,6 +76,9 @@ $hyoo_dungeon_char_summary $mol_page
 					<= Ideals $mol_text text <= ideals
 					<= Affection $mol_text text <= affection
 					<= Weakness $mol_text text <= weakness
+					<= Remarks $mol_textarea
+						hint \Заметки
+						value? <=> remarks?
 			<= Stat_main $mol_list rows /
 				<= Grade_block $hyoo_dungeon_char_summary_block
 					title \Прогресс
