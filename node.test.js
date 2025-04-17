@@ -13677,7 +13677,7 @@ var $;
             },
             Perks_block: {
                 flex: {
-                    basis: '20rem',
+                    basis: '16rem',
                 },
             },
             Perks: {
