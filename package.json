@@ -180,6 +180,7 @@
     "$hyoo_dungeon_item",
     "$hyoo_dungeon_coin",
     "$mol_unit",
+    "$hyoo_dungeon_damage",
     "$hyoo_dungeon_skill",
     "$hyoo_dungeon_story",
     "$hyoo_dungeon_class",

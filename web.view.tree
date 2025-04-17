@@ -997,20 +997,8 @@ $hyoo_dungeon_item_config $mol_page
 			name \💢 Вид урона
 			Content <= Damage_type $mol_switch
 				value? <=> damage_type?
-				options *
-					stab \🤺 Колящий
-					slash \🔪 Режущий
-					crush \🥊 Дробящий
-					poison \🦂 Ядовитый
-					fire \🔥 Огненный
-					cold \🧊 Холодовой
-					electro \⚡ Электрический
-					acid \🧪 Кислотный
-					force \🥋 Силовой
-					necro \💀 Некротический
-					psy \💫 Психический
-					radiant \🔆 Сияющий
-					thunder \📢 Громовой
+				keys <= damage_options /
+				option_title* <= damage_title* \
 		<= Ability_block $mol_form_field
 			name \🔰 Основная способность
 			Content <= Ability $mol_switch

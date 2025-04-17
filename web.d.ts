@@ -2552,6 +2552,29 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    type $hyoo_dungeon_damage = {
+        title: string;
+        description: string;
+    };
+    const $hyoo_dungeon_damage_all: {
+        stab: $hyoo_dungeon_damage;
+        slash: $hyoo_dungeon_damage;
+        crush: $hyoo_dungeon_damage;
+        poison: $hyoo_dungeon_damage;
+        fire: $hyoo_dungeon_damage;
+        cold: $hyoo_dungeon_damage;
+        electro: $hyoo_dungeon_damage;
+        acid: $hyoo_dungeon_damage;
+        force: $hyoo_dungeon_damage;
+        necro: $hyoo_dungeon_damage;
+        psy: $hyoo_dungeon_damage;
+        radiant: $hyoo_dungeon_damage;
+        thunder: $hyoo_dungeon_damage;
+    };
+    type $hyoo_dungeon_damage_id = keyof typeof $hyoo_dungeon_damage_all;
+}
+
+declare namespace $ {
     type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire' | 'cold' | 'electro' | 'acid' | 'force' | 'necro' | 'psy' | 'radiant' | 'thunder';
     type size = 'small' | 'medium' | 'large';
     type ability = 'strength' | 'dexterity';
@@ -5273,41 +5296,32 @@ declare namespace $ {
 		,
 		ReturnType< $mol_switch['value'] >
 	>
-	type $mol_switch__options_hyoo_dungeon_item_config_43 = $mol_type_enforce<
-		({ 
-			'stab': string,
-			'slash': string,
-			'crush': string,
-			'poison': string,
-			'fire': string,
-			'cold': string,
-			'electro': string,
-			'acid': string,
-			'force': string,
-			'necro': string,
-			'psy': string,
-			'radiant': string,
-			'thunder': string,
-		}) 
+	type $mol_switch__keys_hyoo_dungeon_item_config_43 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_item_config['damage_options'] >
 		,
-		ReturnType< $mol_switch['options'] >
+		ReturnType< $mol_switch['keys'] >
 	>
-	type $mol_form_field__name_hyoo_dungeon_item_config_44 = $mol_type_enforce<
+	type $mol_switch__option_title_hyoo_dungeon_item_config_44 = $mol_type_enforce<
+		ReturnType< $hyoo_dungeon_item_config['damage_title'] >
+		,
+		ReturnType< $mol_switch['option_title'] >
+	>
+	type $mol_form_field__name_hyoo_dungeon_item_config_45 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__Content_hyoo_dungeon_item_config_45 = $mol_type_enforce<
+	type $mol_form_field__Content_hyoo_dungeon_item_config_46 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['Damage_type'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_switch__value_hyoo_dungeon_item_config_46 = $mol_type_enforce<
+	type $mol_switch__value_hyoo_dungeon_item_config_47 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['ability'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
-	type $mol_switch__options_hyoo_dungeon_item_config_47 = $mol_type_enforce<
+	type $mol_switch__options_hyoo_dungeon_item_config_48 = $mol_type_enforce<
 		({ 
 			'strength': string,
 			'dexterity': string,
@@ -5315,27 +5329,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_form_field__name_hyoo_dungeon_item_config_48 = $mol_type_enforce<
+	type $mol_form_field__name_hyoo_dungeon_item_config_49 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__Content_hyoo_dungeon_item_config_49 = $mol_type_enforce<
+	type $mol_form_field__Content_hyoo_dungeon_item_config_50 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['Ability'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_item_config_50 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_item_config_51 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['brief'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_string__hint_hyoo_dungeon_item_config_51 = $mol_type_enforce<
+	type $mol_string__hint_hyoo_dungeon_item_config_52 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_hyoo_dungeon_item_config_52 = $mol_type_enforce<
+	type $mol_string__value_hyoo_dungeon_item_config_53 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_item_config['name'] >
 		,
 		ReturnType< $mol_string['value'] >
@@ -5373,6 +5387,8 @@ declare namespace $ {
 		Distance_max( ): $mol_paginator
 		Distance_max_block( ): $mol_form_field
 		Distance_limit( ): $mol_form_group
+		damage_options( ): readonly(any)[]
+		damage_title( id: any): string
 		Damage_type( ): $mol_switch
 		Damage_type_block( ): $mol_form_field
 		Ability( ): $mol_switch
@@ -5390,6 +5406,8 @@ declare namespace $ {
 declare namespace $.$$ {
     class $hyoo_dungeon_item_config extends $.$hyoo_dungeon_item_config {
         title(): string;
+        damage_options(): string[];
+        damage_title(id: $hyoo_dungeon_damage_id): string;
     }
 }
 
@@ -5557,27 +5575,27 @@ declare namespace $ {
 
 //# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $ {
-    type $hyoo_dungeon_moral_info = {
+    type $hyoo_dungeon_moral = {
         title: string;
     };
     const $hyoo_dungeon_moral_all: {
-        good: $hyoo_dungeon_moral_info;
-        neutral: $hyoo_dungeon_moral_info;
-        evil: $hyoo_dungeon_moral_info;
+        good: $hyoo_dungeon_moral;
+        neutral: $hyoo_dungeon_moral;
+        evil: $hyoo_dungeon_moral;
     };
-    type $hyoo_dungeon_moral = keyof typeof $hyoo_dungeon_moral_all;
+    type $hyoo_dungeon_moral_id = keyof typeof $hyoo_dungeon_moral_all;
 }
 
 declare namespace $ {
-    type $hyoo_dungeon_ethics_info = {
+    type $hyoo_dungeon_ethics = {
         title: string;
     };
     const $hyoo_dungeon_ethics_all: {
-        lawful: $hyoo_dungeon_moral_info;
-        neutral: $hyoo_dungeon_moral_info;
-        chaotic: $hyoo_dungeon_moral_info;
+        lawful: $hyoo_dungeon_ethics;
+        neutral: $hyoo_dungeon_ethics;
+        chaotic: $hyoo_dungeon_ethics;
     };
-    type $hyoo_dungeon_ethics = keyof typeof $hyoo_dungeon_ethics_all;
+    type $hyoo_dungeon_ethics_id = keyof typeof $hyoo_dungeon_ethics_all;
 }
 
 declare namespace $ {
@@ -6524,9 +6542,9 @@ declare namespace $ {
 declare namespace $.$$ {
     class $hyoo_dungeon_char_personality extends $.$hyoo_dungeon_char_personality {
         moral_options(): string[];
-        moral_title(id: $hyoo_dungeon_moral): string;
+        moral_title(id: $hyoo_dungeon_moral_id): string;
         ethics_options(): string[];
-        ethics_title(id: $hyoo_dungeon_ethics): string;
+        ethics_title(id: $hyoo_dungeon_ethics_id): string;
     }
 }
 

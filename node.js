@@ -7809,6 +7809,66 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $.$hyoo_dungeon_damage_all = {
+        stab: {
+            title: '🤺 Колющий',
+            description: 'Проникающий удар острым предметом, концентрирующем всю силу удара в одной точке',
+        },
+        slash: {
+            title: '🔪 Режущий',
+            description: 'Скользящий удар, рассекающий мягкую плоть',
+        },
+        crush: {
+            title: '🥊 Дробящий',
+            description: 'Сминающий или сдавливающий удар тяжёлым предметом',
+        },
+        poison: {
+            title: '🦂 Ядовитый',
+            description: 'Отравление организма токсичными веществами',
+        },
+        fire: {
+            title: '🔥 Огненный',
+            description: 'Разрушение воздействием высокой температуры',
+        },
+        cold: {
+            title: '🧊 Холодовой',
+            description: 'Обморожение и внутреннее повреждение кристаллами льда',
+        },
+        electro: {
+            title: '⚡ Электрический',
+            description: 'Молниеносный пробой высокого напряжения',
+        },
+        acid: {
+            title: '🧪 Кислотный',
+            description: 'Раздушение, воздействием едких веществ',
+        },
+        force: {
+            title: '🥋 Силовой',
+            description: 'Магический урон силовым полем',
+        },
+        necro: {
+            title: '💀 Некротический',
+            description: 'Лишение жизненной силы, разрушающией как плоть, так и душу.',
+        },
+        psy: {
+            title: '💫 Психический',
+            description: 'Разрушительное воздействие на психику',
+        },
+        radiant: {
+            title: '🔆 Сияющий',
+            description: 'Переполнение божественной силой, опаляющей плоть и сжигающей слабую душу',
+        },
+        thunder: {
+            title: '📢 Громовой',
+            description: 'Разрушение мощными колебаниями воздуха',
+        },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $hyoo_dungeon_item extends $mol_store {
         title(next) {
             return this.value('title', next) ?? '';
@@ -7869,23 +7929,8 @@ var $;
                 brief += `:${this.attack_distance_norm()}..${this.attack_distance_max()}`;
             }
             if (this.damage_type())
-                brief += ' ' + {
-                    '': '',
-                    stab: '🤺',
-                    slash: '🔪',
-                    crush: '🥊',
-                    poison: '🦂',
-                    fire: '🔥',
-                    cold: '🧊',
-                    electro: '⚡',
-                    acid: '🧪',
-                    force: '🥋',
-                    necro: '💀',
-                    psy: '💫',
-                    radiant: '🔆',
-                    thunder: '📢',
-                }[this.damage_type()];
-            brief += ' ' + { strength: ' 💪', dexterity: '🥏' }[this.ability()];
+                brief += ' ' + this.$.$hyoo_dungeon_damage_all[this.damage_type()].title.slice(0, 2);
+            brief += ' ' + this.$.$hyoo_dungeon_ability_all[this.ability()].title.slice(0, 2);
             return brief;
         }
     }
@@ -12699,24 +12744,17 @@ var $;
 			(obj.sub) = () => ([(this.Distance_norm_block()), (this.Distance_max_block())]);
 			return obj;
 		}
+		damage_options(){
+			return [];
+		}
+		damage_title(id){
+			return "";
+		}
 		Damage_type(){
 			const obj = new this.$.$mol_switch();
 			(obj.value) = (next) => ((this.damage_type(next)));
-			(obj.options) = () => ({
-				"stab": "🤺 Колящий", 
-				"slash": "🔪 Режущий", 
-				"crush": "🥊 Дробящий", 
-				"poison": "🦂 Ядовитый", 
-				"fire": "🔥 Огненный", 
-				"cold": "🧊 Холодовой", 
-				"electro": "⚡ Электрический", 
-				"acid": "🧪 Кислотный", 
-				"force": "🥋 Силовой", 
-				"necro": "💀 Некротический", 
-				"psy": "💫 Психический", 
-				"radiant": "🔆 Сияющий", 
-				"thunder": "📢 Громовой"
-			});
+			(obj.keys) = () => ((this.damage_options()));
+			(obj.option_title) = (id) => ((this.damage_title(id)));
 			return obj;
 		}
 		Damage_type_block(){
@@ -12808,7 +12846,16 @@ var $;
             title() {
                 return this.item().title();
             }
+            damage_options() {
+                return Object.keys(this.$.$hyoo_dungeon_damage_all);
+            }
+            damage_title(id) {
+                return this.$.$hyoo_dungeon_damage_all[id].title;
+            }
         }
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_item_config.prototype, "damage_options", null);
         $$.$hyoo_dungeon_item_config = $hyoo_dungeon_item_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
