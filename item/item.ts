@@ -111,24 +111,9 @@ namespace $ {
 			}
 			
 			
-			if( this.damage_type() ) brief += ' ' + {
-				'': '',
-				stab: '🤺',
-				slash: '🔪',
-				crush: '🥊',
-				poison: '🦂',
-				fire: '🔥',
-				cold: '🧊',
-				electro: '⚡',
-				acid: '🧪',
-				force: '🥋',
-				necro: '💀',
-				psy: '💫',
-				radiant: '🔆',
-				thunder: '📢',
-		}[ this.damage_type() ]
+			if( this.damage_type() ) brief += ' ' + this.$.$hyoo_dungeon_damage_all[ this.damage_type() as $hyoo_dungeon_damage_id ].title.slice( 0, 2 )
 			
-			brief += ' ' + { strength: ' 💪', dexterity: '🥏' }[ this.ability() ]
+			brief += ' ' + this.$.$hyoo_dungeon_ability_all[ this.ability() ].title.slice( 0, 2 )
 			
 			return brief
 		}

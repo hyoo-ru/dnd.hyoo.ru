@@ -7,7 +7,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		override moral_title( id: $hyoo_dungeon_moral ) {
+		override moral_title( id: $hyoo_dungeon_moral_id ) {
 			return this.$.$hyoo_dungeon_moral_all[ id ].title
 		}
 		
@@ -17,7 +17,7 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		override ethics_title( id: $hyoo_dungeon_ethics ) {
+		override ethics_title( id: $hyoo_dungeon_ethics_id ) {
 			return this.$.$hyoo_dungeon_ethics_all[ id ].title
 		}
 		

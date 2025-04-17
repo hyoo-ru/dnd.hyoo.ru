@@ -1,6 +1,6 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_moral_info = {
+	export type $hyoo_dungeon_moral = {
 		title: string
 	}
 	
@@ -8,18 +8,18 @@ namespace $ {
 			
 		good: {
 			title: '👼 Добрый',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_moral,
 		
 		neutral: {
 			title: '🤔 Нейтральный',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_moral,
 		
 		evil: {
 			title: '👿 Злой',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_moral,
 		
 	}
 
-	export type $hyoo_dungeon_moral = keyof typeof $hyoo_dungeon_moral_all
+	export type $hyoo_dungeon_moral_id = keyof typeof $hyoo_dungeon_moral_all
 	
 }

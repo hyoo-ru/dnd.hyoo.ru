@@ -1,6 +1,6 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_ethics_info = {
+	export type $hyoo_dungeon_ethics = {
 		title: string
 	}
 	
@@ -8,18 +8,18 @@ namespace $ {
 			
 		lawful: {
 			title: '🧐 Стоик',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_ethics,
 		
 		neutral: {
 			title: '🤔 Нейтрал',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_ethics,
 		
 		chaotic: {
 			title: '🥴 Хаотик',
-		} as $hyoo_dungeon_moral_info,
+		} as $hyoo_dungeon_ethics,
 		
 	}
 
-	export type $hyoo_dungeon_ethics = keyof typeof $hyoo_dungeon_ethics_all
+	export type $hyoo_dungeon_ethics_id = keyof typeof $hyoo_dungeon_ethics_all
 	
 }
