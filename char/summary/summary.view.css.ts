@@ -128,15 +128,6 @@ namespace $.$$ {
 			},
 		},
 		
-		Spells: {
-			gap: $mol_gap.block,
-			$mol_view: {
-				background: {
-					color: $mol_theme.card,
-				},
-			},
-		},
-		
 	} )
 	
 }

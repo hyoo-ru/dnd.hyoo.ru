@@ -35,7 +35,7 @@ $hyoo_dungeon_char_summary $mol_page
 		Item_delete* null
 	Spell_list $hyoo_dungeon_spell_manage
 		char <= char
-		menu_links => spell_list
+		Menu_links => spell_list
 		Spell_delete* null
 	body /
 		<= Columns $mol_view sub /
@@ -140,7 +140,7 @@ $hyoo_dungeon_char_summary $mol_page
 				content / <= Inventory $mol_list rows <= item_list
 			<= Spell_block $hyoo_dungeon_char_summary_block
 				title \Заклинания
-				content / <= Spells $mol_list rows <= spell_list
+				content / <= spell_list
 
 $hyoo_dungeon_char_summary_block $mol_section
 	level 5

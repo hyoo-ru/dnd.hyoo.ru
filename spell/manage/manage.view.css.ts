@@ -8,10 +8,16 @@ namespace $.$$ {
 			},
 		},
 		
-		Level_title: {
-			// color: $mol_theme.shade,
+		Menu_links: {
+			gap: $mol_gap.block,
 		},
-
+		
+		Level: {
+			background: {
+				color: $mol_theme.card,
+			},
+		},
+		
 	} )
 	
 }
