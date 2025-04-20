@@ -8337,11 +8337,11 @@ var $;
         }
         brief() {
             let brief = '';
-            brief += ' [' + [
+            brief += ' ' + [
                 ...this.component('verbal') ? [`👅`] : [],
                 ...this.component('somatic') ? [`🖐`] : [],
                 ...this.material() ? [`🍭`] : [],
-            ].join('') + ']';
+            ].join('');
             if (this.damage_type()) {
                 brief += ' ' + this.$.$hyoo_dungeon_damage_all[this.damage_type()].title.slice(0, 2)
                     + this.damage();
