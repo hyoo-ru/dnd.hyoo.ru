@@ -40,5 +40,14 @@ namespace $.$$ {
 			return `linear-gradient( to bottom, ${color}, ${color} ), url(${ JSON.stringify( this.char_image() ) })`
 		}
 		
+		@ $mol_mem
+		pages() {
+			return [
+				... super.pages(),
+				... $mol_maybe( this.Inventory_spread() ),
+				... $mol_maybe( this.Spells_spread() ),
+			]
+		}
+		
 	}
 }

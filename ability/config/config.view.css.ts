@@ -25,13 +25,13 @@ namespace $.$$ {
 			justify: {
 				content: 'center',
 			},
+			color: $mol_theme.shade,
 		},
 		
 		Ability_safe: {
 			flex: {
 				basis: '2.5rem',
 			},
-			color: $mol_theme.shade,
 			justify: {
 				content: 'center',
 			},
