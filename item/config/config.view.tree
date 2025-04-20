@@ -23,7 +23,7 @@ $hyoo_dungeon_item_config $mol_page
 					value? <=> price?
 			<= Weight_block $mol_form_field
 				name \🧱 Вес
-				Content <= Weight $mol_paginator
+				Content <= Weight $mol_number
 					value? <=> weight?
 		<= Touch_range $mol_form_group sub /
 			<= Hand1_block $mol_form_field

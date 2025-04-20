@@ -3,7 +3,7 @@ $hyoo_dungeon_item_manage $mol_book2_catalog
 	menu_title \Инвентарь
 	menu_tools /
 		<= Item_add $mol_link
-			arg * item <= item_id_next \
+			arg * item <= item_id_next \0
 			sub /
 				<= Item_add_icon $mol_icon_plus
 	param \item

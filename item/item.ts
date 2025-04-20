@@ -1,9 +1,5 @@
 namespace $ {
 	
-	type damage_type = '' | 'stab' | 'slash' | 'crush' | 'poison' | 'fire' | 'cold' | 'electro' | 'acid' | 'force' | 'necro' | 'psy' | 'radiant' | 'thunder'
-	type size = 'small' | 'medium' | 'large'
-	type ability = 'strength' | 'dexterity'
-	
 	export type $hyoo_dungeon_item_data = {
 		title: string
 		price: number
@@ -15,9 +11,9 @@ namespace $ {
 			near: number
 			distant: number
 		}
-		damage_type: damage_type
-		weapon_size: size
-		ability: ability,
+		damage_type: $hyoo_dungeon_damage_id
+		weapon_size: 'small' | 'medium' | 'large'
+		ability: $hyoo_dungeon_ability_id,
 		attack_ammo: boolean
 		attack_cooldown: boolean
 		attack_distance_norm: number
@@ -72,7 +68,7 @@ namespace $ {
 			return this.damage().value( 'distant', next ) ?? 4
 		}
 		
-		damage_type( next?: damage_type ) {
+		damage_type( next?: $hyoo_dungeon_damage_id ) {
 			return this.value( 'damage_type', next ) ?? ''
 		}
 		
@@ -87,7 +83,7 @@ namespace $ {
 		}
 		
 		@ $mol_mem
-		ability( next?: ability ) {
+		ability( next?: $hyoo_dungeon_ability_id ) {
 			return this.value( 'ability', next ) ?? 'strength'
 		}
 		

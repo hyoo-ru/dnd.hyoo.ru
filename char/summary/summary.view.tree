@@ -6,6 +6,8 @@ $hyoo_dungeon_char_summary $mol_page
 		age => age
 		level? => level?
 		experience? => experience?
+		charm_count => charm_count
+		spell_count => spell_count
 		moral => moral
 		ethics => ethics
 		traits => traits
@@ -31,6 +33,10 @@ $hyoo_dungeon_char_summary $mol_page
 		char <= char
 		menu_links => item_list
 		Item_delete* null
+	Spell_list $hyoo_dungeon_spell_manage
+		char <= char
+		menu_links => spell_list
+		Spell_delete* null
 	body /
 		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
@@ -97,6 +103,12 @@ $hyoo_dungeon_char_summary $mol_page
 							Value <= Experience_value $mol_paginator
 								value? <=> experience?
 								step 100
+						<= Charm_count $hyoo_dungeon_parameter
+							title \🎆 Заговоры
+							value / <= charm_count
+						<= Spell_count $hyoo_dungeon_parameter
+							title \🎇 Заклинания
+							value / <= spell_count
 				<= Hits_block $hyoo_dungeon_char_summary_block
 					title \Хиты
 					content /
@@ -126,6 +138,9 @@ $hyoo_dungeon_char_summary $mol_page
 			<= Inventory_block $hyoo_dungeon_char_summary_block
 				title \Инвентарь
 				content / <= Inventory $mol_list rows <= item_list
+			<= Spell_block $hyoo_dungeon_char_summary_block
+				title \Заклинания
+				content / <= Spells $mol_list rows <= spell_list
 
 $hyoo_dungeon_char_summary_block $mol_section
 	level 5

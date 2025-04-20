@@ -3,7 +3,7 @@ namespace $.$$ {
 	$mol_style_define( $hyoo_dungeon_char_summary, {
 		
 		flex: {
-			basis: '105rem',
+			basis: '120rem',
 			grow: 1,
 		},
 		
@@ -74,6 +74,22 @@ namespace $.$$ {
 			},
 		},
 		
+		Charm_count: {
+			Value: {
+				flex: {
+					basis: '5.5rem',
+				},
+			},
+		},
+		
+		Spell_count: {
+			Value: {
+				flex: {
+					basis: '5.5rem',
+				},
+			},
+		},
+		
 		Hits_heal: {
 			Value: {
 				flex: {
@@ -103,6 +119,15 @@ namespace $.$$ {
 		Inventory: {
 			background: {
 				color: $mol_theme.card,
+			},
+		},
+		
+		Spells: {
+			gap: $mol_gap.block,
+			$mol_view: {
+				background: {
+					color: $mol_theme.card,
+				},
 			},
 		},
 		

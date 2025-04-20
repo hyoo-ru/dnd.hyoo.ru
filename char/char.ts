@@ -1,27 +1,28 @@
 namespace $ {
 	
 	export class $hyoo_dungeon_char extends $mol_store<{
-		name: string,
-		race: $hyoo_dungeon_race_id,
-		story: $hyoo_dungeon_story_id,
-		class: $hyoo_dungeon_class_id,
-		moral: 'good' | 'neutral' | 'evil',
-		ethics: 'lawful' | 'neutral' | 'chaotic',
-		biography: string,
-		age: number,
-		level: number,
-		experience: number,
-		hits_max: number,
-		hits_addon: number,
-		hits: number,
-		traits: string,
-		ideals: string,
-		affection: string,
-		weakness: string,
-		remarks: string,
-		abilities: Record< $hyoo_dungeon_ability_id, number >,
-		skills: $hyoo_dungeon_skill_id[],
-		inventory: $hyoo_dungeon_item_data[],
+		name: string
+		race: $hyoo_dungeon_race_id
+		story: $hyoo_dungeon_story_id
+		class: $hyoo_dungeon_class_id
+		moral: 'good' | 'neutral' | 'evil'
+		ethics: 'lawful' | 'neutral' | 'chaotic'
+		biography: string
+		age: number
+		level: number
+		experience: number
+		hits_max: number
+		hits_addon: number
+		hits: number
+		traits: string
+		ideals: string
+		affection: string
+		weakness: string
+		remarks: string
+		abilities: Record< $hyoo_dungeon_ability_id, number >
+		skills: $hyoo_dungeon_skill_id[]
+		inventory: $hyoo_dungeon_item_data[]
+		spells: $hyoo_dungeon_spell_data[]
 	}> {
 		
 		image() {
@@ -41,7 +42,7 @@ namespace $ {
 		}
 		
 		level( next?: number ) {
-			return Math.max( 1, this.value( 'level', next ) ?? 1 )
+			return Math.min( Math.max( 1, this.value( 'level', next ) ?? 1 ), 20 )
 		}
 		
 		experience( next?: number ) {
@@ -153,14 +154,28 @@ namespace $ {
 			this.inventory().data([ ... all.slice( 0, index ), ... all.slice( index + 1 ) ])
 		}
 		
-		// @ $mol_mem
-		// inventory( next?: string ) {
-		// 	return this.value( 'inventory', next ) || [ ... new Set([
-				// ... this.class().inventory,
-				// ... this.race().inventory,
-				// ... this.story().inventory,
-		// 	]) ].join( '\n' )
-		// }
+		@ $mol_mem
+		spells( next?: $hyoo_dungeon_spell_data[] ) {
+			return this.sub( 'spells', new $mol_store([]) as any ) as $mol_store< $hyoo_dungeon_spell_data[] >
+		}
+		
+		@ $mol_mem_key
+		spell( index: number ) {
+			return this.spells().sub( index, new $hyoo_dungeon_spell( {} as any ) )
+		}
+		
+		spell_delete( index: number ) {
+			const all = this.spells().data()
+			this.spells().data([ ... all.slice( 0, index ), ... all.slice( index + 1 ) ])
+		}
+		
+		charm_count() {
+			return this.$.$hyoo_dungeon_spell_levels[ this.level() ].charms
+		}
+		
+		spell_count() {
+			return this.$.$hyoo_dungeon_spell_levels[ this.level() ].spells
+		}
 		
 		moral( next?: 'good' | 'neutral' | 'evil' ) {
 			return this.value( 'moral', next ) ?? 'neutral'
