@@ -14757,6 +14757,11 @@ var $;
                     color: $mol_theme.card,
                 },
             },
+            Spell_block: {
+                flex: {
+                    basis: '15rem',
+                },
+            },
             Spells: {
                 gap: $mol_gap.block,
                 $mol_view: {
