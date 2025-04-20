@@ -11,7 +11,7 @@ namespace $.$$ {
 		}
 		
 		override damage_title( id: $hyoo_dungeon_damage_id ) {
-			return this.$.$hyoo_dungeon_damage_all[ id ].title
+			return this.$.$hyoo_dungeon_damage_all[ id ]?.title ?? '???'
 		}
 		
 		@ $mol_mem
