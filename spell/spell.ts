@@ -74,11 +74,11 @@ namespace $ {
 			
 			// brief += ` 🏅${ this.level() }`
 			
-			brief += ' [' + [
+			brief += ' ' + [
 				... this.component( 'verbal' ) ? [ `👅` ] : [],
 				... this.component( 'somatic' ) ? [ `🖐` ] : [],
 				... this.material() ? [ `🍭` ] : [],
-			].join( '' ) + ']'
+			].join( '' )
 			
 			// if( this.defence() ) brief += ` 🦺${ this.defence() }`
 			
