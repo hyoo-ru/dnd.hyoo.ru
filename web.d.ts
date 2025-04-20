@@ -5887,57 +5887,32 @@ declare namespace $ {
 		,
 		ReturnType< $mol_form_group['sub'] >
 	>
-	type $mol_check_list__option_checked_hyoo_dungeon_spell_config_32 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_spell_config['class_checked'] >
-		,
-		ReturnType< $mol_check_list['option_checked'] >
-	>
-	type $mol_check_list__keys_hyoo_dungeon_spell_config_33 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_spell_config['classes_options'] >
-		,
-		ReturnType< $mol_check_list['keys'] >
-	>
-	type $mol_check_list__option_title_hyoo_dungeon_spell_config_34 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_spell_config['class_title'] >
-		,
-		ReturnType< $mol_check_list['option_title'] >
-	>
-	type $mol_form_field__name_hyoo_dungeon_spell_config_35 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_form_field['name'] >
-	>
-	type $mol_form_field__Content_hyoo_dungeon_spell_config_36 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_spell_config['Classes'] >
-		,
-		ReturnType< $mol_form_field['Content'] >
-	>
-	type $mol_textarea__value_hyoo_dungeon_spell_config_37 = $mol_type_enforce<
+	type $mol_textarea__value_hyoo_dungeon_spell_config_32 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_spell_config['remarks'] >
 		,
 		ReturnType< $mol_textarea['value'] >
 	>
-	type $mol_form_field__name_hyoo_dungeon_spell_config_38 = $mol_type_enforce<
+	type $mol_form_field__name_hyoo_dungeon_spell_config_33 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__Content_hyoo_dungeon_spell_config_39 = $mol_type_enforce<
+	type $mol_form_field__Content_hyoo_dungeon_spell_config_34 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_spell_config['Remarks'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_chip__title_hyoo_dungeon_spell_config_40 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_dungeon_spell_config_35 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_spell_config['brief'] >
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_string__hint_hyoo_dungeon_spell_config_41 = $mol_type_enforce<
+	type $mol_string__hint_hyoo_dungeon_spell_config_36 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_hyoo_dungeon_spell_config_42 = $mol_type_enforce<
+	type $mol_string__value_hyoo_dungeon_spell_config_37 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_spell_config['name'] >
 		,
 		ReturnType< $mol_string['value'] >
@@ -5969,11 +5944,6 @@ declare namespace $ {
 		Material( ): $mol_string
 		Material_block( ): $mol_form_field
 		Components_group( ): $mol_form_group
-		class_checked( id: any, next?: boolean ): boolean
-		classes_options( ): readonly(any)[]
-		class_title( id: any): string
-		Classes( ): $mol_check_list
-		Classes_block( ): $mol_form_field
 		Remarks( ): $mol_textarea
 		Remarks_block( ): $mol_form_field
 		Brief( ): $mol_chip
@@ -5991,9 +5961,6 @@ declare namespace $.$$ {
         title(): string;
         damage_options(): string[];
         damage_title(id: $hyoo_dungeon_damage_id): string;
-        classes_options(): string[];
-        class_title(id: $hyoo_dungeon_class_id): string;
-        class_checked(id: $hyoo_dungeon_class_id, next?: boolean): boolean;
         component_checked(id: 'verbal' | 'somatic', next?: boolean): boolean;
     }
 }

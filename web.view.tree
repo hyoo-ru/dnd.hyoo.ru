@@ -1128,7 +1128,7 @@ $hyoo_dungeon_spell_config $mol_page
 				name \🍭 Материал
 				Content <= Material $mol_string
 					value? <=> material?
-		<= Classes_block $mol_form_field
+		- <= Classes_block $mol_form_field
 			name \Классы
 			Content <= Classes $mol_check_list
 				option_checked*? <=> class_checked*? false

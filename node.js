@@ -13642,29 +13642,6 @@ var $;
 			(obj.sub) = () => ([(this.Components_block()), (this.Material_block())]);
 			return obj;
 		}
-		class_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		classes_options(){
-			return [];
-		}
-		class_title(id){
-			return "";
-		}
-		Classes(){
-			const obj = new this.$.$mol_check_list();
-			(obj.option_checked) = (id, next) => ((this.class_checked(id, next)));
-			(obj.keys) = () => ((this.classes_options()));
-			(obj.option_title) = (id) => ((this.class_title(id)));
-			return obj;
-		}
-		Classes_block(){
-			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Классы");
-			(obj.Content) = () => ((this.Classes()));
-			return obj;
-		}
 		Remarks(){
 			const obj = new this.$.$mol_textarea();
 			(obj.value) = (next) => ((this.remarks(next)));
@@ -13696,7 +13673,6 @@ var $;
 				(this.Common()), 
 				(this.Damage_group()), 
 				(this.Components_group()), 
-				(this.Classes_block()), 
 				(this.Remarks_block())
 			];
 		}
@@ -13720,9 +13696,6 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material"));
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material_block"));
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components_group"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_config.prototype), "class_checked"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Classes"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Classes_block"));
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks"));
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks_block"));
 	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Brief"));
@@ -13749,15 +13722,6 @@ var $;
             damage_title(id) {
                 return this.$.$hyoo_dungeon_damage_all[id]?.title ?? '???';
             }
-            classes_options() {
-                return Object.keys(this.$.$hyoo_dungeon_class_all);
-            }
-            class_title(id) {
-                return this.$.$hyoo_dungeon_class_all[id].title;
-            }
-            class_checked(id, next) {
-                return this.spell().class_has(id, next);
-            }
             component_checked(id, next) {
                 return this.spell().component(id, next);
             }
@@ -13765,9 +13729,6 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_spell_config.prototype, "damage_options", null);
-        __decorate([
-            $mol_mem
-        ], $hyoo_dungeon_spell_config.prototype, "classes_options", null);
         $$.$hyoo_dungeon_spell_config = $hyoo_dungeon_spell_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
