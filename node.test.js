@@ -13738,7 +13738,7 @@ var $;
                 return Object.keys(this.$.$hyoo_dungeon_damage_all);
             }
             damage_title(id) {
-                return this.$.$hyoo_dungeon_damage_all[id].title;
+                return this.$.$hyoo_dungeon_damage_all[id]?.title ?? '???';
             }
             classes_options() {
                 return Object.keys(this.$.$hyoo_dungeon_class_all);
