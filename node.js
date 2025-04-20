@@ -7733,6 +7733,66 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $.$hyoo_dungeon_damage_all = {
+        stab: {
+            title: '🤺 Колющий',
+            description: 'Проникающий удар острым предметом, концентрирующем всю силу удара в одной точке',
+        },
+        slash: {
+            title: '🔪 Режущий',
+            description: 'Скользящий удар, рассекающий мягкую плоть',
+        },
+        crush: {
+            title: '🥊 Дробящий',
+            description: 'Сминающий или сдавливающий удар тяжёлым предметом',
+        },
+        poison: {
+            title: '🦂 Ядовитый',
+            description: 'Отравление организма токсичными веществами',
+        },
+        fire: {
+            title: '🔥 Огненный',
+            description: 'Разрушение воздействием высокой температуры',
+        },
+        cold: {
+            title: '🧊 Холодовой',
+            description: 'Обморожение и внутреннее повреждение кристаллами льда',
+        },
+        electro: {
+            title: '⚡ Электрический',
+            description: 'Молниеносный пробой высокого напряжения',
+        },
+        acid: {
+            title: '🧪 Кислотный',
+            description: 'Раздушение, воздействием едких веществ',
+        },
+        force: {
+            title: '🥋 Силовой',
+            description: 'Магический урон силовым полем',
+        },
+        necro: {
+            title: '💀 Некротический',
+            description: 'Лишение жизненной силы, разрушающией как плоть, так и душу.',
+        },
+        psy: {
+            title: '💫 Психический',
+            description: 'Разрушительное воздействие на психику',
+        },
+        radiant: {
+            title: '🔆 Сияющий',
+            description: 'Переполнение божественной силой, опаляющей плоть и сжигающей слабую душу',
+        },
+        thunder: {
+            title: '📢 Громовой',
+            description: 'Разрушение мощными колебаниями воздуха',
+        },
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_unit extends $mol_object {
         'valueOf()';
         constructor(value) {
@@ -7803,66 +7863,6 @@ var $;
         }
     }
     $.$hyoo_dungeon_coin = $hyoo_dungeon_coin;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$hyoo_dungeon_damage_all = {
-        stab: {
-            title: '🤺 Колющий',
-            description: 'Проникающий удар острым предметом, концентрирующем всю силу удара в одной точке',
-        },
-        slash: {
-            title: '🔪 Режущий',
-            description: 'Скользящий удар, рассекающий мягкую плоть',
-        },
-        crush: {
-            title: '🥊 Дробящий',
-            description: 'Сминающий или сдавливающий удар тяжёлым предметом',
-        },
-        poison: {
-            title: '🦂 Ядовитый',
-            description: 'Отравление организма токсичными веществами',
-        },
-        fire: {
-            title: '🔥 Огненный',
-            description: 'Разрушение воздействием высокой температуры',
-        },
-        cold: {
-            title: '🧊 Холодовой',
-            description: 'Обморожение и внутреннее повреждение кристаллами льда',
-        },
-        electro: {
-            title: '⚡ Электрический',
-            description: 'Молниеносный пробой высокого напряжения',
-        },
-        acid: {
-            title: '🧪 Кислотный',
-            description: 'Раздушение, воздействием едких веществ',
-        },
-        force: {
-            title: '🥋 Силовой',
-            description: 'Магический урон силовым полем',
-        },
-        necro: {
-            title: '💀 Некротический',
-            description: 'Лишение жизненной силы, разрушающией как плоть, так и душу.',
-        },
-        psy: {
-            title: '💫 Психический',
-            description: 'Разрушительное воздействие на психику',
-        },
-        radiant: {
-            title: '🔆 Сияющий',
-            description: 'Переполнение божественной силой, опаляющей плоть и сжигающей слабую душу',
-        },
-        thunder: {
-            title: '📢 Громовой',
-            description: 'Разрушение мощными колебаниями воздуха',
-        },
-    };
 })($ || ($ = {}));
 
 ;
@@ -8288,6 +8288,190 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $hyoo_dungeon_spell extends $mol_store {
+        title(next) {
+            return this.value('title', next) ?? '';
+        }
+        level(next) {
+            return this.value('level', next) ?? 0;
+        }
+        damage(next) {
+            return this.value('damage', next) ?? '0d0';
+        }
+        damage_type(next) {
+            return this.value('damage_type', next) ?? '';
+        }
+        distance(next) {
+            return this.value('distance', next) ?? 0;
+        }
+        ability(next) {
+            return this.value('ability', next) ?? 'inteligence';
+        }
+        component(id, next) {
+            return this.value(id, next) ?? false;
+        }
+        material(next) {
+            return this.value('material', next) ?? '';
+        }
+        classes(next) {
+            return this.value('classes', next) ?? [];
+        }
+        class_has(id, next) {
+            if (next !== undefined) {
+                if (next)
+                    this.classes([...this.classes(), id]);
+                else
+                    this.classes(this.classes().filter(i => i !== id));
+            }
+            const skills = this.classes();
+            return skills.includes(id);
+        }
+        brief() {
+            let brief = '';
+            brief += ' [' + [
+                ...this.component('verbal') ? [`👅`] : [],
+                ...this.component('somatic') ? [`🖐`] : [],
+                ...this.material() ? [`🍭`] : [],
+            ].join('') + ']';
+            if (this.damage_type()) {
+                brief += ' ' + this.$.$hyoo_dungeon_damage_all[this.damage_type()].title.slice(0, 2)
+                    + this.damage();
+            }
+            return brief;
+        }
+        remarks(next) {
+            return this.value('remarks', next) ?? '';
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_spell.prototype, "distance", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_spell.prototype, "ability", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_spell.prototype, "brief", null);
+    $.$hyoo_dungeon_spell = $hyoo_dungeon_spell;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$hyoo_dungeon_spell_levels = [
+        {
+            charms: 0,
+            spells: 0,
+            slots: [],
+        },
+        {
+            charms: 2,
+            spells: 4,
+            slots: [0, 2],
+        },
+        {
+            charms: 2,
+            spells: 5,
+            slots: [0, 3],
+        },
+        {
+            charms: 2,
+            spells: 6,
+            slots: [0, 4, 2],
+        },
+        {
+            charms: 3,
+            spells: 7,
+            slots: [0, 4, 3],
+        },
+        {
+            charms: 3,
+            spells: 8,
+            slots: [0, 4, 3, 2],
+        },
+        {
+            charms: 3,
+            spells: 9,
+            slots: [0, 4, 3, 3],
+        },
+        {
+            charms: 3,
+            spells: 10,
+            slots: [0, 4, 3, 3, 1],
+        },
+        {
+            charms: 3,
+            spells: 11,
+            slots: [0, 4, 3, 3, 2],
+        },
+        {
+            charms: 3,
+            spells: 12,
+            slots: [0, 4, 3, 3, 3, 1],
+        },
+        {
+            charms: 4,
+            spells: 14,
+            slots: [0, 4, 3, 3, 3, 2],
+        },
+        {
+            charms: 4,
+            spells: 15,
+            slots: [0, 4, 3, 3, 3, 2, 1],
+        },
+        {
+            charms: 4,
+            spells: 15,
+            slots: [0, 4, 3, 3, 3, 2, 1],
+        },
+        {
+            charms: 4,
+            spells: 16,
+            slots: [0, 4, 3, 3, 3, 2, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 18,
+            slots: [0, 4, 3, 3, 3, 2, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 19,
+            slots: [0, 4, 3, 3, 3, 2, 1, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 19,
+            slots: [0, 4, 3, 3, 3, 2, 1, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 20,
+            slots: [0, 4, 3, 3, 3, 2, 1, 1, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 22,
+            slots: [0, 4, 3, 3, 3, 3, 1, 1, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 22,
+            slots: [0, 4, 3, 3, 3, 3, 2, 1, 1, 1],
+        },
+        {
+            charms: 4,
+            spells: 22,
+            slots: [0, 4, 3, 3, 3, 3, 2, 2, 1, 1],
+        },
+    ];
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class $hyoo_dungeon_char extends $mol_store {
         image() {
             return this.race().image;
@@ -8302,7 +8486,7 @@ var $;
             return Math.max(1, this.value('age', next) ?? 20);
         }
         level(next) {
-            return Math.max(1, this.value('level', next) ?? 1);
+            return Math.min(Math.max(1, this.value('level', next) ?? 1), 20);
         }
         experience(next) {
             return this.value('experience', next) ?? 0;
@@ -8387,6 +8571,22 @@ var $;
             const all = this.inventory().data();
             this.inventory().data([...all.slice(0, index), ...all.slice(index + 1)]);
         }
+        spells(next) {
+            return this.sub('spells', new $mol_store([]));
+        }
+        spell(index) {
+            return this.spells().sub(index, new $hyoo_dungeon_spell({}));
+        }
+        spell_delete(index) {
+            const all = this.spells().data();
+            this.spells().data([...all.slice(0, index), ...all.slice(index + 1)]);
+        }
+        charm_count() {
+            return this.$.$hyoo_dungeon_spell_levels[this.level()].charms;
+        }
+        spell_count() {
+            return this.$.$hyoo_dungeon_spell_levels[this.level()].spells;
+        }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
         }
@@ -8457,6 +8657,12 @@ var $;
     __decorate([
         $mol_mem_key
     ], $hyoo_dungeon_char.prototype, "inventory_item", null);
+    __decorate([
+        $mol_mem
+    ], $hyoo_dungeon_char.prototype, "spells", null);
+    __decorate([
+        $mol_mem_key
+    ], $hyoo_dungeon_char.prototype, "spell", null);
     __decorate([
         $mol_mem
     ], $hyoo_dungeon_char.prototype, "hits_max", null);
@@ -12646,7 +12852,7 @@ var $;
 			return obj;
 		}
 		Weight(){
-			const obj = new this.$.$mol_paginator();
+			const obj = new this.$.$mol_number();
 			(obj.value) = (next) => ((this.weight(next)));
 			return obj;
 		}
@@ -12880,7 +13086,7 @@ var $;
 ;
 	($.$hyoo_dungeon_item_manage) = class $hyoo_dungeon_item_manage extends ($.$mol_book2_catalog) {
 		item_id_next(){
-			return "";
+			return "0";
 		}
 		Item_add_icon(){
 			const obj = new this.$.$mol_icon_plus();
@@ -12998,6 +13204,799 @@ var $;
                     basis: '35rem',
                 },
             },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_pick) = class $mol_pick extends ($.$mol_pop) {
+		keydown(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		trigger_enabled(){
+			return true;
+		}
+		clicks(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		trigger_content(){
+			return [(this.title())];
+		}
+		hint(){
+			return "";
+		}
+		Trigger(){
+			const obj = new this.$.$mol_check();
+			(obj.minimal_width) = () => (40);
+			(obj.minimal_height) = () => (40);
+			(obj.enabled) = () => ((this.trigger_enabled()));
+			(obj.checked) = (next) => ((this.showed(next)));
+			(obj.clicks) = (next) => ((this.clicks(next)));
+			(obj.sub) = () => ((this.trigger_content()));
+			(obj.hint) = () => ((this.hint()));
+			return obj;
+		}
+		event(){
+			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+		}
+		Anchor(){
+			return (this.Trigger());
+		}
+	};
+	($mol_mem(($.$mol_pick.prototype), "keydown"));
+	($mol_mem(($.$mol_pick.prototype), "clicks"));
+	($mol_mem(($.$mol_pick.prototype), "Trigger"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_pick extends $.$mol_pick {
+            keydown(event) {
+                if (!this.trigger_enabled())
+                    return;
+                if (event.defaultPrevented)
+                    return;
+                if (event.keyCode === $mol_keyboard_code.escape) {
+                    if (!this.showed())
+                        return;
+                    event.preventDefault();
+                    this.showed(false);
+                }
+            }
+        }
+        $$.$mol_pick = $mol_pick;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/pick/pick.view.css", "[mol_pick_trigger] {\n\talign-items: center;\n\tflex-grow: 1;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_dots_vertical) = class $mol_icon_dots_vertical extends ($.$mol_icon) {
+		path(){
+			return "M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_select) = class $mol_select extends ($.$mol_pick) {
+		event_select(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		option_label(id){
+			return "";
+		}
+		filter_pattern(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Option_label(id){
+			const obj = new this.$.$mol_dimmer();
+			(obj.haystack) = () => ((this.option_label(id)));
+			(obj.needle) = () => ((this.filter_pattern()));
+			return obj;
+		}
+		option_content(id){
+			return [(this.Option_label(id))];
+		}
+		no_options_message(){
+			return (this.$.$mol_locale.text("$mol_select_no_options_message"));
+		}
+		nav_components(){
+			return [];
+		}
+		option_focused(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		nav_cycle(next){
+			if(next !== undefined) return next;
+			return true;
+		}
+		Nav(){
+			const obj = new this.$.$mol_nav();
+			(obj.keys_y) = () => ((this.nav_components()));
+			(obj.current_y) = (next) => ((this.option_focused(next)));
+			(obj.cycle) = (next) => ((this.nav_cycle(next)));
+			return obj;
+		}
+		menu_content(){
+			return [];
+		}
+		Menu(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.menu_content()));
+			return obj;
+		}
+		Bubble_pane(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ([(this.Menu())]);
+			return obj;
+		}
+		filter_hint(){
+			return (this.$.$mol_locale.text("$mol_select_filter_hint"));
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		enabled(){
+			return true;
+		}
+		dictionary(next){
+			if(next !== undefined) return next;
+			return {};
+		}
+		options(){
+			return [];
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		option_label_default(){
+			return "";
+		}
+		Option_row(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.event_click) = (next) => ((this.event_select(id, next)));
+			(obj.sub) = () => ((this.option_content(id)));
+			return obj;
+		}
+		No_options(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.no_options_message())]);
+			return obj;
+		}
+		plugins(){
+			return [...(super.plugins()), (this.Nav())];
+		}
+		hint(){
+			return (this.$.$mol_locale.text("$mol_select_hint"));
+		}
+		bubble_content(){
+			return [(this.Filter()), (this.Bubble_pane())];
+		}
+		Filter(){
+			const obj = new this.$.$mol_search();
+			(obj.query) = (next) => ((this.filter_pattern(next)));
+			(obj.hint) = () => ((this.filter_hint()));
+			(obj.submit) = (next) => ((this.submit(next)));
+			(obj.enabled) = () => ((this.enabled()));
+			return obj;
+		}
+		Trigger_icon(){
+			const obj = new this.$.$mol_icon_dots_vertical();
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$mol_select.prototype), "event_select"));
+	($mol_mem(($.$mol_select.prototype), "filter_pattern"));
+	($mol_mem_key(($.$mol_select.prototype), "Option_label"));
+	($mol_mem(($.$mol_select.prototype), "option_focused"));
+	($mol_mem(($.$mol_select.prototype), "nav_cycle"));
+	($mol_mem(($.$mol_select.prototype), "Nav"));
+	($mol_mem(($.$mol_select.prototype), "Menu"));
+	($mol_mem(($.$mol_select.prototype), "Bubble_pane"));
+	($mol_mem(($.$mol_select.prototype), "submit"));
+	($mol_mem(($.$mol_select.prototype), "dictionary"));
+	($mol_mem(($.$mol_select.prototype), "value"));
+	($mol_mem_key(($.$mol_select.prototype), "Option_row"));
+	($mol_mem(($.$mol_select.prototype), "No_options"));
+	($mol_mem(($.$mol_select.prototype), "Filter"));
+	($mol_mem(($.$mol_select.prototype), "Trigger_icon"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_select extends $.$mol_select {
+            filter_pattern(next) {
+                this.focused();
+                return next || '';
+            }
+            open() {
+                this.showed(true);
+            }
+            options() {
+                return Object.keys(this.dictionary());
+            }
+            options_filtered() {
+                let options = this.options();
+                options = options.filter($mol_match_text(this.filter_pattern(), (id) => [this.option_label(id)]));
+                const index = options.indexOf(this.value());
+                if (index >= 0)
+                    options = [...options.slice(0, index), ...options.slice(index + 1)];
+                return options;
+            }
+            option_label(id) {
+                const value = this.dictionary()[id];
+                return (value == null ? id : value) || this.option_label_default();
+            }
+            option_rows() {
+                return this.options_filtered().map((option) => this.Option_row(option));
+            }
+            option_focused(component) {
+                if (component == null) {
+                    for (let comp of this.nav_components()) {
+                        if (comp && comp.focused())
+                            return comp;
+                    }
+                    return null;
+                }
+                if (this.showed()) {
+                    component.focused(true);
+                }
+                return component;
+            }
+            event_select(id, event) {
+                this.value(id);
+                this.showed(false);
+                event?.preventDefault();
+            }
+            nav_components() {
+                if (this.options().length > 1 && this.Filter()) {
+                    return [this.Filter(), ...this.option_rows()];
+                }
+                else {
+                    return this.option_rows();
+                }
+            }
+            trigger_content() {
+                return [
+                    ...this.option_content(this.value()),
+                    this.Trigger_icon(),
+                ];
+            }
+            menu_content() {
+                return [
+                    ...this.option_rows(),
+                    ...(this.options_filtered().length === 0) ? [this.No_options()] : []
+                ];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_select.prototype, "filter_pattern", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select.prototype, "options", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select.prototype, "options_filtered", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select.prototype, "option_focused", null);
+        $$.$mol_select = $mol_select;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/select/select.view.css", "[mol_select] {\n\tdisplay: flex;\n\tword-break: normal;\n\talign-self: flex-start;\n}\n\n[mol_select_option_row] {\n\tmin-width: 100%;\n\tpadding: 0;\n\tjustify-content: flex-start;\n}\n\n[mol_select_bubble] {\n\tmin-width: 100%;\n}\n\n[mol_select_filter] {\n\tflex: 1 0 auto;\n\talign-self: stretch;\n}\n\n[mol_select_option_label] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: left;\n\tmin-height: 1.5em;\n\tdisplay: block;\n\twhite-space: nowrap;\n}\n\n[mol_select_clear_option_content] {\n\tpadding: .5em 1rem .5rem 0;\n\ttext-align: left;\n\tbox-shadow: var(--mol_theme_line);\n\tflex: 1 0 auto;\n}\n\n[mol_select_no_options] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: left;\n\tdisplay: block;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_select_trigger] {\n\tpadding: 0;\n\tflex: 1 1 auto;\n\tdisplay: flex;\n}\n\n[mol_select_trigger] > * {\n\tmargin-right: -1rem;\n}\n\n[mol_select_trigger] > *:last-child {\n\tmargin-right: 0;\n}\n\n[mol_select_menu] {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n");
+})($ || ($ = {}));
+
+;
+	($.$hyoo_dungeon_spell_config) = class $hyoo_dungeon_spell_config extends ($.$mol_page) {
+		brief(){
+			return (this.spell().brief());
+		}
+		name(next){
+			return (this.spell().title(next));
+		}
+		level(next){
+			return (this.spell().level(next));
+		}
+		material(next){
+			return (this.spell().material(next));
+		}
+		distance(next){
+			return (this.spell().distance(next));
+		}
+		damage(next){
+			return (this.spell().damage(next));
+		}
+		damage_type(next){
+			return (this.spell().damage_type(next));
+		}
+		remarks(next){
+			return (this.spell().remarks(next));
+		}
+		Level(){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level(next)));
+			return obj;
+		}
+		Level_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🏅 Уровень");
+			(obj.Content) = () => ((this.Level()));
+			return obj;
+		}
+		Distance(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.distance(next)));
+			return obj;
+		}
+		Distance_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💨 Дальность");
+			(obj.Content) = () => ((this.Distance()));
+			return obj;
+		}
+		Common(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Level_block()), (this.Distance_block())]);
+			return obj;
+		}
+		damage_options(){
+			return [];
+		}
+		damage_title(id){
+			return "";
+		}
+		Damage_type(){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.damage_type(next)));
+			(obj.options) = () => ((this.damage_options()));
+			(obj.option_label) = (id) => ((this.damage_title(id)));
+			return obj;
+		}
+		Damage_type_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💢 Вид урона");
+			(obj.Content) = () => ((this.Damage_type()));
+			return obj;
+		}
+		Damage(){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.damage(next)));
+			return obj;
+		}
+		Damage_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("💥 Степень урона");
+			(obj.Content) = () => ((this.Damage()));
+			return obj;
+		}
+		Damage_group(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Damage_type_block()), (this.Damage_block())]);
+			return obj;
+		}
+		component_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Components(){
+			const obj = new this.$.$mol_check_list();
+			(obj.option_checked) = (id, next) => ((this.component_checked(id, next)));
+			(obj.options) = () => ({"verbal": "👅 Вербальный", "somatic": "🖐 Соматический"});
+			return obj;
+		}
+		Components_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("📦 Компоненты");
+			(obj.Content) = () => ((this.Components()));
+			return obj;
+		}
+		Material(){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.material(next)));
+			return obj;
+		}
+		Material_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("🍭 Материал");
+			(obj.Content) = () => ((this.Material()));
+			return obj;
+		}
+		Components_group(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Components_block()), (this.Material_block())]);
+			return obj;
+		}
+		class_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		classes_options(){
+			return [];
+		}
+		class_title(id){
+			return "";
+		}
+		Classes(){
+			const obj = new this.$.$mol_check_list();
+			(obj.option_checked) = (id, next) => ((this.class_checked(id, next)));
+			(obj.keys) = () => ((this.classes_options()));
+			(obj.option_title) = (id) => ((this.class_title(id)));
+			return obj;
+		}
+		Classes_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Классы");
+			(obj.Content) = () => ((this.Classes()));
+			return obj;
+		}
+		Remarks(){
+			const obj = new this.$.$mol_textarea();
+			(obj.value) = (next) => ((this.remarks(next)));
+			return obj;
+		}
+		Remarks_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Заметки");
+			(obj.Content) = () => ((this.Remarks()));
+			return obj;
+		}
+		Brief(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ((this.brief()));
+			return obj;
+		}
+		spell(){
+			const obj = new this.$.$hyoo_dungeon_spell();
+			return obj;
+		}
+		Title(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ("Название");
+			(obj.value) = (next) => ((this.name(next)));
+			return obj;
+		}
+		body(){
+			return [
+				(this.Common()), 
+				(this.Damage_group()), 
+				(this.Components_group()), 
+				(this.Classes_block()), 
+				(this.Remarks_block())
+			];
+		}
+		foot(){
+			return [(this.Brief())];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Level"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Level_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Distance"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Distance_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Common"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_type"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_type_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_group"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_config.prototype), "component_checked"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components_group"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_config.prototype), "class_checked"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Classes"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Classes_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks_block"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Brief"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "spell"));
+	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Title"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_spell_config extends $.$hyoo_dungeon_spell_config {
+            title() {
+                return this.spell().title();
+            }
+            damage_options() {
+                return Object.keys(this.$.$hyoo_dungeon_damage_all);
+            }
+            damage_title(id) {
+                return this.$.$hyoo_dungeon_damage_all[id].title;
+            }
+            classes_options() {
+                return Object.keys(this.$.$hyoo_dungeon_class_all);
+            }
+            class_title(id) {
+                return this.$.$hyoo_dungeon_class_all[id].title;
+            }
+            class_checked(id, next) {
+                return this.spell().class_has(id, next);
+            }
+            component_checked(id, next) {
+                return this.spell().component(id, next);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_spell_config.prototype, "damage_options", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_spell_config.prototype, "classes_options", null);
+        $$.$hyoo_dungeon_spell_config = $hyoo_dungeon_spell_config;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_spell_config, {
+            flex: {
+                basis: '40rem',
+            },
+            Body_content: {
+                gap: $mol_gap.block,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_dungeon_spell_manage) = class $hyoo_dungeon_spell_manage extends ($.$mol_book2_catalog) {
+		spell_id_next(){
+			return "0";
+		}
+		Spell_add_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Spell_add(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ({"spell": (this.spell_id_next())});
+			(obj.sub) = () => ([(this.Spell_add_icon())]);
+			return obj;
+		}
+		spell(id){
+			const obj = new this.$.$hyoo_dungeon_spell();
+			return obj;
+		}
+		level_title(id){
+			return "Уровень {level}";
+		}
+		Level_title(id){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ((this.level_title(id)));
+			return obj;
+		}
+		level_slot_ready(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Level_slot_ready(id){
+			const obj = new this.$.$mol_paginator();
+			(obj.value) = (next) => ((this.level_slot_ready(id, next)));
+			return obj;
+		}
+		level_slot_max(id){
+			return "";
+		}
+		Level_slot_max(id){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ((this.level_slot_max(id)));
+			return obj;
+		}
+		Level_head(id){
+			const obj = new this.$.$mol_bar();
+			(obj.sub) = () => ([
+				(this.Level_title(id)), 
+				(this.Level_slot_ready(id)), 
+				(this.Level_slot_max(id))
+			]);
+			return obj;
+		}
+		level_spells(id){
+			return [];
+		}
+		Level(id){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Level_head(id)), ...(this.level_spells(id))]);
+			return obj;
+		}
+		levels(){
+			return [(this.Level("0"))];
+		}
+		spell_delete(id){
+			return null;
+		}
+		Spell_delete_icon(id){
+			const obj = new this.$.$mol_icon_trash_can_outline();
+			return obj;
+		}
+		Spell_delete(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.spell_delete(id)));
+			(obj.sub) = () => ([(this.Spell_delete_icon(id))]);
+			return obj;
+		}
+		spell_brief(id){
+			return "";
+		}
+		Spell_brief(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.spell_brief(id))]);
+			return obj;
+		}
+		char(){
+			const obj = new this.$.$hyoo_dungeon_char();
+			return obj;
+		}
+		menu_title(){
+			return "Заклинания";
+		}
+		menu_tools(){
+			return [(this.Spell_add())];
+		}
+		param(){
+			return "spell";
+		}
+		Spread(id){
+			const obj = new this.$.$hyoo_dungeon_spell_config();
+			(obj.spell) = () => ((this.spell(id)));
+			(obj.tools) = () => ([(this.Spread_close())]);
+			return obj;
+		}
+		menu_links(){
+			return (this.levels());
+		}
+		menu_item_content(id){
+			return [(this.Menu_link(id)), (this.Spell_delete(id))];
+		}
+		menu_link_content(id){
+			return [(this.Menu_link_title(id)), (this.Spell_brief(id))];
+		}
+	};
+	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "Spell_add_icon"));
+	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "Spell_add"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "spell"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_title"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "level_slot_ready"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_slot_ready"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_slot_max"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_head"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_delete_icon"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_delete"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_brief"));
+	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "char"));
+	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spread"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_dungeon_spell_manage extends $.$hyoo_dungeon_spell_manage {
+            level() {
+                return this.$.$hyoo_dungeon_spell_levels[this.char().level()];
+            }
+            levels() {
+                return Array.from({ length: this.level().slots.length }, (_, level) => this.Level(level));
+            }
+            level_title(level) {
+                return super.level_title(level).replace('{level}', level + '');
+            }
+            level_slot_max(level) {
+                if (!level)
+                    return '/ ∞';
+                return ' / ' + (this.level().slots[level] ?? 0);
+            }
+            level_slot_ready(level, next) {
+                if (!level)
+                    return 0;
+                const max = this.level().slots[level] ?? 0;
+                if (next === undefined)
+                    return max;
+                return Math.max(0, Math.min(next, max));
+            }
+            level_spells(level) {
+                const spells = this.char().spells().data();
+                return Object.keys(spells).filter(id => spells[id].level === level).map(id => this.Menu_item(id));
+            }
+            spell_id_next() {
+                return this.char().spells().data().length.toString();
+            }
+            spell(index) {
+                return this.char().spell(index);
+            }
+            spell_brief(index) {
+                return this.spell(index).brief();
+            }
+            spell_delete(index) {
+                this.char().spell_delete(index);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_spell_manage.prototype, "level", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_spell_manage.prototype, "levels", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_spell_manage.prototype, "level_slot_ready", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_dungeon_spell_manage.prototype, "level_spells", null);
+        $$.$hyoo_dungeon_spell_manage = $hyoo_dungeon_spell_manage;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_dungeon_spell_manage, {
+            Menu: {
+                flex: {
+                    basis: '25rem',
+                },
+            },
+            Level_title: {},
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -13131,6 +14130,12 @@ var $;
 		experience(next){
 			return (this.char().experience(next));
 		}
+		charm_count(){
+			return (this.char().charm_count());
+		}
+		spell_count(){
+			return (this.char().spell_count());
+		}
 		moral(){
 			return (this.char().moral());
 		}
@@ -13178,6 +14183,9 @@ var $;
 		}
 		item_list(){
 			return (this.Item_list().menu_links());
+		}
+		spell_list(){
+			return (this.Spell_list().menu_links());
 		}
 		Name(){
 			const obj = new this.$.$mol_chip();
@@ -13371,13 +14379,27 @@ var $;
 			(obj.Value) = () => ((this.Experience_value()));
 			return obj;
 		}
+		Charm_count(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🎆 Заговоры");
+			(obj.value) = () => ([(this.charm_count())]);
+			return obj;
+		}
+		Spell_count(){
+			const obj = new this.$.$hyoo_dungeon_parameter();
+			(obj.title) = () => ("🎇 Заклинания");
+			(obj.value) = () => ([(this.spell_count())]);
+			return obj;
+		}
 		Grade_block(){
 			const obj = new this.$.$hyoo_dungeon_char_summary_block();
 			(obj.title) = () => ("Прогресс");
 			(obj.content) = () => ([
 				(this.Level()), 
 				(this.Master_bonus()), 
-				(this.Experience())
+				(this.Experience()), 
+				(this.Charm_count()), 
+				(this.Spell_count())
 			]);
 			return obj;
 		}
@@ -13476,6 +14498,17 @@ var $;
 			(obj.content) = () => ([(this.Inventory())]);
 			return obj;
 		}
+		Spells(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.spell_list()));
+			return obj;
+		}
+		Spell_block(){
+			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			(obj.title) = () => ("Заклинания");
+			(obj.content) = () => ([(this.Spells())]);
+			return obj;
+		}
 		Columns(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([
@@ -13483,7 +14516,8 @@ var $;
 				(this.Stat_main()), 
 				(this.Skills()), 
 				(this.Perks_block()), 
-				(this.Inventory_block())
+				(this.Inventory_block()), 
+				(this.Spell_block())
 			]);
 			return obj;
 		}
@@ -13510,6 +14544,12 @@ var $;
 			const obj = new this.$.$hyoo_dungeon_item_manage();
 			(obj.char) = () => ((this.char()));
 			(obj.Item_delete) = (id) => (null);
+			return obj;
+		}
+		Spell_list(){
+			const obj = new this.$.$hyoo_dungeon_spell_manage();
+			(obj.char) = () => ((this.char()));
+			(obj.Spell_delete) = (id) => (null);
 			return obj;
 		}
 		body(){
@@ -13542,6 +14582,8 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Master_bonus"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Charm_count"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_count"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
@@ -13558,11 +14600,14 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory_block"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spells"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_cofig"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_cofig"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Item_list"));
+	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_list"));
 	($.$hyoo_dungeon_char_summary_block) = class $hyoo_dungeon_char_summary_block extends ($.$mol_section) {
 		level(){
 			return 5;
@@ -13657,7 +14702,7 @@ var $;
     (function ($$) {
         $mol_style_define($hyoo_dungeon_char_summary, {
             flex: {
-                basis: '105rem',
+                basis: '120rem',
                 grow: 1,
             },
             Columns: {
@@ -13719,6 +14764,20 @@ var $;
                     },
                 },
             },
+            Charm_count: {
+                Value: {
+                    flex: {
+                        basis: '5.5rem',
+                    },
+                },
+            },
+            Spell_count: {
+                Value: {
+                    flex: {
+                        basis: '5.5rem',
+                    },
+                },
+            },
             Hits_heal: {
                 Value: {
                     flex: {
@@ -13744,6 +14803,14 @@ var $;
             Inventory: {
                 background: {
                     color: $mol_theme.card,
+                },
+            },
+            Spells: {
+                gap: $mol_gap.block,
+                $mol_view: {
+                    background: {
+                        color: $mol_theme.card,
+                    },
                 },
             },
         });
@@ -14453,6 +15520,15 @@ var $;
 			(obj.addon_tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
+		Spells_spread(){
+			return (this.Spells().spread_current());
+		}
+		Spells(){
+			const obj = new this.$.$hyoo_dungeon_spell_manage();
+			(obj.char) = () => ((this.char()));
+			(obj.addon_tools) = () => ([(this.Spread_close())]);
+			return obj;
+		}
 		Source(){
 			const obj = new this.$.$mol_link_source();
 			(obj.uri) = () => ("https://github.com/hyoo-ru/dungeon.hyoo.ru");
@@ -14486,7 +15562,8 @@ var $;
 				"personality": (this.Personality()), 
 				"Params": (this.Params()), 
 				"skills": (this.Skills()), 
-				"inventory": (this.Inventory())
+				"inventory": (this.Inventory()), 
+				"speels": (this.Spells())
 			};
 		}
 		menu_foot(){
@@ -14499,7 +15576,11 @@ var $;
 			return [(this.Theme())];
 		}
 		pages(){
-			return [...(super.pages()), (this.Inventory_spread())];
+			return [
+				...(super.pages()), 
+				(this.Inventory_spread()), 
+				(this.Spells_spread())
+			];
 		}
 	};
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Summary"));
@@ -14508,6 +15589,7 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Params"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Skills"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Inventory"));
+	($mol_mem(($.$hyoo_dungeon_app.prototype), "Spells"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Source"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Lights"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Theme"));

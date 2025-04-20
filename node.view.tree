@@ -962,7 +962,7 @@ $hyoo_dungeon_item_config $mol_page
 					value? <=> price?
 			<= Weight_block $mol_form_field
 				name \🧱 Вес
-				Content <= Weight $mol_paginator
+				Content <= Weight $mol_number
 					value? <=> weight?
 		<= Touch_range $mol_form_group sub /
 			<= Hand1_block $mol_form_field
@@ -1014,7 +1014,7 @@ $hyoo_dungeon_item_manage $mol_book2_catalog
 	menu_title \Инвентарь
 	menu_tools /
 		<= Item_add $mol_link
-			arg * item <= item_id_next \
+			arg * item <= item_id_next \0
 			sub /
 				<= Item_add_icon $mol_icon_plus
 	param \item
@@ -1031,6 +1031,146 @@ $hyoo_dungeon_item_manage $mol_book2_catalog
 	menu_link_content* /$mol_view
 		<= Menu_link_title*
 		<= Item_brief* $mol_view sub / <= item_brief* \
+
+$mol_pick $mol_pop
+	event *
+		^
+		keydown?event <=> keydown?event null
+	Anchor <= Trigger $mol_check
+		minimal_width 40
+		minimal_height 40
+		enabled <= trigger_enabled true
+		checked? <=> showed?
+		clicks? <=> clicks? null
+		sub <= trigger_content /$mol_view_content
+			<= title
+		hint <= hint \
+
+$mol_icon_dots_vertical $mol_icon path \M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
+
+$mol_select $mol_pick
+	dictionary? *
+	options /string
+	value? \
+	option_label_default \
+	Option_row* $mol_button_minor
+		event_click?event <=> event_select*?event null
+		sub <= option_content* /
+			<= Option_label* $mol_dimmer
+				haystack <= option_label* \
+				needle <= filter_pattern? \
+	No_options $mol_view
+		sub /
+			<= no_options_message @ \No options
+	plugins /
+		^
+		<= Nav $mol_nav
+			keys_y <= nav_components /$mol_view
+			current_y?component <=> option_focused?component null
+			cycle? <=> nav_cycle? true
+	hint @ \Pick..
+	bubble_content /
+		<= Filter
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_content /$mol_view
+	Filter $mol_search
+		query? <=> filter_pattern? \
+		hint <= filter_hint @ \Filter..
+		submit?event <=> submit?event null
+		enabled <= enabled true
+	Trigger_icon $mol_icon_dots_vertical
+
+$hyoo_dungeon_spell_config $mol_page
+	spell $hyoo_dungeon_spell
+		brief => brief
+		title? => name?
+		level? => level?
+		material? => material?
+		distance? => distance?
+		damage? => damage?
+		damage_type? => damage_type?
+		remarks? => remarks?
+	Title $mol_string
+		hint \Название
+		value? <=> name?
+	body /
+		<= Common $mol_form_group sub /
+			<= Level_block $mol_form_field
+				name \🏅 Уровень
+				Content <= Level $mol_paginator
+					value? <=> level?
+			<= Distance_block $mol_form_field
+				name \💨 Дальность
+				Content <= Distance $mol_number
+					value? <=> distance?
+		<= Damage_group $mol_form_group sub /
+			<= Damage_type_block $mol_form_field
+				name \💢 Вид урона
+				Content <= Damage_type $mol_select
+					value? <=> damage_type?
+					options <= damage_options /
+					option_label* <= damage_title* \
+			<= Damage_block $mol_form_field
+				name \💥 Степень урона
+				Content <= Damage $mol_string
+					value? <=> damage?
+		<= Components_group $mol_form_group sub /
+			<= Components_block $mol_form_field
+				name \📦 Компоненты
+				Content <= Components $mol_check_list
+					option_checked*? <=> component_checked*? false
+					options *
+						verbal \👅 Вербальный
+						somatic \🖐 Соматический
+			<= Material_block $mol_form_field
+				name \🍭 Материал
+				Content <= Material $mol_string
+					value? <=> material?
+		<= Classes_block $mol_form_field
+			name \Классы
+			Content <= Classes $mol_check_list
+				option_checked*? <=> class_checked*? false
+				keys <= classes_options /
+				option_title* <= class_title* \
+		<= Remarks_block $mol_form_field
+			name \Заметки
+			Content <= Remarks $mol_textarea
+				value? <=> remarks?
+	foot /
+		<= Brief $mol_chip title <= brief
+
+$hyoo_dungeon_spell_manage $mol_book2_catalog
+	char $hyoo_dungeon_char
+	menu_title \Заклинания
+	menu_tools /
+		<= Spell_add $mol_link
+			arg * spell <= spell_id_next \0
+			sub /
+				<= Spell_add_icon $mol_icon_plus
+	param \spell
+	Spread* $hyoo_dungeon_spell_config
+		spell <= spell* $hyoo_dungeon_spell
+		tools /
+			<= Spread_close
+	menu_links <= levels /
+		<= Level*0 $mol_list rows /
+			<= Level_head* $mol_bar
+				sub /
+					<= Level_title* $mol_chip title <= level_title* \Уровень {level}
+					<= Level_slot_ready* $mol_paginator value? <=> level_slot_ready*? 0
+					<= Level_slot_max* $mol_chip title <= level_slot_max* \
+			^ level_spells* /
+	menu_item_content* /$mol_view
+		<= Menu_link*
+		<= Spell_delete* $mol_button_minor
+			click? <=> spell_delete* null
+			sub /
+				<= Spell_delete_icon* $mol_icon_trash_can_outline
+	menu_link_content* /$mol_view
+		<= Menu_link_title*
+		<= Spell_brief* $mol_view sub / <= spell_brief* \
 
 $mol_section $mol_list
 	level 1
@@ -1066,6 +1206,8 @@ $hyoo_dungeon_char_summary $mol_page
 		age => age
 		level? => level?
 		experience? => experience?
+		charm_count => charm_count
+		spell_count => spell_count
 		moral => moral
 		ethics => ethics
 		traits => traits
@@ -1091,6 +1233,10 @@ $hyoo_dungeon_char_summary $mol_page
 		char <= char
 		menu_links => item_list
 		Item_delete* null
+	Spell_list $hyoo_dungeon_spell_manage
+		char <= char
+		menu_links => spell_list
+		Spell_delete* null
 	body /
 		<= Columns $mol_view sub /
 			<= Info $mol_list rows /
@@ -1157,6 +1303,12 @@ $hyoo_dungeon_char_summary $mol_page
 							Value <= Experience_value $mol_paginator
 								value? <=> experience?
 								step 100
+						<= Charm_count $hyoo_dungeon_parameter
+							title \🎆 Заговоры
+							value / <= charm_count
+						<= Spell_count $hyoo_dungeon_parameter
+							title \🎇 Заклинания
+							value / <= spell_count
 				<= Hits_block $hyoo_dungeon_char_summary_block
 					title \Хиты
 					content /
@@ -1186,6 +1338,9 @@ $hyoo_dungeon_char_summary $mol_page
 			<= Inventory_block $hyoo_dungeon_char_summary_block
 				title \Инвентарь
 				content / <= Inventory $mol_list rows <= item_list
+			<= Spell_block $hyoo_dungeon_char_summary_block
+				title \Заклинания
+				content / <= Spells $mol_list rows <= spell_list
 
 $hyoo_dungeon_char_summary_block $mol_section
 	level 5
@@ -1328,6 +1483,10 @@ $hyoo_dungeon_app $mol_book2_catalog
 			char <= char
 			addon_tools / <= Spread_close
 			spread_current => Inventory_spread
+		speels <= Spells $hyoo_dungeon_spell_manage
+			char <= char
+			addon_tools / <= Spread_close
+			spread_current => Spells_spread
 	menu_foot /
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/dungeon.hyoo.ru
@@ -1338,3 +1497,4 @@ $hyoo_dungeon_app $mol_book2_catalog
 	pages /
 		^
 		<= Inventory_spread
+		<= Spells_spread
