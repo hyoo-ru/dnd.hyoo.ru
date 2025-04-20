@@ -12033,12 +12033,12 @@ var $;
                 justify: {
                     content: 'center',
                 },
+                color: $mol_theme.shade,
             },
             Ability_safe: {
                 flex: {
                     basis: '2.5rem',
                 },
-                color: $mol_theme.shade,
                 justify: {
                     content: 'center',
                 },
@@ -15575,13 +15575,6 @@ var $;
 		plugins(){
 			return [(this.Theme())];
 		}
-		pages(){
-			return [
-				...(super.pages()), 
-				(this.Inventory_spread()), 
-				(this.Spells_spread())
-			];
-		}
 	};
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Summary"));
 	($mol_mem(($.$hyoo_dungeon_app.prototype), "Main"));
@@ -15683,6 +15676,13 @@ var $;
                 const color = this.$.$mol_lights() ? `rgba(255,255,255,.75)` : `rgba(0,0,0,.75)`;
                 return `linear-gradient( to bottom, ${color}, ${color} ), url(${JSON.stringify(this.char_image())})`;
             }
+            pages() {
+                return [
+                    ...super.pages(),
+                    ...$mol_maybe(this.Inventory_spread()),
+                    ...$mol_maybe(this.Spells_spread()),
+                ];
+            }
         }
         __decorate([
             $mol_mem
@@ -15690,6 +15690,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_dungeon_app.prototype, "background", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_dungeon_app.prototype, "pages", null);
         $$.$hyoo_dungeon_app = $hyoo_dungeon_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

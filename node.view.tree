@@ -1494,7 +1494,3 @@ $hyoo_dungeon_app $mol_book2_catalog
 	Placeholder null
 	plugins /
 		<= Theme $mol_theme_auto
-	pages /
-		^
-		<= Inventory_spread
-		<= Spells_spread

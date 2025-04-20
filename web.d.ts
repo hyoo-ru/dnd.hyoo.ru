@@ -7474,7 +7474,6 @@ declare namespace $ {
 		menu_foot( ): readonly(any)[]
 		Placeholder( ): any
 		plugins( ): readonly(any)[]
-		pages( ): readonly(any)[]
 	}
 	
 }
@@ -7484,6 +7483,7 @@ declare namespace $.$$ {
     class $hyoo_dungeon_app extends $.$hyoo_dungeon_app {
         char(): $hyoo_dungeon_char;
         background(): string;
+        pages(): any[];
     }
 }
 
