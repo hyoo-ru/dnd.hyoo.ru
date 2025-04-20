@@ -6698,62 +6698,57 @@ declare namespace $ {
 		,
 		ReturnType< $hyoo_dungeon_char_summary_block['content'] >
 	>
-	type $mol_list__rows_hyoo_dungeon_char_summary_78 = $mol_type_enforce<
-		ReturnType< $hyoo_dungeon_char_summary['spell_list'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $hyoo_dungeon_char_summary_block__title_hyoo_dungeon_char_summary_79 = $mol_type_enforce<
+	type $hyoo_dungeon_char_summary_block__title_hyoo_dungeon_char_summary_78 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $hyoo_dungeon_char_summary_block['title'] >
 	>
-	type $hyoo_dungeon_char_summary_block__content_hyoo_dungeon_char_summary_80 = $mol_type_enforce<
+	type $hyoo_dungeon_char_summary_block__content_hyoo_dungeon_char_summary_79 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $hyoo_dungeon_char_summary_block['content'] >
 	>
-	type $mol_view__sub_hyoo_dungeon_char_summary_81 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_dungeon_char_summary_80 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_82 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__char_hyoo_dungeon_char_summary_81 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_ability_config['char'] >
 	>
-	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_83 = $mol_type_enforce<
+	type $hyoo_dungeon_ability_config__Ability_addon_hyoo_dungeon_char_summary_82 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_ability_config['Ability_addon'] >
 	>
-	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_84 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__char_hyoo_dungeon_char_summary_83 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_skill_config['char'] >
 	>
-	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_85 = $mol_type_enforce<
+	type $hyoo_dungeon_skill_config__Skill_addon_hyoo_dungeon_char_summary_84 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_skill_config['Skill_addon'] >
 	>
-	type $hyoo_dungeon_item_manage__char_hyoo_dungeon_char_summary_86 = $mol_type_enforce<
+	type $hyoo_dungeon_item_manage__char_hyoo_dungeon_char_summary_85 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_item_manage['char'] >
 	>
-	type $hyoo_dungeon_item_manage__Item_delete_hyoo_dungeon_char_summary_87 = $mol_type_enforce<
+	type $hyoo_dungeon_item_manage__Item_delete_hyoo_dungeon_char_summary_86 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_item_manage['Item_delete'] >
 	>
-	type $hyoo_dungeon_spell_manage__char_hyoo_dungeon_char_summary_88 = $mol_type_enforce<
+	type $hyoo_dungeon_spell_manage__char_hyoo_dungeon_char_summary_87 = $mol_type_enforce<
 		ReturnType< $hyoo_dungeon_char_summary['char'] >
 		,
 		ReturnType< $hyoo_dungeon_spell_manage['char'] >
 	>
-	type $hyoo_dungeon_spell_manage__Spell_delete_hyoo_dungeon_char_summary_89 = $mol_type_enforce<
+	type $hyoo_dungeon_spell_manage__Spell_delete_hyoo_dungeon_char_summary_88 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $hyoo_dungeon_spell_manage['Spell_delete'] >
@@ -6782,7 +6777,7 @@ declare namespace $ {
 		ability_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Ability_cofig'] >['ability_list'] >
 		skill_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Skill_cofig'] >['skill_list'] >
 		item_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Item_list'] >['menu_links'] >
-		spell_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Spell_list'] >['menu_links'] >
+		spell_list( ): ReturnType< ReturnType< $hyoo_dungeon_char_summary['Spell_list'] >['Menu_links'] >
 		Name( ): $mol_chip
 		Age( ): $mol_chip
 		speed( ): number
@@ -6837,7 +6832,6 @@ declare namespace $ {
 		Perks_block( ): $hyoo_dungeon_char_summary_block
 		Inventory( ): $mol_list
 		Inventory_block( ): $hyoo_dungeon_char_summary_block
-		Spells( ): $mol_list
 		Spell_block( ): $hyoo_dungeon_char_summary_block
 		Columns( ): $mol_view
 		title( ): string

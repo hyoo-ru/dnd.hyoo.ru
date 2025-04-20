@@ -13957,7 +13957,14 @@ var $;
                     basis: '25rem',
                 },
             },
-            Level_title: {},
+            Menu_links: {
+                gap: $mol_gap.block,
+            },
+            Level: {
+                background: {
+                    color: $mol_theme.card,
+                },
+            },
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -14146,7 +14153,7 @@ var $;
 			return (this.Item_list().menu_links());
 		}
 		spell_list(){
-			return (this.Spell_list().menu_links());
+			return (this.Spell_list().Menu_links());
 		}
 		Name(){
 			const obj = new this.$.$mol_chip();
@@ -14459,15 +14466,10 @@ var $;
 			(obj.content) = () => ([(this.Inventory())]);
 			return obj;
 		}
-		Spells(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.spell_list()));
-			return obj;
-		}
 		Spell_block(){
 			const obj = new this.$.$hyoo_dungeon_char_summary_block();
 			(obj.title) = () => ("Заклинания");
-			(obj.content) = () => ([(this.Spells())]);
+			(obj.content) = () => ([(this.spell_list())]);
 			return obj;
 		}
 		Columns(){
@@ -14561,7 +14563,6 @@ var $;
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spells"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_block"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
 	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
@@ -14769,14 +14770,6 @@ var $;
             Spell_block: {
                 flex: {
                     basis: '15rem',
-                },
-            },
-            Spells: {
-                gap: $mol_gap.block,
-                $mol_view: {
-                    background: {
-                        color: $mol_theme.card,
-                    },
                 },
             },
         });
