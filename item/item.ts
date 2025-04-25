@@ -1,6 +1,6 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_item_data = {
+	export type $hyoo_dnd_item_data = {
 		title: string
 		price: number
 		weight: number
@@ -11,16 +11,16 @@ namespace $ {
 			near: number
 			distant: number
 		}
-		damage_type: $hyoo_dungeon_damage_id
+		damage_type: $hyoo_dnd_damage_id
 		weapon_size: 'small' | 'medium' | 'large'
-		ability: $hyoo_dungeon_ability_id,
+		ability: $hyoo_dnd_ability_id,
 		attack_ammo: boolean
 		attack_cooldown: boolean
 		attack_distance_norm: number
 		attack_distance_max: number
 	}
 	
-	export class $hyoo_dungeon_item extends $mol_store< $hyoo_dungeon_item_data > {
+	export class $hyoo_dnd_item extends $mol_store< $hyoo_dnd_item_data > {
 		
 		title( next?: string ) {
 			return this.value( 'title', next ) ?? ''
@@ -40,7 +40,7 @@ namespace $ {
 		
 		@ $mol_mem
 		price_coin() {
-			return new $hyoo_dungeon_coin( this.price() )
+			return new $hyoo_dnd_coin( this.price() )
 		}
 		
 		@ $mol_mem
@@ -68,7 +68,7 @@ namespace $ {
 			return this.damage().value( 'distant', next ) ?? 4
 		}
 		
-		damage_type( next?: $hyoo_dungeon_damage_id ) {
+		damage_type( next?: $hyoo_dnd_damage_id ) {
 			return this.value( 'damage_type', next ) ?? ''
 		}
 		
@@ -83,7 +83,7 @@ namespace $ {
 		}
 		
 		@ $mol_mem
-		ability( next?: $hyoo_dungeon_ability_id ) {
+		ability( next?: $hyoo_dnd_ability_id ) {
 			return this.value( 'ability', next ) ?? 'strength'
 		}
 		
@@ -107,9 +107,9 @@ namespace $ {
 			}
 			
 			
-			if( this.damage_type() ) brief += ' ' + this.$.$hyoo_dungeon_damage_all[ this.damage_type() as $hyoo_dungeon_damage_id ].title.slice( 0, 2 )
+			if( this.damage_type() ) brief += ' ' + this.$.$hyoo_dnd_damage_all[ this.damage_type() as $hyoo_dnd_damage_id ].title.slice( 0, 2 )
 			
-			brief += ' ' + this.$.$hyoo_dungeon_ability_all[ this.ability() ].title.slice( 0, 2 )
+			brief += ' ' + this.$.$hyoo_dnd_ability_all[ this.ability() ].title.slice( 0, 2 )
 			
 			return brief
 		}

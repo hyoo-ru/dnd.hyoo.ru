@@ -1,4 +1,4 @@
-name: $hyoo_dungeon_app
+name: $hyoo_dnd_app
 
 permissions: write-all
 
@@ -18,10 +18,10 @@ jobs:
     
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'hyoo/dungeon'
+        package: 'hyoo/dnd'
         modules: 'app'
     
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:
-        folder: 'hyoo/dungeon/app/-'
+        folder: 'hyoo/dnd/app/-'

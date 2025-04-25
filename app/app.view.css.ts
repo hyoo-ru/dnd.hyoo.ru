@@ -1,6 +1,6 @@
 namespace $.$$ {
 	
-	$mol_style_define( $hyoo_dungeon_app, {
+	$mol_style_define( $hyoo_dnd_app, {
 		
 		background: {
 			size: [ 'cover' ],

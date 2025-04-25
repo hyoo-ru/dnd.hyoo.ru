@@ -1,5 +1,5 @@
-$hyoo_dungeon_item_manage $mol_book2_catalog
-	char $hyoo_dungeon_char
+$hyoo_dnd_item_manage $mol_book2_catalog
+	char $hyoo_dnd_char
 	menu_title \Инвентарь
 	menu_tools /
 		<= Item_add $mol_link
@@ -7,8 +7,8 @@ $hyoo_dungeon_item_manage $mol_book2_catalog
 			sub /
 				<= Item_add_icon $mol_icon_plus
 	param \item
-	Spread* $hyoo_dungeon_item_config
-		item <= item* $hyoo_dungeon_item
+	Spread* $hyoo_dnd_item_config
+		item <= item* $hyoo_dnd_item
 		tools /
 			<= Spread_close
 	menu_item_content* /$mol_view

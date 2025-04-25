@@ -1,5 +1,5 @@
-$hyoo_dungeon_spell_config $mol_page
-	spell $hyoo_dungeon_spell
+$hyoo_dnd_spell_config $mol_page
+	spell $hyoo_dnd_spell
 		brief => brief
 		title? => name?
 		level? => level?

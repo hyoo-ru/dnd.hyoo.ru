@@ -1,6 +1,6 @@
 namespace $.$$ {
 	
-	$mol_style_define( $hyoo_dungeon_parameter, {
+	$mol_style_define( $hyoo_dnd_parameter, {
 		
 		background: {
 			color: $mol_theme.card,

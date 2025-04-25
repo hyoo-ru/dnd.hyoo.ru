@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $hyoo_dungeon_spell_config extends $.$hyoo_dungeon_spell_config {
+	export class $hyoo_dnd_spell_config extends $.$hyoo_dnd_spell_config {
 		
 		override title() {
 			return this.spell().title()
@@ -7,23 +7,23 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		override damage_options() {
-			return Object.keys( this.$.$hyoo_dungeon_damage_all )
+			return Object.keys( this.$.$hyoo_dnd_damage_all )
 		}
 		
-		override damage_title( id: $hyoo_dungeon_damage_id ) {
-			return this.$.$hyoo_dungeon_damage_all[ id ]?.title ?? '???'
+		override damage_title( id: $hyoo_dnd_damage_id ) {
+			return this.$.$hyoo_dnd_damage_all[ id ]?.title ?? '???'
 		}
 		
 		// @ $mol_mem
 		// override classes_options() {
-		// 	return Object.keys( this.$.$hyoo_dungeon_class_all )
+		// 	return Object.keys( this.$.$hyoo_dnd_class_all )
 		// }
 		
-		// override class_title( id: $hyoo_dungeon_class_id ) {
-		// 	return this.$.$hyoo_dungeon_class_all[ id ].title
+		// override class_title( id: $hyoo_dnd_class_id ) {
+		// 	return this.$.$hyoo_dnd_class_all[ id ].title
 		// }
 		
-		// override class_checked( id: $hyoo_dungeon_class_id, next?: boolean ) {
+		// override class_checked( id: $hyoo_dnd_class_id, next?: boolean ) {
 		// 	return this.spell().class_has( id, next )
 		// }
 		

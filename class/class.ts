@@ -1,19 +1,19 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_class = {
+	export type $hyoo_dnd_class = {
 		title: string
 		link: string
 		description: string
 		image: string
 		dice: 6 | 8
-		ability_main: $hyoo_dungeon_ability_id
-		ability_safe: $hyoo_dungeon_ability_id[]
-		skills: $hyoo_dungeon_skill_id[]
+		ability_main: $hyoo_dnd_ability_id
+		ability_safe: $hyoo_dnd_ability_id[]
+		skills: $hyoo_dnd_skill_id[]
 		perks: string[][]
-		inventory: $hyoo_dungeon_item_data[]
+		inventory: $hyoo_dnd_item_data[]
 	}
 	
-	export const $hyoo_dungeon_class_all = {
+	export const $hyoo_dnd_class_all = {
 			
 		bard: {
 			title: '🎻 Бард',
@@ -82,10 +82,10 @@ namespace $ {
 					attack_distance_max: 60,
 				},
 			],
-		} as $hyoo_dungeon_class,
+		} as $hyoo_dnd_class,
 		
 	}
 
-	export type $hyoo_dungeon_class_id = keyof typeof $hyoo_dungeon_class_all
+	export type $hyoo_dnd_class_id = keyof typeof $hyoo_dnd_class_all
 	
 }

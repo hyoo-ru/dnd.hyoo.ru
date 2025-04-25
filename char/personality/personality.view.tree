@@ -1,6 +1,6 @@
-$hyoo_dungeon_char_personality $mol_page
+$hyoo_dnd_char_personality $mol_page
 	title \Характер
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		moral? => moral?
 		ethics? => ethics?
 		traits? => traits?

@@ -1,10 +1,10 @@
 namespace $ {
 	
-	export class $hyoo_dungeon_char extends $mol_store<{
+	export class $hyoo_dnd_char extends $mol_store<{
 		name: string
-		race: $hyoo_dungeon_race_id
-		story: $hyoo_dungeon_story_id
-		class: $hyoo_dungeon_class_id
+		race: $hyoo_dnd_race_id
+		story: $hyoo_dnd_story_id
+		class: $hyoo_dnd_class_id
 		moral: 'good' | 'neutral' | 'evil'
 		ethics: 'lawful' | 'neutral' | 'chaotic'
 		biography: string
@@ -19,10 +19,10 @@ namespace $ {
 		affection: string
 		weakness: string
 		remarks: string
-		abilities: Record< $hyoo_dungeon_ability_id, number >
-		skills: $hyoo_dungeon_skill_id[]
-		inventory: $hyoo_dungeon_item_data[]
-		spells: $hyoo_dungeon_spell_data[]
+		abilities: Record< $hyoo_dnd_ability_id, number >
+		skills: $hyoo_dnd_skill_id[]
+		inventory: $hyoo_dnd_item_data[]
+		spells: $hyoo_dnd_spell_data[]
 	}> {
 		
 		image() {
@@ -49,54 +49,54 @@ namespace $ {
 			return this.value( 'experience', next ) ?? 0
 		}
 		
-		race_id( next?: $hyoo_dungeon_race_id ) {
-			return this.value( 'race', next ) || Object.keys( $hyoo_dungeon_race_all )[0] as $hyoo_dungeon_race_id
+		race_id( next?: $hyoo_dnd_race_id ) {
+			return this.value( 'race', next ) || Object.keys( $hyoo_dnd_race_all )[0] as $hyoo_dnd_race_id
 		}
 		
 		@ $mol_mem
 		race() {
-			return this.$.$hyoo_dungeon_race_all[ this.race_id() ]
+			return this.$.$hyoo_dnd_race_all[ this.race_id() ]
 		}
 		
-		story_id( next?: $hyoo_dungeon_story_id ) {
-			return this.value( 'story', next ) || Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story_id
+		story_id( next?: $hyoo_dnd_story_id ) {
+			return this.value( 'story', next ) || Object.keys( $hyoo_dnd_story_all )[0] as $hyoo_dnd_story_id
 		}
 		
 		@ $mol_mem
 		story() {
-			return this.$.$hyoo_dungeon_story_all[ this.story_id() ]
+			return this.$.$hyoo_dnd_story_all[ this.story_id() ]
 		}
 		
-		class_id( next?: $hyoo_dungeon_class_id ) {
-			return this.value( 'class', next ) || Object.keys( $hyoo_dungeon_class_all )[0] as $hyoo_dungeon_class_id
+		class_id( next?: $hyoo_dnd_class_id ) {
+			return this.value( 'class', next ) || Object.keys( $hyoo_dnd_class_all )[0] as $hyoo_dnd_class_id
 		}
 		
 		@ $mol_mem
 		class() {
-			return this.$.$hyoo_dungeon_class_all[ this.class_id() ]
+			return this.$.$hyoo_dnd_class_all[ this.class_id() ]
 		}
 		
-		ability_addon( id: $hyoo_dungeon_ability_id, next?: number ) {
+		ability_addon( id: $hyoo_dnd_ability_id, next?: number ) {
 			return this.sub( 'abilities', new $mol_store( {} as any ) ).value( id, next && Math.max( 0, Math.min( next, 7 ) ) ) ?? 0
 		}
 		
-		ability( id: $hyoo_dungeon_ability_id ) {
+		ability( id: $hyoo_dnd_ability_id ) {
 			return 8 + this.ability_addon( id ) + this.race().abilities[ id ]
 		}
 		
-		ability_modifier( id: $hyoo_dungeon_ability_id ) {
+		ability_modifier( id: $hyoo_dnd_ability_id ) {
 			return Math.floor( this.ability( id ) / 2 - 5 )
 		}
 		
 		@ $mol_mem_key
-		ability_safe( id: $hyoo_dungeon_ability_id ) {
+		ability_safe( id: $hyoo_dnd_ability_id ) {
 			const mod = this.ability_modifier( id )
 			const safe = this.class().ability_safe
 			return mod + ( safe.includes( id ) ? this.master_bonus() : 0 )
 		}
 
-		skills_choosen( next?: $hyoo_dungeon_skill_id[] ) {
-			return this.value( 'skills', next ) ?? [] as $hyoo_dungeon_skill_id[]
+		skills_choosen( next?: $hyoo_dnd_skill_id[] ) {
+			return this.value( 'skills', next ) ?? [] as $hyoo_dnd_skill_id[]
 		}
 		
 		@ $mol_mem
@@ -110,14 +110,14 @@ namespace $ {
 		}
 		
 		@ $mol_mem_key
-		skill( id: $hyoo_dungeon_skill_id ) {
-			const skill = this.$.$hyoo_dungeon_skill_all[ id ]
+		skill( id: $hyoo_dnd_skill_id ) {
+			const skill = this.$.$hyoo_dnd_skill_all[ id ]
 			const mod = this.ability_modifier( skill.ability )
 			const skills = this.skills()
 			return mod + ( skills.includes( id ) ? this.master_bonus() : 0 )
 		}
 		
-		skill_has( id: $hyoo_dungeon_skill_id, next?: boolean ) {
+		skill_has( id: $hyoo_dnd_skill_id, next?: boolean ) {
 			if( next !== undefined ) {
 				if( next ) this.skills_choosen([ ... this.skills_choosen(), id ])
 				else this.skills_choosen( this.skills_choosen().filter( i => i !== id ) )
@@ -136,17 +136,17 @@ namespace $ {
 		}
 		
 		@ $mol_mem
-		inventory( next?: $hyoo_dungeon_item_data[] ) {
+		inventory( next?: $hyoo_dnd_item_data[] ) {
 			return this.sub( 'inventory', new $mol_store([ ... new Set([
 				... this.class().inventory,
 				... this.race().inventory,
 				... this.story().inventory,
-			]) ]) as any ) as $mol_store< $hyoo_dungeon_item_data[] >
+			]) ]) as any ) as $mol_store< $hyoo_dnd_item_data[] >
 		}
 		
 		@ $mol_mem_key
 		inventory_item( index: number ) {
-			return this.inventory().sub( index, new $hyoo_dungeon_item( {} as any ) )
+			return this.inventory().sub( index, new $hyoo_dnd_item( {} as any ) )
 		}
 		
 		inventory_delete( index: number ) {
@@ -155,13 +155,13 @@ namespace $ {
 		}
 		
 		@ $mol_mem
-		spells( next?: $hyoo_dungeon_spell_data[] ) {
-			return this.sub( 'spells', new $mol_store([]) as any ) as $mol_store< $hyoo_dungeon_spell_data[] >
+		spells( next?: $hyoo_dnd_spell_data[] ) {
+			return this.sub( 'spells', new $mol_store([]) as any ) as $mol_store< $hyoo_dnd_spell_data[] >
 		}
 		
 		@ $mol_mem_key
 		spell( index: number ) {
-			return this.spells().sub( index, new $hyoo_dungeon_spell( {} as any ) )
+			return this.spells().sub( index, new $hyoo_dnd_spell( {} as any ) )
 		}
 		
 		spell_delete( index: number ) {
@@ -170,11 +170,11 @@ namespace $ {
 		}
 		
 		charm_count() {
-			return this.$.$hyoo_dungeon_spell_levels[ this.level() ].charms
+			return this.$.$hyoo_dnd_spell_levels[ this.level() ].charms
 		}
 		
 		spell_count() {
-			return this.$.$hyoo_dungeon_spell_levels[ this.level() ].spells
+			return this.$.$hyoo_dnd_spell_levels[ this.level() ].spells
 		}
 		
 		moral( next?: 'good' | 'neutral' | 'evil' ) {

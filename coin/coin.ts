@@ -1,5 +1,5 @@
 namespace $ {
-	export class $hyoo_dungeon_coin extends $mol_unit {
+	export class $hyoo_dnd_coin extends $mol_unit {
 		
 		toString() {
 			

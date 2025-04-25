@@ -1,21 +1,21 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_race = {
+	export type $hyoo_dnd_race = {
 		title: string
 		link: string
 		description: string
 		image: string
-		abilities: Record< $hyoo_dungeon_ability_id, number >
+		abilities: Record< $hyoo_dnd_ability_id, number >
 		age_max: number
 		alignment: string
 		size: 'small' | 'medium' | 'big'
 		speed: number
 		perks: string[]
-		inventory: $hyoo_dungeon_item_data[]
-		skills: $hyoo_dungeon_skill_id[]
+		inventory: $hyoo_dnd_item_data[]
+		skills: $hyoo_dnd_skill_id[]
 	}
 	
-	export const $hyoo_dungeon_race_all = {
+	export const $hyoo_dnd_race_all = {
 		
 		human: {
 			title: '👩‍🦲 Человек',
@@ -37,7 +37,7 @@ namespace $ {
 			perks: [],
 			inventory: [],
 			skills: [],
-		} as $hyoo_dungeon_race,
+		} as $hyoo_dnd_race,
 	
 		tabaxi: {
 			title: '🐈 Табакси',
@@ -67,10 +67,10 @@ namespace $ {
 				'perception',
 				'stealth',
 			],
-		} as $hyoo_dungeon_race,
+		} as $hyoo_dnd_race,
 	
 	}
 	
-	export type $hyoo_dungeon_race_id = keyof typeof $hyoo_dungeon_race_all
+	export type $hyoo_dnd_race_id = keyof typeof $hyoo_dnd_race_all
 	
 }

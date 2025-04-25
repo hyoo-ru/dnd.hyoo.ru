@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $hyoo_dungeon_item_config extends $.$hyoo_dungeon_item_config {
+	export class $hyoo_dnd_item_config extends $.$hyoo_dnd_item_config {
 		
 		override title() {
 			return this.item().title()
@@ -7,11 +7,11 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		override damage_options() {
-			return Object.keys( this.$.$hyoo_dungeon_damage_all )
+			return Object.keys( this.$.$hyoo_dnd_damage_all )
 		}
 		
-		override damage_title( id: $hyoo_dungeon_damage_id ) {
-			return this.$.$hyoo_dungeon_damage_all[ id ].title
+		override damage_title( id: $hyoo_dnd_damage_id ) {
+			return this.$.$hyoo_dnd_damage_all[ id ].title
 		}
 		
 	}

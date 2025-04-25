@@ -1,13 +1,13 @@
 namespace $.$$ {
-	export class $hyoo_dungeon_app extends $.$hyoo_dungeon_app {
+	export class $hyoo_dnd_app extends $.$hyoo_dnd_app {
 		
 		@ $mol_mem
 		char() {
-			return this.$.$mol_store_local.sub( 'char', new $hyoo_dungeon_char({
+			return this.$.$mol_store_local.sub( 'char', new $hyoo_dnd_char({
 				// name: '',
-				// race: Object.keys( $hyoo_dungeon_race_all )[0] as $hyoo_dungeon_race_id,
-				// class: Object.keys( $hyoo_dungeon_class_all )[0] as $hyoo_dungeon_class_id,
-				// story: Object.keys( $hyoo_dungeon_story_all )[0] as $hyoo_dungeon_story_id,
+				// race: Object.keys( $hyoo_dnd_race_all )[0] as $hyoo_dnd_race_id,
+				// class: Object.keys( $hyoo_dnd_class_all )[0] as $hyoo_dnd_class_id,
+				// story: Object.keys( $hyoo_dnd_story_all )[0] as $hyoo_dnd_story_id,
 				// moral: 'neutral',
 				// ethics: 'neutral',
 				// experience: 0,

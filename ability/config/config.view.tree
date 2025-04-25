@@ -1,6 +1,6 @@
-$hyoo_dungeon_ability_config $mol_page
+$hyoo_dnd_ability_config $mol_page
 	title \Способности
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
 		ability_safe* => ability_safe*

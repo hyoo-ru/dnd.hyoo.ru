@@ -1,9 +1,9 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_spell_data = {
+	export type $hyoo_dnd_spell_data = {
 		title: string
 		level: number
-		classes: $hyoo_dungeon_class_id[]
+		classes: $hyoo_dnd_class_id[]
 		school: string
 		focus: boolean
 		ritual: boolean
@@ -12,13 +12,13 @@ namespace $ {
 		material: string
 		cooldown: 'action' | 'bonus' | 'reaction' | 'minute' | 'hour'
 		damage: `${number}d${number}`,
-		damage_type: $hyoo_dungeon_damage_id
-		ability: $hyoo_dungeon_ability_id,
+		damage_type: $hyoo_dnd_damage_id
+		ability: $hyoo_dnd_ability_id,
 		distance: number
 		remarks: string
 	}
 	
-	export class $hyoo_dungeon_spell extends $mol_store< $hyoo_dungeon_spell_data > {
+	export class $hyoo_dnd_spell extends $mol_store< $hyoo_dnd_spell_data > {
 		
 		title( next?: string ) {
 			return this.value( 'title', next ) ?? ''
@@ -32,7 +32,7 @@ namespace $ {
 			return this.value( 'damage', next ) ?? '0d0'
 		}
 		
-		damage_type( next?: $hyoo_dungeon_damage_id ) {
+		damage_type( next?: $hyoo_dnd_damage_id ) {
 			return this.value( 'damage_type', next ) ?? ''
 		}
 		
@@ -42,7 +42,7 @@ namespace $ {
 		}
 		
 		@ $mol_mem
-		ability( next?: $hyoo_dungeon_ability_id ) {
+		ability( next?: $hyoo_dnd_ability_id ) {
 			return this.value( 'ability', next ) ?? 'inteligence'
 		}
 		
@@ -54,11 +54,11 @@ namespace $ {
 			return this.value( 'material', next ) ?? ''
 		}
 		
-		classes( next?: $hyoo_dungeon_class_id[] ) {
+		classes( next?: $hyoo_dnd_class_id[] ) {
 			return this.value( 'classes', next ) ?? []
 		}
 		
-		class_has( id: $hyoo_dungeon_class_id, next?: boolean ) {
+		class_has( id: $hyoo_dnd_class_id, next?: boolean ) {
 			if( next !== undefined ) {
 				if( next ) this.classes([ ... this.classes(), id ])
 				else this.classes( this.classes().filter( i => i !== id ) )
@@ -92,11 +92,11 @@ namespace $ {
 			
 			
 			if( this.damage_type() ) {
-				brief += ' ' + this.$.$hyoo_dungeon_damage_all[ this.damage_type() as $hyoo_dungeon_damage_id ].title.slice( 0, 2 )
+				brief += ' ' + this.$.$hyoo_dnd_damage_all[ this.damage_type() as $hyoo_dnd_damage_id ].title.slice( 0, 2 )
 					+ this.damage()
 			}
 			
-			// brief += ' ' + this.$.$hyoo_dungeon_ability_all[ this.ability() ].title.slice( 0, 2 )
+			// brief += ' ' + this.$.$hyoo_dnd_ability_all[ this.ability() ].title.slice( 0, 2 )
 				
 			return brief
 		}

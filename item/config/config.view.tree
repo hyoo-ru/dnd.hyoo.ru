@@ -1,5 +1,5 @@
-$hyoo_dungeon_item_config $mol_page
-	item $hyoo_dungeon_item
+$hyoo_dnd_item_config $mol_page
+	item $hyoo_dnd_item
 		brief => brief
 		title? => name?
 		price? => price?

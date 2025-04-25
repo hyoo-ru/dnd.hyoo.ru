@@ -1,5 +1,5 @@
-$hyoo_dungeon_spell_manage $mol_book2_catalog
-	char $hyoo_dungeon_char
+$hyoo_dnd_spell_manage $mol_book2_catalog
+	char $hyoo_dnd_char
 	menu_title \Заклинания
 	menu_tools /
 		<= Spell_add $mol_link
@@ -7,8 +7,8 @@ $hyoo_dungeon_spell_manage $mol_book2_catalog
 			sub /
 				<= Spell_add_icon $mol_icon_plus
 	param \spell
-	Spread* $hyoo_dungeon_spell_config
-		spell <= spell* $hyoo_dungeon_spell
+	Spread* $hyoo_dnd_spell_config
+		spell <= spell* $hyoo_dnd_spell
 		tools /
 			<= Spread_close
 	menu_links <= levels /

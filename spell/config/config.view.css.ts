@@ -1,6 +1,6 @@
 namespace $.$$ {
 	
-	$mol_style_define( $hyoo_dungeon_spell_config, {
+	$mol_style_define( $hyoo_dnd_spell_config, {
 		
 		flex: {
 			basis: '40rem',

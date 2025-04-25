@@ -1,6 +1,6 @@
-$hyoo_dungeon_skill_config $mol_page
+$hyoo_dnd_skill_config $mol_page
 	title \Навыки
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		skill* => skill*
 		skill_has*? => skill_has*?
 	body <= skill_list /

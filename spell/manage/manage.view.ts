@@ -1,9 +1,9 @@
 namespace $.$$ {
-	export class $hyoo_dungeon_spell_manage extends $.$hyoo_dungeon_spell_manage {
+	export class $hyoo_dnd_spell_manage extends $.$hyoo_dnd_spell_manage {
 		
 		@ $mol_mem
 		level() {
-			return this.$.$hyoo_dungeon_spell_levels[ this.char().level() ]
+			return this.$.$hyoo_dnd_spell_levels[ this.char().level() ]
 		}
 		
 		@ $mol_mem

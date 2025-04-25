@@ -1,4 +1,4 @@
-$hyoo_dungeon_parameter $mol_view
+$hyoo_dnd_parameter $mol_view
 	sub /
 		<= Title $mol_view
 			sub / <= title

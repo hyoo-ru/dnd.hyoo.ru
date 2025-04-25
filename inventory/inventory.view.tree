@@ -1,6 +1,6 @@
-$hyoo_dungeon_inventory $mol_page
+$hyoo_dnd_inventory $mol_page
 	title \Инвентарь
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 	body /
 		<= Item_row*0 $mol_view sub /
 			<= Title $mol_string

@@ -1,6 +1,6 @@
 namespace $ {
 
-	export const $hyoo_dungeon_spell_levels = [
+	export const $hyoo_dnd_spell_levels = [
 		{
 			charms: 0,
 			spells: 0,

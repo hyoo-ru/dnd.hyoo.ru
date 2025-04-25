@@ -1,6 +1,6 @@
 namespace $.$$ {
 	
-	$mol_style_define( $hyoo_dungeon_char_summary, {
+	$mol_style_define( $hyoo_dnd_char_summary, {
 		
 		flex: {
 			basis: '120rem',

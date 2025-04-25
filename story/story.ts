@@ -1,16 +1,16 @@
 namespace $ {
 	
-	export type $hyoo_dungeon_story = {
+	export type $hyoo_dnd_story = {
 		title: string
 		link: string
 		description: string
-		skills: $hyoo_dungeon_skill_id[]
+		skills: $hyoo_dnd_skill_id[]
 		perks: string[]
 		mastery: string[]
-		inventory: $hyoo_dungeon_item_data[]
+		inventory: $hyoo_dnd_item_data[]
 	}
 	
-	export const $hyoo_dungeon_story_all = {
+	export const $hyoo_dnd_story_all = {
 			
 		pirate: {
 			title: '🏴‍☠️ Пират',
@@ -119,10 +119,10 @@ namespace $ {
 					attack_distance_max: 60,
 				},
 			],
-		} as $hyoo_dungeon_story,
+		} as $hyoo_dnd_story,
 		
 	}
 
-	export type $hyoo_dungeon_story_id = keyof typeof $hyoo_dungeon_story_all
+	export type $hyoo_dnd_story_id = keyof typeof $hyoo_dnd_story_all
 
 }

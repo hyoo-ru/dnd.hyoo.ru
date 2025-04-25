@@ -1,6 +1,6 @@
-$hyoo_dungeon_char_main $mol_page
+$hyoo_dnd_char_main $mol_page
 	title \Основное
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		name? => name?
 		biography? => biography?
 		age? => age?

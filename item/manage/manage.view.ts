@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $hyoo_dungeon_item_manage extends $.$hyoo_dungeon_item_manage {
+	export class $hyoo_dnd_item_manage extends $.$hyoo_dnd_item_manage {
 		
 		@ $mol_mem
 		override spread_ids() {
