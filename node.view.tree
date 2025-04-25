@@ -803,7 +803,7 @@ $mol_paginator $mol_bar
 			click?event <=> forward?event null
 			sub / <= Forward_icon $mol_icon_chevron_right
 
-$hyoo_dungeon_parameter $mol_view
+$hyoo_dnd_parameter $mol_view
 	sub /
 		<= Title $mol_view
 			sub / <= title
@@ -811,9 +811,9 @@ $hyoo_dungeon_parameter $mol_view
 			minimal_width 40
 			sub <= value /
 
-$hyoo_dungeon_ability_config $mol_page
+$hyoo_dnd_ability_config $mol_page
 	title \Способности
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		ability* => ability_total*
 		ability_addon*? => ability_addon*?
 		ability_safe* => ability_safe*
@@ -841,9 +841,9 @@ $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 $mol_check_box $mol_check
 	Icon $mol_icon_tick
 
-$hyoo_dungeon_skill_config $mol_page
+$hyoo_dnd_skill_config $mol_page
 	title \Навыки
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		skill* => skill*
 		skill_has*? => skill_has*?
 	body <= skill_list /
@@ -937,8 +937,8 @@ $mol_check_list $mol_view
 $mol_switch $mol_check_list
 	value? \
 
-$hyoo_dungeon_item_config $mol_page
-	item $hyoo_dungeon_item
+$hyoo_dnd_item_config $mol_page
+	item $hyoo_dnd_item
 		brief => brief
 		title? => name?
 		price? => price?
@@ -1009,8 +1009,8 @@ $hyoo_dungeon_item_config $mol_page
 	foot /
 		<= Brief $mol_chip title <= brief
 
-$hyoo_dungeon_item_manage $mol_book2_catalog
-	char $hyoo_dungeon_char
+$hyoo_dnd_item_manage $mol_book2_catalog
+	char $hyoo_dnd_char
 	menu_title \Инвентарь
 	menu_tools /
 		<= Item_add $mol_link
@@ -1018,8 +1018,8 @@ $hyoo_dungeon_item_manage $mol_book2_catalog
 			sub /
 				<= Item_add_icon $mol_icon_plus
 	param \item
-	Spread* $hyoo_dungeon_item_config
-		item <= item* $hyoo_dungeon_item
+	Spread* $hyoo_dnd_item_config
+		item <= item* $hyoo_dnd_item
 		tools /
 			<= Spread_close
 	menu_item_content* /$mol_view
@@ -1082,8 +1082,8 @@ $mol_select $mol_pick
 		enabled <= enabled true
 	Trigger_icon $mol_icon_dots_vertical
 
-$hyoo_dungeon_spell_config $mol_page
-	spell $hyoo_dungeon_spell
+$hyoo_dnd_spell_config $mol_page
+	spell $hyoo_dnd_spell
 		brief => brief
 		title? => name?
 		level? => level?
@@ -1141,8 +1141,8 @@ $hyoo_dungeon_spell_config $mol_page
 	foot /
 		<= Brief $mol_chip title <= brief
 
-$hyoo_dungeon_spell_manage $mol_book2_catalog
-	char $hyoo_dungeon_char
+$hyoo_dnd_spell_manage $mol_book2_catalog
+	char $hyoo_dnd_char
 	menu_title \Заклинания
 	menu_tools /
 		<= Spell_add $mol_link
@@ -1150,8 +1150,8 @@ $hyoo_dungeon_spell_manage $mol_book2_catalog
 			sub /
 				<= Spell_add_icon $mol_icon_plus
 	param \spell
-	Spread* $hyoo_dungeon_spell_config
-		spell <= spell* $hyoo_dungeon_spell
+	Spread* $hyoo_dnd_spell_config
+		spell <= spell* $hyoo_dnd_spell
 		tools /
 			<= Spread_close
 	menu_links <= levels /
@@ -1198,9 +1198,9 @@ $mol_text_list_item $mol_paragraph
 		^
 		mol_text_list_item_index <= index 0
 
-$hyoo_dungeon_char_summary $mol_page
+$hyoo_dnd_char_summary $mol_page
 	title \Сводка
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		name => name
 		biography => biography
 		age => age
@@ -1221,19 +1221,19 @@ $hyoo_dungeon_char_summary $mol_page
 		hits_max? => hits_max?
 		hits_dice => hits_dice
 		hits_heal => hits_heal
-	Ability_cofig $hyoo_dungeon_ability_config
+	Ability_cofig $hyoo_dnd_ability_config
 		char <= char
 		ability_list => ability_list
 		Ability_addon null
-	Skill_cofig $hyoo_dungeon_skill_config
+	Skill_cofig $hyoo_dnd_skill_config
 		char <= char
 		skill_list => skill_list
 		Skill_addon null
-	Item_list $hyoo_dungeon_item_manage
+	Item_list $hyoo_dnd_item_manage
 		char <= char
 		menu_links => item_list
 		Item_delete* null
-	Spell_list $hyoo_dungeon_spell_manage
+	Spell_list $hyoo_dnd_spell_manage
 		char <= char
 		Menu_links => spell_list
 		Spell_delete* null
@@ -1286,68 +1286,68 @@ $hyoo_dungeon_char_summary $mol_page
 						hint \Заметки
 						value? <=> remarks?
 			<= Stat_main $mol_list rows /
-				<= Grade_block $hyoo_dungeon_char_summary_block
+				<= Grade_block $hyoo_dnd_char_summary_block
 					title \Прогресс
 					content /
-						<= Level $hyoo_dungeon_parameter
+						<= Level $hyoo_dnd_parameter
 							title \🏅 Уровень
 							Value <= Level_value $mol_paginator
 								value? <=> level?
-						<= Master_bonus $hyoo_dungeon_parameter
+						<= Master_bonus $hyoo_dnd_parameter
 							title \🥇 Мастерство
 							value /
 								\+
 								<= master_bonus
-						<= Experience $hyoo_dungeon_parameter
+						<= Experience $hyoo_dnd_parameter
 							title \✨ Опыт
 							Value <= Experience_value $mol_paginator
 								value? <=> experience?
 								step 100
-						<= Charm_count $hyoo_dungeon_parameter
+						<= Charm_count $hyoo_dnd_parameter
 							title \🎆 Заговоры
 							value / <= charm_count
-						<= Spell_count $hyoo_dungeon_parameter
+						<= Spell_count $hyoo_dnd_parameter
 							title \🎇 Заклинания
 							value / <= spell_count
-				<= Hits_block $hyoo_dungeon_char_summary_block
+				<= Hits_block $hyoo_dnd_char_summary_block
 					title \Хиты
 					content /
-						<= Hits_max $hyoo_dungeon_parameter
+						<= Hits_max $hyoo_dnd_parameter
 							title \💟 Предел
 							Value <= Hits_max_value $mol_paginator
 								value? <=> hits_max?
-						<= Hits $hyoo_dungeon_parameter
+						<= Hits $hyoo_dnd_parameter
 							title \💗 Здоровье
 							Value <= Hits_value $mol_paginator
 								value? <=> hits?
-						<= Hits_addon $hyoo_dungeon_parameter
+						<= Hits_addon $hyoo_dnd_parameter
 							title \💖 Бафы
 							Value <= Hits_addon_value $mol_paginator
 								value? <=> hits_addon?
-						<= Hits_heal $hyoo_dungeon_parameter
+						<= Hits_heal $hyoo_dnd_parameter
 							title \💊 Лечение
 							value / <= hits_heal
 				<= Abilities $mol_list rows <= ability_list
-			<= Skills $hyoo_dungeon_char_summary_block
+			<= Skills $hyoo_dnd_char_summary_block
 				title \Навыки
 				content <= skill_list
-			<= Perks_block $hyoo_dungeon_char_summary_block
+			<= Perks_block $hyoo_dnd_char_summary_block
 				title \Умения
 				Content <= Perks $mol_text
 					text <= perks \
-			<= Inventory_block $hyoo_dungeon_char_summary_block
+			<= Inventory_block $hyoo_dnd_char_summary_block
 				title \Инвентарь
 				content / <= Inventory $mol_list rows <= item_list
-			<= Spell_block $hyoo_dungeon_char_summary_block
+			<= Spell_block $hyoo_dnd_char_summary_block
 				title \Заклинания
 				content / <= spell_list
 
-$hyoo_dungeon_char_summary_block $mol_section
+$hyoo_dnd_char_summary_block $mol_section
 	level 5
 
-$hyoo_dungeon_char_main $mol_page
+$hyoo_dnd_char_main $mol_page
 	title \Основное
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		name? => name?
 		biography? => biography?
 		age? => age?
@@ -1396,9 +1396,9 @@ $hyoo_dungeon_char_main $mol_page
 			Content <= Biography $mol_textarea
 				value? <=> biography?
 
-$hyoo_dungeon_char_personality $mol_page
+$hyoo_dnd_char_personality $mol_page
 	title \Характер
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		moral? => moral?
 		ethics? => ethics?
 		traits? => traits?
@@ -1456,34 +1456,34 @@ $mol_lights_toggle $mol_check_icon
 $mol_theme_auto $mol_plugin
 	attr * mol_theme <= theme \
 
-$hyoo_dungeon_app $mol_book2_catalog
+$hyoo_dnd_app $mol_book2_catalog
 	param \section
 	menu_title \Dungeons & Dragons
-	char $hyoo_dungeon_char
+	char $hyoo_dnd_char
 		image => char_image
 	style *
 		background-image <= background \
 	spreads *
-		summary <= Summary $hyoo_dungeon_char_summary
+		summary <= Summary $hyoo_dnd_char_summary
 			char <= char
 			tools / <= Spread_close
-		main <= Main $hyoo_dungeon_char_main
+		main <= Main $hyoo_dnd_char_main
 			char <= char
 			tools / <= Spread_close
-		personality <= Personality $hyoo_dungeon_char_personality
+		personality <= Personality $hyoo_dnd_char_personality
 			char <= char
 			tools / <= Spread_close
-		Params <= Params $hyoo_dungeon_ability_config
+		Params <= Params $hyoo_dnd_ability_config
 			char <= char
 			tools / <= Spread_close
-		skills <= Skills $hyoo_dungeon_skill_config
+		skills <= Skills $hyoo_dnd_skill_config
 			char <= char
 			tools / <= Spread_close
-		inventory <= Inventory $hyoo_dungeon_item_manage
+		inventory <= Inventory $hyoo_dnd_item_manage
 			char <= char
 			addon_tools / <= Spread_close
 			spread_current => Inventory_spread
-		speels <= Spells $hyoo_dungeon_spell_manage
+		speels <= Spells $hyoo_dnd_spell_manage
 			char <= char
 			addon_tools / <= Spread_close
 			spread_current => Spells_spread

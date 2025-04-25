@@ -7187,7 +7187,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_ability_all = {
+    $.$hyoo_dnd_ability_all = {
         strength: {
             title: '💪 Мощность',
             description: 'Сила, физическая мощь',
@@ -7219,7 +7219,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_damage_all = {
+    $.$hyoo_dnd_damage_all = {
         stab: {
             title: '🤺 Колющий',
             description: 'Проникающий удар острым предметом, концентрирующем всю силу удара в одной точке',
@@ -7329,7 +7329,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_dungeon_coin extends $mol_unit {
+    class $hyoo_dnd_coin extends $mol_unit {
         toString() {
             let val = this.valueOf();
             let str = '';
@@ -7348,14 +7348,14 @@ var $;
             return str;
         }
     }
-    $.$hyoo_dungeon_coin = $hyoo_dungeon_coin;
+    $.$hyoo_dnd_coin = $hyoo_dnd_coin;
 })($ || ($ = {}));
 
 ;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_dungeon_item extends $mol_store {
+    class $hyoo_dnd_item extends $mol_store {
         title(next) {
             return this.value('title', next) ?? '';
         }
@@ -7369,7 +7369,7 @@ var $;
             return this.value('defence', next) ?? 0;
         }
         price_coin() {
-            return new $hyoo_dungeon_coin(this.price());
+            return new $hyoo_dnd_coin(this.price());
         }
         damage() {
             return this.sub('damage_max', new $mol_store({ hand1: 0, hand2: 0, near: 0, distant: 0 }));
@@ -7415,49 +7415,49 @@ var $;
                 brief += `:${this.attack_distance_norm()}..${this.attack_distance_max()}`;
             }
             if (this.damage_type())
-                brief += ' ' + this.$.$hyoo_dungeon_damage_all[this.damage_type()].title.slice(0, 2);
-            brief += ' ' + this.$.$hyoo_dungeon_ability_all[this.ability()].title.slice(0, 2);
+                brief += ' ' + this.$.$hyoo_dnd_damage_all[this.damage_type()].title.slice(0, 2);
+            brief += ' ' + this.$.$hyoo_dnd_ability_all[this.ability()].title.slice(0, 2);
             return brief;
         }
     }
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "price_coin", null);
+    ], $hyoo_dnd_item.prototype, "price_coin", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "damage", null);
+    ], $hyoo_dnd_item.prototype, "damage", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "damage_hand1", null);
+    ], $hyoo_dnd_item.prototype, "damage_hand1", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "damage_hand2", null);
+    ], $hyoo_dnd_item.prototype, "damage_hand2", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "damage_near", null);
+    ], $hyoo_dnd_item.prototype, "damage_near", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "damage_distant", null);
+    ], $hyoo_dnd_item.prototype, "damage_distant", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "attack_distance_norm", null);
+    ], $hyoo_dnd_item.prototype, "attack_distance_norm", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "attack_distance_max", null);
+    ], $hyoo_dnd_item.prototype, "attack_distance_max", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "ability", null);
+    ], $hyoo_dnd_item.prototype, "ability", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_item.prototype, "brief", null);
-    $.$hyoo_dungeon_item = $hyoo_dungeon_item;
+    ], $hyoo_dnd_item.prototype, "brief", null);
+    $.$hyoo_dnd_item = $hyoo_dnd_item;
 })($ || ($ = {}));
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_skill_all = {
+    $.$hyoo_dnd_skill_all = {
         athletics: {
             title: '🏋️‍♂️ Атлетика',
             ability: 'strength',
@@ -7537,7 +7537,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_race_all = {
+    $.$hyoo_dnd_race_all = {
         human: {
             title: '👩‍🦲 Человек',
             link: 'https://dnd.su/race/81-human/',
@@ -7594,7 +7594,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_story_all = {
+    $.$hyoo_dnd_story_all = {
         pirate: {
             title: '🏴‍☠️ Пират',
             link: 'https://dnd.su/backgrounds/770-pirate/',
@@ -7709,7 +7709,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_class_all = {
+    $.$hyoo_dnd_class_all = {
         bard: {
             title: '🎻 Бард',
             link: 'https://dnd.su/class/88-bard/',
@@ -7783,7 +7783,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_dungeon_spell extends $mol_store {
+    class $hyoo_dnd_spell extends $mol_store {
         title(next) {
             return this.value('title', next) ?? '';
         }
@@ -7829,7 +7829,7 @@ var $;
                 ...this.material() ? [`🍭`] : [],
             ].join('');
             if (this.damage_type()) {
-                brief += ' ' + this.$.$hyoo_dungeon_damage_all[this.damage_type()].title.slice(0, 2)
+                brief += ' ' + this.$.$hyoo_dnd_damage_all[this.damage_type()].title.slice(0, 2)
                     + this.damage();
             }
             return brief;
@@ -7840,21 +7840,21 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_spell.prototype, "distance", null);
+    ], $hyoo_dnd_spell.prototype, "distance", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_spell.prototype, "ability", null);
+    ], $hyoo_dnd_spell.prototype, "ability", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_spell.prototype, "brief", null);
-    $.$hyoo_dungeon_spell = $hyoo_dungeon_spell;
+    ], $hyoo_dnd_spell.prototype, "brief", null);
+    $.$hyoo_dnd_spell = $hyoo_dnd_spell;
 })($ || ($ = {}));
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_spell_levels = [
+    $.$hyoo_dnd_spell_levels = [
         {
             charms: 0,
             spells: 0,
@@ -7967,7 +7967,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_dungeon_char extends $mol_store {
+    class $hyoo_dnd_char extends $mol_store {
         image() {
             return this.race().image;
         }
@@ -7987,22 +7987,22 @@ var $;
             return this.value('experience', next) ?? 0;
         }
         race_id(next) {
-            return this.value('race', next) || Object.keys($hyoo_dungeon_race_all)[0];
+            return this.value('race', next) || Object.keys($hyoo_dnd_race_all)[0];
         }
         race() {
-            return this.$.$hyoo_dungeon_race_all[this.race_id()];
+            return this.$.$hyoo_dnd_race_all[this.race_id()];
         }
         story_id(next) {
-            return this.value('story', next) || Object.keys($hyoo_dungeon_story_all)[0];
+            return this.value('story', next) || Object.keys($hyoo_dnd_story_all)[0];
         }
         story() {
-            return this.$.$hyoo_dungeon_story_all[this.story_id()];
+            return this.$.$hyoo_dnd_story_all[this.story_id()];
         }
         class_id(next) {
-            return this.value('class', next) || Object.keys($hyoo_dungeon_class_all)[0];
+            return this.value('class', next) || Object.keys($hyoo_dnd_class_all)[0];
         }
         class() {
-            return this.$.$hyoo_dungeon_class_all[this.class_id()];
+            return this.$.$hyoo_dnd_class_all[this.class_id()];
         }
         ability_addon(id, next) {
             return this.sub('abilities', new $mol_store({})).value(id, next && Math.max(0, Math.min(next, 7))) ?? 0;
@@ -8030,7 +8030,7 @@ var $;
                 ])];
         }
         skill(id) {
-            const skill = this.$.$hyoo_dungeon_skill_all[id];
+            const skill = this.$.$hyoo_dnd_skill_all[id];
             const mod = this.ability_modifier(skill.ability);
             const skills = this.skills();
             return mod + (skills.includes(id) ? this.master_bonus() : 0);
@@ -8060,7 +8060,7 @@ var $;
                 ])]));
         }
         inventory_item(index) {
-            return this.inventory().sub(index, new $hyoo_dungeon_item({}));
+            return this.inventory().sub(index, new $hyoo_dnd_item({}));
         }
         inventory_delete(index) {
             const all = this.inventory().data();
@@ -8070,17 +8070,17 @@ var $;
             return this.sub('spells', new $mol_store([]));
         }
         spell(index) {
-            return this.spells().sub(index, new $hyoo_dungeon_spell({}));
+            return this.spells().sub(index, new $hyoo_dnd_spell({}));
         }
         spell_delete(index) {
             const all = this.spells().data();
             this.spells().data([...all.slice(0, index), ...all.slice(index + 1)]);
         }
         charm_count() {
-            return this.$.$hyoo_dungeon_spell_levels[this.level()].charms;
+            return this.$.$hyoo_dnd_spell_levels[this.level()].charms;
         }
         spell_count() {
-            return this.$.$hyoo_dungeon_spell_levels[this.level()].spells;
+            return this.$.$hyoo_dnd_spell_levels[this.level()].spells;
         }
         moral(next) {
             return this.value('moral', next) ?? 'neutral';
@@ -8127,50 +8127,50 @@ var $;
     }
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "race", null);
+    ], $hyoo_dnd_char.prototype, "race", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "story", null);
+    ], $hyoo_dnd_char.prototype, "story", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "class", null);
+    ], $hyoo_dnd_char.prototype, "class", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_dungeon_char.prototype, "ability_safe", null);
+    ], $hyoo_dnd_char.prototype, "ability_safe", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "skills", null);
+    ], $hyoo_dnd_char.prototype, "skills", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_dungeon_char.prototype, "skill", null);
+    ], $hyoo_dnd_char.prototype, "skill", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "perks", null);
+    ], $hyoo_dnd_char.prototype, "perks", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "inventory", null);
+    ], $hyoo_dnd_char.prototype, "inventory", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_dungeon_char.prototype, "inventory_item", null);
+    ], $hyoo_dnd_char.prototype, "inventory_item", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "spells", null);
+    ], $hyoo_dnd_char.prototype, "spells", null);
     __decorate([
         $mol_mem_key
-    ], $hyoo_dungeon_char.prototype, "spell", null);
+    ], $hyoo_dnd_char.prototype, "spell", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "hits_max", null);
+    ], $hyoo_dnd_char.prototype, "hits_max", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "hits", null);
+    ], $hyoo_dnd_char.prototype, "hits", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "hits_addon", null);
+    ], $hyoo_dnd_char.prototype, "hits_addon", null);
     __decorate([
         $mol_mem
-    ], $hyoo_dungeon_char.prototype, "hits_heal", null);
-    $.$hyoo_dungeon_char = $hyoo_dungeon_char;
+    ], $hyoo_dnd_char.prototype, "hits_heal", null);
+    $.$hyoo_dnd_char = $hyoo_dnd_char;
 })($ || ($ = {}));
 
 ;
@@ -11258,7 +11258,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_parameter) = class $hyoo_dungeon_parameter extends ($.$mol_view) {
+	($.$hyoo_dnd_parameter) = class $hyoo_dnd_parameter extends ($.$mol_view) {
 		Title(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.title())]);
@@ -11277,8 +11277,8 @@ var $;
 			return [(this.Title()), (this.Value())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_parameter.prototype), "Title"));
-	($mol_mem(($.$hyoo_dungeon_parameter.prototype), "Value"));
+	($mol_mem(($.$hyoo_dnd_parameter.prototype), "Title"));
+	($mol_mem(($.$hyoo_dnd_parameter.prototype), "Value"));
 
 
 ;
@@ -11290,7 +11290,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_parameter, {
+        $mol_style_define($hyoo_dnd_parameter, {
             background: {
                 color: $mol_theme.card,
             },
@@ -11312,7 +11312,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_ability_config) = class $hyoo_dungeon_ability_config extends ($.$mol_page) {
+	($.$hyoo_dnd_ability_config) = class $hyoo_dnd_ability_config extends ($.$mol_page) {
 		ability_total(id){
 			return (this.char().ability(id));
 		}
@@ -11387,7 +11387,7 @@ var $;
 			return "Способности";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		pending(next){
@@ -11398,26 +11398,26 @@ var $;
 			return (this.ability_list());
 		}
 	};
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_title"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_total"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_modifier"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_safe"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_addon"));
-	($mol_mem_key(($.$hyoo_dungeon_ability_config.prototype), "Ability_row"));
-	($mol_mem(($.$hyoo_dungeon_ability_config.prototype), "char"));
-	($mol_mem(($.$hyoo_dungeon_ability_config.prototype), "pending"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_title"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_total"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_modifier"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_safe"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_addon"));
+	($mol_mem_key(($.$hyoo_dnd_ability_config.prototype), "Ability_row"));
+	($mol_mem(($.$hyoo_dnd_ability_config.prototype), "char"));
+	($mol_mem(($.$hyoo_dnd_ability_config.prototype), "pending"));
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_dungeon_modifier extends $mol_unit {
+    class $hyoo_dnd_modifier extends $mol_unit {
         toString() {
             return this.valueOf().toLocaleString(undefined, { signDisplay: 'always' }).replace('-', '−');
         }
     }
-    $.$hyoo_dungeon_modifier = $hyoo_dungeon_modifier;
+    $.$hyoo_dnd_modifier = $hyoo_dnd_modifier;
 })($ || ($ = {}));
 
 ;
@@ -11429,7 +11429,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_ability_config extends $.$hyoo_dungeon_ability_config {
+        class $hyoo_dnd_ability_config extends $.$hyoo_dnd_ability_config {
             title() {
                 if (!this.pending())
                     return super.title();
@@ -11437,26 +11437,26 @@ var $;
             }
             pending() {
                 const char = this.char();
-                const total = Object.keys(this.$.$hyoo_dungeon_ability_all)
+                const total = Object.keys(this.$.$hyoo_dnd_ability_all)
                     .reduce((sum, id) => sum + char.ability_addon(id), 0);
                 return 24 - total;
             }
             ability_list() {
                 return [
                     this.Ability_row(''),
-                    ...Object.keys(this.$.$hyoo_dungeon_ability_all)
+                    ...Object.keys(this.$.$hyoo_dnd_ability_all)
                         .map(ability => this.Ability_row(ability))
                 ];
             }
             ability_hint(id) {
                 if (!id)
                     return 'Характеристики';
-                return this.$.$hyoo_dungeon_ability_all[id].description;
+                return this.$.$hyoo_dnd_ability_all[id].description;
             }
             ability_title(id) {
                 if (!id)
                     return 'Способности';
-                return this.$.$hyoo_dungeon_ability_all[id].title;
+                return this.$.$hyoo_dnd_ability_all[id].title;
             }
             ability_total_value(id) {
                 if (!id)
@@ -11466,27 +11466,27 @@ var $;
             ability_modifier_value(id) {
                 if (!id)
                     return ['✨'];
-                return [new $hyoo_dungeon_modifier(this.char().ability_modifier(id)).toString()];
+                return [new $hyoo_dnd_modifier(this.char().ability_modifier(id)).toString()];
             }
             ability_safe_value(id) {
                 if (!id)
                     return ['☔'];
-                return [new $hyoo_dungeon_modifier(this.char().ability_safe(id)).toString()];
+                return [new $hyoo_dnd_modifier(this.char().ability_safe(id)).toString()];
             }
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_ability_config.prototype, "title", null);
+        ], $hyoo_dnd_ability_config.prototype, "title", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_ability_config.prototype, "pending", null);
+        ], $hyoo_dnd_ability_config.prototype, "pending", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_ability_config.prototype, "ability_list", null);
+        ], $hyoo_dnd_ability_config.prototype, "ability_list", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_ability_config.prototype, "ability_safe_value", null);
-        $$.$hyoo_dungeon_ability_config = $hyoo_dungeon_ability_config;
+        ], $hyoo_dnd_ability_config.prototype, "ability_safe_value", null);
+        $$.$hyoo_dnd_ability_config = $hyoo_dnd_ability_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -11496,7 +11496,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_ability_config, {
+        $mol_style_define($hyoo_dnd_ability_config, {
             flex: {
                 basis: '25rem',
             },
@@ -11580,7 +11580,7 @@ var $;
 "use strict";
 
 ;
-	($.$hyoo_dungeon_skill_config) = class $hyoo_dungeon_skill_config extends ($.$mol_page) {
+	($.$hyoo_dnd_skill_config) = class $hyoo_dnd_skill_config extends ($.$mol_page) {
 		skill(id){
 			return (this.char().skill(id));
 		}
@@ -11624,18 +11624,18 @@ var $;
 			return "Навыки";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		body(){
 			return (this.skill_list());
 		}
 	};
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_addon"));
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_title"));
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_value"));
-	($mol_mem_key(($.$hyoo_dungeon_skill_config.prototype), "Skill_row"));
-	($mol_mem(($.$hyoo_dungeon_skill_config.prototype), "char"));
+	($mol_mem_key(($.$hyoo_dnd_skill_config.prototype), "Skill_addon"));
+	($mol_mem_key(($.$hyoo_dnd_skill_config.prototype), "Skill_title"));
+	($mol_mem_key(($.$hyoo_dnd_skill_config.prototype), "Skill_value"));
+	($mol_mem_key(($.$hyoo_dnd_skill_config.prototype), "Skill_row"));
+	($mol_mem(($.$hyoo_dnd_skill_config.prototype), "char"));
 
 
 ;
@@ -11647,27 +11647,27 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_skill_config extends $.$hyoo_dungeon_skill_config {
+        class $hyoo_dnd_skill_config extends $.$hyoo_dnd_skill_config {
             skill_list() {
-                return Object.keys(this.$.$hyoo_dungeon_skill_all).map(ability => this.Skill_row(ability));
+                return Object.keys(this.$.$hyoo_dnd_skill_all).map(ability => this.Skill_row(ability));
             }
             skill_title(id) {
-                return this.$.$hyoo_dungeon_skill_all[id].title;
+                return this.$.$hyoo_dnd_skill_all[id].title;
             }
             skill_value(id) {
-                const ability = this.$.$hyoo_dungeon_skill_all[id].ability;
-                const icon = this.$.$hyoo_dungeon_ability_all[ability].title.slice(0, 2);
-                const skill = new $hyoo_dungeon_modifier(this.skill(id));
+                const ability = this.$.$hyoo_dnd_skill_all[id].ability;
+                const icon = this.$.$hyoo_dnd_ability_all[ability].title.slice(0, 2);
+                const skill = new $hyoo_dnd_modifier(this.skill(id));
                 return `${skill} ${icon}`;
             }
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_skill_config.prototype, "skill_list", null);
+        ], $hyoo_dnd_skill_config.prototype, "skill_list", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_skill_config.prototype, "skill_value", null);
-        $$.$hyoo_dungeon_skill_config = $hyoo_dungeon_skill_config;
+        ], $hyoo_dnd_skill_config.prototype, "skill_value", null);
+        $$.$hyoo_dnd_skill_config = $hyoo_dnd_skill_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -11677,7 +11677,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_skill_config, {
+        $mol_style_define($hyoo_dnd_skill_config, {
             flex: {
                 basis: '18rem',
             },
@@ -12288,7 +12288,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_item_config) = class $hyoo_dungeon_item_config extends ($.$mol_page) {
+	($.$hyoo_dnd_item_config) = class $hyoo_dnd_item_config extends ($.$mol_page) {
 		brief(){
 			return (this.item().brief());
 		}
@@ -12472,7 +12472,7 @@ var $;
 			return obj;
 		}
 		item(){
-			const obj = new this.$.$hyoo_dungeon_item();
+			const obj = new this.$.$hyoo_dnd_item();
 			return obj;
 		}
 		Title(){
@@ -12495,33 +12495,33 @@ var $;
 			return [(this.Brief())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Price"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Price_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Weight"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Weight_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Common"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand1"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand1_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand2"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Hand2_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Touch_range"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Near"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Near_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distant"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distant_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Long_range"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_norm"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_norm_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_max"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_max_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Distance_limit"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Damage_type"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Damage_type_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Ability_block"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Brief"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "item"));
-	($mol_mem(($.$hyoo_dungeon_item_config.prototype), "Title"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Price"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Price_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Weight"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Weight_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Common"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Hand1"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Hand1_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Hand2"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Hand2_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Touch_range"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Near"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Near_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distant"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distant_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Long_range"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distance_norm"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distance_norm_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distance_max"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distance_max_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Distance_limit"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Damage_type"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Damage_type_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Ability"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Ability_block"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Brief"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "item"));
+	($mol_mem(($.$hyoo_dnd_item_config.prototype), "Title"));
 
 
 ;
@@ -12533,21 +12533,21 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_item_config extends $.$hyoo_dungeon_item_config {
+        class $hyoo_dnd_item_config extends $.$hyoo_dnd_item_config {
             title() {
                 return this.item().title();
             }
             damage_options() {
-                return Object.keys(this.$.$hyoo_dungeon_damage_all);
+                return Object.keys(this.$.$hyoo_dnd_damage_all);
             }
             damage_title(id) {
-                return this.$.$hyoo_dungeon_damage_all[id].title;
+                return this.$.$hyoo_dnd_damage_all[id].title;
             }
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_item_config.prototype, "damage_options", null);
-        $$.$hyoo_dungeon_item_config = $hyoo_dungeon_item_config;
+        ], $hyoo_dnd_item_config.prototype, "damage_options", null);
+        $$.$hyoo_dnd_item_config = $hyoo_dnd_item_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -12557,7 +12557,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_item_config, {
+        $mol_style_define($hyoo_dnd_item_config, {
             flex: {
                 basis: '40rem',
             },
@@ -12569,7 +12569,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_item_manage) = class $hyoo_dungeon_item_manage extends ($.$mol_book2_catalog) {
+	($.$hyoo_dnd_item_manage) = class $hyoo_dnd_item_manage extends ($.$mol_book2_catalog) {
 		item_id_next(){
 			return "0";
 		}
@@ -12584,7 +12584,7 @@ var $;
 			return obj;
 		}
 		item(id){
-			const obj = new this.$.$hyoo_dungeon_item();
+			const obj = new this.$.$hyoo_dnd_item();
 			return obj;
 		}
 		item_delete(id){
@@ -12609,7 +12609,7 @@ var $;
 			return obj;
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		menu_title(){
@@ -12622,7 +12622,7 @@ var $;
 			return "item";
 		}
 		Spread(id){
-			const obj = new this.$.$hyoo_dungeon_item_config();
+			const obj = new this.$.$hyoo_dnd_item_config();
 			(obj.item) = () => ((this.item(id)));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
@@ -12634,14 +12634,14 @@ var $;
 			return [(this.Menu_link_title(id)), (this.Item_brief(id))];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "Item_add_icon"));
-	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "Item_add"));
-	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "item"));
-	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_delete_icon"));
-	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_delete"));
-	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Item_brief"));
-	($mol_mem(($.$hyoo_dungeon_item_manage.prototype), "char"));
-	($mol_mem_key(($.$hyoo_dungeon_item_manage.prototype), "Spread"));
+	($mol_mem(($.$hyoo_dnd_item_manage.prototype), "Item_add_icon"));
+	($mol_mem(($.$hyoo_dnd_item_manage.prototype), "Item_add"));
+	($mol_mem_key(($.$hyoo_dnd_item_manage.prototype), "item"));
+	($mol_mem_key(($.$hyoo_dnd_item_manage.prototype), "Item_delete_icon"));
+	($mol_mem_key(($.$hyoo_dnd_item_manage.prototype), "Item_delete"));
+	($mol_mem_key(($.$hyoo_dnd_item_manage.prototype), "Item_brief"));
+	($mol_mem(($.$hyoo_dnd_item_manage.prototype), "char"));
+	($mol_mem_key(($.$hyoo_dnd_item_manage.prototype), "Spread"));
 
 
 ;
@@ -12653,7 +12653,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_item_manage extends $.$hyoo_dungeon_item_manage {
+        class $hyoo_dnd_item_manage extends $.$hyoo_dnd_item_manage {
             spread_ids() {
                 return Object.keys(this.char().inventory().data());
             }
@@ -12672,8 +12672,8 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_item_manage.prototype, "spread_ids", null);
-        $$.$hyoo_dungeon_item_manage = $hyoo_dungeon_item_manage;
+        ], $hyoo_dnd_item_manage.prototype, "spread_ids", null);
+        $$.$hyoo_dnd_item_manage = $hyoo_dnd_item_manage;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -12683,7 +12683,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_item_manage, {
+        $mol_style_define($hyoo_dnd_item_manage, {
             Menu: {
                 flex: {
                     basis: '35rem',
@@ -13008,7 +13008,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_spell_config) = class $hyoo_dungeon_spell_config extends ($.$mol_page) {
+	($.$hyoo_dnd_spell_config) = class $hyoo_dnd_spell_config extends ($.$mol_page) {
 		brief(){
 			return (this.spell().brief());
 		}
@@ -13144,7 +13144,7 @@ var $;
 			return obj;
 		}
 		spell(){
-			const obj = new this.$.$hyoo_dungeon_spell();
+			const obj = new this.$.$hyoo_dnd_spell();
 			return obj;
 		}
 		Title(){
@@ -13165,27 +13165,27 @@ var $;
 			return [(this.Brief())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Level_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Distance"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Distance_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Common"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_type"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_type_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Damage_group"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_config.prototype), "component_checked"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Material_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Components_group"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Remarks_block"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Brief"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "spell"));
-	($mol_mem(($.$hyoo_dungeon_spell_config.prototype), "Title"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Level"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Level_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Distance"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Distance_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Common"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Damage_type"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Damage_type_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Damage"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Damage_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Damage_group"));
+	($mol_mem_key(($.$hyoo_dnd_spell_config.prototype), "component_checked"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Components"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Components_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Material"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Material_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Components_group"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Remarks"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Remarks_block"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Brief"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "spell"));
+	($mol_mem(($.$hyoo_dnd_spell_config.prototype), "Title"));
 
 
 ;
@@ -13197,15 +13197,15 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_spell_config extends $.$hyoo_dungeon_spell_config {
+        class $hyoo_dnd_spell_config extends $.$hyoo_dnd_spell_config {
             title() {
                 return this.spell().title();
             }
             damage_options() {
-                return Object.keys(this.$.$hyoo_dungeon_damage_all);
+                return Object.keys(this.$.$hyoo_dnd_damage_all);
             }
             damage_title(id) {
-                return this.$.$hyoo_dungeon_damage_all[id]?.title ?? '???';
+                return this.$.$hyoo_dnd_damage_all[id]?.title ?? '???';
             }
             component_checked(id, next) {
                 return this.spell().component(id, next);
@@ -13213,8 +13213,8 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_spell_config.prototype, "damage_options", null);
-        $$.$hyoo_dungeon_spell_config = $hyoo_dungeon_spell_config;
+        ], $hyoo_dnd_spell_config.prototype, "damage_options", null);
+        $$.$hyoo_dnd_spell_config = $hyoo_dnd_spell_config;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -13224,7 +13224,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_spell_config, {
+        $mol_style_define($hyoo_dnd_spell_config, {
             flex: {
                 basis: '40rem',
             },
@@ -13236,7 +13236,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_spell_manage) = class $hyoo_dungeon_spell_manage extends ($.$mol_book2_catalog) {
+	($.$hyoo_dnd_spell_manage) = class $hyoo_dnd_spell_manage extends ($.$mol_book2_catalog) {
 		spell_id_next(){
 			return "0";
 		}
@@ -13251,7 +13251,7 @@ var $;
 			return obj;
 		}
 		spell(id){
-			const obj = new this.$.$hyoo_dungeon_spell();
+			const obj = new this.$.$hyoo_dnd_spell();
 			return obj;
 		}
 		level_title(id){
@@ -13321,7 +13321,7 @@ var $;
 			return obj;
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		menu_title(){
@@ -13334,7 +13334,7 @@ var $;
 			return "spell";
 		}
 		Spread(id){
-			const obj = new this.$.$hyoo_dungeon_spell_config();
+			const obj = new this.$.$hyoo_dnd_spell_config();
 			(obj.spell) = () => ((this.spell(id)));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
@@ -13349,20 +13349,20 @@ var $;
 			return [(this.Menu_link_title(id)), (this.Spell_brief(id))];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "Spell_add_icon"));
-	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "Spell_add"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "spell"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_title"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "level_slot_ready"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_slot_ready"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_slot_max"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level_head"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Level"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_delete_icon"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_delete"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spell_brief"));
-	($mol_mem(($.$hyoo_dungeon_spell_manage.prototype), "char"));
-	($mol_mem_key(($.$hyoo_dungeon_spell_manage.prototype), "Spread"));
+	($mol_mem(($.$hyoo_dnd_spell_manage.prototype), "Spell_add_icon"));
+	($mol_mem(($.$hyoo_dnd_spell_manage.prototype), "Spell_add"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "spell"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Level_title"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "level_slot_ready"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Level_slot_ready"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Level_slot_max"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Level_head"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Level"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Spell_delete_icon"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Spell_delete"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Spell_brief"));
+	($mol_mem(($.$hyoo_dnd_spell_manage.prototype), "char"));
+	($mol_mem_key(($.$hyoo_dnd_spell_manage.prototype), "Spread"));
 
 
 ;
@@ -13374,9 +13374,9 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_spell_manage extends $.$hyoo_dungeon_spell_manage {
+        class $hyoo_dnd_spell_manage extends $.$hyoo_dnd_spell_manage {
             level() {
-                return this.$.$hyoo_dungeon_spell_levels[this.char().level()];
+                return this.$.$hyoo_dnd_spell_levels[this.char().level()];
             }
             levels() {
                 return Array.from({ length: this.level().slots.length }, (_, level) => this.Level(level));
@@ -13416,17 +13416,17 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_spell_manage.prototype, "level", null);
+        ], $hyoo_dnd_spell_manage.prototype, "level", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_spell_manage.prototype, "levels", null);
+        ], $hyoo_dnd_spell_manage.prototype, "levels", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_spell_manage.prototype, "level_slot_ready", null);
+        ], $hyoo_dnd_spell_manage.prototype, "level_slot_ready", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_spell_manage.prototype, "level_spells", null);
-        $$.$hyoo_dungeon_spell_manage = $hyoo_dungeon_spell_manage;
+        ], $hyoo_dnd_spell_manage.prototype, "level_spells", null);
+        $$.$hyoo_dnd_spell_manage = $hyoo_dnd_spell_manage;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -13436,7 +13436,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_spell_manage, {
+        $mol_style_define($hyoo_dnd_spell_manage, {
             Menu: {
                 flex: {
                     basis: '25rem',
@@ -13567,7 +13567,7 @@ var $;
 "use strict";
 
 ;
-	($.$hyoo_dungeon_char_summary) = class $hyoo_dungeon_char_summary extends ($.$mol_page) {
+	($.$hyoo_dnd_char_summary) = class $hyoo_dnd_char_summary extends ($.$mol_page) {
 		name(){
 			return (this.char().name());
 		}
@@ -13809,13 +13809,13 @@ var $;
 			return obj;
 		}
 		Level(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("🏅 Уровень");
 			(obj.Value) = () => ((this.Level_value()));
 			return obj;
 		}
 		Master_bonus(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("🥇 Мастерство");
 			(obj.value) = () => (["+", (this.master_bonus())]);
 			return obj;
@@ -13827,25 +13827,25 @@ var $;
 			return obj;
 		}
 		Experience(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("✨ Опыт");
 			(obj.Value) = () => ((this.Experience_value()));
 			return obj;
 		}
 		Charm_count(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("🎆 Заговоры");
 			(obj.value) = () => ([(this.charm_count())]);
 			return obj;
 		}
 		Spell_count(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("🎇 Заклинания");
 			(obj.value) = () => ([(this.spell_count())]);
 			return obj;
 		}
 		Grade_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Прогресс");
 			(obj.content) = () => ([
 				(this.Level()), 
@@ -13862,7 +13862,7 @@ var $;
 			return obj;
 		}
 		Hits_max(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("💟 Предел");
 			(obj.Value) = () => ((this.Hits_max_value()));
 			return obj;
@@ -13873,7 +13873,7 @@ var $;
 			return obj;
 		}
 		Hits(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("💗 Здоровье");
 			(obj.Value) = () => ((this.Hits_value()));
 			return obj;
@@ -13884,19 +13884,19 @@ var $;
 			return obj;
 		}
 		Hits_addon(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("💖 Бафы");
 			(obj.Value) = () => ((this.Hits_addon_value()));
 			return obj;
 		}
 		Hits_heal(){
-			const obj = new this.$.$hyoo_dungeon_parameter();
+			const obj = new this.$.$hyoo_dnd_parameter();
 			(obj.title) = () => ("💊 Лечение");
 			(obj.value) = () => ([(this.hits_heal())]);
 			return obj;
 		}
 		Hits_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Хиты");
 			(obj.content) = () => ([
 				(this.Hits_max()), 
@@ -13921,7 +13921,7 @@ var $;
 			return obj;
 		}
 		Skills(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Навыки");
 			(obj.content) = () => ((this.skill_list()));
 			return obj;
@@ -13935,7 +13935,7 @@ var $;
 			return obj;
 		}
 		Perks_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Умения");
 			(obj.Content) = () => ((this.Perks()));
 			return obj;
@@ -13946,13 +13946,13 @@ var $;
 			return obj;
 		}
 		Inventory_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Инвентарь");
 			(obj.content) = () => ([(this.Inventory())]);
 			return obj;
 		}
 		Spell_block(){
-			const obj = new this.$.$hyoo_dungeon_char_summary_block();
+			const obj = new this.$.$hyoo_dnd_char_summary_block();
 			(obj.title) = () => ("Заклинания");
 			(obj.content) = () => ([(this.spell_list())]);
 			return obj;
@@ -13973,29 +13973,29 @@ var $;
 			return "Сводка";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		Ability_cofig(){
-			const obj = new this.$.$hyoo_dungeon_ability_config();
+			const obj = new this.$.$hyoo_dnd_ability_config();
 			(obj.char) = () => ((this.char()));
 			(obj.Ability_addon) = () => (null);
 			return obj;
 		}
 		Skill_cofig(){
-			const obj = new this.$.$hyoo_dungeon_skill_config();
+			const obj = new this.$.$hyoo_dnd_skill_config();
 			(obj.char) = () => ((this.char()));
 			(obj.Skill_addon) = () => (null);
 			return obj;
 		}
 		Item_list(){
-			const obj = new this.$.$hyoo_dungeon_item_manage();
+			const obj = new this.$.$hyoo_dnd_item_manage();
 			(obj.char) = () => ((this.char()));
 			(obj.Item_delete) = (id) => (null);
 			return obj;
 		}
 		Spell_list(){
-			const obj = new this.$.$hyoo_dungeon_spell_manage();
+			const obj = new this.$.$hyoo_dnd_spell_manage();
 			(obj.char) = () => ((this.char()));
 			(obj.Spell_delete) = (id) => (null);
 			return obj;
@@ -14004,58 +14004,58 @@ var $;
 			return [(this.Columns())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Name"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Age"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Speed"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Base"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Top"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Race"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Class"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Story"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Life"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Goodness"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Principality"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Alignment"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Main"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Biography"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Traits"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ideals"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Affection"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Weakness"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Remarks"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Personality"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Info"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Master_bonus"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Experience"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Charm_count"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_count"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Grade_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_max"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon_value"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_addon"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_heal"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Hits_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Abilities"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Stat_main"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skills"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Perks_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Inventory_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_block"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Columns"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "char"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Ability_cofig"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Skill_cofig"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Item_list"));
-	($mol_mem(($.$hyoo_dungeon_char_summary.prototype), "Spell_list"));
-	($.$hyoo_dungeon_char_summary_block) = class $hyoo_dungeon_char_summary_block extends ($.$mol_section) {
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Name"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Age"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Speed"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Base"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Top"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Race"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Class"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Story"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Life"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Goodness"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Principality"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Alignment"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Main"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Biography"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Traits"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Ideals"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Affection"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Weakness"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Remarks"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Personality"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Info"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Level_value"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Level"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Master_bonus"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Experience_value"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Experience"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Charm_count"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Spell_count"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Grade_block"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_max_value"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_max"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_value"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_addon_value"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_addon"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_heal"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Hits_block"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Abilities"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Stat_main"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Skills"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Perks"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Perks_block"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Inventory"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Inventory_block"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Spell_block"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Columns"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "char"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Ability_cofig"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Skill_cofig"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Item_list"));
+	($mol_mem(($.$hyoo_dnd_char_summary.prototype), "Spell_list"));
+	($.$hyoo_dnd_char_summary_block) = class $hyoo_dnd_char_summary_block extends ($.$mol_section) {
 		level(){
 			return 5;
 		}
@@ -14066,7 +14066,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_moral_all = {
+    $.$hyoo_dnd_moral_all = {
         good: {
             title: '👼 Добрый',
         },
@@ -14083,7 +14083,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$hyoo_dungeon_ethics_all = {
+    $.$hyoo_dnd_ethics_all = {
         lawful: {
             title: '🧐 Стоик',
         },
@@ -14105,7 +14105,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_char_summary extends $.$hyoo_dungeon_char_summary {
+        class $hyoo_dnd_char_summary extends $.$hyoo_dnd_char_summary {
             race_title() {
                 return this.char().race().title;
             }
@@ -14125,10 +14125,10 @@ var $;
                 return this.char().class().link;
             }
             moral_title() {
-                return this.$.$hyoo_dungeon_moral_all[this.moral()].title;
+                return this.$.$hyoo_dnd_moral_all[this.moral()].title;
             }
             ethics_title() {
-                return this.$.$hyoo_dungeon_ethics_all[this.ethics()].title;
+                return this.$.$hyoo_dnd_ethics_all[this.ethics()].title;
             }
             speed() {
                 return this.char().race().speed;
@@ -14137,7 +14137,7 @@ var $;
                 return this.char().perks().join('\n');
             }
         }
-        $$.$hyoo_dungeon_char_summary = $hyoo_dungeon_char_summary;
+        $$.$hyoo_dnd_char_summary = $hyoo_dnd_char_summary;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -14147,7 +14147,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_char_summary, {
+        $mol_style_define($hyoo_dnd_char_summary, {
             flex: {
                 basis: '120rem',
                 grow: 1,
@@ -14262,7 +14262,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_char_main) = class $hyoo_dungeon_char_main extends ($.$mol_page) {
+	($.$hyoo_dnd_char_main) = class $hyoo_dnd_char_main extends ($.$mol_page) {
 		name(next){
 			return (this.char().name(next));
 		}
@@ -14423,7 +14423,7 @@ var $;
 			return "Основное";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		body(){
@@ -14440,26 +14440,26 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Name_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Base_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Level_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Age_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Grade"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Race_descr"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Class"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Class_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Class_descr"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Story_descr"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Biography"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "Biography_block"));
-	($mol_mem(($.$hyoo_dungeon_char_main.prototype), "char"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Name"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Name_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Base_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Level"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Level_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Age"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Age_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Grade"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Race"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Race_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Race_descr"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Class"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Class_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Class_descr"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Story"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Story_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Story_descr"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Biography"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "Biography_block"));
+	($mol_mem(($.$hyoo_dnd_char_main.prototype), "char"));
 
 
 ;
@@ -14471,32 +14471,32 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_char_main extends $.$hyoo_dungeon_char_main {
+        class $hyoo_dnd_char_main extends $.$hyoo_dnd_char_main {
             race_options() {
-                return Object.keys(this.$.$hyoo_dungeon_race_all);
+                return Object.keys(this.$.$hyoo_dnd_race_all);
             }
             race_title(id) {
-                return this.$.$hyoo_dungeon_race_all[id].title;
+                return this.$.$hyoo_dnd_race_all[id].title;
             }
             race_descr() {
                 return this.char().race().description;
             }
             story_options() {
-                return Object.keys(this.$.$hyoo_dungeon_story_all);
+                return Object.keys(this.$.$hyoo_dnd_story_all);
             }
             story_title(id) {
-                return this.$.$hyoo_dungeon_story_all[id].title;
+                return this.$.$hyoo_dnd_story_all[id].title;
             }
             story_descr() {
                 return this.char().story().description;
             }
             class_options() {
-                return Object.keys(this.$.$hyoo_dungeon_class_all);
+                return Object.keys(this.$.$hyoo_dnd_class_all);
             }
             class_title(id) {
                 if (!id)
                     return '';
-                return this.$.$hyoo_dungeon_class_all[id].title;
+                return this.$.$hyoo_dnd_class_all[id].title;
             }
             class_descr() {
                 return this.char().class().description;
@@ -14504,23 +14504,23 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_char_main.prototype, "race_options", null);
+        ], $hyoo_dnd_char_main.prototype, "race_options", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "race_title", null);
+        ], $hyoo_dnd_char_main.prototype, "race_title", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_char_main.prototype, "story_options", null);
+        ], $hyoo_dnd_char_main.prototype, "story_options", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "story_title", null);
+        ], $hyoo_dnd_char_main.prototype, "story_title", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_char_main.prototype, "class_options", null);
+        ], $hyoo_dnd_char_main.prototype, "class_options", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_char_main.prototype, "class_title", null);
-        $$.$hyoo_dungeon_char_main = $hyoo_dungeon_char_main;
+        ], $hyoo_dnd_char_main.prototype, "class_title", null);
+        $$.$hyoo_dnd_char_main = $hyoo_dnd_char_main;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -14530,7 +14530,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_char_main, {
+        $mol_style_define($hyoo_dnd_char_main, {
             flex: {
                 basis: '40rem',
             },
@@ -14544,7 +14544,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_char_personality) = class $hyoo_dungeon_char_personality extends ($.$mol_page) {
+	($.$hyoo_dnd_char_personality) = class $hyoo_dnd_char_personality extends ($.$mol_page) {
 		moral(next){
 			return (this.char().moral(next));
 		}
@@ -14649,7 +14649,7 @@ var $;
 			return "Характер";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		body(){
@@ -14663,19 +14663,19 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Moral"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Moral_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Ethics"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Ethics_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Traits"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Traits_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Ideals"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Ideals_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Affection"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Affection_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Weakness"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "Weakness_block"));
-	($mol_mem(($.$hyoo_dungeon_char_personality.prototype), "char"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Moral"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Moral_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Ethics"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Ethics_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Traits"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Traits_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Ideals"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Ideals_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Affection"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Affection_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Weakness"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "Weakness_block"));
+	($mol_mem(($.$hyoo_dnd_char_personality.prototype), "char"));
 
 
 ;
@@ -14687,33 +14687,33 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_char_personality extends $.$hyoo_dungeon_char_personality {
+        class $hyoo_dnd_char_personality extends $.$hyoo_dnd_char_personality {
             moral_options() {
-                return Object.keys(this.$.$hyoo_dungeon_moral_all);
+                return Object.keys(this.$.$hyoo_dnd_moral_all);
             }
             moral_title(id) {
-                return this.$.$hyoo_dungeon_moral_all[id].title;
+                return this.$.$hyoo_dnd_moral_all[id].title;
             }
             ethics_options() {
-                return Object.keys(this.$.$hyoo_dungeon_ethics_all);
+                return Object.keys(this.$.$hyoo_dnd_ethics_all);
             }
             ethics_title(id) {
-                return this.$.$hyoo_dungeon_ethics_all[id].title;
+                return this.$.$hyoo_dnd_ethics_all[id].title;
             }
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_char_personality.prototype, "moral_options", null);
+        ], $hyoo_dnd_char_personality.prototype, "moral_options", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_char_personality.prototype, "moral_title", null);
+        ], $hyoo_dnd_char_personality.prototype, "moral_title", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_char_personality.prototype, "ethics_options", null);
+        ], $hyoo_dnd_char_personality.prototype, "ethics_options", null);
         __decorate([
             $mol_mem_key
-        ], $hyoo_dungeon_char_personality.prototype, "ethics_title", null);
-        $$.$hyoo_dungeon_char_personality = $hyoo_dungeon_char_personality;
+        ], $hyoo_dnd_char_personality.prototype, "ethics_title", null);
+        $$.$hyoo_dnd_char_personality = $hyoo_dnd_char_personality;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -14723,7 +14723,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_char_personality, {
+        $mol_style_define($hyoo_dnd_char_personality, {
             flex: {
                 basis: '30rem',
             },
@@ -14918,7 +14918,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_dungeon_app) = class $hyoo_dungeon_app extends ($.$mol_book2_catalog) {
+	($.$hyoo_dnd_app) = class $hyoo_dnd_app extends ($.$mol_book2_catalog) {
 		char_image(){
 			return (this.char().image());
 		}
@@ -14926,31 +14926,31 @@ var $;
 			return "";
 		}
 		Summary(){
-			const obj = new this.$.$hyoo_dungeon_char_summary();
+			const obj = new this.$.$hyoo_dnd_char_summary();
 			(obj.char) = () => ((this.char()));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
 		Main(){
-			const obj = new this.$.$hyoo_dungeon_char_main();
+			const obj = new this.$.$hyoo_dnd_char_main();
 			(obj.char) = () => ((this.char()));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
 		Personality(){
-			const obj = new this.$.$hyoo_dungeon_char_personality();
+			const obj = new this.$.$hyoo_dnd_char_personality();
 			(obj.char) = () => ((this.char()));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
 		Params(){
-			const obj = new this.$.$hyoo_dungeon_ability_config();
+			const obj = new this.$.$hyoo_dnd_ability_config();
 			(obj.char) = () => ((this.char()));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
 		}
 		Skills(){
-			const obj = new this.$.$hyoo_dungeon_skill_config();
+			const obj = new this.$.$hyoo_dnd_skill_config();
 			(obj.char) = () => ((this.char()));
 			(obj.tools) = () => ([(this.Spread_close())]);
 			return obj;
@@ -14959,7 +14959,7 @@ var $;
 			return (this.Inventory().spread_current());
 		}
 		Inventory(){
-			const obj = new this.$.$hyoo_dungeon_item_manage();
+			const obj = new this.$.$hyoo_dnd_item_manage();
 			(obj.char) = () => ((this.char()));
 			(obj.addon_tools) = () => ([(this.Spread_close())]);
 			return obj;
@@ -14968,7 +14968,7 @@ var $;
 			return (this.Spells().spread_current());
 		}
 		Spells(){
-			const obj = new this.$.$hyoo_dungeon_spell_manage();
+			const obj = new this.$.$hyoo_dnd_spell_manage();
 			(obj.char) = () => ((this.char()));
 			(obj.addon_tools) = () => ([(this.Spread_close())]);
 			return obj;
@@ -14993,7 +14993,7 @@ var $;
 			return "Dungeons & Dragons";
 		}
 		char(){
-			const obj = new this.$.$hyoo_dungeon_char();
+			const obj = new this.$.$hyoo_dnd_char();
 			return obj;
 		}
 		style(){
@@ -15020,17 +15020,17 @@ var $;
 			return [(this.Theme())];
 		}
 	};
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Summary"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Main"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Personality"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Params"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Skills"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Inventory"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Spells"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Source"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Lights"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "Theme"));
-	($mol_mem(($.$hyoo_dungeon_app.prototype), "char"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Summary"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Main"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Personality"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Params"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Skills"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Inventory"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Spells"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Source"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Lights"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "Theme"));
+	($mol_mem(($.$hyoo_dnd_app.prototype), "char"));
 
 
 ;
@@ -15124,9 +15124,9 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $hyoo_dungeon_app extends $.$hyoo_dungeon_app {
+        class $hyoo_dnd_app extends $.$hyoo_dnd_app {
             char() {
-                return this.$.$mol_store_local.sub('char', new $hyoo_dungeon_char({}));
+                return this.$.$mol_store_local.sub('char', new $hyoo_dnd_char({}));
             }
             background() {
                 const color = this.$.$mol_lights() ? `rgba(255,255,255,.75)` : `rgba(0,0,0,.75)`;
@@ -15142,14 +15142,14 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_app.prototype, "char", null);
+        ], $hyoo_dnd_app.prototype, "char", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_app.prototype, "background", null);
+        ], $hyoo_dnd_app.prototype, "background", null);
         __decorate([
             $mol_mem
-        ], $hyoo_dungeon_app.prototype, "pages", null);
-        $$.$hyoo_dungeon_app = $hyoo_dungeon_app;
+        ], $hyoo_dnd_app.prototype, "pages", null);
+        $$.$hyoo_dnd_app = $hyoo_dnd_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -15159,7 +15159,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $mol_style_define($hyoo_dungeon_app, {
+        $mol_style_define($hyoo_dnd_app, {
             background: {
                 size: ['cover'],
                 position: 'center',
