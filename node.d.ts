@@ -2773,6 +2773,7 @@ declare namespace $ {
     };
     const $hyoo_dnd_race_all: {
         human: $hyoo_dnd_race;
+        elf: $hyoo_dnd_race;
         tabaxi: $hyoo_dnd_race;
     };
     type $hyoo_dnd_race_id = keyof typeof $hyoo_dnd_race_all;
@@ -2886,7 +2887,7 @@ declare namespace $ {
         age(next?: number): number;
         level(next?: number): number;
         experience(next?: number): number;
-        race_id(next?: $hyoo_dnd_race_id): "human" | "tabaxi";
+        race_id(next?: $hyoo_dnd_race_id): "human" | "elf" | "tabaxi";
         race(): $hyoo_dnd_race;
         story_id(next?: $hyoo_dnd_story_id): "pirate";
         story(): $hyoo_dnd_story;
