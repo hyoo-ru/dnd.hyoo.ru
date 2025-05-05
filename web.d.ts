@@ -7349,6 +7349,17 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_offline(): void;
+}
+
+declare namespace $ {
+    function $mol_offline_web(): void;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	type $hyoo_dnd_char_summary__char_hyoo_dnd_app_1 = $mol_type_enforce<
 		ReturnType< $hyoo_dnd_app['char'] >
