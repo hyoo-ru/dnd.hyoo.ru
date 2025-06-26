@@ -1457,7 +1457,8 @@ $mol_lights_toggle $mol_check_icon
 	checked? <=> lights? false
 
 $mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $hyoo_dnd_app $mol_book2_catalog
 	param \section
