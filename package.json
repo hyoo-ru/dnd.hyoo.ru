@@ -249,6 +249,8 @@
     "$mol_number",
     "$mol_form_field",
     "$mol_form",
+    "$mol_button_major",
+    "$mol_status",
     "$mol_row",
     "$mol_labeler",
     "$mol_form_group",
