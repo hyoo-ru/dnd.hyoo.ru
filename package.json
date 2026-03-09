@@ -287,7 +287,9 @@
     "$mol_icon_brightness",
     "$mol_theme_auto",
     "$mol_store_local",
+    "$mol_store_native",
     "$mol_mem_force",
+    "$mol_store_safe",
     "$mol_offline_install",
     "$mol_offline"
   ],
